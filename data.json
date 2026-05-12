@@ -1,0 +1,199 @@
+{
+  "profile": {
+    "name": "Tony Lau",
+    "tagline": "Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.",
+    "photo": null,
+    "github": "https://github.com/Intrepidcanadian",
+    "linkedin": "https://linkedin.com/",
+    "email": "tony.kp.lau@gmail.com",
+    "skills": [
+      "Python", "TypeScript", "Solidity", "SQL", "Next.js", "React",
+      "Node.js", "VBA", "AI/ML", "Blockchain", "Financial Modelling", "Agent Harnesses"
+    ]
+  },
+
+  "stats": [
+    { "value": "10+", "label": "years in infrastructure finance — from solar assets to nuclear energy." },
+    { "value": "150+", "label": "GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps." },
+    { "value": "3", "label": "degrees from Schulich — BBA, Master of Finance, Master of Law." }
+  ],
+
+  "experience": [
+    {
+      "date": "2026 — Now",
+      "title": "Instructor — Fintech: Digital Transformation",
+      "desc": "Teaching graduate course FINE6280 on fintech and digital transformation of financial services to 40 students.",
+      "org": "Schulich, York"
+    },
+    {
+      "date": "2025 — 2026",
+      "title": "Manager — Corporate Development",
+      "desc": "M&A and new project development across nuclear, real estate, and renewable energy.",
+      "org": "OPG"
+    },
+    {
+      "date": "2022 — 2023",
+      "title": "Senior Financial Analyst — Shop Pay & Shop App",
+      "desc": "Financial modelling for Shop App marketplace. Built business cases and launched the Shop Cash Loyalty Program.",
+      "org": "Shopify"
+    },
+    {
+      "date": "2020 — 2022",
+      "title": "Senior Manager — Green Infrastructure Investments",
+      "desc": "Due diligence on equity/debt investments in Canadian infrastructure — transmission, district energy, SMRs.",
+      "org": "CIB"
+    },
+    {
+      "date": "2019 — 2020",
+      "title": "Senior Manager — Corporate Development",
+      "desc": "M&A and acquisition of private companies. Closed a $150M private placement for water heater portfolio.",
+      "org": "Enercare"
+    },
+    {
+      "date": "2015 — 2018",
+      "title": "Senior Analyst — Private Investments, Infrastructure",
+      "desc": "Built complex financial models for acquisition underwriting and financing. Managed portfolio companies.",
+      "org": "AIMCo"
+    },
+    {
+      "date": "2012 — 2014",
+      "title": "Analyst — Investments, Infrastructure",
+      "desc": "Fundraising and acquisition of solar assets (>50 MW). Transactions across Europe, US wind, UK airports.",
+      "org": "TD Greystone"
+    }
+  ],
+
+  "projects": {
+    "featured": {
+      "name": "CYM Studio",
+      "tagline": "AI video production + gasless gift-card redemption on Conflux eSpace",
+      "desc": "Full-stack platform for AI-powered video production with an integrated rewards system. Tournament winners redeem real-world gift cards across 300+ brands using USDT0 — no gas needed.",
+      "tags": ["Next.js", "TypeScript", "Solidity", "Conflux", "USDT0"],
+      "url": "https://cymstudio.app",
+      "github": "https://github.com/Intrepidcanadian/cymstudios",
+      "image": null
+    },
+    "grid": [
+      {
+        "name": "Nanobot",
+        "desc": "Ultra-lightweight personal AI assistant — 99% fewer lines of code than OpenClaw. Multi-platform chat integration.",
+        "tags": ["Python", "AI Agent"],
+        "github": "https://github.com/Intrepidcanadian/nanobot",
+        "image": null
+      },
+      {
+        "name": "Pulse520",
+        "desc": "Ultra-lightweight personal AI assistant with desktop app. ~4,000 lines delivering core agent functionality.",
+        "tags": ["Python", "Desktop"],
+        "github": "https://github.com/Intrepidcanadian/pulse520-releases",
+        "image": null
+      },
+      {
+        "name": "Open Design",
+        "desc": "Open-source alternative to Claude Design. 31 skills, 72 design systems, sandboxed preview, multi-format export.",
+        "tags": ["TypeScript", "Design"],
+        "github": "https://github.com/Intrepidcanadian/open-design",
+        "image": null
+      },
+      {
+        "name": "Trailer Maker",
+        "desc": "Concept-to-theatrical-trailer pipeline. Claude + Seedance 2.0 + ffmpeg with human-in-the-loop review.",
+        "tags": ["Python", "AI Video"],
+        "github": "https://github.com/Intrepidcanadian/trailermaking",
+        "image": null
+      },
+      {
+        "name": "Learnpedia",
+        "desc": "Personal wiki for AI video production — prompts, camera angles, lighting, character consistency, motion.",
+        "tags": ["Next.js", "TypeScript"],
+        "github": "https://github.com/Intrepidcanadian/learnpedia",
+        "image": null
+      },
+      {
+        "name": "Conflux Bounties",
+        "desc": "Developer bounties program for the Conflux Network ecosystem. Open-source projects and incentives for builders.",
+        "tags": ["TypeScript", "Blockchain"],
+        "github": "https://github.com/Intrepidcanadian/conflux-bounties",
+        "image": null
+      },
+      {
+        "name": "Prediction Market Bot",
+        "desc": "Automated trading bot for prediction markets with AI-powered analysis and risk management.",
+        "tags": ["TypeScript", "Trading"],
+        "github": "https://github.com/Intrepidcanadian/predictionmarketbot",
+        "image": null
+      },
+      {
+        "name": "Schulich FINE6280",
+        "desc": "Course materials for graduate-level Fintech: Digital Transformation of Financial Services.",
+        "tags": ["HTML", "Education"],
+        "github": "https://github.com/Intrepidcanadian/SCHULICH-FINE-TLAU",
+        "image": null
+      },
+      {
+        "name": "Browser Use",
+        "desc": "Making websites accessible for AI agents — Chrome extension and RESTful API for browser automation.",
+        "tags": ["Python", "AI Agents"],
+        "github": "https://github.com/Intrepidcanadian/browser-use",
+        "image": null
+      }
+    ]
+  },
+
+  "videos": [
+    {
+      "title": "CYM Studio — Project Intro",
+      "desc": "Overview of the AI video production and gift-card redemption platform",
+      "url": "https://youtu.be/0VJXfjlGKjo",
+      "thumbnail": null
+    },
+    {
+      "title": "CYM Studio — Builder Intro",
+      "desc": "Technical walkthrough of the builder experience and architecture",
+      "url": "https://youtu.be/xy3z2ZAp6aU",
+      "thumbnail": null
+    }
+  ],
+
+  "events": [
+    {
+      "type": "hosted",
+      "title": "Sample Developer Event",
+      "location": "Toronto",
+      "date": "2026",
+      "desc": "Replace with details and photos of events you've organized.",
+      "image": null
+    },
+    {
+      "type": "attended",
+      "title": "Sample Conference",
+      "location": "Toronto",
+      "date": "2026",
+      "desc": "Replace with details of conferences and meetups you've attended.",
+      "image": null
+    },
+    {
+      "type": "speaking",
+      "title": "Sample Talk",
+      "location": "Toronto",
+      "date": "2026",
+      "desc": "Replace with details of your speaking engagements.",
+      "image": null
+    }
+  ],
+
+  "education": [
+    {
+      "school": "Schulich School of Business",
+      "items": ["Bachelor of Business Administration", "Master of Finance", "Master of Law"]
+    },
+    {
+      "school": "BrainStation",
+      "items": ["Software Engineering Certification (2023)"]
+    },
+    {
+      "school": "Continuous Learning",
+      "items": ["Full-Stack Development", "Agent Harnesses & AI/ML", "Advanced Financial Modelling"]
+    }
+  ]
+}

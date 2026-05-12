@@ -1,7 +1,15 @@
 .env
-/*
-!memory/
-!SOUL.md
-!USER.md
-!memory/MEMORY.md
-!.gitignore
+.DS_Store
+node_modules/
+
+# nanobot internals
+.claude/
+.nanobot/
+memory/history.jsonl
+sessions/
+cron/
+skills/
+AGENTS.md
+TOOLS.md
+HEARTBEAT.md
+*.pdf
