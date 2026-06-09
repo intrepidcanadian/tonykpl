@@ -2,7 +2,12 @@
   "profile": {
     "name": "Tony Lau",
     "tagline": "Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.",
-    "photo": null,
+    "photo": "assets/photos/Tony%20Lau.png",
+    "collage": [
+      "assets/photos/Tony%20Lau.png",
+      "assets/events/GeorgeBrownUniswapFoundation.png",
+      "assets/events/YorkUniversityUniswapFoundation.png"
+    ],
     "github": "https://github.com/Intrepidcanadian",
     "linkedin": "https://linkedin.com/",
     "email": "tony.kp.lau@gmail.com",
@@ -23,43 +28,50 @@
       "date": "2026 — Now",
       "title": "Instructor — Fintech: Digital Transformation",
       "desc": "Teaching graduate course FINE6280 on fintech and digital transformation of financial services to 40 students.",
-      "org": "Schulich, York"
+      "org": "Schulich, York",
+      "logo": "assets/logos/schulich.png"
     },
     {
       "date": "2025 — 2026",
       "title": "Manager — Corporate Development",
       "desc": "M&A and new project development across nuclear, real estate, and renewable energy.",
-      "org": "OPG"
+      "org": "OPG",
+      "logo": "assets/logos/opg.png"
     },
     {
       "date": "2022 — 2023",
       "title": "Senior Financial Analyst — Shop Pay & Shop App",
       "desc": "Financial modelling for Shop App marketplace. Built business cases and launched the Shop Cash Loyalty Program.",
-      "org": "Shopify"
+      "org": "Shopify",
+      "logo": "assets/logos/shopify.png"
     },
     {
       "date": "2020 — 2022",
       "title": "Senior Manager — Green Infrastructure Investments",
       "desc": "Due diligence on equity/debt investments in Canadian infrastructure — transmission, district energy, SMRs.",
-      "org": "CIB"
+      "org": "CIB",
+      "logo": "assets/logos/cib.png"
     },
     {
       "date": "2019 — 2020",
       "title": "Senior Manager — Corporate Development",
       "desc": "M&A and acquisition of private companies. Closed a $150M private placement for water heater portfolio.",
-      "org": "Enercare"
+      "org": "Enercare",
+      "logo": "assets/logos/enercare.png"
     },
     {
       "date": "2015 — 2018",
       "title": "Senior Analyst — Private Investments, Infrastructure",
       "desc": "Built complex financial models for acquisition underwriting and financing. Managed portfolio companies.",
-      "org": "AIMCo"
+      "org": "AIMCo",
+      "logo": "assets/logos/aimco.png"
     },
     {
       "date": "2012 — 2014",
       "title": "Analyst — Investments, Infrastructure",
       "desc": "Fundraising and acquisition of solar assets (>50 MW). Transactions across Europe, US wind, UK airports.",
-      "org": "TD Greystone"
+      "org": "TD Greystone",
+      "logo": "assets/logos/td-greystone.png"
     }
   ],
 
@@ -158,27 +170,29 @@
   "events": [
     {
       "type": "hosted",
-      "title": "Sample Developer Event",
-      "location": "Toronto",
-      "date": "2026",
-      "desc": "Replace with details and photos of events you've organized.",
-      "image": null
+      "title": "WTF is Uniswap v4",
+      "location": "George Brown College, Toronto",
+      "date": "March 29, 2025",
+      "desc": "Workshop introducing developers to Uniswap v4 hooks and architecture, hosted in partnership with the Uniswap Foundation.",
+      "image": "assets/events/GeorgeBrownUniswapFoundation.png",
+      "url": "https://luma.com/d86cz5h5"
     },
     {
-      "type": "attended",
-      "title": "Sample Conference",
-      "location": "Toronto",
-      "date": "2026",
-      "desc": "Replace with details of conferences and meetups you've attended.",
-      "image": null
+      "type": "hosted",
+      "title": "Introduction to Uniswap v4",
+      "location": "York University, Toronto",
+      "date": "June 23, 2025",
+      "desc": "Lecture-style workshop on Uniswap v4 for the developer community, supported by the Uniswap Foundation.",
+      "image": "assets/events/YorkUniversityUniswapFoundation.png"
     },
     {
-      "type": "speaking",
-      "title": "Sample Talk",
+      "type": "hosted",
+      "title": "Uniswap Foundation Builder Session",
       "location": "Toronto",
-      "date": "2026",
-      "desc": "Replace with details of your speaking engagements.",
-      "image": null
+      "date": "April 29, 2025",
+      "desc": "Intimate builder session with the Uniswap Foundation team, exploring v4 development and ecosystem opportunities.",
+      "image": "assets/events/33BloorUniswapFoundation.png",
+      "url": "https://luma.com/asd9qwpp"
     }
   ],
 

@@ -207,16 +207,28 @@
 
     /* ─── log row ───────────────────────────────────────────────────── */
     .log-row {
-      display: grid; grid-template-columns: 120px 1fr 100px;
+      display: grid; grid-template-columns: 120px 1fr 140px;
       gap: var(--gap-lg); padding: 22px 0;
-      border-top: 1px solid var(--border); align-items: baseline;
+      border-top: 1px solid var(--border); align-items: center;
     }
     .log-row .meta { color: var(--muted); }
     .log-row h3 { font-size: 19px; }
     .log-row .pull { text-align: right; }
+    .log-row .org-logo {
+      display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+    }
+    .log-row .org-logo img {
+      height: 28px; width: auto; opacity: 0.7; filter: grayscale(0.2);
+      transition: opacity 0.2s;
+    }
+    .log-row:hover .org-logo img { opacity: 1; }
+    .log-row .org-logo .org-name {
+      color: var(--muted); font-family: var(--font-mono); font-size: 12px;
+    }
     @media (max-width: 920px) {
       .log-row { grid-template-columns: 1fr; gap: var(--gap-xs); }
       .log-row .pull { text-align: left; }
+      .log-row .org-logo { justify-content: flex-start; }
     }
 
     /* ─── image placeholder ─────────────────────────────────────────── */
@@ -229,6 +241,37 @@
     .ph-img.square   { aspect-ratio: 1 / 1; }
     .ph-img.portrait { aspect-ratio: 3 / 4; }
     .ph-img.wide     { aspect-ratio: 16 / 9; }
+
+    /* ── hero collage ──────────────────────────────────────────────── */
+    .hero-collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      aspect-ratio: 3 / 4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .hero-collage .collage-cell {
+      overflow: hidden; border-radius: var(--radius);
+      position: relative;
+    }
+    .hero-collage .collage-cell img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .hero-collage .collage-cell:hover img {
+      transform: scale(1.05);
+    }
+    .hero-collage .collage-main {
+      grid-row: 1 / 3; /* spans both rows on the left */
+    }
+    @media (max-width: 920px) {
+      .hero-collage {
+        aspect-ratio: 4 / 3;
+        max-width: 100%;
+      }
+    }
 
     /* ─── hero ──────────────────────────────────────────────────────── */
     .hero          { padding-block: clamp(80px, 12vw, 160px); }
@@ -290,14 +333,24 @@
     .video-thumb.placeholder { background: var(--bg); color: var(--muted); }
 
     /* ═══ CUSTOM: event cards ═══════════════════════════════════════ */
+    .event-card {
+      display: flex; flex-direction: column; overflow: hidden;
+    }
     .event-img {
-      height: 160px; background: var(--bg); border-radius: var(--radius) var(--radius) 0 0;
+      position: relative;
+      height: 220px; background: var(--bg); border-radius: var(--radius) var(--radius) 0 0;
       display: grid; place-items: center; color: var(--muted); font-size: 12px;
-      margin: -28px -28px var(--gap-md);
-      flex-direction: column; gap: 8px;
+      margin: -28px -28px 0; padding: 0;
+      overflow: hidden;
+    }
+    .event-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .event-body {
+      padding-top: var(--gap-md); display: flex; flex-direction: column; flex: 1;
     }
     .event-badge {
-      display: inline-block; padding: 3px 8px; border-radius: 999px;
+      display: inline-block; padding: 3px 8px; border-radius: 999px; width: fit-content;
       font-family: var(--font-mono); font-size: 10px; font-weight: 600;
       letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;
     }
@@ -327,6 +380,27 @@
 
     /* ═══ CUSTOM: section numbers ════════════════════════════════════ */
     .section-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); margin-right: 12px; }
+
+    /* ═══ GitHub contribution graph ═══════════════════════════════════ */
+    .gh-year { margin-bottom: var(--gap-lg); }
+    .gh-year-title { font-family: var(--font-body); font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .gh-graph-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
+    .gh-graph-scroll::-webkit-scrollbar { height: 4px; }
+    .gh-graph-scroll::-webkit-scrollbar-track { background: transparent; }
+    .gh-graph-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .gh-legend { display: flex; align-items: center; gap: 6px; margin-top: var(--gap-sm); font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+    .gh-legend-cell { width: 10px; height: 10px; border-radius: 2px; }
+
+    .gh-cell-0 { fill: var(--fg-soft); }
+    .gh-cell-1 { fill: #0e4429; }
+    .gh-cell-2 { fill: #006d32; }
+    .gh-cell-3 { fill: #26a641; }
+    .gh-cell-4 { fill: #39d353; }
+    [data-theme="light"] .gh-cell-0 { fill: #ebedf0; }
+    [data-theme="light"] .gh-cell-1 { fill: #9be9a8; }
+    [data-theme="light"] .gh-cell-2 { fill: #40c463; }
+    [data-theme="light"] .gh-cell-3 { fill: #30a14e; }
+    [data-theme="light"] .gh-cell-4 { fill: #216e39; }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -342,6 +416,7 @@
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#github">GitHub</a>
         <a href="#events">Events</a>
         <a href="#contact">Contact</a>
         <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
@@ -366,7 +441,9 @@
             <a href="https://github.com/Intrepidcanadian" class="btn btn-ghost btn-arrow" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
-        <div class="ph-img portrait" aria-label="Tony Lau portrait">[ Photo coming soon ]</div>
+        <div class="hero-collage" id="hero-collage" aria-label="Tony Lau photo collage">
+          <!-- populated by data.json -->
+        </div>
       </div>
     </section>
 
@@ -619,10 +696,22 @@
       </div>
     </section>
 
+    <!-- ─── GITHUB ACTIVITY ────────────────────────────────────────── -->
+    <section class="section" data-od-id="github" id="github">
+      <div class="container">
+        <p class="eyebrow"><span class="section-num">04</span> GitHub Activity</p>
+        <h2 style="margin-bottom: 8px;">Building in public</h2>
+        <p class="lead" style="margin-bottom: var(--gap-lg);">Contribution history from <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">@intrepidcanadian</a>.</p>
+        <div id="github-activity">
+          <p style="color: var(--muted); font-size: 14px;">Loading contribution data&hellip;</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ─── EVENTS ────────────────────────────────────────────────── -->
     <section class="section" data-od-id="events" id="events">
       <div class="container">
-        <p class="eyebrow"><span class="section-num">04</span> Events</p>
+        <p class="eyebrow"><span class="section-num">05</span> Events</p>
         <h2 style="margin-bottom: 8px;">Developer relations & community</h2>
         <p class="lead" style="margin-bottom: var(--gap-lg);">Hackathons, conferences, and events I've hosted and attended.</p>
 
@@ -634,27 +723,7 @@
         </div>
 
         <div class="grid-3" id="events-grid">
-          <div class="card event-card" data-type="hosted">
-            <div class="event-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add photo</span></div>
-            <span class="event-badge badge-hosted">Hosted</span>
-            <h3 style="font-size: 17px;">Sample Developer Event</h3>
-            <p class="event-meta-row">Toronto &middot; 2026</p>
-            <p style="color: var(--muted); font-size: 14px;">Replace with details and photos of events you've organized.</p>
-          </div>
-          <div class="card event-card" data-type="attended">
-            <div class="event-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add photo</span></div>
-            <span class="event-badge badge-attended">Attended</span>
-            <h3 style="font-size: 17px;">Sample Conference</h3>
-            <p class="event-meta-row">Toronto &middot; 2026</p>
-            <p style="color: var(--muted); font-size: 14px;">Replace with details of conferences and meetups you've attended.</p>
-          </div>
-          <div class="card event-card" data-type="speaking">
-            <div class="event-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add photo</span></div>
-            <span class="event-badge badge-speaking">Speaking</span>
-            <h3 style="font-size: 17px;">Sample Talk</h3>
-            <p class="event-meta-row">Toronto &middot; 2026</p>
-            <p style="color: var(--muted); font-size: 14px;">Replace with details of your speaking engagements.</p>
-          </div>
+          <!-- Static fallback — replaced by data.json at runtime -->
         </div>
       </div>
     </section>
@@ -662,7 +731,7 @@
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
     <section class="section" data-od-id="education" id="education">
       <div class="container">
-        <p class="eyebrow"><span class="section-num">05</span> Education</p>
+        <p class="eyebrow"><span class="section-num">06</span> Education</p>
         <h2 style="margin-bottom: var(--gap-lg);">Academic background</h2>
         <div class="grid-3">
           <div class="card">
@@ -684,7 +753,7 @@
     <!-- ─── CONTACT (Layout 6 — CTA strip) ────────────────────────── -->
     <section class="section" data-od-id="contact" id="contact" style="text-align: center;">
       <div class="container" style="max-width: 600px;">
-        <p class="eyebrow"><span class="section-num">06</span> Contact</p>
+        <p class="eyebrow"><span class="section-num">07</span> Contact</p>
         <h2>Let's connect.</h2>
         <p class="lead" style="margin: 16px auto 32px;">Interested in collaborating, chatting, or just saying hello?</p>
         <div style="display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;">
@@ -745,14 +814,19 @@
     fetch('data.json')
       .then(r => r.json())
       .then(data => {
-        // Profile photo
-        if (data.profile?.photo) {
-          const heroImg = document.querySelector('[data-od-id="hero"] .ph-img');
-          if (heroImg) {
-            heroImg.innerHTML = '';
-            heroImg.style.backgroundImage = `url(${data.profile.photo})`;
-            heroImg.style.backgroundSize = 'cover';
-            heroImg.style.backgroundPosition = 'center';
+        // Hero collage
+        if (data.profile?.collage || data.profile?.photo) {
+          const collageEl = document.getElementById('hero-collage');
+          if (collageEl && data.profile.collage && data.profile.collage.length >= 3) {
+            const photos = data.profile.collage;
+            collageEl.innerHTML = photos.map((src, i) =>
+              `<div class="collage-cell${i === 0 ? ' collage-main' : ''}"><img src="${src}" alt="Tony Lau photo ${i + 1}"></div>`
+            ).join('');
+          } else if (collageEl && data.profile.photo) {
+            // fallback to single photo
+            collageEl.style.display = 'block';
+            collageEl.style.aspectRatio = '3 / 4';
+            collageEl.innerHTML = `<img src="${data.profile.photo}" alt="Tony Lau" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);">`;
           }
         }
 
@@ -788,7 +862,10 @@
                   <h3>${e.title}</h3>
                   <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">${e.desc}</p>
                 </div>
-                <span class="pull meta">${e.org}</span>
+                <div class="pull org-logo">
+                  ${e.logo ? `<img src="${e.logo}" alt="${e.org}">` : ''}
+                  <span class="org-name">${e.org}</span>
+                </div>
               </article>`).join('');
           }
         }
@@ -846,521 +923,162 @@
               <div class="card event-card" data-type="${e.type}">
                 <div class="event-img">
                   ${e.image
-                    ? `<img src="${e.image}" alt="${e.title}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;margin:0;">`
+                    ? `<img src="${e.image}" alt="${e.title}">`
                     : `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add photo</span>`
                   }
                 </div>
-                <span class="event-badge ${badgeClass[e.type] || ''}">${e.type}</span>
-                <h3 style="font-size: 17px;">${e.title}</h3>
-                <p class="event-meta-row">${e.location} &middot; ${e.date}</p>
-                <p style="color: var(--muted); font-size: 14px;">${e.desc}</p>
+                <div class="event-body">
+                  <span class="event-badge ${badgeClass[e.type] || ''}">${e.type}</span>
+                  <h3 style="font-size: 17px; margin-bottom: 6px;">${e.title}</h3>
+                  <p class="event-meta-row">${e.location} &middot; ${e.date}</p>
+                  <p style="color: var(--muted); font-size: 14px;">${e.desc}</p>
+                </div>
               </div>`).join('');
             bindFilters(); // rebind after dynamic render
           }
         }
       })
       .catch(() => { /* data.json not found — static HTML works fine */ });
-  </script>
 
-  <!-- ─── Nanobot Chat Sidebar (native WebSocket) ────────────────────── -->
-  <style>
-    /* ── FAB toggle ────────────────────────────────────────────────── */
-    .nb-toggle {
-      position: fixed; bottom: 24px; right: 24px; z-index: 10001;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: var(--accent); color: #fff; border: none; cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      font-size: 24px; line-height: 1;
-    }
-    .nb-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.4); }
-    .nb-toggle .nb-ico-close { display: none; }
-    body.nb-open .nb-toggle { opacity: 0; pointer-events: none; transition: opacity 0.2s 0.1s; }
+    // ─── GitHub contribution graph ────────────────────────────────
+    (function() {
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const container = document.getElementById('github-activity');
+      if (!container) return;
 
-    /* ── sidebar shell ─────────────────────────────────────────────── */
-    .nb-sidebar {
-      position: fixed; top: 0; right: -420px; z-index: 10000;
-      width: 400px; height: 100vh;
-      background: var(--surface);
-      border-left: 1px solid var(--border);
-      box-shadow: -4px 0 30px rgba(0,0,0,0.3);
-      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex; flex-direction: column;
-    }
-    .nb-sidebar.open { right: 0; }
-    body { transition: margin-right 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    body.nb-open { margin-right: 400px; }
+      fetch('/api/github-contributions')
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(years => {
+          container.innerHTML = '';
+          years.forEach(yd => container.appendChild(buildYearGraph(yd)));
 
-    /* ── header ─────────────────────────────────────────────────────── */
-    .nb-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg);
-      flex-shrink: 0;
-    }
-    .nb-header h4 {
-      margin: 0; font-size: 14px; font-family: var(--font-body);
-      color: var(--fg); font-weight: 600; display: flex; align-items: center; gap: 8px;
-    }
-    .nb-dot {
-      width: 8px; height: 8px; border-radius: 50%; display: inline-block;
-      background: #ef4444; /* red = disconnected */
-    }
-    .nb-dot.connected { background: #22c55e; }
-    .nb-header-actions { display: flex; gap: 4px; }
-    .nb-header-actions button {
-      background: none; border: none; color: var(--muted); cursor: pointer;
-      font-size: 14px; padding: 4px 8px; border-radius: 4px;
-      font-family: var(--font-body);
-    }
-    .nb-header-actions button:hover { color: var(--fg); background: var(--fg-soft); }
-
-    /* ── messages area ──────────────────────────────────────────────── */
-    .nb-messages {
-      flex: 1; overflow-y: auto; padding: 16px;
-      display: flex; flex-direction: column; gap: 12px;
-      scroll-behavior: smooth;
-    }
-    .nb-messages::-webkit-scrollbar { width: 4px; }
-    .nb-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-    .nb-msg {
-      max-width: 85%; padding: 10px 14px; border-radius: 14px;
-      font-size: 14px; line-height: 1.55; font-family: var(--font-body);
-      word-wrap: break-word; white-space: pre-wrap;
-    }
-    .nb-msg.user {
-      align-self: flex-end;
-      background: var(--accent); color: #fff;
-      border-bottom-right-radius: 4px;
-    }
-    .nb-msg.assistant {
-      align-self: flex-start;
-      background: var(--bg); color: var(--fg);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 4px;
-    }
-    .nb-msg.tool-hint {
-      align-self: flex-start;
-      background: transparent; color: var(--muted);
-      border: none; padding: 2px 14px;
-      font-size: 12px; font-family: var(--font-mono);
-      opacity: 0.7;
-    }
-    .nb-msg.system {
-      align-self: center; text-align: center;
-      background: transparent; color: var(--muted);
-      font-size: 12px; padding: 4px;
-    }
-
-    /* typing indicator */
-    .nb-typing {
-      align-self: flex-start; display: none; gap: 4px;
-      padding: 10px 18px; align-items: center;
-    }
-    .nb-typing.visible { display: flex; }
-    .nb-typing span {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--muted);
-      animation: nb-bounce 1.4s infinite ease-in-out;
-    }
-    .nb-typing span:nth-child(2) { animation-delay: 0.16s; }
-    .nb-typing span:nth-child(3) { animation-delay: 0.32s; }
-    @keyframes nb-bounce {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-      40% { transform: scale(1); opacity: 1; }
-    }
-
-    /* ── input area ────────────────────────────────────────────────── */
-    .nb-input-area {
-      padding: 12px 16px; border-top: 1px solid var(--border);
-      background: var(--bg); flex-shrink: 0;
-    }
-    .nb-input-row {
-      display: flex; gap: 8px; align-items: flex-end;
-    }
-    .nb-input-row textarea {
-      flex: 1; resize: none; border: 1px solid var(--border);
-      background: var(--surface); color: var(--fg);
-      border-radius: 12px; padding: 10px 14px;
-      font-family: var(--font-body); font-size: 14px;
-      line-height: 1.4; max-height: 120px; min-height: 40px;
-      outline: none; transition: border-color 0.15s;
-    }
-    .nb-input-row textarea:focus { border-color: var(--accent); }
-    .nb-input-row textarea::placeholder { color: var(--muted); }
-    .nb-send {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--accent); color: #fff; border: none;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: opacity 0.15s;
-    }
-    .nb-send:disabled { opacity: 0.4; cursor: not-allowed; }
-    .nb-send svg { width: 18px; height: 18px; }
-    .nb-attach {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: none; border: 1px solid var(--border); color: var(--muted);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: color 0.15s, border-color 0.15s;
-    }
-    .nb-attach:hover { color: var(--fg); border-color: var(--fg); }
-    .nb-attach svg { width: 16px; height: 16px; }
-    .nb-attach-input { display: none; }
-
-    /* ── attachment preview ─────────────────────────────────────────── */
-    .nb-attach-preview {
-      display: none; padding: 8px 0 4px; gap: 8px; flex-wrap: wrap;
-    }
-    .nb-attach-preview.visible { display: flex; }
-    .nb-attach-thumb {
-      position: relative; width: 56px; height: 56px; border-radius: 8px;
-      overflow: hidden; border: 1px solid var(--border);
-    }
-    .nb-attach-thumb img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .nb-attach-thumb .nb-remove-attach {
-      position: absolute; top: 2px; right: 2px;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: rgba(0,0,0,0.7); color: #fff; border: none;
-      font-size: 11px; cursor: pointer; display: flex;
-      align-items: center; justify-content: center; line-height: 1;
-    }
-    .nb-attach-thumb .nb-attach-name {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.6); color: #fff;
-      font-size: 8px; padding: 1px 3px; text-align: center;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
-
-    /* ── image in message ──────────────────────────────────────────── */
-    .nb-msg-img {
-      max-width: 100%; border-radius: 8px; margin-bottom: 6px;
-      display: block;
-    }
-
-    .nb-input-hint {
-      font-size: 11px; color: var(--muted); margin-top: 6px;
-      font-family: var(--font-mono); text-align: center;
-    }
-
-    /* ── mobile ─────────────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .nb-sidebar { width: 100vw; right: -100vw; }
-      .nb-sidebar.open { right: 0; }
-      body.nb-open { margin-right: 0; }
-      .nb-toggle { bottom: 16px; right: 16px; width: 48px; height: 48px; }
-    }
-  </style>
-
-  <button class="nb-toggle" id="nbToggle" title="Chat with Nanobot">
-    <span class="nb-ico-chat">🐈</span>
-    <span class="nb-ico-close">✕</span>
-  </button>
-
-  <div class="nb-sidebar" id="nbSidebar">
-    <div class="nb-header">
-      <h4><span class="nb-dot" id="nbDot"></span> nanobot · portfolio manager</h4>
-      <div class="nb-header-actions">
-        <button id="nbNewChat" title="New chat">+</button>
-        <button id="nbRefresh" title="Refresh site">↻</button>
-        <button id="nbClose" title="Close">✕</button>
-      </div>
-    </div>
-    <div class="nb-messages" id="nbMessages">
-      <div class="nb-msg system">Connect to nanobot to start managing your portfolio.</div>
-    </div>
-    <div class="nb-typing" id="nbTyping"><span></span><span></span><span></span></div>
-    <div class="nb-input-area">
-      <div class="nb-attach-preview" id="nbAttachPreview"></div>
-      <div class="nb-input-row">
-        <button class="nb-attach" id="nbAttachBtn" title="Attach photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
-          </svg>
-        </button>
-        <input type="file" class="nb-attach-input" id="nbAttachInput" accept="image/*" multiple>
-        <textarea id="nbInput" rows="1" placeholder="Ask nanobot to update your portfolio…"></textarea>
-        <button class="nb-send" id="nbSend" disabled>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
-      </div>
-      <div class="nb-input-hint">attach photos · nanobot saves to assets/ & updates data.json</div>
-    </div>
-  </div>
-
-  <script>
-  (function() {
-    /* ── config ──────────────────────────────────────────────────── */
-    const WS_HOST   = '127.0.0.1';
-    const WS_PORT   = 8766;
-    const HTTP_BASE = 'http://' + WS_HOST + ':' + WS_PORT;
-
-    /* ── DOM refs ───────────────────────────────────────────────── */
-    const toggle    = document.getElementById('nbToggle');
-    const sidebar   = document.getElementById('nbSidebar');
-    const closeBtn  = document.getElementById('nbClose');
-    const dot       = document.getElementById('nbDot');
-    const msgBox    = document.getElementById('nbMessages');
-    const typing    = document.getElementById('nbTyping');
-    const input     = document.getElementById('nbInput');
-    const sendBtn   = document.getElementById('nbSend');
-    const newChat   = document.getElementById('nbNewChat');
-    const refresh   = document.getElementById('nbRefresh');
-    const attachBtn = document.getElementById('nbAttachBtn');
-    const attachIn  = document.getElementById('nbAttachInput');
-    const preview   = document.getElementById('nbAttachPreview');
-
-    /* ── state ──────────────────────────────────────────────────── */
-    let ws = null;
-    let chatId = null;
-    let token = null;
-    let connected = false;
-    let streaming = false;       // currently receiving deltas
-    let streamEl = null;         // <div> being streamed into
-    let turnActive = false;      // agent turn in progress
-    let pendingMedia = [];       // [{data_url, name}]
-
-    /* ── helpers ─────────────────────────────────────────────────── */
-    function addMsg(text, cls, images) {
-      const d = document.createElement('div');
-      d.className = 'nb-msg ' + cls;
-      if (images && images.length) {
-        images.forEach(img => {
-          const el = document.createElement('img');
-          el.src = img.data_url;
-          el.className = 'nb-msg-img';
-          el.alt = img.name;
-          d.appendChild(el);
+          // Legend
+          const legend = document.createElement('div');
+          legend.className = 'gh-legend';
+          const ns = 'http://www.w3.org/2000/svg';
+          const legendSvg = document.createElementNS(ns, 'svg');
+          legendSvg.setAttribute('width', 70);
+          legendSvg.setAttribute('height', 10);
+          [0,1,2,3,4].forEach((lvl, i) => {
+            const r = document.createElementNS(ns, 'rect');
+            r.setAttribute('x', i * 14); r.setAttribute('y', 0);
+            r.setAttribute('width', 10); r.setAttribute('height', 10);
+            r.setAttribute('rx', 2); r.setAttribute('class', 'gh-cell-' + lvl);
+            legendSvg.appendChild(r);
+          });
+          legend.innerHTML = '<span>Less</span>';
+          legend.appendChild(legendSvg);
+          legend.insertAdjacentHTML('beforeend', '<span>More</span>');
+          container.appendChild(legend);
+        })
+        .catch(() => {
+          container.innerHTML = '<p style="color: var(--muted); font-size: 14px;">GitHub contribution data unavailable.</p>';
         });
+
+      function buildYearGraph(data) {
+        const wrap = document.createElement('div');
+        wrap.className = 'gh-year';
+
+        const title = document.createElement('div');
+        title.className = 'gh-year-title';
+        title.textContent = data.total.toLocaleString() + ' contributions in ' + data.year;
+        wrap.appendChild(title);
+
+        const grid = buildGrid(data.days, data.year);
+        const monthLabels = getMonthLabels(grid);
+        const cellSize = 10, cellGap = 3, step = cellSize + cellGap;
+        const labelH = 20, dayLabelW = 28;
+        const svgW = dayLabelW + grid.length * step;
+        const svgH = labelH + 7 * step;
+
+        const scroll = document.createElement('div');
+        scroll.className = 'gh-graph-scroll';
+
+        const ns = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('width', svgW);
+        svg.setAttribute('height', svgH);
+        svg.style.display = 'block';
+
+        // Month labels
+        monthLabels.forEach(l => {
+          const t = document.createElementNS(ns, 'text');
+          t.setAttribute('x', dayLabelW + l.col * step);
+          t.setAttribute('y', 12);
+          t.setAttribute('fill', 'var(--muted)');
+          t.setAttribute('font-size', 10);
+          t.setAttribute('font-family', 'var(--font-mono)');
+          t.textContent = l.month;
+          svg.appendChild(t);
+        });
+
+        // Day labels
+        ['Mon','','Wed','','Fri','',''].forEach((label, row) => {
+          if (!label) return;
+          const t = document.createElementNS(ns, 'text');
+          t.setAttribute('x', 0);
+          t.setAttribute('y', labelH + row * step + cellSize - 1);
+          t.setAttribute('fill', 'var(--muted)');
+          t.setAttribute('font-size', 9);
+          t.setAttribute('font-family', 'var(--font-mono)');
+          t.textContent = label;
+          svg.appendChild(t);
+        });
+
+        // Cells
+        grid.forEach((week, col) => {
+          week.forEach((day, row) => {
+            if (!day) return;
+            const r = document.createElementNS(ns, 'rect');
+            r.setAttribute('x', dayLabelW + col * step);
+            r.setAttribute('y', labelH + row * step);
+            r.setAttribute('width', cellSize);
+            r.setAttribute('height', cellSize);
+            r.setAttribute('rx', 2);
+            r.setAttribute('class', 'gh-cell-' + day.level);
+            svg.appendChild(r);
+          });
+        });
+
+        scroll.appendChild(svg);
+        wrap.appendChild(scroll);
+        return wrap;
       }
-      if (text) {
-        const t = document.createElement('span');
-        t.textContent = text;
-        d.appendChild(t);
-      }
-      msgBox.appendChild(d);
-      scrollDown();
-      return d;
-    }
-    function scrollDown() {
-      requestAnimationFrame(() => { msgBox.scrollTop = msgBox.scrollHeight; });
-    }
-    function setConnected(v) {
-      connected = v;
-      dot.classList.toggle('connected', v);
-      sendBtn.disabled = !v;
-    }
 
-    /* ── auto-resize textarea ────────────────────────────────────── */
-    input.addEventListener('input', () => {
-      input.style.height = 'auto';
-      input.style.height = Math.min(input.scrollHeight, 120) + 'px';
-    });
+      function buildGrid(days, year) {
+        const start = new Date(year, 0, 1);
+        const end = new Date(year, 11, 31);
+        const startDay = start.getDay();
+        const dayMap = {};
+        days.forEach(d => { dayMap[d.date] = d; });
 
-    /* ── WebSocket connect (token-free localhost mode) ──────────── */
-    async function connect() {
-      const wsUrl = 'ws://' + WS_HOST + ':' + WS_PORT + '/';
-      ws = new WebSocket(wsUrl);
-
-      ws.onopen = () => {
-        setConnected(true);
-        addMsg('Connected to nanobot (kimi-k2.6)', 'system');
-      };
-
-      ws.onclose = () => {
-        setConnected(false);
-        streaming = false;
-        turnActive = false;
-        typing.classList.remove('visible');
-      };
-
-      ws.onerror = () => {
-        addMsg('WebSocket error — retrying in 3s…', 'system');
-        setTimeout(connect, 3000);
-      };
-
-      ws.onmessage = (evt) => {
-        let msg;
-        try { msg = JSON.parse(evt.data); } catch { return; }
-
-        switch (msg.event) {
-          case 'ready':
-            chatId = msg.chat_id;
-            break;
-
-          case 'attached':
-            chatId = msg.chat_id;
-            break;
-
-          case 'delta':
-            typing.classList.remove('visible');
-            if (!streaming || !streamEl) {
-              streamEl = addMsg('', 'assistant');
-              streaming = true;
-            }
-            streamEl.textContent += msg.text;
-            scrollDown();
-            break;
-
-          case 'stream_end':
-            streaming = false;
-            streamEl = null;
-            break;
-
-          case 'message':
-            typing.classList.remove('visible');
-            if (msg.kind === 'tool_hint' || msg.kind === 'progress') {
-              addMsg('↳ ' + (msg.text || ''), 'tool-hint');
-            } else if (msg.text) {
-              if (streaming && streamEl) {
-                // flush current stream, start new message
-                streaming = false;
-                streamEl = null;
-              }
-              addMsg(msg.text, 'assistant');
-            }
-            break;
-
-          case 'turn_end':
-            turnActive = false;
-            streaming = false;
-            streamEl = null;
-            typing.classList.remove('visible');
-            sendBtn.disabled = false;
-            break;
-
-          case 'error':
-            addMsg('Error: ' + (msg.detail || 'unknown'), 'system');
-            turnActive = false;
-            typing.classList.remove('visible');
-            sendBtn.disabled = false;
-            break;
+        const grid = [];
+        let week = Array(startDay).fill(null);
+        const cur = new Date(start);
+        while (cur <= end) {
+          const ds = cur.toISOString().slice(0, 10);
+          week.push(dayMap[ds] || { date: ds, level: 0 });
+          if (week.length === 7) { grid.push(week); week = []; }
+          cur.setDate(cur.getDate() + 1);
         }
-      };
-    }
+        if (week.length) { while (week.length < 7) week.push(null); grid.push(week); }
+        return grid;
+      }
 
-    /* ── file attachment ──────────────────────────────────────────── */
-    function readFileAsDataUrl(file) {
-      return new Promise((resolve, reject) => {
-        const r = new FileReader();
-        r.onload = () => resolve({ data_url: r.result, name: file.name });
-        r.onerror = reject;
-        r.readAsDataURL(file);
-      });
-    }
-
-    function renderPreviews() {
-      preview.innerHTML = '';
-      if (!pendingMedia.length) { preview.classList.remove('visible'); return; }
-      preview.classList.add('visible');
-      pendingMedia.forEach((m, i) => {
-        const thumb = document.createElement('div');
-        thumb.className = 'nb-attach-thumb';
-        thumb.innerHTML = '<img src="' + m.data_url + '" alt="' + m.name + '">'
-          + '<button class="nb-remove-attach" data-idx="' + i + '">✕</button>'
-          + '<span class="nb-attach-name">' + m.name + '</span>';
-        preview.appendChild(thumb);
-      });
-      // remove buttons
-      preview.querySelectorAll('.nb-remove-attach').forEach(btn => {
-        btn.addEventListener('click', () => {
-          pendingMedia.splice(parseInt(btn.dataset.idx), 1);
-          renderPreviews();
+      function getMonthLabels(grid) {
+        const labels = [];
+        let last = -1;
+        grid.forEach((week, col) => {
+          const first = week.find(d => d !== null);
+          if (first) {
+            const m = parseInt(first.date.slice(5, 7), 10) - 1;
+            if (m !== last) { labels.push({ month: MONTHS[m], col: col }); last = m; }
+          }
         });
-      });
-    }
-
-    attachBtn.addEventListener('click', () => attachIn.click());
-    attachIn.addEventListener('change', async () => {
-      const files = Array.from(attachIn.files);
-      if (!files.length) return;
-      for (const f of files) {
-        if (!f.type.startsWith('image/')) continue;
-        if (f.size > 8 * 1024 * 1024) { addMsg('File too large (max 8MB): ' + f.name, 'system'); continue; }
-        const m = await readFileAsDataUrl(f);
-        pendingMedia.push(m);
+        return labels;
       }
-      attachIn.value = '';
-      renderPreviews();
-    });
-
-    /* ── send message ────────────────────────────────────────────── */
-    function send() {
-      const text = input.value.trim();
-      const hasMedia = pendingMedia.length > 0;
-      if ((!text && !hasMedia) || !ws || ws.readyState !== 1 || !chatId) return;
-
-      // show user message with image previews
-      addMsg(text || '(photo attached)', 'user', hasMedia ? pendingMedia : null);
-
-      // build payload
-      const payload = {
-        type: 'message',
-        chat_id: chatId,
-        content: text || 'I attached a photo. Please save it to the appropriate assets/ folder and update data.json.',
-        webui: true
-      };
-      if (hasMedia) {
-        payload.media = pendingMedia.map(m => ({ data_url: m.data_url, name: m.name }));
-      }
-      ws.send(JSON.stringify(payload));
-
-      // reset
-      input.value = '';
-      input.style.height = 'auto';
-      pendingMedia = [];
-      renderPreviews();
-      turnActive = true;
-      sendBtn.disabled = true;
-      typing.classList.add('visible');
-      scrollDown();
-    }
-
-    /* ── event listeners ─────────────────────────────────────────── */
-    sendBtn.addEventListener('click', send);
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
-    });
-
-    // sidebar open/close
-    function openSidebar() {
-      sidebar.classList.add('open');
-      toggle.classList.add('active');
-      document.body.classList.add('nb-open');
-      if (!ws || ws.readyState !== 1) connect();
-      input.focus();
-    }
-    function closeSidebar() {
-      sidebar.classList.remove('open');
-      toggle.classList.remove('active');
-      document.body.classList.remove('nb-open');
-    }
-    toggle.addEventListener('click', () => {
-      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-    });
-    closeBtn.addEventListener('click', closeSidebar);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeSidebar();
-    });
-
-    // new chat
-    newChat.addEventListener('click', () => {
-      if (!ws || ws.readyState !== 1) return;
-      ws.send(JSON.stringify({ type: 'new_chat' }));
-      msgBox.innerHTML = '<div class="nb-msg system">New chat started.</div>';
-      streaming = false;
-      streamEl = null;
-      turnActive = false;
-    });
-
-    // refresh site (re-fetch data.json)
-    refresh.addEventListener('click', () => {
-      window.location.reload();
-    });
-
-  })();
+    })();
   </script>
+
 </body>
 </html>
