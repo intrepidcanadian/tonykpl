@@ -36,7 +36,7 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
 1. Add an entry to `events[]` in `data.json`:
    ```json
    {
-     "type": "hosted",
+     "type": "hosted/speaking",
      "title": "Event Name",
      "location": "Toronto",
      "date": "2026",
@@ -44,7 +44,7 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
      "image": "assets/events/photo.jpg"
    }
    ```
-   `type` must be one of: `hosted`, `attended`, `speaking`
+   `type` must be one of: `hosted/speaking`, `attended` (these match the filter buttons and badge styles in `index.html`)
 2. Drop the photo into `assets/events/`
 
 ### Adding a video

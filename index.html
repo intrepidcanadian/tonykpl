@@ -10,6 +10,51 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tony Lau · Finance × Technology × Developer Relations</title>
+  <meta name="description" content="Infrastructure investor turned software engineer building at the intersection of finance and technology — AI video production, blockchain infrastructure, and fintech education." />
+  <meta name="author" content="Tony Lau" />
+  <link rel="canonical" href="https://tonykpl.vercel.app/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/photos/Tony%20Lau.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tony Lau" />
+  <meta property="og:title" content="Tony Lau · Finance × Technology × Developer Relations" />
+  <meta property="og:description" content="Infrastructure investor turned software engineer building at the intersection of finance and technology — AI video production, blockchain infrastructure, and fintech education." />
+  <meta property="og:url" content="https://tonykpl.vercel.app/" />
+  <meta property="og:image" content="https://tonykpl.vercel.app/assets/photos/Tony%20Lau.png" />
+  <meta property="og:image:alt" content="Tony Lau" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tony Lau · Finance × Technology × Developer Relations" />
+  <meta name="twitter:description" content="Infrastructure investor turned software engineer building at the intersection of finance and technology — AI video production, blockchain infrastructure, and fintech education." />
+  <meta name="twitter:image" content="https://tonykpl.vercel.app/assets/photos/Tony%20Lau.png" />
+
+  <!-- structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tony Lau",
+    "url": "https://tonykpl.vercel.app/",
+    "image": "https://tonykpl.vercel.app/assets/photos/Tony%20Lau.png",
+    "email": "mailto:tony.kp.lau@gmail.com",
+    "jobTitle": "Software Engineer & Fintech Instructor",
+    "description": "Infrastructure investor turned software engineer building at the intersection of finance and technology.",
+    "sameAs": [
+      "https://github.com/Intrepidcanadian",
+      "https://www.linkedin.com/in/tonykpl/"
+    ],
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Schulich School of Business, York University" },
+      { "@type": "EducationalOrganization", "name": "BrainStation" }
+    ],
+    "knowsAbout": ["Python", "TypeScript", "Solidity", "SQL", "Next.js", "React", "Node.js", "AI/ML", "Blockchain", "Financial Modelling"]
+  }
+  </script>
   <style>
     /* ─── tokens (OD 6-variable system) ──────────────────────────────
        Dark theme defaults — light theme overridden via [data-theme] */
@@ -207,28 +252,31 @@
 
     /* ─── log row ───────────────────────────────────────────────────── */
     .log-row {
-      display: grid; grid-template-columns: 120px 1fr 140px;
+      display: grid; grid-template-columns: 120px 1fr 180px;
       gap: var(--gap-lg); padding: 22px 0;
-      border-top: 1px solid var(--border); align-items: center;
+      border-top: 1px solid var(--border); align-items: start;
     }
-    .log-row .meta { color: var(--muted); }
+    .log-row .meta { color: var(--muted); padding-top: 4px; }
     .log-row h3 { font-size: 19px; }
     .log-row .pull { text-align: right; }
     .log-row .org-logo {
-      display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+      padding-top: 4px;
     }
     .log-row .org-logo img {
-      height: 28px; width: auto; opacity: 0.7; filter: grayscale(0.2);
+      height: 32px; width: auto; opacity: 0.7; filter: grayscale(0.2);
       transition: opacity 0.2s;
     }
     .log-row:hover .org-logo img { opacity: 1; }
     .log-row .org-logo .org-name {
-      color: var(--muted); font-family: var(--font-mono); font-size: 12px;
+      color: var(--muted); font-family: var(--font-mono); font-size: 11px;
+      line-height: 1.4; text-align: right;
     }
     @media (max-width: 920px) {
       .log-row { grid-template-columns: 1fr; gap: var(--gap-xs); }
       .log-row .pull { text-align: left; }
-      .log-row .org-logo { justify-content: flex-start; }
+      .log-row .org-logo { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .log-row .org-logo .org-name { text-align: left; }
     }
 
     /* ─── image placeholder ─────────────────────────────────────────── */
@@ -321,16 +369,41 @@
     .preview-body { height: 160px; display: grid; place-items: center; color: var(--muted); font-size: 14px; }
     @media (max-width: 920px) { .featured { grid-template-columns: 1fr; } .featured-preview { display: none; } }
 
-    /* ═══ CUSTOM: video cards ════════════════════════════════════════ */
-    .video-link { display: block; text-decoration: none; color: inherit; }
-    .video-link:hover .card { border-color: var(--accent); }
-    .video-thumb {
-      height: 120px; background: linear-gradient(135deg, var(--accent-soft), var(--fg-soft));
-      border-radius: var(--radius) var(--radius) 0 0;
-      display: grid; place-items: center; color: var(--accent);
-      margin: -28px -28px var(--gap-md); padding: 0;
+    /* ═══ CUSTOM: video mosaic ═════════════════════════════════════ */
+    .video-mosaic {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px;
     }
-    .video-thumb.placeholder { background: var(--bg); color: var(--muted); }
+    .video-link { display: block; text-decoration: none; color: inherit; cursor: pointer; }
+    .video-link:hover .video-card { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .video-link:hover .video-thumb img { transform: scale(1.04); }
+    .video-card {
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden; background: var(--surface);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .video-thumb {
+      position: relative; aspect-ratio: 16/9; overflow: hidden;
+      background: linear-gradient(135deg, var(--accent-soft), var(--fg-soft));
+    }
+    .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .video-thumb .play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      display: grid; place-items: center; color: #fff;
+    }
+    .video-thumb .play-btn svg { margin-left: 3px; }
+    .video-meta { padding: 16px; }
+    .video-meta h3 { font-size: 15px; margin: 0 0 4px; }
+    .video-meta p { margin: 0; color: var(--muted); font-size: 13px; }
+    @media (max-width: 960px) {
+      .video-mosaic { grid-template-columns: 1fr; }
+      .video-mosaic > * { grid-column: span 1 !important; }
+    }
+
+    /* ═══ CUSTOM: LinkedIn post embeds ════════════════════════════ */
+    .post-embed { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .post-embed iframe { width: 100%; border: none; min-height: 500px; }
 
     /* ═══ CUSTOM: event cards ═══════════════════════════════════════ */
     .event-card {
@@ -354,9 +427,8 @@
       font-family: var(--font-mono); font-size: 10px; font-weight: 600;
       letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;
     }
-    .badge-hosted  { background: color-mix(in oklch, var(--success) 14%, transparent); color: var(--success); }
+    .badge-hosted-speaking { background: color-mix(in oklch, var(--success) 14%, transparent); color: var(--success); }
     .badge-attended { background: var(--accent-soft); color: var(--accent); }
-    .badge-speaking { background: color-mix(in oklch, var(--warn) 14%, transparent); color: var(--warn); }
     .event-meta-row { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 
     .events-filter { display: flex; gap: 8px; margin-bottom: var(--gap-lg); flex-wrap: wrap; }
@@ -368,6 +440,34 @@
     .filter-btn:hover { border-color: var(--muted); color: var(--fg); }
     .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .event-card.hidden { display: none; }
+
+    /* ═══ Highlights thumbnails ═════════════════════════════════════ */
+    .highlights { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .highlights img {
+      width: 64px; height: 64px; object-fit: cover; border-radius: var(--radius);
+      border: 1px solid var(--border); cursor: pointer; transition: opacity 0.15s;
+    }
+    .highlights img:hover { opacity: 0.75; }
+
+    /* ═══ Lightbox ══════════════════════════════════════════════════ */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lightbox img {
+      max-width: 90vw; max-height: 80vh; border-radius: var(--radius-lg);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .lightbox-caption {
+      color: #fff; font-size: 14px; margin-top: 12px; text-align: center;
+      max-width: 600px; font-family: var(--font-body);
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px; background: none; border: none;
+      color: #fff; font-size: 32px; cursor: pointer; line-height: 1;
+    }
 
     /* ═══ CUSTOM: mobile nav ════════════════════════════════════════ */
     .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; cursor: pointer; }
@@ -496,7 +596,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <h3>Developer Relations</h3>
-            <p>Community building, hackathon organizing, technical education, workshops. Conflux, Chainlink, and beyond.</p>
+            <p>Community building, hackathon organizing, technical education, workshops. Conflux, Alephium, and Uniswap.</p>
           </div>
         </div>
         <div>
@@ -514,11 +614,16 @@
     <!-- ─── EXPERIENCE (Layout 7 — log list) ─────────────────────── -->
     <section class="section" data-od-id="experience" id="experience">
       <div class="container">
-        <div class="row-between" style="margin-bottom: 32px;">
+        <div class="row-between" style="margin-bottom: 16px;">
           <div>
             <p class="eyebrow"><span class="section-num">02</span> Experience</p>
             <h2>Career timeline</h2>
           </div>
+        </div>
+        <div class="events-filter" id="exp-filter">
+          <button class="filter-btn active" data-exp="career">Career</button>
+          <button class="filter-btn" data-exp="volunteer">Volunteer</button>
+          <button class="filter-btn" data-exp="internships">Internships</button>
         </div>
         <div id="experience-list">
           <article class="log-row">
@@ -671,28 +776,27 @@
         <hr class="rule" style="margin-top: var(--gap-2xl); margin-bottom: var(--gap-xl);">
         <p class="eyebrow">Video Work</p>
         <h3 style="margin-bottom: var(--gap-md);">AI-produced videos</h3>
-        <div class="grid-3" id="videos-grid">
-          <a href="https://youtu.be/0VJXfjlGKjo" class="video-link" target="_blank" rel="noopener">
-            <div class="card">
-              <div class="video-thumb"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-              <h3 style="font-size: 16px;">CYM Studio — Project Intro</h3>
-              <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">Overview of the AI video production and gift-card redemption platform</p>
-            </div>
-          </a>
-          <a href="https://youtu.be/xy3z2ZAp6aU" class="video-link" target="_blank" rel="noopener">
-            <div class="card">
-              <div class="video-thumb"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-              <h3 style="font-size: 16px;">CYM Studio — Builder Intro</h3>
-              <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">Technical walkthrough of the builder experience and architecture</p>
-            </div>
-          </a>
-          <div class="card" style="opacity: 0.5; cursor: default;">
-            <div class="video-thumb placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            <h3 style="font-size: 16px;">More videos coming</h3>
-            <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">Additional project demos and creative work</p>
-          </div>
+        <div class="video-mosaic" id="videos-grid">
         </div>
 
+      </div>
+    </section>
+
+    <!-- ─── TINKERING ───────────────────────────────────────────────── -->
+    <section class="section" data-od-id="tinkering" id="tinkering">
+      <div class="container">
+        <p class="eyebrow">Lab</p>
+        <h3 style="margin-bottom: var(--gap-md);">Tinkering</h3>
+        <div class="video-mosaic" id="tinkering-grid"></div>
+      </div>
+    </section>
+
+    <!-- ─── LINKEDIN POSTS ──────────────────────────────────────────── -->
+    <section class="section" data-od-id="posts" id="posts">
+      <div class="container">
+        <p class="eyebrow">LinkedIn</p>
+        <h3 style="margin-bottom: var(--gap-md);">Posts & highlights</h3>
+        <div class="grid-3" id="posts-grid"></div>
       </div>
     </section>
 
@@ -717,9 +821,8 @@
 
         <div class="events-filter">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="hosted">Hosted</button>
+          <button class="filter-btn" data-filter="hosted/speaking">Hosted / Speaking</button>
           <button class="filter-btn" data-filter="attended">Attended</button>
-          <button class="filter-btn" data-filter="speaking">Speaking</button>
         </div>
 
         <div class="grid-3" id="events-grid">
@@ -743,6 +846,14 @@
             <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Software Engineering Certification (2023)</p>
           </div>
           <div class="card">
+            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Atrium Academy</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px;">Uniswap Hook Incubator — Cohort 1 (2024)</p>
+            <img src="assets/CertificateAtriumAcademy.jpeg" alt="Atrium Academy Certificate of Achievement — Uniswap Hook Incubator Cohort 1"
+                 data-caption="Atrium Academy — Uniswap Hook Incubator, Cohort 1 (June 2024)"
+                 loading="lazy" onclick="openLightbox(this)"
+                 style="width: 100%; border-radius: var(--radius); border: 1px solid var(--border); cursor: pointer; display: block;" />
+          </div>
+          <div class="card">
             <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Continuous Learning</h3>
             <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Full-Stack Development<br>Agent Harnesses & AI/ML<br>Advanced Financial Modelling</p>
           </div>
@@ -759,7 +870,7 @@
         <div style="display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;">
           <a href="mailto:tony.kp.lau@gmail.com" class="btn btn-primary">Email me</a>
           <a href="https://github.com/Intrepidcanadian" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/tonykpl/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -811,7 +922,7 @@
     // On load, fetch data.json and overlay dynamic content onto the
     // static HTML shell. If data.json fails (e.g. file:// protocol),
     // the static HTML still works fine.
-    fetch('data.json')
+    fetch('data.json?v=' + Date.now())
       .then(r => r.json())
       .then(data => {
         // Hero collage
@@ -851,24 +962,38 @@
           }
         }
 
-        // Experience
-        if (data.experience) {
-          const expContainer = document.getElementById('experience-list');
-          if (expContainer) {
-            expContainer.innerHTML = data.experience.map(e => `
-              <article class="log-row">
-                <span class="meta">${e.date}</span>
-                <div>
-                  <h3>${e.title}</h3>
-                  <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">${e.desc}</p>
-                </div>
-                <div class="pull org-logo">
-                  ${e.logo ? `<img src="${e.logo}" alt="${e.org}">` : ''}
-                  <span class="org-name">${e.org}</span>
-                </div>
-              </article>`).join('');
-          }
+        // Experience tabs + highlights
+        function renderExpEntry(e) {
+          const hl = e.highlights ? `<div class="highlights">${e.highlights.map(h =>
+            `<img src="${h.image}" alt="${h.caption}" data-caption="${h.caption}" onclick="openLightbox(this)">`
+          ).join('')}</div>` : '';
+          return `<article class="log-row">
+            <span class="meta">${e.date}</span>
+            <div>
+              <h3>${e.title}</h3>
+              <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">${e.desc}</p>
+              ${hl}
+            </div>
+            <div class="pull org-logo">
+              ${e.logo ? `<img src="${e.logo}" alt="${e.org}">` : ''}
+              <span class="org-name">${e.org}</span>
+            </div>
+          </article>`;
         }
+        const expData = { career: data.experience, volunteer: data.volunteer, internships: data.internships };
+        const expList = document.getElementById('experience-list');
+        function renderExpTab(key) {
+          const items = expData[key] || [];
+          expList.innerHTML = items.map(renderExpEntry).join('');
+        }
+        renderExpTab('career');
+        document.querySelectorAll('#exp-filter .filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('#exp-filter .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderExpTab(btn.dataset.exp);
+          });
+        });
 
         // Projects grid
         if (data.projects?.grid) {
@@ -894,23 +1019,71 @@
         if (data.videos) {
           const vidGrid = document.getElementById('videos-grid');
           if (vidGrid) {
-            const cards = data.videos.map(v => `
-              <a href="${v.url}" class="video-link" target="_blank" rel="noopener">
-                <div class="card">
-                  <div class="video-thumb"${v.thumbnail ? ` style="background:url(${v.thumbnail}) center/cover;"` : ''}>
-                    ${v.thumbnail ? '' : '<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>'}
+            function ytThumb(url) {
+              const m = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/);
+              return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : null;
+            }
+            const cols = [7, 5, 4, 4, 4, 12];
+            const playIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+            vidGrid.innerHTML = data.videos.map((v, i) => {
+              const thumb = v.thumbnail || ytThumb(v.url);
+              const span = cols[i % cols.length];
+              return `
+              <a href="${v.url}" class="video-link" target="_blank" rel="noopener" style="grid-column: span ${span};">
+                <div class="video-card">
+                  <div class="video-thumb">
+                    ${thumb ? `<img src="${thumb}" alt="${v.title}">` : ''}
+                    <div class="play-btn">${playIcon}</div>
                   </div>
-                  <h3 style="font-size: 16px;">${v.title}</h3>
-                  <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">${v.desc}</p>
+                  <div class="video-meta">
+                    <h3>${v.title}</h3>
+                    <p>${v.desc}</p>
+                  </div>
                 </div>
-              </a>`).join('');
-            // Add placeholder for "more coming"
-            vidGrid.innerHTML = cards + `
-              <div class="card" style="opacity: 0.5; cursor: default;">
-                <div class="video-thumb placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-                <h3 style="font-size: 16px;">More videos coming</h3>
-                <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">Additional project demos and creative work</p>
+              </a>`;
+            }).join('');
+          }
+        }
+
+        // Tinkering
+        if (data.tinkering) {
+          const tGrid = document.getElementById('tinkering-grid');
+          if (tGrid) {
+            const tCols = [7, 5];
+            tGrid.innerHTML = data.tinkering.map((t, i) => {
+              const span = tCols[i % tCols.length];
+              return `
+              <div class="video-card" style="grid-column: span ${span};">
+                <div class="video-thumb" style="aspect-ratio:16/9;">
+                  <video src="${t.video}" controls preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>
+                </div>
+                <div class="video-meta">
+                  <h3>${t.title}</h3>
+                  <p>${t.desc}</p>
+                </div>
               </div>`;
+            }).join('');
+          }
+        }
+
+        // LinkedIn Posts
+        if (data.posts) {
+          const postGrid = document.getElementById('posts-grid');
+          if (postGrid) {
+            function liEmbedUrl(url) {
+              const ugc = url.match(/ugcPost-(\d+)/);
+              if (ugc) return 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:' + ugc[1];
+              const act = url.match(/activity-(\d+)/);
+              if (act) return 'https://www.linkedin.com/embed/feed/update/urn:li:activity:' + act[1];
+              return null;
+            }
+            postGrid.innerHTML = data.posts.map(p => {
+              const embedUrl = liEmbedUrl(p.url);
+              if (!embedUrl) return '';
+              return `<div class="post-embed">
+                <iframe src="${embedUrl}" title="${p.title}" loading="lazy"></iframe>
+              </div>`;
+            }).join('');
           }
         }
 
@@ -918,7 +1091,7 @@
         if (data.events) {
           const evGrid = document.getElementById('events-grid');
           if (evGrid) {
-            const badgeClass = { hosted: 'badge-hosted', attended: 'badge-attended', speaking: 'badge-speaking' };
+            const badgeClass = { 'hosted/speaking': 'badge-hosted-speaking', attended: 'badge-attended' };
             evGrid.innerHTML = data.events.map(e => `
               <div class="card event-card" data-type="${e.type}">
                 <div class="event-img">
@@ -928,7 +1101,7 @@
                   }
                 </div>
                 <div class="event-body">
-                  <span class="event-badge ${badgeClass[e.type] || ''}">${e.type}</span>
+                  <span class="event-badge ${badgeClass[e.type] || ''}">${e.type === 'hosted/speaking' ? 'Hosted / Speaking' : e.type}</span>
                   <h3 style="font-size: 17px; margin-bottom: 6px;">${e.title}</h3>
                   <p class="event-meta-row">${e.location} &middot; ${e.date}</p>
                   <p style="color: var(--muted); font-size: 14px;">${e.desc}</p>
@@ -1078,7 +1251,27 @@
         return labels;
       }
     })();
+
+    // Lightbox
+    function openLightbox(img) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-caption').textContent = img.dataset.caption || '';
+      lb.classList.add('open');
+    }
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('open');
+    });
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+    });
   </script>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
 </body>
 </html>

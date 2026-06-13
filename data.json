@@ -9,78 +9,208 @@
       "assets/events/YorkUniversityUniswapFoundation.png"
     ],
     "github": "https://github.com/Intrepidcanadian",
-    "linkedin": "https://linkedin.com/",
+    "linkedin": "https://www.linkedin.com/in/tonykpl/",
     "email": "tony.kp.lau@gmail.com",
     "skills": [
-      "Python", "TypeScript", "Solidity", "SQL", "Next.js", "React",
-      "Node.js", "VBA", "AI/ML", "Blockchain", "Financial Modelling", "Agent Harnesses"
+      "Python",
+      "TypeScript",
+      "Solidity",
+      "SQL",
+      "Next.js",
+      "React",
+      "Node.js",
+      "VBA",
+      "AI/ML",
+      "Blockchain",
+      "Financial Modelling",
+      "Agent Harnesses"
     ]
   },
-
   "stats": [
-    { "value": "10+", "label": "years in infrastructure finance — from solar assets to nuclear energy." },
-    { "value": "150+", "label": "GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps." },
-    { "value": "3", "label": "degrees from Schulich — BBA, Master of Finance, Master of Law." }
+    {
+      "value": "10+",
+      "label": "years in infrastructure finance — from solar assets to nuclear energy."
+    },
+    {
+      "value": "150+",
+      "label": "GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps."
+    },
+    {
+      "value": "3",
+      "label": "degrees from Schulich — BBA, Master of Finance, Master of Law."
+    }
   ],
-
   "experience": [
     {
       "date": "2026 — Now",
       "title": "Instructor — Fintech: Digital Transformation",
       "desc": "Teaching graduate course FINE6280 on fintech and digital transformation of financial services to 40 students.",
-      "org": "Schulich, York",
+      "org": "York University, Schulich School of Business",
       "logo": "assets/logos/schulich.png"
     },
     {
       "date": "2025 — 2026",
       "title": "Manager — Corporate Development",
       "desc": "M&A and new project development across nuclear, real estate, and renewable energy.",
-      "org": "OPG",
+      "org": "Ontario Power Generation (OPG)",
       "logo": "assets/logos/opg.png"
     },
     {
       "date": "2022 — 2023",
       "title": "Senior Financial Analyst — Shop Pay & Shop App",
-      "desc": "Financial modelling for Shop App marketplace. Built business cases and launched the Shop Cash Loyalty Program.",
+      "desc": "Financial modelling for Shop App marketplace. Built business cases and helped launched the Shop Cash Loyalty Program.",
       "org": "Shopify",
-      "logo": "assets/logos/shopify.png"
+      "logo": "assets/logos/shopify.png",
+      "highlights": [
+        {
+          "image": "assets/ShopifyBurst.jpeg",
+          "caption": "At Shopify with Burst mascot"
+        },
+        {
+          "image": "assets/ShopifyBeefintheCity.jpeg",
+          "caption": "Beef in the City — side venture at Shopify"
+        },
+        {
+          "image": "assets/ShopifyFirstBoxes.jpeg",
+          "caption": "First boxes shipped for Beef in the City"
+        }
+      ]
     },
     {
       "date": "2020 — 2022",
       "title": "Senior Manager — Green Infrastructure Investments",
       "desc": "Due diligence on equity/debt investments in Canadian infrastructure — transmission, district energy, SMRs.",
-      "org": "CIB",
-      "logo": "assets/logos/cib.png"
+      "org": "Canada Infrastructure Bank",
+      "logo": "assets/logos/cib.png",
+      "highlights": [
+        {
+          "image": "assets/CIB1.png",
+          "caption": "$1.4B district energy agreement with Enwave (2021)"
+        }
+      ]
     },
     {
       "date": "2019 — 2020",
       "title": "Senior Manager — Corporate Development",
       "desc": "M&A and acquisition of private companies. Closed a $150M private placement for water heater portfolio.",
       "org": "Enercare",
-      "logo": "assets/logos/enercare.png"
+      "logo": "assets/logos/enercare.png",
+      "highlights": [
+        {
+          "image": "assets/Enercare1.png",
+          "caption": "C$150M green bond private placement (2020)"
+        },
+        {
+          "image": "assets/Enercare2.png",
+          "caption": "Innovation Award — financial modelling (Q3 2019)"
+        }
+      ]
     },
     {
       "date": "2015 — 2018",
       "title": "Senior Analyst — Private Investments, Infrastructure",
       "desc": "Built complex financial models for acquisition underwriting and financing. Managed portfolio companies.",
-      "org": "AIMCo",
-      "logo": "assets/logos/aimco.png"
+      "org": "Alberta Investment Management Corp",
+      "logo": "assets/logos/aimco.png",
+      "highlights": [
+        {
+          "image": "assets/AIMCo1.jpeg",
+          "caption": "Letter from Alberta Deputy Minister — Trans Mountain Pipeline (2018)"
+        },
+        {
+          "image": "assets/AIMCo3.png",
+          "caption": "London City Airport acquisition (2016)"
+        },
+        {
+          "image": "assets/AIMCo2.png",
+          "caption": "Enel — minority stake in Canadian wind projects"
+        },
+        {
+          "image": "assets/AIMCo4.jpeg",
+          "caption": "USS acquires minority stake in Thames Water (2017)"
+        },
+        {
+          "image": "assets/AIMCo5.png",
+          "caption": "Porterbrook Leasing — Electrostar train vehicles"
+        },
+        {
+          "image": "assets/AIMCo6.png",
+          "caption": "Porterbrook Leasing — additional Electrostar purchase"
+        }
+      ]
     },
     {
       "date": "2012 — 2014",
       "title": "Analyst — Investments, Infrastructure",
       "desc": "Fundraising and acquisition of solar assets (>50 MW). Transactions across Europe, US wind, UK airports.",
       "org": "TD Greystone",
-      "logo": "assets/logos/td-greystone.png"
+      "logo": "assets/logos/td-greystone.png",
+      "highlights": [
+        {
+          "image": "assets/Greystone.png",
+          "caption": "Greystone Infrastructure Fund acquires interest in Silicon Ranch Corp (solar)"
+        }
+      ]
     }
   ],
-
+  "volunteer": [
+    {
+      "date": "2021 — 2024",
+      "title": "Director — Treasurer",
+      "desc": "Reviewed financials for condo building. Oversaw budgeting and financial reporting for the corporation.",
+      "org": "Toronto Standard Condo Corp"
+    },
+    {
+      "date": "2021 — 2023",
+      "title": "Board Member — Treasurer",
+      "desc": "Financial forecasting and treasury management for a legal clinic serving Chinese and Southeast Asian communities.",
+      "org": "Chinese and Southeast Asian Legal Clinic (CSALC)"
+    }
+  ],
+  "internships": [
+    {
+      "date": "2011",
+      "title": "Private Equity Intern",
+      "desc": "Private equity internship.",
+      "org": "Lionhart"
+    },
+    {
+      "date": "2011",
+      "title": "Analyst (Intern) — Derivative Products: Collateral and Credit",
+      "desc": "Derivatives collateral and credit analysis at Global Banking and Markets.",
+      "org": "Scotiabank"
+    },
+    {
+      "date": "2010 — 2011",
+      "title": "Research Assistant (Part-time)",
+      "desc": "Part-time research assistant.",
+      "org": "York University, Schulich School of Business"
+    },
+    {
+      "date": "2009",
+      "title": "Economic and Research Analyst",
+      "desc": "Economic research and analysis.",
+      "org": "Innovation, Science and Economic Development Canada"
+    },
+    {
+      "date": "2008",
+      "title": "Recruitment Consultant (Intern)",
+      "desc": "Recruitment consulting internship in Hong Kong.",
+      "org": "SearchAsia Consulting"
+    }
+  ],
   "projects": {
     "featured": {
       "name": "CYM Studio",
       "tagline": "AI video production + gasless gift-card redemption on Conflux eSpace",
       "desc": "Full-stack platform for AI-powered video production with an integrated rewards system. Tournament winners redeem real-world gift cards across 300+ brands using USDT0 — no gas needed.",
-      "tags": ["Next.js", "TypeScript", "Solidity", "Conflux", "USDT0"],
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Solidity",
+        "Conflux",
+        "USDT0"
+      ],
       "url": "https://cymstudio.app",
       "github": "https://github.com/Intrepidcanadian/cymstudios",
       "image": null
@@ -89,87 +219,240 @@
       {
         "name": "Nanobot",
         "desc": "Ultra-lightweight personal AI assistant — 99% fewer lines of code than OpenClaw. Multi-platform chat integration.",
-        "tags": ["Python", "AI Agent"],
+        "tags": [
+          "Python",
+          "AI Agent"
+        ],
         "github": "https://github.com/Intrepidcanadian/nanobot",
         "image": null
       },
       {
         "name": "Pulse520",
         "desc": "Ultra-lightweight personal AI assistant with desktop app. ~4,000 lines delivering core agent functionality.",
-        "tags": ["Python", "Desktop"],
+        "tags": [
+          "Python",
+          "Desktop"
+        ],
         "github": "https://github.com/Intrepidcanadian/pulse520-releases",
         "image": null
       },
       {
         "name": "Open Design",
         "desc": "Open-source alternative to Claude Design. 31 skills, 72 design systems, sandboxed preview, multi-format export.",
-        "tags": ["TypeScript", "Design"],
+        "tags": [
+          "TypeScript",
+          "Design"
+        ],
         "github": "https://github.com/Intrepidcanadian/open-design",
         "image": null
       },
       {
         "name": "Trailer Maker",
         "desc": "Concept-to-theatrical-trailer pipeline. Claude + Seedance 2.0 + ffmpeg with human-in-the-loop review.",
-        "tags": ["Python", "AI Video"],
+        "tags": [
+          "Python",
+          "AI Video"
+        ],
         "github": "https://github.com/Intrepidcanadian/trailermaking",
         "image": null
       },
       {
         "name": "Learnpedia",
         "desc": "Personal wiki for AI video production — prompts, camera angles, lighting, character consistency, motion.",
-        "tags": ["Next.js", "TypeScript"],
+        "tags": [
+          "Next.js",
+          "TypeScript"
+        ],
         "github": "https://github.com/Intrepidcanadian/learnpedia",
         "image": null
       },
       {
         "name": "Conflux Bounties",
         "desc": "Developer bounties program for the Conflux Network ecosystem. Open-source projects and incentives for builders.",
-        "tags": ["TypeScript", "Blockchain"],
+        "tags": [
+          "TypeScript",
+          "Blockchain"
+        ],
         "github": "https://github.com/Intrepidcanadian/conflux-bounties",
         "image": null
       },
       {
         "name": "Prediction Market Bot",
         "desc": "Automated trading bot for prediction markets with AI-powered analysis and risk management.",
-        "tags": ["TypeScript", "Trading"],
+        "tags": [
+          "TypeScript",
+          "Trading"
+        ],
         "github": "https://github.com/Intrepidcanadian/predictionmarketbot",
         "image": null
       },
       {
         "name": "Schulich FINE6280",
         "desc": "Course materials for graduate-level Fintech: Digital Transformation of Financial Services.",
-        "tags": ["HTML", "Education"],
+        "tags": [
+          "HTML",
+          "Education"
+        ],
         "github": "https://github.com/Intrepidcanadian/SCHULICH-FINE-TLAU",
         "image": null
       },
       {
         "name": "Browser Use",
         "desc": "Making websites accessible for AI agents — Chrome extension and RESTful API for browser automation.",
-        "tags": ["Python", "AI Agents"],
+        "tags": [
+          "Python",
+          "AI Agents"
+        ],
         "github": "https://github.com/Intrepidcanadian/browser-use",
         "image": null
       }
     ]
   },
-
   "videos": [
     {
-      "title": "CYM Studio — Project Intro",
-      "desc": "Overview of the AI video production and gift-card redemption platform",
-      "url": "https://youtu.be/0VJXfjlGKjo",
+      "title": "BSL Season 22 — Player Intros",
+      "desc": "AI-produced player introduction video for Bombastic StarLeague Season 22",
+      "url": "https://youtu.be/TpDAeRkc9gk",
       "thumbnail": null
     },
     {
-      "title": "CYM Studio — Builder Intro",
-      "desc": "Technical walkthrough of the builder experience and architecture",
-      "url": "https://youtu.be/xy3z2ZAp6aU",
+      "title": "2v2 Random Starcraft — $500 Prize Pool",
+      "desc": "AI-produced broadcast for a 2v2 random Brood War tournament",
+      "url": "https://youtu.be/NTiKNaKZAF8",
+      "thumbnail": null
+    },
+    {
+      "title": "Season 3 Bombastic 2v2 — $1,000 Prize Pool",
+      "desc": "AI-produced broadcast for BSL 2v2 Season 3 tournament",
+      "url": "https://youtu.be/Q82c39DQoJc",
+      "thumbnail": null
+    },
+    {
+      "title": "Bombastic Qualifications — Season 3",
+      "desc": "AI-produced coverage of Season 3 qualifier matches",
+      "url": "https://youtu.be/9RJzUTqOm5M",
+      "thumbnail": null
+    },
+    {
+      "title": "2023 2v2 Shield Battery Tournament",
+      "desc": "AI-produced broadcast of the Shield Battery 2v2 tournament",
+      "url": "https://youtu.be/s-l4dQm7-uc",
+      "thumbnail": null
+    },
+    {
+      "title": "BSL Starleague 22 — RO32 Week 2",
+      "desc": "AI-produced broadcast for Starleague 22 Round of 32",
+      "url": "https://youtu.be/B0BGMrKSYWw",
+      "thumbnail": null
+    },
+    {
+      "title": "Non-Korean BSL Championship",
+      "desc": "AI-produced broadcast for the June 2026 Non-Korean BSL Championship",
+      "url": "https://www.youtube.com/watch?v=2GBAga5YZ_k",
       "thumbnail": null
     }
   ],
-
+  "tinkering": [
+    {
+      "title": "NVIDIA DGX Spark / Nemotron / Gemma4 / Nemo Claw",
+      "desc": "Tinkering with NVIDIA DGX Spark hardware, running Nemotron, Gemma4, and Nemo Claw models locally.",
+      "video": "assets/videos/TorontoLive — Urban Operations - 30 May 2026 (1).mp4"
+    },
+    {
+      "title": "Apple Mobile App — Agent Task Marketplace",
+      "desc": "Building a mobile app with an AI agent task marketplace using Pulse520.",
+      "video": "assets/videos/Pulse520.ai (2).mp4"
+    }
+  ],
+  "posts": [
+    {
+      "title": "NVIDIA Toronto Hackathon 2025",
+      "desc": "Absolutely crazy how such tiny hardware can do so much — building with NVIDIA Jetson at the Toronto hackathon.",
+      "url": "https://www.linkedin.com/posts/tonykpl_absolutely-crazy-how-such-tiny-hardware-can-ugcPost-7466866297054846976-Bt1R",
+      "date": "2025"
+    },
+    {
+      "title": "Building an Indexer on Conflux Network",
+      "desc": "Built a repo/tutorial for building an indexer on Conflux Network — open-source developer tooling.",
+      "url": "https://www.linkedin.com/posts/tonykpl_i-decided-to-build-a-repotutorial-for-building-ugcPost-7247867773991682048-CkST",
+      "date": "2024"
+    },
+    {
+      "title": "ETH Global Singapore",
+      "desc": "Another ETHGlobal hackathon in the books — building and shipping in Singapore.",
+      "url": "https://www.linkedin.com/posts/tonykpl_another-ethglobal-hackathon-in-the-books-ugcPost-7243814151561584640-YQKI",
+      "date": "2024"
+    },
+    {
+      "title": "Ginseng Swap Presentation",
+      "desc": "Video showcasing Ginseng Swap — a DeFi project built during hackathon season.",
+      "url": "https://www.linkedin.com/posts/tonykpl_did-a-video-showcasing-ginseng-swap-this-ugcPost-7235048268127166464-8uwl",
+      "date": "2024"
+    },
+    {
+      "title": "HKSTP Ideation Programme",
+      "desc": "Completed the Ideation Programme at Hong Kong Science and Technology Park (HKSTP).",
+      "url": "https://www.linkedin.com/posts/activity-7260835701661868032-RaFu",
+      "date": "2024"
+    },
+    {
+      "title": "Buildspace — San Francisco",
+      "desc": "Went to Buildspace in San Francisco — immersive builder community experience.",
+      "url": "https://www.linkedin.com/posts/activity-7228438570871443456-C9WI",
+      "date": "2024"
+    },
+    {
+      "title": "ETH Global Brussels",
+      "desc": "Participated in ETH Global Brussels — building at the intersection of blockchain and real-world applications.",
+      "url": "https://www.linkedin.com/posts/activity-7218648996641206272-Su4u",
+      "date": "2024"
+    },
+    {
+      "title": "Alephium Developer Ambassador",
+      "desc": "Became an Alephium Developer Ambassador — supporting ecosystem growth and developer tooling.",
+      "url": "https://www.linkedin.com/posts/activity-7214661059716993024-Z1zz",
+      "date": "2024"
+    },
+    {
+      "title": "Shopify Editions.Dev",
+      "desc": "Participated in Shopify Editions.Dev — exploring the latest platform capabilities and developer tools.",
+      "url": "https://www.linkedin.com/posts/activity-7211753478526783488-zZS_",
+      "date": "2024"
+    },
+    {
+      "title": "zkSync Toronto Hackathon",
+      "desc": "Participated in the zkSync Toronto Hackathon — building with zero-knowledge proofs.",
+      "url": "https://www.linkedin.com/posts/activity-7103454552187666432-0iMd",
+      "date": "2023"
+    },
+    {
+      "title": "1855 Accelerator Hackathon",
+      "desc": "Participated in the 1855 Accelerator hackathon in Whitby, Ontario.",
+      "url": "https://www.linkedin.com/posts/activity-7109003960497164288-2vT0",
+      "date": "2023"
+    },
+    {
+      "title": "LearnWeb3 Hackathon",
+      "desc": "Participated in the LearnWeb3 hackathon — building and learning in the web3 space.",
+      "url": "https://www.linkedin.com/posts/activity-7120512186342391808-EGmy",
+      "date": "2023"
+    },
+    {
+      "title": "Encode Club — Digital Identity Hackathon",
+      "desc": "Participated in Encode Club's digital identity hackathon — exploring decentralized identity solutions.",
+      "url": "https://www.linkedin.com/posts/activity-7125980553597616128--XYD",
+      "date": "2023"
+    },
+    {
+      "title": "Encode Club — Solana Hackathon",
+      "desc": "Built a Unity engine game during the Encode Club Solana hackathon.",
+      "url": "https://www.linkedin.com/posts/activity-7160124503006617600-aTa6",
+      "date": "2024"
+    }
+  ],
   "events": [
     {
-      "type": "hosted",
+      "type": "hosted/speaking",
       "title": "WTF is Uniswap v4",
       "location": "George Brown College, Toronto",
       "date": "March 29, 2025",
@@ -178,7 +461,7 @@
       "url": "https://luma.com/d86cz5h5"
     },
     {
-      "type": "hosted",
+      "type": "hosted/speaking",
       "title": "Introduction to Uniswap v4",
       "location": "York University, Toronto",
       "date": "June 23, 2025",
@@ -186,28 +469,68 @@
       "image": "assets/events/YorkUniversityUniswapFoundation.png"
     },
     {
-      "type": "hosted",
+      "type": "hosted/speaking",
       "title": "Uniswap Foundation Builder Session",
       "location": "Toronto",
       "date": "April 29, 2025",
       "desc": "Intimate builder session with the Uniswap Foundation team, exploring v4 development and ecosystem opportunities.",
       "image": "assets/events/33BloorUniswapFoundation.png",
       "url": "https://luma.com/asd9qwpp"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Blockchain Tuesday — Panel Interview",
+      "location": "Toronto",
+      "date": "2025",
+      "desc": "Hosted and spoke at a panel interview at Blockchain Tuesdays, a community gathering for blockchain in Toronto.",
+      "image": "assets/events/BlockchainTuesdayPanelInterview.jpg"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Blockchain Tuesday — x402",
+      "location": "Toronto",
+      "date": "2025",
+      "desc": "Hosted and spoke at Blockchain Tuesday x402 — a community gathering for blockchain in Toronto.",
+      "image": "assets/events/BlockchainTuesdayx402.jpg"
+    },
+    {
+      "type": "attended",
+      "title": "ETH Toronto — Hackathon Winner (zkSync)",
+      "location": "Toronto",
+      "date": "2023",
+      "desc": "Won the zkSync track at ETH Toronto hackathon.",
+      "image": "assets/events/ETHToronto- Hackathon Winner for zkSync.jpg"
     }
   ],
-
   "education": [
     {
       "school": "Schulich School of Business",
-      "items": ["Bachelor of Business Administration", "Master of Finance", "Master of Law"]
+      "items": [
+        "Bachelor of Business Administration",
+        "Master of Finance",
+        "Master of Law"
+      ]
     },
     {
       "school": "BrainStation",
-      "items": ["Software Engineering Certification (2023)"]
+      "items": [
+        "Software Engineering Certification (2023)"
+      ]
+    },
+    {
+      "school": "Atrium Academy",
+      "items": [
+        "Uniswap Hook Incubator — Cohort 1 (2024)"
+      ],
+      "certificate": "assets/CertificateAtriumAcademy.jpeg"
     },
     {
       "school": "Continuous Learning",
-      "items": ["Full-Stack Development", "Agent Harnesses & AI/ML", "Advanced Financial Modelling"]
+      "items": [
+        "Full-Stack Development",
+        "Agent Harnesses & AI/ML",
+        "Advanced Financial Modelling"
+      ]
     }
   ]
 }
