@@ -2,11 +2,11 @@
   "profile": {
     "name": "Tony Lau",
     "tagline": "Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.",
-    "photo": "assets/photos/Tony%20Lau.png",
+    "photo": "assets/photos/Tony%20Lau.webp",
     "collage": [
-      "assets/photos/Tony%20Lau.png",
-      "assets/events/GeorgeBrownUniswapFoundation.png",
-      "assets/events/YorkUniversityUniswapFoundation.png"
+      "assets/photos/Tony%20Lau.webp",
+      "assets/events/GeorgeBrownUniswapFoundation.webp",
+      "assets/events/YorkUniversityUniswapFoundation.webp"
     ],
     "github": "https://github.com/Intrepidcanadian",
     "linkedin": "https://www.linkedin.com/in/tonykpl/",
@@ -63,15 +63,15 @@
       "logo": "assets/logos/shopify.png",
       "highlights": [
         {
-          "image": "assets/ShopifyBurst.jpeg",
+          "image": "assets/ShopifyBurst.webp",
           "caption": "At Shopify with Burst mascot"
         },
         {
-          "image": "assets/ShopifyBeefintheCity.jpeg",
+          "image": "assets/ShopifyBeefintheCity.webp",
           "caption": "Beef in the City — side venture at Shopify"
         },
         {
-          "image": "assets/ShopifyFirstBoxes.jpeg",
+          "image": "assets/ShopifyFirstBoxes.webp",
           "caption": "First boxes shipped for Beef in the City"
         }
       ]
@@ -84,7 +84,7 @@
       "logo": "assets/logos/cib.png",
       "highlights": [
         {
-          "image": "assets/CIB1.png",
+          "image": "assets/CIB1.webp",
           "caption": "$1.4B district energy agreement with Enwave (2021)"
         }
       ]
@@ -97,11 +97,11 @@
       "logo": "assets/logos/enercare.png",
       "highlights": [
         {
-          "image": "assets/Enercare1.png",
+          "image": "assets/Enercare1.webp",
           "caption": "C$150M green bond private placement (2020)"
         },
         {
-          "image": "assets/Enercare2.png",
+          "image": "assets/Enercare2.webp",
           "caption": "Innovation Award — financial modelling (Q3 2019)"
         }
       ]
@@ -114,27 +114,27 @@
       "logo": "assets/logos/aimco.png",
       "highlights": [
         {
-          "image": "assets/AIMCo1.jpeg",
+          "image": "assets/AIMCo1.webp",
           "caption": "Letter from Alberta Deputy Minister — Trans Mountain Pipeline (2018)"
         },
         {
-          "image": "assets/AIMCo3.png",
+          "image": "assets/AIMCo3.webp",
           "caption": "London City Airport acquisition (2016)"
         },
         {
-          "image": "assets/AIMCo2.png",
+          "image": "assets/AIMCo2.webp",
           "caption": "Enel — minority stake in Canadian wind projects"
         },
         {
-          "image": "assets/AIMCo4.jpeg",
+          "image": "assets/AIMCo4.webp",
           "caption": "USS acquires minority stake in Thames Water (2017)"
         },
         {
-          "image": "assets/AIMCo5.png",
+          "image": "assets/AIMCo5.webp",
           "caption": "Porterbrook Leasing — Electrostar train vehicles"
         },
         {
-          "image": "assets/AIMCo6.png",
+          "image": "assets/AIMCo6.webp",
           "caption": "Porterbrook Leasing — additional Electrostar purchase"
         }
       ]
@@ -147,7 +147,7 @@
       "logo": "assets/logos/td-greystone.png",
       "highlights": [
         {
-          "image": "assets/Greystone.png",
+          "image": "assets/Greystone.webp",
           "caption": "Greystone Infrastructure Fund acquires interest in Silicon Ranch Corp (solar)"
         }
       ]
@@ -457,7 +457,7 @@
       "location": "George Brown College, Toronto",
       "date": "March 29, 2025",
       "desc": "Workshop introducing developers to Uniswap v4 hooks and architecture, hosted in partnership with the Uniswap Foundation.",
-      "image": "assets/events/GeorgeBrownUniswapFoundation.png",
+      "image": "assets/events/GeorgeBrownUniswapFoundation.webp",
       "url": "https://luma.com/d86cz5h5"
     },
     {
@@ -466,7 +466,7 @@
       "location": "York University, Toronto",
       "date": "June 23, 2025",
       "desc": "Lecture-style workshop on Uniswap v4 for the developer community, supported by the Uniswap Foundation.",
-      "image": "assets/events/YorkUniversityUniswapFoundation.png"
+      "image": "assets/events/YorkUniversityUniswapFoundation.webp"
     },
     {
       "type": "hosted/speaking",
@@ -474,7 +474,7 @@
       "location": "Toronto",
       "date": "April 29, 2025",
       "desc": "Intimate builder session with the Uniswap Foundation team, exploring v4 development and ecosystem opportunities.",
-      "image": "assets/events/33BloorUniswapFoundation.png",
+      "image": "assets/events/33BloorUniswapFoundation.webp",
       "url": "https://luma.com/asd9qwpp"
     },
     {
@@ -483,7 +483,7 @@
       "location": "Toronto",
       "date": "2025",
       "desc": "Hosted and spoke at a panel interview at Blockchain Tuesdays, a community gathering for blockchain in Toronto.",
-      "image": "assets/events/BlockchainTuesdayPanelInterview.jpg"
+      "image": "assets/events/BlockchainTuesdayPanelInterview.webp"
     },
     {
       "type": "hosted/speaking",
@@ -491,7 +491,7 @@
       "location": "Toronto",
       "date": "2025",
       "desc": "Hosted and spoke at Blockchain Tuesday x402 — a community gathering for blockchain in Toronto.",
-      "image": "assets/events/BlockchainTuesdayx402.jpg"
+      "image": "assets/events/BlockchainTuesdayx402.webp"
     },
     {
       "type": "attended",
@@ -499,7 +499,7 @@
       "location": "Toronto",
       "date": "2023",
       "desc": "Won the zkSync track at ETH Toronto hackathon.",
-      "image": "assets/events/ETHToronto- Hackathon Winner for zkSync.jpg"
+      "image": "assets/events/ETHToronto- Hackathon Winner for zkSync.webp"
     }
   ],
   "education": [
@@ -522,7 +522,7 @@
       "items": [
         "Uniswap Hook Incubator — Cohort 1 (2024)"
       ],
-      "certificate": "assets/CertificateAtriumAcademy.jpeg"
+      "certificate": "assets/CertificateAtriumAcademy.webp"
     },
     {
       "school": "Continuous Learning",
