@@ -40,6 +40,19 @@
       "label": "degrees from Schulich — BBA, Master of Finance, Master of Law."
     }
   ],
+  "global": {
+    "hub": "Toronto",
+    "places": [
+      { "city": "Toronto", "country": "Canada", "lat": 43.65, "lng": -79.38, "type": "home", "note": "Home base — OPG, Shopify, CIB, Schulich, ETH Toronto" },
+      { "city": "London", "country": "UK", "lat": 51.51, "lng": -0.13, "type": "work", "note": "AIMCo — London City Airport, Thames Water, Porterbrook" },
+      { "city": "Hong Kong", "country": "Hong Kong", "lat": 22.32, "lng": 114.17, "type": "work", "note": "SearchAsia internship · HKSTP Ideation Programme" },
+      { "city": "Singapore", "country": "Singapore", "lat": 1.35, "lng": 103.82, "type": "event", "note": "ETH Global Singapore hackathon" },
+      { "city": "Brussels", "country": "Belgium", "lat": 50.85, "lng": 4.35, "type": "event", "note": "ETH Global Brussels hackathon" },
+      { "city": "San Francisco", "country": "USA", "lat": 37.77, "lng": -122.42, "type": "event", "note": "Buildspace SF" },
+      { "city": "Edmonton", "country": "Canada", "lat": 53.55, "lng": -113.49, "type": "work", "note": "AIMCo HQ — Trans Mountain, Enel wind" },
+      { "city": "Ottawa", "country": "Canada", "lat": 45.42, "lng": -75.70, "type": "work", "note": "Innovation, Science and Economic Development Canada" }
+    ]
+  },
   "experience": [
     {
       "date": "2026 — Now",

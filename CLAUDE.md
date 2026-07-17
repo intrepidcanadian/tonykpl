@@ -12,8 +12,32 @@ portfolio/
     ├── photos/             ← Profile photos (headshot, etc.)
     ├── events/             ← Event photos (conferences, meetups, hackathons)
     ├── projects/           ← Project screenshots and thumbnails
-    └── videos/             ← Video thumbnails (actual videos are on YouTube)
+    ├── videos/             ← Video thumbnails (actual videos are on YouTube)
+    └── geo/
+        └── land-mask.png   ← Equirectangular land mask (2048×1024, white=land/black=sea),
+                              baked from Natural Earth 1:50M (world-atlas land-50m.json).
+                              Public domain — no attribution required. Used by the globe.
 ```
+
+## assets/geo/land-mask.png
+
+Baked equirectangular land mask for the particle globe. 2048×1024, white = land,
+black = sea. Source: Natural Earth 1:50M via the `world-atlas` package
+(`land-50m.json` TopoJSON). The globe loads this PNG directly at runtime and
+samples it to decide which Fibonacci-sphere points are on land.
+
+To regenerate (Natural Earth is public domain, no attribution needed):
+
+```bash
+cd /tmp && mkdir gen-mask && cd gen-mask && npm init -y
+npm install topojson-client sharp
+# save the gen.js script (TopoJSON decode → scanline rasterize → sharp PNG encode)
+node gen.js assets/geo/land-mask.png
+```
+
+The generation script is NOT committed — only the baked PNG. Re-run only if you
+want a different resolution or a coarser/finer Natural Earth scale (e.g. 1:110M
+for a lighter file, 1:10M for max detail).
 
 ## How to update the site
 

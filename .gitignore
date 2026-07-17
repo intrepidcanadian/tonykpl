@@ -14,3 +14,4 @@ TOOLS.md
 HEARTBEAT.md
 *.pdf
 .vercel
+.gstack/

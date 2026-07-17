@@ -471,6 +471,11 @@
       position: absolute; top: 20px; right: 24px; background: none; border: none;
       color: #fff; font-size: 32px; cursor: pointer; line-height: 1;
     }
+    .lightbox-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    [data-lb-trigger] { cursor: pointer; }
+    [data-lb-trigger]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius); }
+    /* keep lightbox focus in view when open */
+    body.lb-open { overflow: hidden; }
 
     /* ═══ CUSTOM: mobile nav ════════════════════════════════════════ */
     .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; cursor: pointer; }
@@ -504,6 +509,173 @@
     [data-theme="light"] .gh-cell-2 { fill: #40c463; }
     [data-theme="light"] .gh-cell-3 { fill: #30a14e; }
     [data-theme="light"] .gh-cell-4 { fill: #216e39; }
+
+    /* ═══ CUSTOM: company / institution logo strip ════════════════════ */
+    .logo-strip { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-lg) var(--gap-xl); }
+    .logo-strip img {
+      height: 28px; width: auto; opacity: 0.55;
+      filter: grayscale(1) contrast(0.9);
+      transition: opacity 0.2s ease, filter 0.2s ease;
+    }
+    .logo-strip img:hover { opacity: 1; filter: grayscale(0.3) contrast(1); }
+    @media (max-width: 720px) { .logo-strip { gap: var(--gap-md) var(--gap-lg); } .logo-strip img { height: 24px; } }
+
+    /* ═══ CUSTOM: active nav link ════════════════════════════════════ */
+    .topnav nav a { position: relative; padding-bottom: 2px; }
+    .topnav nav a.active { color: var(--fg); }
+    .topnav nav a.active::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -16px; height: 2px;
+      background: var(--accent); border-radius: 2px;
+    }
+
+    /* ═══ CUSTOM: featured preview image / honest fallback ════════════ */
+    .featured-preview { cursor: pointer; }
+    .featured-preview .preview-body { position: relative; padding: 0; overflow: hidden; }
+    .featured-preview img.preview-shot {
+      width: 100%; height: 100%; min-height: 160px; object-fit: cover; object-position: top;
+      display: block;
+    }
+    .featured-preview .preview-fallback {
+      height: 160px; display: grid; place-items: center; color: var(--muted);
+      font-family: var(--font-mono); font-size: 13px; gap: 8px; text-align: center;
+    }
+    .featured-preview .preview-fallback a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ═══ CUSTOM: hero collage loading bg ═════════════════════════════ */
+    .hero-collage {
+      background:
+        linear-gradient(135deg, var(--accent-soft), transparent 60%),
+        var(--surface);
+      min-height: 320px;
+    }
+
+    /* ═══ CUSTOM: back-to-top ════════════════════════════════════════ */
+    .to-top {
+      position: fixed; right: 24px; bottom: 24px; z-index: 50;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border); color: var(--fg);
+      display: grid; place-items: center; cursor: pointer;
+      opacity: 0; pointer-events: none; transform: translateY(8px);
+      transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.15s ease;
+    }
+    .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .to-top:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ═══ CUSTOM: hero character curtain ═════════════════════════════ */
+    /* A canvas of verlet-physics glyph strands pinned to the top of the
+       hero, parted by the cursor like fabric. Sits behind the hero
+       content; copy tagged [data-curtain-avoid] carves holes so the
+       headline stays readable. */
+    .hero { position: relative; overflow: hidden; }
+    .hero-curtain {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; /* curtain never blocks clicks on CTAs */
+    }
+    /* push the split layout above the canvas */
+    .hero > .container { position: relative; z-index: 1; }
+
+    /* Audio toggle — small, unobtrusive, top-right of hero. Off by
+       default so the page is silent until the visitor opts in. */
+    .curtain-audio-toggle {
+      position: absolute; top: 18px; right: 18px; z-index: 2;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 10px; border-radius: 999px;
+      background: color-mix(in oklch, var(--surface) 80%, transparent);
+      border: 1px solid var(--border); color: var(--muted);
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+      cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .curtain-audio-toggle:hover { color: var(--fg); border-color: var(--muted); }
+    .curtain-audio-toggle.on { color: var(--accent); border-color: var(--accent); }
+    .curtain-audio-toggle svg { width: 13px; height: 13px; }
+
+    /* ═══ CUSTOM: 3D globe section ══════════════════════════════════ */
+    .globe-section { position: relative; overflow: hidden; background: var(--bg); }
+    .globe-wrap {
+      position: relative; width: 100%;
+      height: clamp(360px, 56vh, 560px);
+      display: grid; place-items: center;
+    }
+    .globe-wrap canvas { outline: none; }
+    .globe-loading {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      color: var(--muted); font-family: var(--font-mono); font-size: 13px;
+      letter-spacing: 0.04em; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .globe-loaded .globe-loading { opacity: 0; }
+    .globe-caption {
+      position: absolute; left: 0; right: 0; bottom: 12px;
+      display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;
+      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.04em; pointer-events: none; text-align: center;
+      padding: 0 var(--gutter);
+    }
+    .globe-caption .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+    /* atmosphere rim glow behind the particle sphere */
+    .globe-glow {
+      position: absolute; left: 50%; top: 50%;
+      width: 78%; aspect-ratio: 1; transform: translate(-50%, -50%);
+      border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, transparent 70%, rgba(129,140,248,0.18) 82%, transparent 94%);
+      transition: background 0.3s ease;
+    }
+    [data-theme="light"] .globe-glow {
+      background: radial-gradient(circle at 50% 50%, transparent 70%, rgba(79,125,245,0.10) 82%, transparent 94%);
+    }
+    /* hover tooltip for city points */
+    .globe-tooltip {
+      position: absolute; display: none; transform: translate(-50%, -100%);
+      background: var(--surface); border: 1px solid var(--border); color: var(--fg);
+      padding: 5px 9px; border-radius: 6px; font-family: var(--font-mono); font-size: 11px;
+      white-space: nowrap; pointer-events: none; z-index: 5;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    @media (max-width: 720px) {
+      .globe-wrap { height: clamp(320px, 50vh, 420px); }
+      .globe-caption { gap: var(--gap-md); font-size: 10px; }
+    }
+
+    /* ═══ CUSTOM: scroll reveal ═════════════════════════════════════ */
+    /* Elements tagged [data-reveal] start hidden and lift slightly; the
+       IntersectionObserver fades them in once they scroll into view. */
+    [data-reveal] {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    [data-reveal].in { opacity: 1; transform: none; }
+    /* stagger children when the parent is tagged [data-reveal-group] */
+    [data-reveal-group] > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+    [data-reveal-group].in > * { opacity: 1; transform: none; }
+    [data-reveal-group].in > *:nth-child(1) { transition-delay: 0ms; }
+    [data-reveal-group].in > *:nth-child(2) { transition-delay: 80ms; }
+    [data-reveal-group].in > *:nth-child(3) { transition-delay: 160ms; }
+    [data-reveal-group].in > *:nth-child(4) { transition-delay: 240ms; }
+    [data-reveal-group].in > *:nth-child(5) { transition-delay: 320ms; }
+    [data-reveal-group].in > *:nth-child(6) { transition-delay: 400ms; }
+
+    /* ═══ CUSTOM: reduced motion ═════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-collage .collage-cell img,
+      .video-link:hover .video-thumb img,
+      .project-link, .video-card { transform: none !important; }
+      /* curtain becomes a static, faint backdrop — no physics loop */
+      .hero-curtain { opacity: 0.5; }
+      /* scroll-reveal: show everything immediately, no motion */
+      [data-reveal], [data-reveal-group] > * { opacity: 1 !important; transform: none !important; }
+      /* count-up handled in JS — static value already in DOM */
+    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -534,19 +706,48 @@
 
     <!-- ─── HERO (Layout 2 — split) ───────────────────────────────── -->
     <section class="section hero" data-od-id="hero" id="hero">
+      <!-- Character curtain: verlet glyph strands, parted by the cursor.
+           pointer-events:none in CSS so it never blocks the CTAs. -->
+      <canvas class="hero-curtain" id="hero-curtain" aria-hidden="true"></canvas>
+      <button class="curtain-audio-toggle" id="curtain-audio-toggle" aria-pressed="false" aria-label="Toggle curtain sound (chimes when cursor brushes strands)" title="Toggle curtain sound">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <span class="toggle-label">Muted</span>
+      </button>
       <div class="container hero-split">
         <div>
-          <p class="eyebrow">Finance &middot; Technology &middot; Developer Relations</p>
-          <h1>Tony Lau</h1>
-          <p class="lead" style="margin-top: 20px;">Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.</p>
-          <div class="hero-cta" style="margin-top: 28px;">
+          <p class="eyebrow" data-curtain-avoid>Finance &middot; Technology &middot; Developer Relations</p>
+          <h1 data-curtain-avoid>Tony Lau</h1>
+          <p class="lead" data-curtain-avoid style="margin-top: 20px;">Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.</p>
+          <div class="hero-cta" data-curtain-avoid style="margin-top: 28px;">
             <a href="#projects" class="btn btn-primary">View projects</a>
             <a href="https://github.com/Intrepidcanadian" class="btn btn-ghost btn-arrow" target="_blank" rel="noopener">GitHub</a>
+            <a href="mailto:tony.kp.lau@gmail.com" class="btn btn-ghost">Email me</a>
           </div>
         </div>
         <div class="hero-collage" id="hero-collage" aria-label="Tony Lau photo collage">
           <!-- populated by data.json -->
         </div>
+      </div>
+    </section>
+
+    <!-- ─── GLOBAL (3D globe) ──────────────────────────────────────── -->
+    <section class="section globe-section" data-od-id="global" id="global">
+      <div class="container" style="margin-bottom: var(--gap-md);">
+        <p class="eyebrow" data-reveal>A global builder</p>
+        <h2 data-reveal style="max-width: 20ch;">From Toronto to the world.</h2>
+        <p class="lead" data-reveal style="margin-top: 12px;">Career, hackathons, and community work across four continents. Drag to spin.</p>
+      </div>
+      <div class="globe-wrap" id="globe-wrap">
+        <!-- atmosphere rim glow -->
+        <div class="globe-glow" aria-hidden="true"></div>
+        <div class="globe-loading" id="globe-loading">Spinning up the globe&hellip;</div>
+        <div class="globe-tooltip" id="globe-tooltip" role="status" aria-live="polite"></div>
+        <!-- particle-globe canvas mounts here via JS -->
+      </div>
+      <div class="globe-caption" id="globe-caption">
+        <span><span class="dot" style="background: var(--accent);"></span>Home base</span>
+        <span><span class="dot" style="background: var(--success);"></span>Worked</span>
+        <span><span class="dot" style="background: var(--warn);"></span>Events &amp; hackathons</span>
       </div>
     </section>
 
@@ -574,12 +775,12 @@
     <!-- ─── ABOUT (Layout 3 — feature triplet) ───────────────────── -->
     <section class="section" data-od-id="about" id="about">
       <div class="container stack" style="gap: 56px;">
-        <div style="max-width: 48ch;">
+        <div style="max-width: 48ch;" data-reveal>
           <p class="eyebrow"><span class="section-num">01</span> About</p>
           <h2>Three domains, one builder.</h2>
           <p class="lead" style="margin-top: 12px;">I bring a finance-meets-tech perspective to everything I do — from corporate development at OPG to teaching fintech at Schulich to building AI agents.</p>
         </div>
-        <div class="grid-3">
+        <div class="grid-3" data-reveal-group>
           <div class="feature card-flat">
             <div class="feature-mark">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -611,6 +812,18 @@
             <span class="tag">Blockchain</span><span class="tag">Financial Modelling</span><span class="tag">Agent Harnesses</span>
           </div>
         </div>
+        <div>
+          <p class="eyebrow">Selected organizations</p>
+          <div class="logo-strip" id="logo-strip">
+            <img src="assets/logos/aimco.png" alt="AIMCo" loading="lazy">
+            <img src="assets/logos/td-greystone.png" alt="TD Greystone" loading="lazy">
+            <img src="assets/logos/cib.png" alt="Canada Infrastructure Bank" loading="lazy">
+            <img src="assets/logos/shopify.png" alt="Shopify" loading="lazy">
+            <img src="assets/logos/schulich.png" alt="Schulich School of Business" loading="lazy">
+            <img src="assets/logos/enercare.png" alt="Enercare" loading="lazy">
+            <img src="assets/logos/opg.png" alt="Ontario Power Generation" loading="lazy">
+          </div>
+        </div>
       </div>
     </section>
 
@@ -618,15 +831,15 @@
     <section class="section" data-od-id="experience" id="experience">
       <div class="container">
         <div class="row-between" style="margin-bottom: 16px;">
-          <div>
+          <div data-reveal>
             <p class="eyebrow"><span class="section-num">02</span> Experience</p>
             <h2>Career timeline</h2>
           </div>
         </div>
-        <div class="events-filter" id="exp-filter">
-          <button class="filter-btn active" data-exp="career">Career</button>
-          <button class="filter-btn" data-exp="volunteer">Volunteer</button>
-          <button class="filter-btn" data-exp="internships">Internships</button>
+        <div class="events-filter" id="exp-filter" role="group" aria-label="Filter experience">
+          <button class="filter-btn active" data-exp="career" aria-pressed="true">Career</button>
+          <button class="filter-btn" data-exp="volunteer" aria-pressed="false">Volunteer</button>
+          <button class="filter-btn" data-exp="internships" aria-pressed="false">Internships</button>
         </div>
         <div id="experience-list">
           <article class="log-row">
@@ -692,8 +905,8 @@
     <!-- ─── PROJECTS ──────────────────────────────────────────────── -->
     <section class="section" data-od-id="projects" id="projects">
       <div class="container">
-        <p class="eyebrow"><span class="section-num">03</span> Projects</p>
-        <h2 style="margin-bottom: 8px;">Software & open source</h2>
+        <p class="eyebrow" data-reveal><span class="section-num">03</span> Projects</p>
+        <h2 data-reveal style="margin-bottom: 8px;">Software & open source</h2>
         <p class="lead" style="margin-bottom: var(--gap-xl);">View all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
 
         <!-- Featured -->
@@ -711,10 +924,13 @@
               <a href="https://github.com/Intrepidcanadian/cymstudios" class="btn btn-secondary" target="_blank" rel="noopener" style="font-size:13px;padding:7px 14px;">Source</a>
             </div>
           </div>
-          <div class="featured-preview">
+          <a href="https://cymstudio.app" class="featured-preview" target="_blank" rel="noopener" id="featured-preview">
             <div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-url">cymstudio.app</span></div>
-            <div class="preview-body">Live preview</div>
-          </div>
+            <div class="preview-body">
+              <!-- Drop a screenshot at assets/projects/cymstudio.webp and it renders here.
+                   See data.json → projects.featured.image -->
+            </div>
+          </a>
         </div>
 
         <!-- Grid -->
@@ -782,15 +998,12 @@
         <div class="video-mosaic" id="videos-grid">
         </div>
 
-      </div>
-    </section>
-
-    <!-- ─── TINKERING ───────────────────────────────────────────────── -->
-    <section class="section" data-od-id="tinkering" id="tinkering">
-      <div class="container">
+        <!-- Tinkering / lab builds -->
+        <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
         <p class="eyebrow">Lab</p>
         <h3 style="margin-bottom: var(--gap-md);">Tinkering</h3>
         <div class="video-mosaic" id="tinkering-grid"></div>
+
       </div>
     </section>
 
@@ -818,14 +1031,14 @@
     <!-- ─── EVENTS ────────────────────────────────────────────────── -->
     <section class="section" data-od-id="events" id="events">
       <div class="container">
-        <p class="eyebrow"><span class="section-num">05</span> Events</p>
-        <h2 style="margin-bottom: 8px;">Developer relations & community</h2>
+        <p class="eyebrow" data-reveal><span class="section-num">05</span> Events</p>
+        <h2 data-reveal style="margin-bottom: 8px;">Developer relations & community</h2>
         <p class="lead" style="margin-bottom: var(--gap-lg);">Hackathons, conferences, and events I've hosted and attended.</p>
 
-        <div class="events-filter">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="hosted/speaking">Hosted / Speaking</button>
-          <button class="filter-btn" data-filter="attended">Attended</button>
+        <div class="events-filter" id="events-filter" role="group" aria-label="Filter events">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="hosted/speaking" aria-pressed="false">Hosted / Speaking</button>
+          <button class="filter-btn" data-filter="attended" aria-pressed="false">Attended</button>
         </div>
 
         <div class="grid-3" id="events-grid">
@@ -837,9 +1050,9 @@
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
     <section class="section" data-od-id="education" id="education">
       <div class="container">
-        <p class="eyebrow"><span class="section-num">06</span> Education</p>
-        <h2 style="margin-bottom: var(--gap-lg);">Academic background</h2>
-        <div class="grid-3">
+        <p class="eyebrow" data-reveal><span class="section-num">06</span> Education</p>
+        <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
+        <div class="grid-3" data-reveal-group>
           <div class="card">
             <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Schulich School of Business</h3>
             <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Bachelor of Business Administration<br>Master of Finance<br>Master of Law</p>
@@ -853,8 +1066,10 @@
             <p style="color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px;">Uniswap Hook Incubator — Cohort 1 (2024)</p>
             <img src="assets/CertificateAtriumAcademy.webp" alt="Atrium Academy Certificate of Achievement — Uniswap Hook Incubator Cohort 1"
                  data-caption="Atrium Academy — Uniswap Hook Incubator, Cohort 1 (June 2024)"
-                 loading="lazy" onclick="openLightbox(this)"
-                 style="width: 100%; border-radius: var(--radius); border: 1px solid var(--border); cursor: pointer; display: block;" />
+                 loading="lazy" tabindex="0" role="button"
+                 aria-label="Enlarge Atrium Academy certificate (press Enter to open)"
+                 data-lb-trigger
+                 style="width: 100%; border-radius: var(--radius); border: 1px solid var(--border); display: block;" />
           </div>
           <div class="card">
             <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Continuous Learning</h3>
@@ -867,8 +1082,8 @@
     <!-- ─── CONTACT (Layout 6 — CTA strip) ────────────────────────── -->
     <section class="section" data-od-id="contact" id="contact" style="text-align: center;">
       <div class="container" style="max-width: 600px;">
-        <p class="eyebrow"><span class="section-num">07</span> Contact</p>
-        <h2>Let's connect.</h2>
+        <p class="eyebrow" data-reveal><span class="section-num">07</span> Contact</p>
+        <h2 data-reveal>Let's connect.</h2>
         <p class="lead" style="margin: 16px auto 32px;">Interested in collaborating, chatting, or just saying hello?</p>
         <div style="display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;">
           <a href="mailto:tony.kp.lau@gmail.com" class="btn btn-primary">Email me</a>
@@ -883,9 +1098,19 @@
   <footer class="pagefoot" data-od-id="footer">
     <div class="container row-between">
       <span>&copy; 2026 Tony Lau</span>
+      <div class="row" style="gap: var(--gap-md);">
+        <a href="mailto:tony.kp.lau@gmail.com" class="meta" style="color: var(--muted);">Email</a>
+        <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">GitHub</a>
+        <a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">LinkedIn</a>
+      </div>
       <span class="meta">Built with Open Design &middot; Toronto</span>
     </div>
   </footer>
+
+  <!-- Back to top -->
+  <button class="to-top" id="to-top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
 
   <script>
     // Theme toggle
@@ -906,12 +1131,45 @@
       a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open'));
     });
 
-    // Event filter — works on both static and dynamic cards
+    // Active nav link via IntersectionObserver — highlights the section in view
+    (function() {
+      const navLinks = document.querySelectorAll('#nav-links a[href^="#"]');
+      const linkMap = {};
+      navLinks.forEach(a => { linkMap[a.getAttribute('href').slice(1)] = a; });
+      const visible = {};  // id -> intersectionRatio
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+        // pick the most-visible section that has a nav link
+        let best = null, bestRatio = 0;
+        for (const id in visible) {
+          if (linkMap[id] && visible[id] > bestRatio) { best = id; bestRatio = visible[id]; }
+        }
+        if (best) {
+          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href').slice(1) === best));
+        }
+      }, { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5, 1] });
+      document.querySelectorAll('main section[id]').forEach(s => obs.observe(s));
+    })();
+
+    // Back-to-top visibility
+    (function() {
+      const btn = document.getElementById('to-top');
+      if (!btn) return;
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('show', window.scrollY > 600);
+      }, { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
+
+    // Event filter — scoped to #events-filter only, works on dynamic cards
     function bindFilters() {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
+      const group = document.getElementById('events-filter');
+      if (!group) return;
+      group.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          group.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
           btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
           const f = btn.dataset.filter;
           document.querySelectorAll('.event-card').forEach(c => {
             c.classList.toggle('hidden', f !== 'all' && c.dataset.type !== f);
@@ -968,7 +1226,7 @@
         // Experience tabs + highlights
         function renderExpEntry(e) {
           const hl = e.highlights ? `<div class="highlights">${e.highlights.map(h =>
-            `<img src="${h.image}" alt="${h.caption}" data-caption="${h.caption}" loading="lazy" onclick="openLightbox(this)">`
+            `<img src="${h.image}" alt="${h.caption}" data-caption="${h.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${h.caption}" data-lb-trigger>`
           ).join('')}</div>` : '';
           return `<article class="log-row">
             <span class="meta">${e.date}</span>
@@ -992,11 +1250,27 @@
         renderExpTab('career');
         document.querySelectorAll('#exp-filter .filter-btn').forEach(btn => {
           btn.addEventListener('click', () => {
-            document.querySelectorAll('#exp-filter .filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#exp-filter .filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
             renderExpTab(btn.dataset.exp);
           });
         });
+
+        // Featured project preview image — populates the preview frame if a
+        // screenshot is provided at projects.featured.image, else shows an
+        // honest fallback. Drop the file in assets/projects/ and set the path.
+        if (data.projects?.featured?.image) {
+          const previewBody = document.querySelector('#featured-preview .preview-body');
+          if (previewBody) {
+            previewBody.innerHTML = `<img class="preview-shot" src="${data.projects.featured.image}" alt="CYM Studio screenshot" loading="lazy">`;
+          }
+        } else {
+          const previewBody = document.querySelector('#featured-preview .preview-body');
+          if (previewBody) {
+            previewBody.innerHTML = `<div class="preview-fallback"><span>Screenshot coming soon</span><a href="${data.projects?.featured?.url || 'https://cymstudio.app'}" target="_blank" rel="noopener">Visit cymstudio.app &nearr;</a></div>`;
+          }
+        }
 
         // Projects grid
         if (data.projects?.grid) {
@@ -1069,7 +1343,7 @@
           }
         }
 
-        // LinkedIn Posts
+        // LinkedIn Posts — feature the most recent 6, link out for the rest
         if (data.posts) {
           const postGrid = document.getElementById('posts-grid');
           if (postGrid) {
@@ -1080,13 +1354,23 @@
               if (act) return 'https://www.linkedin.com/embed/feed/update/urn:li:activity:' + act[1];
               return null;
             }
-            postGrid.innerHTML = data.posts.map(p => {
+            const featured = data.posts.slice(0, 6);
+            postGrid.innerHTML = featured.map(p => {
               const embedUrl = liEmbedUrl(p.url);
               if (!embedUrl) return '';
               return `<div class="post-embed">
                 <iframe src="${embedUrl}" title="${p.title}" loading="lazy"></iframe>
               </div>`;
             }).join('');
+            if (data.posts.length > featured.length) {
+              const more = document.createElement('div');
+              more.className = 'post-embed';
+              more.style.display = 'grid';
+              more.style.placeItems = 'center';
+              more.style.padding = 'var(--gap-lg)';
+              more.innerHTML = `<a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="btn btn-secondary btn-arrow">See ${data.posts.length - featured.length} more on LinkedIn</a>`;
+              postGrid.appendChild(more);
+            }
           }
         }
 
@@ -1255,19 +1539,913 @@
       }
     })();
 
-    // Lightbox
+    // Lightbox — keyboard accessible (Enter/Space to open, Escape to close)
+    let lastFocused = null;
     function openLightbox(img) {
       const lb = document.getElementById('lightbox');
       document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.getAttribute('aria-label') || img.dataset.caption || img.alt || '';
       document.getElementById('lightbox-caption').textContent = img.dataset.caption || '';
       lb.classList.add('open');
+      document.body.classList.add('lb-open');
+      lastFocused = img;
+      const closeBtn = document.getElementById('lightbox-close');
+      if (closeBtn) closeBtn.focus();
     }
-    document.getElementById('lightbox-close').addEventListener('click', () => {
-      document.getElementById('lightbox').classList.remove('open');
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('open');
+      document.body.classList.remove('lb-open');
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+    // click + keyboard activation for any [data-lb-trigger]
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-lb-trigger]');
+      if (t) { openLightbox(t); }
     });
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+    document.addEventListener('keydown', (e) => {
+      const t = e.target.closest('[data-lb-trigger]');
+      if (t && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault(); openLightbox(t);
+      }
+      if (e.key === 'Escape' && document.getElementById('lightbox').classList.contains('open')) {
+        closeLightbox();
+      }
     });
+    // Lightbox listeners — the lightbox <div> is defined AFTER this
+    // script in the markup, so defer these until the DOM is parsed.
+    function bindLightboxDom() {
+      const closeBtn = document.getElementById('lightbox-close');
+      const lb = document.getElementById('lightbox');
+      if (!closeBtn || !lb) return false;
+      closeBtn.addEventListener('click', closeLightbox);
+      lb.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeLightbox();
+      });
+      return true;
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindLightboxDom);
+    } else {
+      bindLightboxDom();
+    }
+
+    // ════════════════════════════════════════════════════════════════
+    //  3D GLOBE (Globe.GL / three.js) + STAT COUNT-UP + SCROLL REVEAL
+    // ════════════════════════════════════════════════════════════════
+
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Scroll reveal: fade/lift [data-reveal] + staggered groups ──
+    (function initScrollReveal() {
+      const items = document.querySelectorAll('[data-reveal], [data-reveal-group]');
+      if (REDUCE_MOTION || !('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('in'));
+        return;
+      }
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      items.forEach(el => obs.observe(el));
+    })();
+
+    // ── Stat count-up: animate the numeric portion when scrolled into view ──
+    // Re-scans the stats grid (data.json may overwrite it on load) and
+    // animates each number once it scrolls into view.
+    (function initCountUp() {
+      function animate(el) {
+        if (el.dataset.counted) return;
+        const m = el.textContent.match(/(\d+)/);
+        if (!m) return;
+        const target = parseInt(m[1], 10);
+        // capture any trailing non-digit (the "+") — works whether it's a
+        // text node or a <span class="stat-unit">
+        const suffix = (el.textContent.match(/[^0-9]+$/) || [''])[0];
+        el.dataset.counted = '1';
+        if (REDUCE_MOTION) { el.textContent = target + suffix; return; }
+        const duration = 1400;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(tick);
+      }
+      function attach(el) {
+        if (REDUCE_MOTION || !('IntersectionObserver' in window)) { animate(el); return; }
+        const o = new IntersectionObserver((entries, obs) => {
+          entries.forEach(e => { if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); } });
+        }, { threshold: 0.5 });
+        o.observe(el);
+      }
+      // scan now, and re-scan after data.json (which can swap the stats
+      // markup) has had a chance to render
+      function scan() {
+        document.querySelectorAll('#stats-grid .stat-num:not([data-counted])').forEach(attach);
+      }
+      scan();
+      // re-scan shortly after load to catch the data.json-rendered stats
+      setTimeout(scan, 600);
+      setTimeout(scan, 1500);
+    })();
+
+    // ── 3D globe ────────────────────────────────────────────────────
+    // ── 3D globe: particle-Earth (Conflux-style), dependency-free ──
+    // Samples a Fibonacci sphere, keeps land points, renders back-to-front
+    // with depth alpha + twinkle. City points + Toronto-hub travelling arcs.
+    // Adapted from the Conflux globe (github.com/aigc17).
+    (function initGlobe() {
+      const wrap = document.getElementById('globe-wrap');
+      const loading = document.getElementById('globe-loading');
+      const tooltip = document.getElementById('globe-tooltip');
+      if (!wrap) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.display = 'block';
+      canvas.style.cursor = 'grab';
+      canvas.style.touchAction = 'none';
+      wrap.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const reduce = REDUCE_MOTION;
+
+      // theme-aware palette
+      function palette() {
+        const s = getComputedStyle(document.documentElement);
+        const light = document.documentElement.getAttribute('data-theme') === 'light';
+        return {
+          dotColor:   light ? '#5a5b62' : '#DDE3F5',
+          arcColor:   s.getPropertyValue('--accent').trim() || '#4f7df5',
+          glowColor:  light ? 'rgba(79,125,245,0.10)' : 'rgba(129,140,248,0.18)',
+          home:       s.getPropertyValue('--accent').trim() || '#4f7df5',
+          work:       s.getPropertyValue('--success').trim() || '#22c55e',
+          event:      s.getPropertyValue('--warn').trim() || '#f59e0b',
+        };
+      }
+
+      // constants (mirroring the Conflux engine)
+      const R_FRAC = 0.42, BASE_TILT = 0.34, PERSP = 2.2;
+      const ALT = 0.22, TAIL = 0.28, ARC_MS = 2200, AMBIENT_MS = 3600, MAX_ARCS = 9;
+      const DRAG_SENS = 0.006, FRICTION = 0.94, SPEED = 0.0016;
+      const SAMPLES = 22000;
+
+      let size = 0, cx = 0, cy = 0, R = 0, dpr = 1;
+      let yaw = 0, yawVel = 0, pitch = BASE_TILT, pitchTarget = BASE_TILT;
+      let landPoints = [], landPhases = [];
+      let cities = [], cityVecs = [];
+      let arcs = [];
+      let raf = 0, cancelled = false, visible = true;
+      let dragging = false, lastX = 0, lastY = 0, hoverCity = null;
+
+      function resize() {
+        const rect = wrap.getBoundingClientRect();
+        size = Math.max(200, Math.min(rect.width, rect.height));
+        cx = rect.width / 2; cy = rect.height / 2;
+        R = Math.min(rect.width, rect.height) * R_FRAC;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(rect.width * dpr);
+        canvas.height = Math.round(rect.height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      const dot3 = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+
+      function spawnArc(aVec, bVec) {
+        if (arcs.length >= MAX_ARCS) return;
+        arcs.push({ a: aVec, b: bVec, start: performance.now() });
+      }
+      function spawnHubArc(p) {
+        const hub = cities.find(c => c.type === 'home') || cities[0];
+        if (!hub || !p || p === hub) return;
+        spawnArc(hub._vec, p._vec);
+      }
+
+      // lat/lng → unit vec3
+      function latLngToVec(lat, lng) {
+        const la = lat * Math.PI / 180, ln = lng * Math.PI / 180;
+        return [Math.cos(la) * Math.cos(ln), Math.sin(la), Math.cos(la) * Math.sin(ln)];
+      }
+
+      // Land mask: load a pre-baked equirectangular PNG (white = land,
+      // black = sea), rasterized once from Natural Earth 1:50M (via
+      // world-atlas land-50m.json) at 2048x1024. Much higher coastline
+      // detail and far faster load than runtime geojson rasterization.
+      let MW = 0, MH = 0, maskData = null;
+      async function loadMask() {
+        const img = new Image();
+        img.src = 'assets/geo/land-mask.png';
+        await img.decode().catch(() => {});
+        if (!img.naturalWidth) return;
+        MW = img.naturalWidth;
+        MH = img.naturalHeight;
+        const c = document.createElement('canvas');
+        c.width = MW; c.height = MH;
+        const cx2 = c.getContext('2d');
+        cx2.drawImage(img, 0, 0, MW, MH);
+        maskData = cx2.getImageData(0, 0, MW, MH).data;
+      }
+      function isLand(lat, lng) {
+        if (!maskData) return false;
+        const x = Math.min(MW-1, Math.max(0, (((lng + 180) / 360) * MW) | 0));
+        const y = Math.min(MH-1, Math.max(0, (((90 - lat) / 180) * MH) | 0));
+        return maskData[(y * MW + x) * 4] > 128; // bright = land
+      }
+
+      function buildLandPoints() {
+        landPoints = []; landPhases = [];
+        const golden = Math.PI * (3 - Math.sqrt(5));
+        for (let i = 0; i < SAMPLES; i++) {
+          const y = 1 - (i / (SAMPLES - 1)) * 2;
+          const r = Math.sqrt(Math.max(0, 1 - y * y));
+          const t = i * golden;
+          const x = Math.cos(t) * r;
+          const z = Math.sin(t) * r;
+          const lat = (Math.asin(y) * 180) / Math.PI;
+          const lng = (Math.atan2(z, x) * 180) / Math.PI;
+          if (isLand(lat, lng)) {
+            landPoints.push([x, y, z]);
+            landPhases.push(Math.random() * Math.PI * 2);
+          }
+        }
+      }
+
+      function rot(p) {
+        const ca = Math.cos(yaw), sa = Math.sin(yaw);
+        const cT = Math.cos(pitch), sT = Math.sin(pitch);
+        const rx = p[0]*ca - p[2]*sa;
+        const rz = p[0]*sa + p[2]*ca;
+        const ty = p[1]*cT - rz*sT;
+        const tz = p[1]*sT + rz*cT;
+        return [rx, ty, tz];
+      }
+
+      function draw(now) {
+        if (cancelled || !visible) { raf = 0; return; }
+        const dt = lastNow ? now - lastNow : 16; lastNow = now;
+        const step = dt / 16.67;
+        const pal = palette();
+
+        if (!dragging) {
+          if (Math.abs(yawVel) > SPEED * 1.5) yawVel *= FRICTION;
+          // spin negated so continents drift west→east under the cx-tx mirror
+          else if (!reduce) yawVel += (-SPEED - yawVel) * 0.03;
+          else yawVel *= FRICTION;
+        }
+        yaw += yawVel * step;
+        pitch += (pitchTarget - pitch) * 0.1;
+
+        // ambient arc timer
+        if (!reduce && cities.length > 1) {
+          ambientAcc += dt;
+          if (ambientAcc > AMBIENT_MS) {
+            ambientAcc = 0;
+            const hub = cities.find(c => c.type === 'home') || cities[0];
+            const others = cities.filter(c => c !== hub);
+            if (others.length) spawnHubArc(others[(Math.random() * others.length) | 0]);
+          }
+        }
+
+        ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
+        // back dots
+        ctx.fillStyle = pal.dotColor;
+        const proj = [];
+        for (let i = 0; i < landPoints.length; i++) {
+          const [tx, ty, tz] = rot(landPoints[i]);
+          if (tz > 0.02) continue; // only back hemisphere for this pass
+          proj.push([tx, ty, tz, landPhases[i]]);
+        }
+        proj.sort((a, b) => a[2] - b[2]);
+        for (const [tx, ty, tz, ph] of proj) {
+          const scale = PERSP / (PERSP - tz);
+          const sx = cx - tx * R * scale; // mirror x: east is right (see note at drawCities)
+          const sy = cy - ty * R * scale;
+          const depth = (tz + 1) / 2;
+          const tw = !reduce ? 0.72 + 0.28 * Math.sin(now * 0.0016 + ph) : 1;
+          ctx.globalAlpha = (0.10 + depth * 0.6) * tw;
+          ctx.beginPath();
+          ctx.arc(sx, sy, 0.4 + depth * 0.9, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // back city points
+        drawCities(pal, now, false);
+        // back arcs
+        drawArcs(pal, false);
+
+        // front dots
+        ctx.fillStyle = pal.dotColor; ctx.globalAlpha = 1;
+        for (let i = 0; i < landPoints.length; i++) {
+          const [tx, ty, tz] = rot(landPoints[i]);
+          if (tz <= 0.02) continue;
+          const scale = PERSP / (PERSP - tz);
+          const sx = cx - tx * R * scale;
+          const sy = cy - ty * R * scale;
+          const depth = (tz + 1) / 2;
+          const tw = !reduce ? 0.72 + 0.28 * Math.sin(now * 0.0016 + landPhases[i]) : 1;
+          ctx.globalAlpha = (0.15 + depth * 0.85) * tw;
+          ctx.beginPath();
+          ctx.arc(sx, sy, 0.5 + depth * 1.15, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // front city points + front arcs on top
+        drawCities(pal, now, true);
+        drawArcs(pal, true);
+
+        ctx.globalAlpha = 1;
+        raf = requestAnimationFrame(draw);
+      }
+
+      function drawCities(pal, now, front) {
+        for (const c of cities) {
+          const [tx, ty, tz] = rot(c._vec);
+          const isFront = tz > 0;
+          if (isFront !== front) continue;
+          const scale = PERSP / (PERSP - tz);
+          // x is mirrored (cx - tx) so east renders to the right — matching
+          // a real globe viewed from the front. The original Conflux engine
+          // uses cx + tx; that mirrors the world, which is invisible when
+          // there are no labeled landmarks but breaks for labeled cities.
+          const sx = cx - tx * R * scale;
+          const sy = cy - ty * R * scale;
+          const depth = (tz + 1) / 2;
+          const col = c.type === 'home' ? pal.home : c.type === 'event' ? pal.event : pal.work;
+          const baseR = c.type === 'home' ? 4.5 : 3.2;
+          ctx.globalAlpha = 0.25 + depth * 0.75;
+          // glow
+          ctx.fillStyle = col;
+          ctx.beginPath(); ctx.arc(sx, sy, baseR * 1.8, 0, Math.PI * 2); ctx.fill();
+          ctx.globalAlpha = 0.4 + depth * 0.6;
+          ctx.fillStyle = '#fff';
+          ctx.beginPath(); ctx.arc(sx, sy, baseR * 0.5, 0, Math.PI * 2); ctx.fill();
+          // store screen pos for hover
+          c._sx = sx; c._sy = sy; c._depth = depth;
+        }
+      }
+
+      function drawArcs(pal, front) {
+        ctx.lineCap = 'round';
+        const now = performance.now();
+        for (let i = arcs.length - 1; i >= 0; i--) {
+          const arc = arcs[i];
+          const t = (now - arc.start) / ARC_MS;
+          if (t > 1 + TAIL) { arcs.splice(i, 1); continue; }
+          const omega = Math.acos(Math.max(-1, Math.min(1, dot3(arc.a, arc.b))));
+          const sinO = Math.sin(omega) || 1e-6;
+          const head = Math.min(t, 1);
+          const tailA = Math.max(0, head - TAIL);
+          const life = t > 1 ? Math.max(0, 1 - (t - 1) / TAIL) : 1;
+          const N = 18;
+          let prev = null;
+          for (let j = 0; j <= N; j++) {
+            const u = tailA + ((head - tailA) * j) / N;
+            const s0 = Math.sin((1 - u) * omega) / sinO;
+            const s1 = Math.sin(u * omega) / sinO;
+            const lift = 1 + ALT * Math.sin(Math.PI * u);
+            const [tx, ty, tz] = rot([
+              (arc.a[0]*s0 + arc.b[0]*s1) * lift,
+              (arc.a[1]*s0 + arc.b[1]*s1) * lift,
+              (arc.a[2]*s0 + arc.b[2]*s1) * lift,
+            ]);
+            const isFront = tz > 0;
+            if (isFront !== front) { prev = null; continue; }
+            const scale = PERSP / (PERSP - tz);
+            const sx = cx - tx * R * scale;
+            const sy = cy - ty * R * scale;
+            const local = j / N;
+            const depth = (tz + 1) / 2;
+            if (prev) {
+              ctx.globalAlpha = local * (0.12 + depth * 0.88) * life;
+              ctx.strokeStyle = pal.arcColor;
+              ctx.lineWidth = 0.6 + local * 1.1;
+              ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(sx, sy); ctx.stroke();
+            }
+            if (j === N) {
+              ctx.globalAlpha = (0.5 + depth * 0.5) * life;
+              ctx.fillStyle = pal.arcColor;
+              ctx.beginPath(); ctx.arc(sx, sy, 1.7, 0, Math.PI * 2); ctx.fill();
+            }
+            prev = [sx, sy];
+          }
+        }
+      }
+
+      let lastNow = 0, ambientAcc = 0;
+      function loop(now) { lastNow = now || performance.now(); draw(now || performance.now()); }
+      function startLoop() { if (!raf && visible) raf = requestAnimationFrame(loop); }
+
+      // ── drag to spin ──
+      canvas.addEventListener('pointerdown', (e) => {
+        dragging = true; lastX = e.clientX; lastY = e.clientY;
+        canvas.style.cursor = 'grabbing';
+        canvas.setPointerCapture && canvas.setPointerCapture(e.pointerId);
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - lastX, dy = e.clientY - lastY;
+        lastX = e.clientX; lastY = e.clientY;
+        // yaw drag inverted to match the cx-tx mirror
+        yaw -= dx * DRAG_SENS; yawVel = -dx * DRAG_SENS;
+        pitchTarget = Math.max(-0.95, Math.min(0.95, pitchTarget - dy * DRAG_SENS));
+      }, { passive: true });
+      window.addEventListener('pointerup', () => { dragging = false; canvas.style.cursor = 'grab'; }, { passive: true });
+
+      // ── hover for city labels ──
+      canvas.addEventListener('pointermove', (e) => {
+        if (dragging || !tooltip) return;
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+        let found = null, bestD = 16;
+        for (const c of cities) {
+          if (c._sx == null || c._depth < 0.35) continue;
+          const d = Math.hypot(c._sx - mx, c._sy - my);
+          if (d < bestD) { bestD = d; found = c; }
+        }
+        hoverCity = found;
+        if (found) {
+          tooltip.style.display = 'block';
+          tooltip.style.left = (found._sx) + 'px';
+          tooltip.style.top = (found._sy - 14) + 'px';
+          tooltip.textContent = found.city + ' — ' + found.note;
+        } else {
+          tooltip.style.display = 'none';
+        }
+      });
+      canvas.addEventListener('pointerleave', () => { if (tooltip) tooltip.style.display = 'none'; });
+
+      // ── pause when off-screen ──
+      const visObs = new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible) startLoop();
+        else { cancelAnimationFrame(raf); raf = 0; }
+      }, { threshold: 0 });
+      visObs.observe(wrap);
+
+      // rebuild on resize
+      const ro = new ResizeObserver(() => { resize(); });
+      ro.observe(wrap);
+
+      // ── boot ──
+      resize();
+      fetch('data.json?v=' + Date.now()).then(r => r.json()).then(async (data) => {
+        if (!data.global || !data.global.places) return;
+        cities = data.global.places.map(p => ({ ...p, _vec: latLngToVec(p.lat, p.lng) }));
+        try {
+          await loadMask();
+          buildLandPoints();
+        } catch (e) { /* no land mask — cities + arcs still render */ }
+
+        wrap.classList.add('globe-loaded');
+        if (loading) loading.style.display = 'none';
+
+        // fire arcs from hub to each city on load, staggered
+        if (!reduce) {
+          const others = cities.filter(c => c.type !== 'home');
+          others.forEach((c, i) => setTimeout(() => spawnHubArc(c), 400 + i * 350));
+        }
+        startLoop();
+      }).catch(() => { if (loading) loading.textContent = 'Globe unavailable.'; });
+    })();
+
+    // ════════════════════════════════════════════════════════════════
+    //  HERO CHARACTER CURTAIN
+    //  Verlet-physics glyph strands pinned to the top of the hero,
+    //  parted by the cursor like fabric. Synthesized wind-chime audio
+    //  on brush (Web Audio API — no audio files). Audio is OFF by
+    //  default; visitor opts in via the toggle.
+    //  Adapted from github.com/aigc17/Chinese-PhoenixCrown (MIT-style).
+    // ════════════════════════════════════════════════════════════════
+    (function () {
+      const canvas = document.getElementById('hero-curtain');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ── character pool: finance × code keywords flowing as vertical
+      //    prose, interleaved with currency/code symbols ──────────────
+      const CHAR_POOL =
+        'FINANCE TECHNOLOGY BLOCKCHAIN SOLIDITY NEXTJS REACT TYPESCRIPT ' +
+        'PYTHON AGENT AI VIDEO CONFLUX DEFI SQL NODE INFRASTRUCTURE ' +
+        'CORPORATE DEVELOPMENT M&A HACKATHON EDUCATION ' +
+        '$ ¥ € £ % { } [ ] => ++ == 0 1 2 3 4 5 6 7 8 9';
+
+      // ── tunable constants (ported from the reference) ──────────────
+      const COL_SPACING = 9;
+      const ROW_SPACING = 10;
+      const FONT_SIZE = 7.5;
+      const MOUSE_RADIUS = 120;
+      const DAMPING = 0.94;
+      const HOME_STIFFNESS = 0.014;
+      const CONSTRAINT_ITERATIONS = 2;
+      const RAGGEDNESS = 0.3;
+      const LENGTH_SCALE = 1;
+      const GLYPH_SCALE = 1;
+
+      // ── theme-aware ink palette. The strands read as "lit" threads:
+      //    accent for life, muted for texture. ───────────────────────
+      function inkPalette() {
+        const s = getComputedStyle(document.documentElement);
+        const accent = s.getPropertyValue('--accent').trim() || '#4f7df5';
+        const muted = s.getPropertyValue('--muted').trim() || '#7a7a74';
+        return [accent, muted, accent, muted, muted]; // accent-weighted
+      }
+      function inkAlpha() {
+        return document.documentElement.getAttribute('data-theme') === 'light' ? 0.5 : 0.85;
+      }
+
+      let columns = [];
+      let width = 0, height = 0, dpr = 1;
+      let raf = 0, running = true;
+      let reveal = 0, revealAt = Infinity;
+      const mouse = { x: -9999, y: -9999, vx: 0, vy: 0, active: false };
+      let avoidRects = [];
+      const AVOID_FEATHER = 48;
+
+      // glyph atlas — rasterize each char×color once, stamp with drawImage
+      let atlas = null, atlasMap = new Map();
+      const ATLAS_PAD = 3;
+      let atlasCell = 0, atlasCellCss = 0;
+
+      function buildAtlas() {
+        const inks = Array.from(new Set(inkPalette()));
+        const chars = Array.from(new Set(CHAR_POOL.split('')));
+        const scale = dpr;
+        atlasCellCss = FONT_SIZE + ATLAS_PAD * 2;
+        atlasCell = atlasCellCss * scale;
+
+        const total = chars.length * inks.length;
+        const cols = Math.ceil(Math.sqrt(total));
+        const rows = Math.ceil(total / cols);
+
+        atlas = document.createElement('canvas');
+        atlas.width = Math.ceil(cols * atlasCell);
+        atlas.height = Math.ceil(rows * atlasCell);
+        const actx = atlas.getContext('2d');
+        if (!actx) { atlas = null; return; }
+        actx.scale(scale, scale);
+        actx.font = '300 ' + FONT_SIZE + "px ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace";
+        actx.textAlign = 'center';
+        actx.textBaseline = 'middle';
+
+        atlasMap = new Map();
+        let i = 0;
+        for (const ink of inks) {
+          actx.fillStyle = ink;
+          for (const ch of chars) {
+            const cx = (i % cols) * atlasCellCss;
+            const cy = Math.floor(i / cols) * atlasCellCss;
+            actx.fillText(ch, cx + atlasCellCss / 2, cy + atlasCellCss / 2);
+            atlasMap.set(ch + '|' + ink, { sx: cx * scale, sy: cy * scale });
+            i++;
+          }
+        }
+      }
+
+      function sampleAvoidRects() {
+        avoidRects = [];
+        const canvasRect = canvas.getBoundingClientRect();
+        document.querySelectorAll('[data-curtain-avoid]').forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (!r.width || !r.height) return;
+          avoidRects.push({
+            left: r.left - canvasRect.left,
+            top: r.top - canvasRect.top,
+            right: r.right - canvasRect.left,
+            bottom: r.bottom - canvasRect.top,
+          });
+        });
+      }
+
+      function avoidFadeAt(x, y) {
+        let fade = 1;
+        for (const r of avoidRects) {
+          const dx = Math.max(r.left - x, 0, x - r.right);
+          const dy = Math.max(r.top - y, 0, y - r.bottom);
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < AVOID_FEATHER) {
+            const f = 0.06 + (d / AVOID_FEATHER) * 0.94;
+            if (f < fade) fade = f;
+          }
+        }
+        return fade;
+      }
+
+      function rand(seed) {
+        const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+        return x - Math.floor(x);
+      }
+
+      // has build() produced any strands yet? guards the loop + observers
+      let initialized = false;
+
+      function build() {
+        const rect = canvas.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        if (width < 2 || height < 2) return false;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+
+        buildAtlas();
+        sampleAvoidRects();
+
+        const alpha = inkAlpha();
+        const inks = inkPalette();
+        const colCount = Math.max(1, Math.floor(width / COL_SPACING));
+        const xOffset = (width - (colCount - 1) * COL_SPACING) / 2;
+
+        columns = [];
+        for (let c = 0; c < colCount; c++) {
+          const colX = xOffset + c * COL_SPACING;
+          const topY = 4; // hang from the hero's top edge (no contour image)
+          const startY = topY + 6;
+          const available = height - startY;
+          if (available < ROW_SPACING * 2) continue;
+
+          const wave = 0.5 + 0.5 * Math.sin(c * 0.55 + rand(c * 2.1) * 1.8);
+          const lengthJitter = 1 - RAGGEDNESS + (rand(c * 7.3) * 0.55 + wave * 0.45) * RAGGEDNESS;
+          const colRows = Math.max(2, Math.floor((available / ROW_SPACING) * LENGTH_SCALE * lengthJitter));
+
+          const charOffset = Math.floor(rand(c * 3.7) * CHAR_POOL.length);
+          const chain = [];
+          for (let r = 0; r < colRows; r++) {
+            const seed = c * 131 + r * 17;
+            const homeX = colX + (rand(seed + 3) - 0.5) * 1.6;
+            const homeY = startY + r * ROW_SPACING;
+            const ink = inks[Math.floor(rand(c * 13.7 + Math.floor(r / 6) * 5.1) * inks.length)];
+            const ch = CHAR_POOL[(charOffset + r) % CHAR_POOL.length] || '0';
+            chain.push({
+              x: homeX, y: startY + r * 1.5,
+              px: homeX, py: startY + r * 1.5,
+              homeX, homeY, char: ch,
+              alpha, visible: rand(seed + 2) > 0.06,
+              color: ink, cell: atlasMap.get(ch + '|' + ink) || null,
+            });
+          }
+          columns.push(chain);
+        }
+        initialized = columns.length > 0;
+        return initialized;
+      }
+
+      function step() {
+        const r2 = MOUSE_RADIUS * MOUSE_RADIUS;
+        for (let c = 0; c < columns.length; c++) {
+          const chain = columns[c];
+          const breeze = Math.sin((performance.now() / 1000) * 0.7 + c * 0.35) * 0.012;
+          for (let r = 1; r < chain.length; r++) {
+            const n = chain[r];
+            const depth = r / chain.length;
+            let vx = (n.x - n.px) * DAMPING;
+            let vy = (n.y - n.py) * DAMPING;
+            n.px = n.x; n.py = n.y;
+            vx += (n.homeX - n.x) * HOME_STIFFNESS;
+            vy += (n.homeY - n.y) * HOME_STIFFNESS;
+            vx += breeze * depth;
+            if (mouse.active) {
+              const dx = n.x - mouse.x, dy = n.y - mouse.y;
+              const d2 = dx * dx + dy * dy;
+              if (d2 < r2 && d2 > 0.01) {
+                const d = Math.sqrt(d2);
+                const falloff = (1 - d / MOUSE_RADIUS) ** 2;
+                const push = falloff * 1.4;
+                vx += (dx / d) * push + mouse.vx * falloff * 0.38;
+                vy += (dy / d) * push * 0.3 + mouse.vy * falloff * 0.2;
+              }
+            }
+            n.x += vx; n.y += vy;
+          }
+          for (let it = 0; it < CONSTRAINT_ITERATIONS; it++) {
+            for (let r = 1; r < chain.length; r++) {
+              const a = chain[r - 1], b = chain[r];
+              let dx = b.x - a.x, dy = b.y - a.y;
+              let d = Math.sqrt(dx * dx + dy * dy);
+              if (d < 0.0001) { d = 0.0001; dx = 0; dy = 0.0001; }
+              const diff = (d - ROW_SPACING) / d;
+              if (r === 1) { b.x -= dx * diff; b.y -= dy * diff; }
+              else { const ox = dx * diff * 0.5, oy = dy * diff * 0.5; a.x += ox; a.y += oy; b.x -= ox; b.y -= oy; }
+            }
+          }
+        }
+        mouse.vx *= 0.85; mouse.vy *= 0.85;
+      }
+
+      function draw() {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        if (reveal <= 0 || !atlas) return;
+        const half = atlasCellCss / 2;
+        const hasAvoid = avoidRects.length > 0;
+        for (let c = 0; c < columns.length; c++) {
+          const chain = columns[c];
+          for (let r = 0; r < chain.length; r++) {
+            const n = chain[r];
+            if (!n.visible) continue;
+            const tail = r / chain.length;
+            let edgeFade = tail > 0.75 ? 1 - (tail - 0.75) / 0.25 : 1;
+            if (hasAvoid) edgeFade *= avoidFadeAt(n.x, n.y);
+            edgeFade *= reveal;
+            const cell = n.cell;
+            if (!cell) continue;
+            let angle = 0;
+            if (r > 0) {
+              const p = chain[r - 1];
+              angle = Math.atan2(n.x - p.x, Math.max(n.y - p.y, 0.001)) * -1;
+            }
+            const a = n.alpha * edgeFade;
+            if (a < 0.02) continue;
+            ctx.globalAlpha = a;
+            if (angle > 0.06 || angle < -0.06) {
+              const cos = Math.cos(angle), sin = Math.sin(angle);
+              ctx.setTransform(dpr * cos, dpr * sin, -dpr * sin, dpr * cos, dpr * n.x, dpr * n.y);
+              ctx.drawImage(atlas, cell.sx, cell.sy, atlasCell, atlasCell, -half, -half, atlasCellCss, atlasCellCss);
+              ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            } else {
+              ctx.drawImage(atlas, cell.sx, cell.sy, atlasCell, atlasCell, n.x - half, n.y - half, atlasCellCss, atlasCellCss);
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function loop() {
+        if (!running) return;
+        if (performance.now() >= revealAt) {
+          if (reveal < 1) reveal = Math.min(1, reveal + 0.025);
+          step();
+        }
+        draw();
+        raf = requestAnimationFrame(loop);
+      }
+
+      // ── pointer interaction (window-level so strands react even when
+      //    the cursor is over sibling elements above the canvas) ──────
+      function onPointerMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        if (mouse.active) {
+          mouse.vx = mouse.vx * 0.5 + (x - mouse.x) * 0.5;
+          mouse.vy = mouse.vy * 0.5 + (y - mouse.y) * 0.5;
+        }
+        mouse.x = x; mouse.y = y; mouse.active = true;
+        if (audioEnabled && reveal > 0.5 && x >= 0 && x <= width && y >= 0 && y <= height) {
+          const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy);
+          if (speed > 2.5 && y > 4) playCurtainBrush(Math.min(1, speed / 26));
+        }
+      }
+      function onPointerLeave() {
+        mouse.active = false; mouse.x = -9999; mouse.y = -9999;
+      }
+
+      // ── pause physics when the hero scrolls off-screen ─────────────
+      const heroEl = document.getElementById('hero');
+      const visObs = new IntersectionObserver((entries) => {
+        const visible = entries[0].isIntersecting;
+        running = visible;
+        // only (re)start the loop once the curtain has been built,
+        // otherwise we'd draw an empty scene before start() runs
+        if (visible && initialized && !raf) loop();
+        else if (!visible) { cancelAnimationFrame(raf); raf = 0; }
+      }, { threshold: 0 });
+      if (heroEl) visObs.observe(heroEl);
+
+      // ── rebuild on resize (debounced via rAF) ──────────────────────
+      let resizeRaf = 0;
+      const ro = new ResizeObserver(() => {
+        cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(() => { build(); sampleAvoidRects(); });
+      });
+      ro.observe(canvas);
+
+      // ── rebuild ink palette when theme changes ─────────────────────
+      const themeObs = new MutationObserver(() => { if (initialized) build(); });
+      themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      // ── reduced-motion: render one static frame, no loop ───────────
+      function start() {
+        const ok = build();
+        if (!ok) {
+          // layout not ready yet (canvas has no size) — retry shortly
+          setTimeout(start, 60);
+          return;
+        }
+        if (reduceMotion) {
+          reveal = 1;
+          draw();
+          return;
+        }
+        revealAt = performance.now() + 380;
+        if (!raf) loop();
+      }
+      window.addEventListener('pointermove', onPointerMove, { passive: true });
+      window.addEventListener('pointerleave', onPointerLeave);
+      // delay first build until layout/fonts settle, then start
+      requestAnimationFrame(() => requestAnimationFrame(start));
+
+      // ════════════════════════════════════════════════════════════════
+      //  CURTAIN AUDIO — synthesized chimes (Web Audio API, no files)
+      //  OFF by default. Unlocked + enabled by the toggle button.
+      // ════════════════════════════════════════════════════════════════
+      let audioEnabled = false;
+      let actx = null, master = null, noiseBuffer = null, lastPlay = 0;
+
+      function ensureAudio() {
+        if (actx) return actx;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        actx = new AC();
+        master = actx.createGain();
+        master.gain.value = 0.85;
+        master.connect(actx.destination);
+        const len = actx.sampleRate;
+        noiseBuffer = actx.createBuffer(1, len, actx.sampleRate);
+        const data = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+        return actx;
+      }
+
+      function playCurtainBrush(intensity) {
+        const c = ensureAudio();
+        if (!c || !master || !noiseBuffer) return;
+        if (c.state === 'suspended') { c.resume().catch(() => {}); return; }
+        const now = performance.now();
+        if (now - lastPlay < 70) return;
+        lastPlay = now;
+        const t = c.currentTime;
+        const amp = 0.04 + Math.min(1, intensity) * 0.1;
+
+        // fabric swish — band-passed noise burst
+        const src = c.createBufferSource();
+        src.buffer = noiseBuffer;
+        src.playbackRate.value = 0.85 + Math.random() * 0.3;
+        const bp = c.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.value = 1400 + intensity * 1800 + Math.random() * 500;
+        bp.Q.value = 1.4;
+        const g = c.createGain();
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(amp, t + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+        src.connect(bp); bp.connect(g); g.connect(master);
+        src.start(t, Math.random() * 0.5, 0.25);
+        src.stop(t + 0.3);
+
+        // metallic bell strike — pentatonic partials
+        if (intensity > 0.08) {
+          const notes = [1567.98, 1760, 2093, 2349.3, 2637, 3135.96];
+          const f0 = notes[Math.floor(Math.random() * notes.length)];
+          const partials = [
+            { ratio: 1, gain: 1, decay: 0.9 },
+            { ratio: 2.32, gain: 0.55, decay: 0.55 },
+            { ratio: 4.25, gain: 0.28, decay: 0.32 },
+            { ratio: 6.63, gain: 0.14, decay: 0.18 },
+          ];
+          const strikeAmp = 0.04 + intensity * 0.08;
+          const detune = 1 + (Math.random() - 0.5) * 0.015;
+          for (const p of partials) {
+            const osc = c.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.value = f0 * p.ratio * detune;
+            const og = c.createGain();
+            const pAmp = strikeAmp * p.gain;
+            og.gain.setValueAtTime(0, t);
+            og.gain.linearRampToValueAtTime(pAmp, t + 0.003);
+            og.gain.exponentialRampToValueAtTime(0.0001, t + p.decay);
+            osc.connect(og); og.connect(master);
+            osc.start(t); osc.stop(t + p.decay + 0.05);
+          }
+        }
+      }
+
+      // ── audio toggle button ────────────────────────────────────────
+      const audioBtn = document.getElementById('curtain-audio-toggle');
+      if (audioBtn) {
+        const label = audioBtn.querySelector('.toggle-label');
+        audioBtn.addEventListener('click', () => {
+          audioEnabled = !audioEnabled;
+          audioBtn.classList.toggle('on', audioEnabled);
+          audioBtn.setAttribute('aria-pressed', String(audioEnabled));
+          if (label) label.textContent = audioEnabled ? 'Sound on' : 'Muted';
+          if (audioEnabled) {
+            const c = ensureAudio();
+            if (c && c.state === 'suspended') c.resume().catch(() => {});
+          }
+        });
+      }
+    })();
   </script>
 
   <!-- Lightbox -->
