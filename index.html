@@ -2024,7 +2024,7 @@
     //  default; visitor opts in via the toggle.
     //  Adapted from github.com/aigc17/Chinese-PhoenixCrown (MIT-style).
     // ════════════════════════════════════════════════════════════════
-    (function () {
+    (async function () {
       const canvas = document.getElementById('hero-curtain');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -2032,13 +2032,34 @@
 
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // ── character pool: finance × code keywords flowing as vertical
-      //    prose, interleaved with currency/code symbols ──────────────
-      const CHAR_POOL =
-        'FINANCE TECHNOLOGY BLOCKCHAIN SOLIDITY NEXTJS REACT TYPESCRIPT ' +
-        'PYTHON AGENT AI VIDEO CONFLUX DEFI SQL NODE INFRASTRUCTURE ' +
-        'CORPORATE DEVELOPMENT M&A HACKATHON EDUCATION ' +
-        '$ ¥ € £ % { } [ ] => ++ == 0 1 2 3 4 5 6 7 8 9';
+      // ── text source for the strands. We use Pretext (layoutWithLines)
+      //    to wrap this paragraph to the hero width; each wrapped line
+      //    becomes one vertical strand, so the curtain reads as real
+      //    sentences flowing down instead of abstract glyph rain.
+      //    A symbol run is appended so currency/code glyphs still thread
+      //    through the prose, keeping the finance-meets-code identity.
+      const CURTAIN_TEXT =
+        'Infrastructure investor turned software engineer building at the ' +
+        'intersection of finance and technology — AI video production, ' +
+        'blockchain infrastructure, and fintech education across four ' +
+        'continents. $ ¥ € £ % { } [ ] => ++ == 0 1 2 3 4 5 6 7 8 9 ' +
+        'Python TypeScript Solidity Next.js React Node Conflux DeFi SQL ' +
+        'agent harnesses financial modelling corporate development M&A.';
+
+      // ── Pretext: load from CDN (ESM). prepareWithSegments does the
+      //    one-time segmentation + canvas measurement; layoutWithLines
+      //    is the cheap hot path we re-run on resize. Falls back to the
+      //    old flat-pool approach if the CDN or Intl.Segmenter is missing.
+      let pretext = null;
+      let prepared = null;
+      const FONT = '300 ' + 7.5 + "px ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace";
+      try {
+        if (window.Intl && Intl.Segmenter) {
+          // package is pre-1.0 (currently 0.x); use the unversioned path so
+          // it resolves to the published latest instead of a 404 on @1
+          pretext = await import('https://cdn.jsdelivr.net/npm/@chenglou/pretext/dist/layout.js');
+        }
+      } catch (e) { pretext = null; /* fall back to flat pool */ }
 
       // ── tunable constants (ported from the reference) ──────────────
       const COL_SPACING = 9;
@@ -2072,14 +2093,17 @@
       let avoidRects = [];
       const AVOID_FEATHER = 48;
 
-      // glyph atlas — rasterize each char×color once, stamp with drawImage
+      // glyph atlas — rasterize each char×color once, stamp with drawImage.
+      // Single uniform size now (no big/small tiers). atlasMap keyed by
+      // `char|ink`; each entry carries its cell dims for draw().
       let atlas = null, atlasMap = new Map();
       const ATLAS_PAD = 3;
       let atlasCell = 0, atlasCellCss = 0;
+      const FONT_FAMILY = "ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace";
 
       function buildAtlas() {
         const inks = Array.from(new Set(inkPalette()));
-        const chars = Array.from(new Set(CHAR_POOL.split('')));
+        const chars = Array.from(new Set(CURTAIN_TEXT.split('')));
         const scale = dpr;
         atlasCellCss = FONT_SIZE + ATLAS_PAD * 2;
         atlasCell = atlasCellCss * scale;
@@ -2094,7 +2118,7 @@
         const actx = atlas.getContext('2d');
         if (!actx) { atlas = null; return; }
         actx.scale(scale, scale);
-        actx.font = '300 ' + FONT_SIZE + "px ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace";
+        actx.font = '300 ' + FONT_SIZE + 'px ' + FONT_FAMILY;
         actx.textAlign = 'center';
         actx.textBaseline = 'middle';
 
@@ -2106,7 +2130,7 @@
             const cx = (i % cols) * atlasCellCss;
             const cy = Math.floor(i / cols) * atlasCellCss;
             actx.fillText(ch, cx + atlasCellCss / 2, cy + atlasCellCss / 2);
-            atlasMap.set(ch + '|' + ink, { sx: cx * scale, sy: cy * scale });
+            atlasMap.set(ch + '|' + ink, { sx: cx * scale, sy: cy * scale, cell: atlasCell, css: atlasCellCss });
             i++;
           }
         }
@@ -2149,6 +2173,29 @@
       // has build() produced any strands yet? guards the loop + observers
       let initialized = false;
 
+      // Produce the array of wrapped lines the strands will draw from.
+      // With Pretext: real line-breaking of CURTAIN_TEXT to the hero
+      // width. Without: split the raw text on spaces into pseudo-lines.
+      // Lines are cached per-width and only rebuilt when width changes.
+      let cachedLines = null, cachedLineWidth = 0;
+      function getLines() {
+        if (pretext) {
+          if (!prepared) prepared = pretext.prepareWithSegments(CURTAIN_TEXT, FONT);
+          if (cachedLines && Math.abs(cachedLineWidth - width) < 4) return cachedLines;
+          // width per strand is narrow; wrap to a fraction of hero width
+          // so strands stay readable. Re-running layout (not prepare) on
+          // resize is the cheap path Pretext is built for.
+          const wrapW = Math.max(60, Math.min(width * 0.5, 220));
+          const { lines } = pretext.layoutWithLines(prepared, wrapW, ROW_SPACING);
+          cachedLines = lines.map(l => l.text);
+          cachedLineWidth = width;
+          return cachedLines;
+        }
+        // fallback: space-split pseudo-lines
+        if (!cachedLines) cachedLines = CURTAIN_TEXT.split(/(\s+)/).filter(s => s.trim());
+        return cachedLines;
+      }
+
       function build() {
         const rect = canvas.getBoundingClientRect();
         width = rect.width;
@@ -2163,35 +2210,44 @@
 
         const alpha = inkAlpha();
         const inks = inkPalette();
-        const colCount = Math.max(1, Math.floor(width / COL_SPACING));
-        const xOffset = (width - (colCount - 1) * COL_SPACING) / 2;
+        const lines = getLines();
+
+        // Words now read LEFT-TO-RIGHT. Each "chain" is a horizontal row
+        // pinned at the left edge; characters advance rightward across the
+        // row, so a row spells out a real line of text. The whole field is
+        // a stack of these horizontal lines, like lines of a paragraph that
+        // sway and part like fabric. (Variable name kept as `columns` to
+        // avoid touching every later reference — it now holds rows.)
+        const rowSpacing = ROW_SPACING;
+        const charSpacing = COL_SPACING; // horizontal advance per glyph
+        const rowCount = Math.max(1, Math.floor(height / rowSpacing));
+        const yOff = (height - (rowCount - 1) * rowSpacing) / 2;
 
         columns = [];
-        for (let c = 0; c < colCount; c++) {
-          const colX = xOffset + c * COL_SPACING;
-          const topY = 4; // hang from the hero's top edge (no contour image)
-          const startY = topY + 6;
-          const available = height - startY;
-          if (available < ROW_SPACING * 2) continue;
-
+        for (let c = 0; c < rowCount; c++) {
+          const rowY = yOff + c * rowSpacing;
+          const lineText = lines.length ? lines[c % lines.length] : '0';
+          // ragged length so row ends are uneven, like text edges
           const wave = 0.5 + 0.5 * Math.sin(c * 0.55 + rand(c * 2.1) * 1.8);
           const lengthJitter = 1 - RAGGEDNESS + (rand(c * 7.3) * 0.55 + wave * 0.45) * RAGGEDNESS;
-          const colRows = Math.max(2, Math.floor((available / ROW_SPACING) * LENGTH_SCALE * lengthJitter));
+          const charCount = Math.max(2, Math.floor((width / charSpacing) * LENGTH_SCALE * lengthJitter));
 
-          const charOffset = Math.floor(rand(c * 3.7) * CHAR_POOL.length);
           const chain = [];
-          for (let r = 0; r < colRows; r++) {
+          for (let r = 0; r < charCount; r++) {
             const seed = c * 131 + r * 17;
-            const homeX = colX + (rand(seed + 3) - 0.5) * 1.6;
-            const homeY = startY + r * ROW_SPACING;
+            // horizontal advance = r * charSpacing, pinned at the left (x=6)
+            const homeX = 6 + r * charSpacing + (rand(seed + 3) - 0.5) * 1.6;
+            const homeY = rowY + (rand(seed + 5) - 0.5) * 1.6;
             const ink = inks[Math.floor(rand(c * 13.7 + Math.floor(r / 6) * 5.1) * inks.length)];
-            const ch = CHAR_POOL[(charOffset + r) % CHAR_POOL.length] || '0';
+            const ch = lineText[r % lineText.length] || '0';
             chain.push({
-              x: homeX, y: startY + r * 1.5,
-              px: homeX, py: startY + r * 1.5,
+              x: homeX, y: homeY,            // start at rest position
+              px: homeX, py: homeY,
               homeX, homeY, char: ch,
+              linkLen: charSpacing,          // horizontal chain link length
               alpha, visible: rand(seed + 2) > 0.06,
-              color: ink, cell: atlasMap.get(ch + '|' + ink) || null,
+              color: ink,
+              cell: atlasMap.get(ch + '|' + ink) || null,
             });
           }
           columns.push(chain);
@@ -2232,8 +2288,10 @@
               const a = chain[r - 1], b = chain[r];
               let dx = b.x - a.x, dy = b.y - a.y;
               let d = Math.sqrt(dx * dx + dy * dy);
-              if (d < 0.0001) { d = 0.0001; dx = 0; dy = 0.0001; }
-              const diff = (d - ROW_SPACING) / d;
+              if (d < 0.0001) { d = 0.0001; dx = 0.0001; dy = 0; }
+              // link length is the horizontal char advance; row 0 is pinned
+              const linkLen = b.linkLen || COL_SPACING;
+              const diff = (d - linkLen) / d;
               if (r === 1) { b.x -= dx * diff; b.y -= dy * diff; }
               else { const ox = dx * diff * 0.5, oy = dy * diff * 0.5; a.x += ox; a.y += oy; b.x -= ox; b.y -= oy; }
             }
@@ -2246,7 +2304,6 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, width, height);
         if (reveal <= 0 || !atlas) return;
-        const half = atlasCellCss / 2;
         const hasAvoid = avoidRects.length > 0;
         for (let c = 0; c < columns.length; c++) {
           const chain = columns[c];
@@ -2259,22 +2316,13 @@
             edgeFade *= reveal;
             const cell = n.cell;
             if (!cell) continue;
-            let angle = 0;
-            if (r > 0) {
-              const p = chain[r - 1];
-              angle = Math.atan2(n.x - p.x, Math.max(n.y - p.y, 0.001)) * -1;
-            }
             const a = n.alpha * edgeFade;
             if (a < 0.02) continue;
             ctx.globalAlpha = a;
-            if (angle > 0.06 || angle < -0.06) {
-              const cos = Math.cos(angle), sin = Math.sin(angle);
-              ctx.setTransform(dpr * cos, dpr * sin, -dpr * sin, dpr * cos, dpr * n.x, dpr * n.y);
-              ctx.drawImage(atlas, cell.sx, cell.sy, atlasCell, atlasCell, -half, -half, atlasCellCss, atlasCellCss);
-              ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            } else {
-              ctx.drawImage(atlas, cell.sx, cell.sy, atlasCell, atlasCell, n.x - half, n.y - half, atlasCellCss, atlasCellCss);
-            }
+            // horizontal chains: glyphs stay upright so words read left-to-right.
+            // the verlet sway shows as vertical bobbing, not rotation.
+            const half = cell.css / 2;
+            ctx.drawImage(atlas, cell.sx, cell.sy, cell.cell, cell.cell, n.x - half, n.y - half, cell.css, cell.css);
           }
         }
         ctx.globalAlpha = 1;
