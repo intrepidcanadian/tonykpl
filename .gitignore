@@ -15,3 +15,4 @@ HEARTBEAT.md
 *.pdf
 .vercel
 .gstack/
+.zcode/

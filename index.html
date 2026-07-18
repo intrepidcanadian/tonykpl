@@ -658,6 +658,56 @@
     [data-reveal-group].in > *:nth-child(5) { transition-delay: 320ms; }
     [data-reveal-group].in > *:nth-child(6) { transition-delay: 400ms; }
 
+    /* ═══ CUSTOM: 3D coat section ════════════════════════════════════ */
+    /* A rotating three.js coat whose surface is projected with text. The
+       canvas mounts inside .coat-wrap only when scrolled near (lazy), so
+       the page never blocks on the model load. Mirrors the globe's layout. */
+    .coat-section { position: relative; overflow: hidden; background: var(--bg); }
+    .coat-wrap {
+      position: relative; width: 100%;
+      height: clamp(420px, 64vh, 640px);
+      display: grid; place-items: center;
+    }
+    .coat-wrap canvas { outline: none; }
+    .coat-loading {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      color: var(--muted); font-family: var(--font-mono); font-size: 13px;
+      letter-spacing: 0.04em; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .coat-loaded .coat-loading { opacity: 0; }
+    .coat-attribution {
+      text-align: center; margin-top: var(--gap-md);
+      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .coat-attribution a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+    @media (max-width: 720px) {
+      .coat-wrap { height: clamp(360px, 56vh, 480px); }
+    }
+
+    /* ═══ CUSTOM: projects + sticky coat split layout ════════════════ */
+    /* Two-column split: featured + single-column project cards on the left,
+       the static coat pinned (sticky) on the right while projects scroll.
+       align-items: start lets the right column stick without stretching. */
+    .projects-coat-split {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: var(--gap-xl);
+      align-items: start;
+    }
+    .projects-coat-split > .coat-sticky {
+      position: sticky;
+      top: 96px; /* clear the sticky nav (~60px) plus breathing room */
+    }
+    /* coat is shorter in a column than it was full-width */
+    .projects-coat-split .coat-wrap { height: clamp(380px, 60vh, 560px); }
+    @media (max-width: 920px) {
+      .projects-coat-split { grid-template-columns: 1fr; }
+      .projects-coat-split > .coat-sticky { position: static; }
+      .projects-coat-split .coat-wrap { height: clamp(360px, 56vh, 480px); }
+    }
+
     /* ═══ CUSTOM: reduced motion ═════════════════════════════════════ */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -680,6 +730,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- importmap for three.js + addons. The coat loads these lazily via dynamic
+       import(), but GLTFLoader has internal bare-specifier imports (e.g.
+       'three/addons/utils/...') that only resolve with this mapping present.
+       Must appear before any module script that uses the specifiers. -->
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  }}
+  </script>
 </head>
 <body>
   <!-- ─── NAV ─────────────────────────────────────────────────────── -->
@@ -909,8 +970,11 @@
         <h2 data-reveal style="margin-bottom: 8px;">Software & open source</h2>
         <p class="lead" style="margin-bottom: var(--gap-xl);">View all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
 
-        <!-- Featured -->
-        <div class="featured">
+        <!-- Two-column split: projects on the left, sticky coat on the right -->
+        <div class="projects-coat-split">
+          <div>
+            <!-- Featured -->
+            <div class="featured">
           <div>
             <span class="pill">Featured</span>
             <h3 style="margin-top: var(--gap-md);">CYM Studio</h3>
@@ -934,7 +998,7 @@
         </div>
 
         <!-- Grid -->
-        <div class="grid-3" id="projects-grid">
+        <div class="stack" id="projects-grid" style="gap: var(--gap-md);">
           <a href="https://github.com/Intrepidcanadian/nanobot" class="project-link" target="_blank" rel="noopener">
             <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span class="project-arrow">&nearr;</span></div>
             <h3>Nanobot</h3>
@@ -990,19 +1054,33 @@
             <div class="project-tags"><span class="tag">Python</span><span class="tag">AI Agents</span></div></div>
           </a>
         </div>
+          </div><!-- /left column (featured + project list) -->
+
+          <!-- RIGHT: sticky static coat -->
+          <div class="coat-sticky">
+            <p class="eyebrow" data-reveal>The finance × code suit</p>
+            <h2 data-reveal style="max-width: 22ch; font-size: clamp(26px, 3vw, 34px);">Building skills</h2>
+            <p class="lead" data-reveal style="margin-top: 10px; font-size: 15px;">A suit blending software engineering and finance.</p>
+            <div class="coat-wrap" id="coat-wrap" style="margin-top: var(--gap-md);">
+              <div class="coat-loading" id="coat-loading">Loading the suit&hellip;</div>
+              <!-- three.js canvas mounts here when scrolled into view -->
+            </div>
+            <p class="coat-attribution">3D model "Fancy Tailcoat Suit" by <a href="https://sketchfab.com/3d-models/fancy-tailcoat-suit-39205a46de554a2aa1645f85fdd3c7c2" target="_blank" rel="noopener">LuuHung</a> &middot; CC-BY-4.0</p>
+          </div>
+        </div><!-- /projects-coat-split -->
+
+        <!-- Tinkering / lab builds -->
+        <hr class="rule" style="margin-top: var(--gap-2xl); margin-bottom: var(--gap-xl);">
+        <p class="eyebrow">Lab</p>
+        <h3 style="margin-bottom: var(--gap-md);">Tinkering</h3>
+        <div class="video-mosaic" id="tinkering-grid"></div>
 
         <!-- Video work -->
-        <hr class="rule" style="margin-top: var(--gap-2xl); margin-bottom: var(--gap-xl);">
+        <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
         <p class="eyebrow">Video Work</p>
         <h3 style="margin-bottom: var(--gap-md);">AI-produced videos</h3>
         <div class="video-mosaic" id="videos-grid">
         </div>
-
-        <!-- Tinkering / lab builds -->
-        <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
-        <p class="eyebrow">Lab</p>
-        <h3 style="margin-bottom: var(--gap-md);">Tinkering</h3>
-        <div class="video-mosaic" id="tinkering-grid"></div>
 
       </div>
     </section>
@@ -2014,6 +2092,272 @@
         }
         startLoop();
       }).catch(() => { if (loading) loading.textContent = 'Globe unavailable.'; });
+    })();
+
+    // ════════════════════════════════════════════════════════════════
+    //  3D TEXT-PROJECTED COAT (three.js, lazy-loaded)
+    //  A rotating suit whose surface is projected with finance/code text
+    //  via a triplanar world-space shader. Loads three.js + the 1.6MB model
+    //  ONLY when scrolled near, so the page never blocks on it. Each garment
+    //  part (shirt/blazer/pants/tie/midcoat/collar) gets its own accent color.
+    //  Model: "Fancy Tailcoat Suit" by LuuHung, CC-BY-4.0 (attribution in
+    //  the section HTML — text projection is a runtime effect, no modified
+    //  asset is redistributed).
+    // ════════════════════════════════════════════════════════════════
+    (function initCoat() {
+      const wrap = document.getElementById('coat-wrap');
+      const loading = document.getElementById('coat-loading');
+      if (!wrap) return;
+      let started = false; // guard so we only load once
+
+      // ── pre-fetch: kick off the three.js + model load when the section
+      //    is ~200px from the viewport, so it's ready as the user arrives.
+      const prefetch = new IntersectionObserver((entries, obs) => {
+        if (entries[0].isIntersecting && !started) {
+          started = true;
+          obs.disconnect();
+          load();
+        }
+      }, { rootMargin: '200px 0px' });
+      prefetch.observe(wrap);
+
+      // If the section is already in view on load (e.g. anchor jump),
+      // the observer above still fires — no separate fast-path needed.
+
+      async function load() {
+        let THREE, OrbitControls, GLTFLoader;
+        try {
+          // dynamic-import three.js + addons. Bare specifiers resolve via the
+          // importmap in <head>. GLTFLoader has internal bare imports that
+          // need the map, so we use the specifiers rather than full URLs.
+          THREE = await import('three');
+          ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+          ({ GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js'));
+        } catch (e) {
+          if (loading) loading.textContent = 'Suit unavailable.';
+          return;
+        }
+        mount(THREE, OrbitControls, GLTFLoader);
+      }
+
+      function mount(THREE, OrbitControls, GLTFLoader) {
+        // ── text canvas the shader samples (1024², finance/code words) ──
+        const WORDS = [
+          'FINANCE','TECHNOLOGY','BLOCKCHAIN','SOLIDITY','PYTHON','TYPESCRIPT',
+          'NEXTJS','REACT','NODE','AI','AGENT','VIDEO','CONFLUX','DEFI','SQL',
+          'INFRASTRUCTURE','CORPORATE','DEVELOPMENT','M&A','EDUCATION',
+          'ENGINEER','$','¥','€','£','%','{ }','[ ]','=>','++','0 1',
+        ];
+        function makeTextTexture() {
+          const S = 1024;
+          const c = document.createElement('canvas');
+          c.width = c.height = S;
+          const x = c.getContext('2d');
+          x.fillStyle = '#0a0a0c';
+          x.fillRect(0, 0, S, S);
+          x.fillStyle = '#b9c2e8';
+          x.font = '600 30px ui-monospace, "JetBrains Mono", monospace';
+          x.textBaseline = 'top';
+          const lineH = 44;
+          let row = 0;
+          for (let y = -20; y < S + lineH; y += lineH) {
+            const wob = (row % 2) * 40;
+            let px = -((row * 53) % 220) + wob;
+            while (px < S) {
+              const w = WORDS[(row * 7 + (px | 0)) % WORDS.length];
+              x.globalAlpha = 0.5 + 0.5 * Math.random();
+              x.fillText(w, px, y);
+              px += x.measureText(w).width + 28;
+            }
+            row++;
+          }
+          const tex = new THREE.CanvasTexture(c);
+          tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+          return tex;
+        }
+
+        // ── triplanar text-projection shaders (world-space) ────────────
+        const textVert = `
+          varying vec3 vWorldPos;
+          varying vec3 vWorldNormal;
+          void main() {
+            vec4 wp = modelMatrix * vec4(position, 1.0);
+            vWorldPos = wp.xyz;
+            vWorldNormal = normalize(mat3(modelMatrix) * normal);
+            gl_Position = projectionMatrix * viewMatrix * wp;
+          }
+        `;
+        const textFrag = `
+          precision highp float;
+          uniform sampler2D uText;
+          uniform vec3 uAccent;
+          uniform vec3 uBg;
+          uniform float uScale;
+          varying vec3 vWorldPos;
+          varying vec3 vWorldNormal;
+          void main() {
+            vec2 uvX = vWorldPos.yz * uScale;
+            vec2 uvY = vWorldPos.xz * uScale;
+            vec2 uvZ = vWorldPos.xy * uScale;
+            float tX = texture2D(uText, uvX).r;
+            float tY = texture2D(uText, uvY).r;
+            float tZ = texture2D(uText, uvZ).r;
+            vec3 nw = abs(normalize(vWorldNormal));
+            float denom = nw.x + nw.y + nw.z + 1e-5;
+            float text = (tX*nw.x + tY*nw.y + tZ*nw.z) / denom;
+            vec3 L = normalize(vec3(0.4, 0.8, 0.6));
+            float diff = 0.45 + 0.55 * max(0.0, dot(normalize(vWorldNormal), L));
+            vec3 col = mix(uBg * diff, uAccent * (0.8 + 0.4*diff), text);
+            gl_FragColor = vec4(col, 1.0);
+          }
+        `;
+
+        // ── per-part accent colors, by mesh index. Map derived from the
+        //    model's named GLTF nodes (Tie_low, MidCoat_low, Collar_low,
+        //    etc.). three.js flattens node names on load, so we index here.
+        const ACCENT = {
+          blazer:  new THREE.Color('#4f7df5'),
+          shirt:   new THREE.Color('#f4f5fa'),
+          pants:   new THREE.Color('#22c55e'),
+          tie:     new THREE.Color('#b91c1c'),
+          midcoat: new THREE.Color('#7c3aed'),
+          collar:  new THREE.Color('#e5e7eb'),
+          detail:  new THREE.Color('#f59e0b'),
+          default: new THREE.Color('#7a7a74'),
+        };
+        // 0 Button | 1,2 Chain | 3 Star | 4 Shirt | 5 Coat body
+        // 6 Tie | 7 MidCoat | 8 Pants | 9 Collar
+        const MESH_ACCENT = [
+          ACCENT.detail, ACCENT.blazer, ACCENT.blazer, ACCENT.detail,
+          ACCENT.shirt, ACCENT.blazer, ACCENT.tie, ACCENT.midcoat,
+          ACCENT.pants, ACCENT.collar,
+        ];
+
+        // ── renderer + scene (canvas mounts inside #coat-wrap) ─────────
+        const canvas = document.createElement('canvas');
+        canvas.style.width = canvas.style.height = '100%';
+        canvas.style.display = 'block';
+        wrap.appendChild(canvas);
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+        camera.position.set(0, 0.2, 4.2);
+
+        function resize() {
+          const w = wrap.clientWidth, h = wrap.clientHeight;
+          if (w < 2 || h < 2) return;
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          renderer.setSize(w, h, false);
+        }
+        resize();
+
+        const controls = new OrbitControls(camera, canvas);
+        controls.enableDamping = true;
+        controls.autoRotate = false; // coat stays static (still draggable)
+        controls.autoRotateSpeed = 0.8;
+        controls.enablePan = false;
+        controls.minDistance = 2.5;
+        controls.maxDistance = 7;
+        controls.target.set(0, -0.1, 0);
+
+        const textTex = makeTextTexture();
+        // uBg tracks the page background so dark fills match the section
+        const bgHex = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#0a0a0c';
+        const bg = new THREE.Color(bgHex);
+
+        // the loaded model root. Hoisted to mount() scope so the animate
+        // loop can rotate it based on scroll progress.
+        let coat = null;
+
+        const loader = new GLTFLoader();
+        loader.load('assets/coat.glb', (gltf) => {
+          const root = gltf.scene;
+          const meshes = [];
+          root.traverse((obj) => { if (obj.isMesh) meshes.push(obj); });
+          meshes.forEach((obj, i) => {
+            obj.material = new THREE.ShaderMaterial({
+              vertexShader: textVert,
+              fragmentShader: textFrag,
+              uniforms: {
+                uText:   { value: textTex },
+                uAccent: { value: (MESH_ACCENT[i] || ACCENT.default).clone() },
+                uBg:     { value: bg },
+                uScale:  { value: 1.6 },
+              },
+            });
+          });
+          // center + normalize the larger of width/height to 2.6 units
+          const box = new THREE.Box3().setFromObject(root);
+          const size = new THREE.Vector3(); box.getSize(size);
+          const center = new THREE.Vector3(); box.getCenter(center);
+          root.position.sub(center);
+          root.scale.setScalar(2.6 / Math.max(size.x, size.y));
+          scene.add(root);
+          coat = root;
+
+          wrap.classList.add('coat-loaded');
+          if (loading) loading.style.display = 'none';
+        }, undefined, () => {
+          if (loading) loading.textContent = 'Suit unavailable.';
+        });
+
+        // ── scroll-driven rotation ─────────────────────────────────────
+        // The coat is sticky inside the Projects section. As the user
+        // scrolls through that section, the coat's yaw maps to scroll
+        // progress: top = facing one way, bottom = facing the other. Drag
+        // still works (it moves the camera, not the model, so the two
+        // inputs compose without fighting).
+        const SCROLL_RANGE = Math.PI * 0.8; // ~145° total turn
+        const projectsSection = document.getElementById('projects');
+        let targetYaw = 0;
+
+        function updateTargetYaw() {
+          if (!projectsSection) return;
+          const r = projectsSection.getBoundingClientRect();
+          // progress 0 when the section top hits the nav, 1 when its bottom
+          // reaches the viewport bottom. Clamped.
+          const start = -r.top;                 // scrolled past section top
+          const span = Math.max(1, r.height - window.innerHeight);
+          const p = Math.max(0, Math.min(1, start / span));
+          targetYaw = p * SCROLL_RANGE;
+        }
+        window.addEventListener('scroll', updateTargetYaw, { passive: true });
+        updateTargetYaw();
+
+        // ── loop, paused when off-screen ───────────────────────────────
+        let raf = 0, visible = true;
+        function animate() {
+          if (!visible) { raf = 0; return; }
+          if (coat) {
+            if (REDUCE_MOTION) {
+              coat.rotation.y = targetYaw;           // direct, no easing
+            } else {
+              // smooth toward the scroll-driven target
+              coat.rotation.y += (targetYaw - coat.rotation.y) * 0.08;
+            }
+          }
+          controls.update();
+          renderer.render(scene, camera);
+          raf = requestAnimationFrame(animate);
+        }
+        const visObs = new IntersectionObserver((entries) => {
+          visible = entries[0].isIntersecting;
+          if (visible && !raf) raf = requestAnimationFrame(animate);
+          else if (!visible) { cancelAnimationFrame(raf); raf = 0; }
+        }, { threshold: 0 });
+        visObs.observe(wrap);
+
+        // start once (the vis observer will also gate it)
+        raf = requestAnimationFrame(animate);
+
+        // resize reacts to layout, not just window resize
+        const ro = new ResizeObserver(() => resize());
+        ro.observe(wrap);
+      }
     })();
 
     // ════════════════════════════════════════════════════════════════
