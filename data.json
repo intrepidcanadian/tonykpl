@@ -4,9 +4,9 @@
     "tagline": "Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.",
     "photo": "assets/photos/Tony%20Lau.webp",
     "collage": [
-      "assets/photos/Tony%20Lau.webp",
-      "assets/events/GeorgeBrownUniswapFoundation.webp",
-      "assets/events/YorkUniversityUniswapFoundation.webp"
+      "assets/events/AntlerResidencySpeakingPortrait.webp",
+      "assets/events/BuildspaceS5GroupPhoto.webp",
+      "assets/events/GeorgeBrownUniswapV4BuildHooks.webp"
     ],
     "github": "https://github.com/Intrepidcanadian",
     "linkedin": "https://www.linkedin.com/in/tonykpl/",
@@ -45,10 +45,13 @@
     "places": [
       { "city": "Toronto", "country": "Canada", "lat": 43.65, "lng": -79.38, "type": "home", "note": "Home base — OPG, Shopify, CIB, Schulich, ETH Toronto" },
       { "city": "London", "country": "UK", "lat": 51.51, "lng": -0.13, "type": "work", "note": "AIMCo — London City Airport, Thames Water, Porterbrook" },
-      { "city": "Hong Kong", "country": "Hong Kong", "lat": 22.32, "lng": 114.17, "type": "work", "note": "SearchAsia internship · HKSTP Ideation Programme" },
+      { "city": "Hong Kong", "country": "Hong Kong", "lat": 22.32, "lng": 114.17, "type": "work", "note": "SearchAsia internship · HKSTP Ideation · HK FinTech Week · AFF Pitchathon" },
       { "city": "Singapore", "country": "Singapore", "lat": 1.35, "lng": 103.82, "type": "event", "note": "ETH Global Singapore hackathon" },
       { "city": "Brussels", "country": "Belgium", "lat": 50.85, "lng": 4.35, "type": "event", "note": "ETH Global Brussels hackathon" },
       { "city": "San Francisco", "country": "USA", "lat": 37.77, "lng": -122.42, "type": "event", "note": "Buildspace SF" },
+      { "city": "Denver", "country": "USA", "lat": 39.74, "lng": -104.99, "type": "event", "note": "ETHDenver 2025" },
+      { "city": "New York", "country": "USA", "lat": 40.71, "lng": -74.01, "type": "event", "note": "ETHGlobal New York hackathon" },
+      { "city": "Athens", "country": "Greece", "lat": 37.98, "lng": 23.73, "type": "event", "note": "Alephium Hephaestus hackathon" },
       { "city": "Edmonton", "country": "Canada", "lat": 53.55, "lng": -113.49, "type": "work", "note": "AIMCo HQ — Trans Mountain, Enel wind" },
       { "city": "Ottawa", "country": "Canada", "lat": 45.42, "lng": -75.70, "type": "work", "note": "Innovation, Science and Economic Development Canada" }
     ]
@@ -86,6 +89,14 @@
         {
           "image": "assets/ShopifyFirstBoxes.webp",
           "caption": "First boxes shipped for Beef in the City"
+        },
+        {
+          "image": "assets/ShopifyShoppyMascot.webp",
+          "caption": "With Shoppy at Shopify Summit 2024"
+        },
+        {
+          "image": "assets/ShopifyDwightCutout.webp",
+          "caption": "Shopify Summit Toronto — identity theft is not a joke, Jim"
         }
       ]
     },
@@ -471,7 +482,12 @@
       "date": "March 29, 2025",
       "desc": "Workshop introducing developers to Uniswap v4 hooks and architecture, hosted in partnership with the Uniswap Foundation.",
       "image": "assets/events/GeorgeBrownUniswapFoundation.webp",
-      "url": "https://luma.com/d86cz5h5"
+      "url": "https://luma.com/d86cz5h5",
+      "highlights": [
+        { "image": "assets/events/GeorgeBrownUniswapV4GroupPhoto.webp", "caption": "Group photo — wtf is uniswap v4" },
+        { "image": "assets/events/GeorgeBrownUniswapV4BuildHooks.webp", "caption": "Presenting Build Hooks: The Future of DeFi" },
+        { "image": "assets/events/GeorgeBrownUniswapV4AmbassadorIntro.webp", "caption": "Uniswap Foundation Ambassador introduction" }
+      ]
     },
     {
       "type": "hosted/speaking",
@@ -488,7 +504,10 @@
       "date": "April 29, 2025",
       "desc": "Intimate builder session with the Uniswap Foundation team, exploring v4 development and ecosystem opportunities.",
       "image": "assets/events/33BloorUniswapFoundation.webp",
-      "url": "https://luma.com/asd9qwpp"
+      "url": "https://luma.com/asd9qwpp",
+      "highlights": [
+        { "image": "assets/events/33BloorUniswapBuilderGroupPhoto.webp", "caption": "Builder session group photo — 33 Bloor" }
+      ]
     },
     {
       "type": "hosted/speaking",
@@ -496,7 +515,11 @@
       "location": "Toronto",
       "date": "2025",
       "desc": "Hosted and spoke at a panel interview at Blockchain Tuesdays, a community gathering for blockchain in Toronto.",
-      "image": "assets/events/BlockchainTuesdayPanelInterview.webp"
+      "image": "assets/events/BlockchainTuesdayPanelInterview.webp",
+      "highlights": [
+        { "image": "assets/events/BlockchainTuesdayMarch2025Presenting.webp", "caption": "Presenting at Blockchain Tuesdays — March 2025" },
+        { "image": "assets/events/BlockchainTuesdayMarch2025Presenters.webp", "caption": "Presenters at Blockchain Tuesdays" }
+      ]
     },
     {
       "type": "hosted/speaking",
@@ -505,6 +528,140 @@
       "date": "2025",
       "desc": "Hosted and spoke at Blockchain Tuesday x402 — a community gathering for blockchain in Toronto.",
       "image": "assets/events/BlockchainTuesdayx402.webp"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "AFF Pitchathon — InnoVenture Salon",
+      "location": "Hong Kong",
+      "date": "January 2025",
+      "desc": "Pitched Ginseng Swap on the Pitchathon stage at the Asian Financial Forum's InnoVenture Salon.",
+      "image": "assets/events/AFFPitchathonOnStage.webp",
+      "highlights": [
+        { "image": "assets/events/AFFPitchathonGinsengSwapPitch.webp", "caption": "Ginseng Swap pitch at the AFF Pitchathon" }
+      ]
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "FintechHK Start-up Salon",
+      "location": "Hong Kong",
+      "date": "November 2025",
+      "desc": "Exhibited Ginseng Swap — swap & remit on stablecoin rails — at the FintechHK Start-up Salon (HKTDC).",
+      "image": "assets/events/FintechHKStartupSalonBoothTony.webp",
+      "highlights": [
+        { "image": "assets/events/FintechHKStartupSalonBooth.webp", "caption": "Ginseng Swap booth at the FintechHK Start-up Salon" }
+      ]
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Antler Canada — Founder Residency",
+      "location": "Toronto",
+      "date": "2024",
+      "desc": "Founder in Antler Canada's Toronto residency — built and pitched Ginseng Swap through the cohort.",
+      "image": "assets/events/AntlerResidencySpeaking.webp",
+      "highlights": [
+        { "image": "assets/events/AntlerResidencyCohort.webp", "caption": "Antler Toronto cohort" },
+        { "image": "assets/events/AntlerResidencyNetworking.webp", "caption": "Networking at Antler" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "ETHDenver 2025",
+      "location": "Denver",
+      "date": "February 2025",
+      "desc": "Attended ETHDenver 2025 — the world's largest web3 #BUIDLathon.",
+      "image": "assets/events/ETHDenver2025BuidlerBadge.webp",
+      "highlights": [
+        { "image": "assets/events/ETHDenver2025RunningClub.webp", "caption": "Morning run with the running club, Denver" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "Hong Kong FinTech Week 2024",
+      "location": "Hong Kong",
+      "date": "November 2024",
+      "desc": "Attended Hong Kong FinTech Week 2024 — fintech, digital assets, and web3 across the Asia-Pacific ecosystem.",
+      "image": "assets/events/HKFintechWeek2024Entrance.webp",
+      "highlights": [
+        { "image": "assets/events/HKFintechWeek2024ConfluxBooth.webp", "caption": "Conflux booth at HK FinTech Week" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "ETHGlobal Singapore",
+      "location": "Singapore",
+      "date": "September 2024",
+      "desc": "Hacked at ETHGlobal Singapore at Marina Bay Sands — another ETHGlobal hackathon in the books.",
+      "image": "assets/events/ETHGlobalSingapore2024MBS.webp",
+      "highlights": [
+        { "image": "assets/events/ETHGlobalSingapore2024Queue.webp", "caption": "Hacker check-in at ETHGlobal Singapore" },
+        { "image": "assets/events/ETHGlobalSingapore2024Night.webp", "caption": "Singapore by night" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "Buildspace S5",
+      "location": "San Francisco",
+      "date": "Summer 2024",
+      "desc": "Six-week builder residency at Buildspace in San Francisco — demoed Ginseng Swap at demo day.",
+      "image": "assets/events/BuildspaceS5GinsengSwapDemo.webp",
+      "highlights": [
+        { "image": "assets/events/BuildspaceS5GroupPhoto.webp", "caption": "Buildspace S5 group" },
+        { "image": "assets/events/BuildspaceS5PinkCar.webp", "caption": "Obligatory pink car moment" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "ETHGlobal Brussels",
+      "location": "Brussels",
+      "date": "July 2024",
+      "desc": "Hacked at ETHGlobal Brussels at The EGG — building at the intersection of blockchain and real-world applications.",
+      "image": "assets/events/ETHGlobalBrussels2024Hacking.webp",
+      "highlights": [
+        { "image": "assets/events/ETHGlobalBrussels2024Stage.webp", "caption": "ETHGlobal Brussels main stage" },
+        { "image": "assets/events/ETHGlobalBrussels2024Friend.webp", "caption": "With a fellow hacker" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "Alephium Hephaestus Hackathon",
+      "location": "Greece",
+      "date": "June 2024",
+      "desc": "Attended the Alephium Hephaestus hackathon in Greece as a developer ambassador.",
+      "image": "assets/events/AlephiumHephaestusGreece.webp",
+      "highlights": [
+        { "image": "assets/events/AlephiumHephaestusGreeceGroup.webp", "caption": "Hephaestus hackathon group photo" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "Shopify Summit & Editions.Dev 2024",
+      "location": "Toronto",
+      "date": "June 2024",
+      "desc": "Attended Shopify Summit 2024 and Editions.Dev — celebrating 20 years of Shopify.",
+      "image": "assets/events/ShopifySummit2024.webp",
+      "highlights": [
+        { "image": "assets/events/ShopifyEditionsDev.webp", "caption": "Editions.Dev with a friend" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "ETHGlobal New York",
+      "location": "New York",
+      "date": "September 2023",
+      "desc": "Hacked at ETHGlobal New York — a weekend of building with the Ethereum ecosystem.",
+      "image": "assets/events/ETHGlobalNewYorkSign.webp",
+      "highlights": [
+        { "image": "assets/events/ETHGlobalNewYorkHackingHall.webp", "caption": "The hacking hall at ETHGlobal New York" },
+        { "image": "assets/events/ETHGlobalNewYorkWorkshop.webp", "caption": "Workshop room — ETHGlobal New York" }
+      ]
+    },
+    {
+      "type": "attended",
+      "title": "BDO Seed to Solution Hackathon — Winner",
+      "location": "Toronto",
+      "date": "September 2023",
+      "desc": "Won the Seed to Solution hackathon with team Harvest Hackers — $1,500 prize presented by BDO.",
+      "image": "assets/events/BDOSeedToSolutionWinners.webp"
     },
     {
       "type": "attended",
