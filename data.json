@@ -74,7 +74,7 @@
     {
       "date": "2022 — 2023",
       "title": "Senior Financial Analyst — Shop Pay & Shop App",
-      "desc": "Financial modelling for Shop App marketplace. Built business cases and helped launched the Shop Cash Loyalty Program.",
+      "desc": "Financial modelling for Shop App marketplace. Built business cases and helped launch the Shop Cash Loyalty Program.",
       "org": "Shopify",
       "logo": "assets/logos/shopify.png",
       "highlights": [
@@ -380,12 +380,14 @@
     {
       "title": "NVIDIA DGX Spark / Nemotron / Gemma4 / Nemo Claw",
       "desc": "Tinkering with NVIDIA DGX Spark hardware, running Nemotron, Gemma4, and Nemo Claw models locally.",
-      "video": "assets/videos/TorontoLive — Urban Operations - 30 May 2026 (1).mp4"
+      "video": "assets/videos/dgx-spark-nemotron.mp4",
+      "poster": "assets/videos/dgx-spark-nemotron-poster.webp"
     },
     {
       "title": "Apple Mobile App — Agent Task Marketplace",
       "desc": "Building a mobile app with an AI agent task marketplace using Pulse520.",
-      "video": "assets/videos/Pulse520.ai (2).mp4"
+      "video": "assets/videos/pulse520-agent-marketplace.mp4",
+      "poster": "assets/videos/pulse520-agent-marketplace-poster.webp"
     }
   ],
   "posts": [

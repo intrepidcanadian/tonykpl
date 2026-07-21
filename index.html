@@ -1409,7 +1409,7 @@
               return `
               <div class="video-card" style="grid-column: span ${span};">
                 <div class="video-thumb" style="aspect-ratio:16/9;">
-                  <video src="${t.video}" controls preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>
+                  <video src="${t.video}" controls preload="none"${t.poster ? ` poster="${t.poster}"` : ''} style="width:100%;height:100%;object-fit:cover;"></video>
                 </div>
                 <div class="video-meta">
                   <h3>${t.title}</h3>
