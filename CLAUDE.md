@@ -72,7 +72,12 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
 2. Drop the photo into `assets/events/`
 
 ### Adding a video
-1. Add an entry to `videos[]` in `data.json`:
+There are three video collections in `data.json`:
+- `videos[]` — "AI-produced videos" grid (purely creative productions, e.g. StarCraft broadcasts)
+- `videosSoftware[]` — "Software · Hackathons · Other" grid (hackathon demos, appearances)
+- `tinkering[]` — "Tinkering" grid of locally-hosted mp4s (`video` + `poster` fields; keep mp4s ≤ ~10 MB, 720p)
+
+1. Add an entry to the right array in `data.json`:
    ```json
    {
      "title": "Video Title",
@@ -81,7 +86,10 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
      "thumbnail": "assets/videos/thumb.jpg"
    }
    ```
-2. Optionally drop a thumbnail into `assets/videos/`
+   Instead of a single `thumbnail`, an entry may use `"thumbnails": ["a.webp", "b.webp"]` —
+   the card then shows the images side by side (used for video screenshots).
+   If both are omitted, the YouTube thumbnail is used automatically.
+2. Optionally drop thumbnails/screenshots into `assets/videos/`
 
 ### Updating profile photo
 1. Drop the photo into `assets/photos/`

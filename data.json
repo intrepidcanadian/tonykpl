@@ -36,15 +36,23 @@
       "label": "GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps."
     },
     {
-      "value": "3",
-      "label": "degrees from Schulich — BBA, Master of Finance, Master of Law."
+      "value": "2",
+      "label": "graduate degrees — Master of Law (Osgoode) and Master of Finance (York University)."
+    },
+    {
+      "value": "1",
+      "label": "undergraduate degree — BBA from York University."
+    },
+    {
+      "value": "1",
+      "label": "professional certification — Software Engineering at BrainStation."
     }
   ],
   "global": {
     "hub": "Toronto",
     "places": [
-      { "city": "Toronto", "country": "Canada", "lat": 43.65, "lng": -79.38, "type": "home", "note": "Home base — OPG, Shopify, CIB, Schulich, ETH Toronto" },
-      { "city": "London", "country": "UK", "lat": 51.51, "lng": -0.13, "type": "work", "note": "AIMCo — London City Airport, Thames Water, Porterbrook" },
+      { "city": "Toronto", "country": "Canada", "lat": 43.65, "lng": -79.38, "type": "home", "note": "Home base — OPG, Shopify, CIB, Schulich, ETH Toronto · district energy due diligence · Ontario private equity due diligence: medical isotopes, water heaters, submetering" },
+      { "city": "London", "country": "UK", "lat": 51.51, "lng": -0.13, "type": "work", "note": "AIMCo — airports (London City), rolling stock (Porterbrook), water utilities (Thames Water) due diligence" },
       { "city": "Hong Kong", "country": "Hong Kong", "lat": 22.32, "lng": 114.17, "type": "work", "note": "SearchAsia internship · HKSTP Ideation · HK FinTech Week · AFF Pitchathon" },
       { "city": "Singapore", "country": "Singapore", "lat": 1.35, "lng": 103.82, "type": "event", "note": "ETH Global Singapore hackathon" },
       { "city": "Brussels", "country": "Belgium", "lat": 50.85, "lng": 4.35, "type": "event", "note": "ETH Global Brussels hackathon" },
@@ -53,7 +61,20 @@
       { "city": "New York", "country": "USA", "lat": 40.71, "lng": -74.01, "type": "event", "note": "ETHGlobal New York hackathon" },
       { "city": "Athens", "country": "Greece", "lat": 37.98, "lng": 23.73, "type": "event", "note": "Alephium Hephaestus hackathon" },
       { "city": "Edmonton", "country": "Canada", "lat": 53.55, "lng": -113.49, "type": "work", "note": "AIMCo HQ — Trans Mountain, Enel wind" },
-      { "city": "Ottawa", "country": "Canada", "lat": 45.42, "lng": -75.70, "type": "work", "note": "Innovation, Science and Economic Development Canada" }
+      { "city": "Ottawa", "country": "Canada", "lat": 45.42, "lng": -75.70, "type": "work", "note": "Innovation, Science and Economic Development Canada" },
+      { "city": "Tel Aviv", "country": "Israel", "lat": 32.08, "lng": 34.78, "type": "event", "note": "Tel Aviv case competition" },
+      { "city": "Colón", "country": "Panama", "lat": 9.36, "lng": -79.90, "type": "work", "note": "Port investment due diligence" },
+      { "city": "Manzanillo", "country": "Mexico", "lat": 19.05, "lng": -104.32, "type": "work", "note": "Port investment due diligence" },
+      { "city": "Vancouver", "country": "Canada", "lat": 49.28, "lng": -123.12, "type": "work", "note": "Vancouver Wharf port investment due diligence · district energy due diligence" },
+      { "city": "Lisbon", "country": "Portugal", "lat": 38.72, "lng": -9.14, "type": "work", "note": "Natural gas distribution due diligence" },
+      { "city": "Calgary", "country": "Canada", "lat": 51.05, "lng": -114.07, "type": "work", "note": "Power and pipeline due diligence" },
+      { "city": "Houston", "country": "USA", "lat": 29.76, "lng": -95.37, "type": "work", "note": "LNG due diligence" },
+      { "city": "Northwest BC", "country": "Canada", "lat": 54.52, "lng": -128.60, "type": "work", "note": "Hydro facilities due diligence" },
+      { "city": "Markham", "country": "Canada", "lat": 43.86, "lng": -79.34, "type": "work", "note": "District energy due diligence" },
+      { "city": "Darlington", "country": "Canada", "lat": 43.87, "lng": -78.72, "type": "work", "note": "Nuclear due diligence" },
+      { "city": "Saskatoon", "country": "Canada", "lat": 52.13, "lng": -106.67, "type": "work", "note": "Transmission due diligence" },
+      { "city": "Prince George", "country": "Canada", "lat": 53.92, "lng": -122.75, "type": "work", "note": "Transmission due diligence" },
+      { "city": "Nashville", "country": "USA", "lat": 36.16, "lng": -86.78, "type": "work", "note": "Solar due diligence" }
     ]
   },
   "experience": [
@@ -226,6 +247,7 @@
   "projects": {
     "featured": {
       "name": "CYM Studio",
+      "image": "assets/projects/cymstudio.webp",
       "tagline": "AI video production + gasless gift-card redemption on Conflux eSpace",
       "desc": "Full-stack platform for AI-powered video production with an integrated rewards system. Tournament winners redeem real-world gift cards across 300+ brands using USDT0 — no gas needed.",
       "tags": [
@@ -236,8 +258,7 @@
         "USDT0"
       ],
       "url": "https://cymstudio.app",
-      "github": "https://github.com/Intrepidcanadian/cymstudios",
-      "image": null
+      "github": "https://github.com/Intrepidcanadian/cymstudios"
     },
     "grid": [
       {
@@ -332,6 +353,26 @@
       }
     ]
   },
+  "videosSoftware": [
+    {
+      "title": "JPMorgan Digital Identity Hackathon — 3rd Place",
+      "desc": "Product Passport: verifiable credentials for bills of lading on zkSync Era using JPMorgan's Onyx SDK. 3rd place overall, November 2023",
+      "url": "https://www.youtube.com/watch?v=O5WXx-31A9I",
+      "thumbnails": ["assets/videos/product-passport-1.webp", "assets/videos/product-passport-2.webp", "assets/videos/product-passport-3.webp"]
+    },
+    {
+      "title": "NEAR Hackathon — Ancestry Records",
+      "desc": "Tree: family records stored on NEAR with AI personas, so you can chat with ancestors who passed away. October 2023",
+      "url": "https://youtu.be/rUYA5nFbYak",
+      "thumbnails": ["assets/videos/ancestry-tree-1.webp", "assets/videos/ancestry-tree-2.webp", "assets/videos/ancestry-tree-3.webp"]
+    },
+    {
+      "title": "Build Space Music Video — Bronson Alan",
+      "desc": "On camera in Bronson Alan's rap music video, filmed with the buildspace crowd at Gateway Pavilion, San Francisco",
+      "url": "https://youtu.be/u9VcT272xl0",
+      "thumbnails": ["assets/videos/buildspace-rap-1.webp", "assets/videos/buildspace-rap-2.webp"]
+    }
+  ],
   "videos": [
     {
       "title": "BSL Season 22 — Player Intros",
@@ -388,6 +429,12 @@
       "desc": "Building a mobile app with an AI agent task marketplace using Pulse520.",
       "video": "assets/videos/pulse520-agent-marketplace.mp4",
       "poster": "assets/videos/pulse520-agent-marketplace-poster.webp"
+    },
+    {
+      "title": "AI Agent Making DeFi Transactions",
+      "desc": "ElizaOS agent swapping DAI to USDC on Polygon via Uniswap v3, then browsing Aave markets on its own. March 2025.",
+      "video": "assets/videos/defi-agent-browser.mp4",
+      "poster": "assets/videos/defi-agent-browser-poster.webp"
     }
   ],
   "posts": [
@@ -676,11 +723,16 @@
   ],
   "education": [
     {
-      "school": "Schulich School of Business",
+      "school": "Osgoode Hall Law School, York University",
       "items": [
-        "Bachelor of Business Administration",
-        "Master of Finance",
         "Master of Law"
+      ]
+    },
+    {
+      "school": "Schulich School of Business, York University",
+      "items": [
+        "Master of Finance",
+        "Bachelor of Business Administration"
       ]
     },
     {

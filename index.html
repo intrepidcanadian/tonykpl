@@ -52,6 +52,7 @@
       "https://www.linkedin.com/in/tonykpl/"
     ],
     "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Osgoode Hall Law School, York University" },
       { "@type": "CollegeOrUniversity", "name": "Schulich School of Business, York University" },
       { "@type": "EducationalOrganization", "name": "BrainStation" }
     ],
@@ -389,6 +390,8 @@
       background: linear-gradient(135deg, var(--accent-soft), var(--fg-soft));
     }
     .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .video-thumb.multi { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; }
+    .video-thumb.multi img { min-width: 0; }
     .video-thumb .play-btn {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 48px; height: 48px; border-radius: 50%;
@@ -575,22 +578,6 @@
     /* push the split layout above the canvas */
     .hero > .container { position: relative; z-index: 1; }
 
-    /* Audio toggle — small, unobtrusive, top-right of hero. Off by
-       default so the page is silent until the visitor opts in. */
-    .curtain-audio-toggle {
-      position: absolute; top: 18px; right: 18px; z-index: 2;
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 10px; border-radius: 999px;
-      background: color-mix(in oklch, var(--surface) 80%, transparent);
-      border: 1px solid var(--border); color: var(--muted);
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
-      cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      transition: color 0.15s ease, border-color 0.15s ease;
-    }
-    .curtain-audio-toggle:hover { color: var(--fg); border-color: var(--muted); }
-    .curtain-audio-toggle.on { color: var(--accent); border-color: var(--accent); }
-    .curtain-audio-toggle svg { width: 13px; height: 13px; }
-
     /* ═══ CUSTOM: 3D globe section ══════════════════════════════════ */
     .globe-section { position: relative; overflow: hidden; background: var(--bg); }
     .globe-wrap {
@@ -770,10 +757,6 @@
       <!-- Character curtain: verlet glyph strands, parted by the cursor.
            pointer-events:none in CSS so it never blocks the CTAs. -->
       <canvas class="hero-curtain" id="hero-curtain" aria-hidden="true"></canvas>
-      <button class="curtain-audio-toggle" id="curtain-audio-toggle" aria-pressed="false" aria-label="Toggle curtain sound (chimes when cursor brushes strands)" title="Toggle curtain sound">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-        <span class="toggle-label">Muted</span>
-      </button>
       <div class="container hero-split">
         <div>
           <p class="eyebrow" data-curtain-avoid>Finance &middot; Technology &middot; Developer Relations</p>
@@ -826,8 +809,16 @@
             <p class="stat-label">GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps.</p>
           </div>
           <div class="stat">
-            <div class="stat-num num">3</div>
-            <p class="stat-label">degrees from Schulich — BBA, Master of Finance, Master of Law.</p>
+            <div class="stat-num num">2</div>
+            <p class="stat-label">graduate degrees — Master of Law (Osgoode) and Master of Finance (York University).</p>
+          </div>
+          <div class="stat">
+            <div class="stat-num num">1</div>
+            <p class="stat-label">undergraduate degree — BBA from York University.</p>
+          </div>
+          <div class="stat">
+            <div class="stat-num num">1</div>
+            <p class="stat-label">professional certification — Software Engineering at BrainStation.</p>
           </div>
         </div>
       </div>
@@ -1093,6 +1084,12 @@
         <h3 style="margin-bottom: var(--gap-md);">Tinkering</h3>
         <div class="video-mosaic" id="tinkering-grid"></div>
 
+        <!-- Software, hackathons & other -->
+        <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
+        <p class="eyebrow">Software &middot; Hackathons &middot; Other</p>
+        <h3 style="margin-bottom: var(--gap-md);">Hackathon demos &amp; appearances</h3>
+        <div class="video-mosaic" id="videos-software-grid"></div>
+
         <!-- Video work -->
         <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
         <p class="eyebrow">Video Work</p>
@@ -1131,8 +1128,12 @@
         <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
         <div class="grid-3" data-reveal-group>
           <div class="card">
-            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Schulich School of Business</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Bachelor of Business Administration<br>Master of Finance<br>Master of Law</p>
+            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Osgoode Hall Law School, York University</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Master of Law</p>
+          </div>
+          <div class="card">
+            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Schulich School of Business, York University</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Master of Finance<br>Bachelor of Business Administration</p>
           </div>
           <div class="card">
             <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">BrainStation</h3>
@@ -1369,35 +1370,38 @@
           }
         }
 
-        // Videos
-        if (data.videos) {
-          const vidGrid = document.getElementById('videos-grid');
-          if (vidGrid) {
-            function ytThumb(url) {
-              const m = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/);
-              return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : null;
-            }
-            const cols = [7, 5, 4, 4, 4, 12];
-            const playIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-            vidGrid.innerHTML = data.videos.map((v, i) => {
-              const thumb = v.thumbnail || ytThumb(v.url);
-              const span = cols[i % cols.length];
-              return `
-              <a href="${v.url}" class="video-link" target="_blank" rel="noopener" style="grid-column: span ${span};">
-                <div class="video-card">
-                  <div class="video-thumb">
-                    ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : ''}
-                    <div class="play-btn">${playIcon}</div>
-                  </div>
-                  <div class="video-meta">
-                    <h3>${v.title}</h3>
-                    <p>${v.desc}</p>
-                  </div>
-                </div>
-              </a>`;
-            }).join('');
+        // Videos — shared card renderer for the software/hackathon grid and
+        // the AI-produced grid. Cards accept `thumbnails` (multi-image strip)
+        // or a single `thumbnail`, falling back to the YouTube thumb.
+        function renderVideoGrid(list, gridId, cols) {
+          const grid = document.getElementById(gridId);
+          if (!grid || !list) return;
+          function ytThumb(url) {
+            const m = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/);
+            return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : null;
           }
+          const playIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+          grid.innerHTML = list.map((v, i) => {
+            const single = v.thumbnail || ytThumb(v.url);
+            const thumbs = (v.thumbnails && v.thumbnails.length) ? v.thumbnails : (single ? [single] : []);
+            const span = cols[i % cols.length];
+            return `
+            <a href="${v.url}" class="video-link" target="_blank" rel="noopener" style="grid-column: span ${span};">
+              <div class="video-card">
+                <div class="video-thumb${thumbs.length > 1 ? ' multi' : ''}">
+                  ${thumbs.map(t => `<img src="${t}" alt="${v.title}" loading="lazy">`).join('')}
+                  <div class="play-btn">${playIcon}</div>
+                </div>
+                <div class="video-meta">
+                  <h3>${v.title}</h3>
+                  <p>${v.desc}</p>
+                </div>
+              </div>
+            </a>`;
+          }).join('');
         }
+        renderVideoGrid(data.videosSoftware, 'videos-software-grid', [7, 5, 12]);
+        renderVideoGrid(data.videos, 'videos-grid', [7, 5, 4, 4, 4, 12]);
 
         // Tinkering
         if (data.tinkering) {
@@ -1776,7 +1780,7 @@
 
       // constants (mirroring the Conflux engine)
       const R_FRAC = 0.42, BASE_TILT = 0.34, PERSP = 2.2;
-      const ALT = 0.22, TAIL = 0.28, ARC_MS = 2200, AMBIENT_MS = 3600, MAX_ARCS = 9;
+      const ALT = 0.22, TAIL = 0.28, ARC_MS = 2200, AMBIENT_MS = 1300, MAX_ARCS = 14;
       const DRAG_SENS = 0.006, FRICTION = 0.94, SPEED = 0.0016;
       const SAMPLES = 22000;
 
@@ -1892,7 +1896,16 @@
             ambientAcc = 0;
             const hub = cities.find(c => c.type === 'home') || cities[0];
             const others = cities.filter(c => c !== hub);
-            if (others.length) spawnHubArc(others[(Math.random() * others.length) | 0]);
+            if (others.length) {
+              spawnHubArc(others[(Math.random() * others.length) | 0]);
+              // half the time, also link two random non-hub cities so the
+              // traffic reads as a network rather than hub-and-spoke only
+              if (others.length > 1 && Math.random() < 0.5) {
+                const a = others[(Math.random() * others.length) | 0];
+                const b = others[(Math.random() * others.length) | 0];
+                if (a !== b) spawnArc(a._vec, b._vec);
+              }
+            }
           }
         }
 
@@ -2698,10 +2711,6 @@
           mouse.vy = mouse.vy * 0.5 + (y - mouse.y) * 0.5;
         }
         mouse.x = x; mouse.y = y; mouse.active = true;
-        if (audioEnabled && reveal > 0.5 && x >= 0 && x <= width && y >= 0 && y <= height) {
-          const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy);
-          if (speed > 2.5 && y > 4) playCurtainBrush(Math.min(1, speed / 26));
-        }
       }
       function onPointerLeave() {
         mouse.active = false; mouse.x = -9999; mouse.y = -9999;
@@ -2752,96 +2761,6 @@
       // delay first build until layout/fonts settle, then start
       requestAnimationFrame(() => requestAnimationFrame(start));
 
-      // ════════════════════════════════════════════════════════════════
-      //  CURTAIN AUDIO — synthesized chimes (Web Audio API, no files)
-      //  OFF by default. Unlocked + enabled by the toggle button.
-      // ════════════════════════════════════════════════════════════════
-      let audioEnabled = false;
-      let actx = null, master = null, noiseBuffer = null, lastPlay = 0;
-
-      function ensureAudio() {
-        if (actx) return actx;
-        const AC = window.AudioContext || window.webkitAudioContext;
-        if (!AC) return null;
-        actx = new AC();
-        master = actx.createGain();
-        master.gain.value = 0.85;
-        master.connect(actx.destination);
-        const len = actx.sampleRate;
-        noiseBuffer = actx.createBuffer(1, len, actx.sampleRate);
-        const data = noiseBuffer.getChannelData(0);
-        for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
-        return actx;
-      }
-
-      function playCurtainBrush(intensity) {
-        const c = ensureAudio();
-        if (!c || !master || !noiseBuffer) return;
-        if (c.state === 'suspended') { c.resume().catch(() => {}); return; }
-        const now = performance.now();
-        if (now - lastPlay < 70) return;
-        lastPlay = now;
-        const t = c.currentTime;
-        const amp = 0.04 + Math.min(1, intensity) * 0.1;
-
-        // fabric swish — band-passed noise burst
-        const src = c.createBufferSource();
-        src.buffer = noiseBuffer;
-        src.playbackRate.value = 0.85 + Math.random() * 0.3;
-        const bp = c.createBiquadFilter();
-        bp.type = 'bandpass';
-        bp.frequency.value = 1400 + intensity * 1800 + Math.random() * 500;
-        bp.Q.value = 1.4;
-        const g = c.createGain();
-        g.gain.setValueAtTime(0, t);
-        g.gain.linearRampToValueAtTime(amp, t + 0.012);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
-        src.connect(bp); bp.connect(g); g.connect(master);
-        src.start(t, Math.random() * 0.5, 0.25);
-        src.stop(t + 0.3);
-
-        // metallic bell strike — pentatonic partials
-        if (intensity > 0.08) {
-          const notes = [1567.98, 1760, 2093, 2349.3, 2637, 3135.96];
-          const f0 = notes[Math.floor(Math.random() * notes.length)];
-          const partials = [
-            { ratio: 1, gain: 1, decay: 0.9 },
-            { ratio: 2.32, gain: 0.55, decay: 0.55 },
-            { ratio: 4.25, gain: 0.28, decay: 0.32 },
-            { ratio: 6.63, gain: 0.14, decay: 0.18 },
-          ];
-          const strikeAmp = 0.04 + intensity * 0.08;
-          const detune = 1 + (Math.random() - 0.5) * 0.015;
-          for (const p of partials) {
-            const osc = c.createOscillator();
-            osc.type = 'sine';
-            osc.frequency.value = f0 * p.ratio * detune;
-            const og = c.createGain();
-            const pAmp = strikeAmp * p.gain;
-            og.gain.setValueAtTime(0, t);
-            og.gain.linearRampToValueAtTime(pAmp, t + 0.003);
-            og.gain.exponentialRampToValueAtTime(0.0001, t + p.decay);
-            osc.connect(og); og.connect(master);
-            osc.start(t); osc.stop(t + p.decay + 0.05);
-          }
-        }
-      }
-
-      // ── audio toggle button ────────────────────────────────────────
-      const audioBtn = document.getElementById('curtain-audio-toggle');
-      if (audioBtn) {
-        const label = audioBtn.querySelector('.toggle-label');
-        audioBtn.addEventListener('click', () => {
-          audioEnabled = !audioEnabled;
-          audioBtn.classList.toggle('on', audioEnabled);
-          audioBtn.setAttribute('aria-pressed', String(audioEnabled));
-          if (label) label.textContent = audioEnabled ? 'Sound on' : 'Muted';
-          if (audioEnabled) {
-            const c = ensureAudio();
-            if (c && c.state === 'suspended') c.resume().catch(() => {});
-          }
-        });
-      }
     })();
   </script>
 
