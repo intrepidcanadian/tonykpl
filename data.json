@@ -435,6 +435,11 @@
       "desc": "ElizaOS agent swapping DAI to USDC on Polygon via Uniswap v3, then browsing Aave markets on its own. March 2025.",
       "video": "assets/videos/defi-agent-browser.mp4",
       "poster": "assets/videos/defi-agent-browser-poster.webp"
+    },
+    {
+      "title": "Blockchain Mining",
+      "desc": "Building a mining rig from parts — GPU shopping at the computer store, then assembling at home. March 2024.",
+      "images": ["assets/videos/pc-build-home.webp", "assets/videos/pc-build-store.webp"]
     }
   ],
   "posts": [
@@ -718,7 +723,13 @@
       "location": "Toronto",
       "date": "2023",
       "desc": "Won the zkSync track at ETH Toronto hackathon.",
-      "image": "assets/events/ETHToronto- Hackathon Winner for zkSync.webp"
+      "image": "assets/events/ETHToronto- Hackathon Winner for zkSync.webp",
+      "highlights": [
+        {
+          "image": "assets/events/KaspaCommunityEvent.webp",
+          "caption": "With the Kaspa community at ETH Toronto"
+        }
+      ]
     }
   ],
   "education": [
