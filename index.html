@@ -234,12 +234,29 @@
     .feature p  { margin: 0; color: var(--muted); font-size: 15px; }
 
     /* ─── stat ──────────────────────────────────────────────────────── */
-    .stat .stat-num {
-      font-family: var(--font-display); font-size: clamp(56px, 8vw, 96px);
-      line-height: 0.95; letter-spacing: -0.04em; color: var(--accent); font-weight: 600;
+    .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-lg) 0; }
+    .stat { position: relative; padding: 6px 28px 6px 24px; border-left: 1px solid var(--border); }
+    .stat::before {
+      content: ''; position: absolute; left: -1px; top: 0;
+      width: 1px; height: 0; background: var(--accent);
+      transition: height 0.4s ease;
     }
-    .stat .stat-label { color: var(--muted); font-size: 14px; margin-top: 8px; max-width: 24ch; }
+    .stat:hover::before { height: 100%; }
+    .stat .stat-kicker {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+      transition: color 0.25s ease;
+    }
+    .stat:hover .stat-kicker { color: var(--accent); }
+    .stat .stat-num {
+      font-family: var(--font-display); font-size: clamp(44px, 5vw, 80px);
+      line-height: 0.95; letter-spacing: -0.04em; color: var(--accent); font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat .stat-label { color: var(--muted); font-size: 13px; line-height: 1.55; margin-top: 12px; max-width: 24ch; }
     .stat .stat-unit  { font-size: 0.5em; opacity: 0.7; margin-left: 2px; }
+    @media (max-width: 1100px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px)  { .stats-row { grid-template-columns: 1fr; } .stat { padding-left: 18px; } }
 
     /* ─── pill / tag ────────────────────────────────────────────────── */
     .pill {
@@ -281,6 +298,34 @@
       .log-row .pull { text-align: left; }
       .log-row .org-logo { flex-direction: row; align-items: center; justify-content: flex-start; }
       .log-row .org-logo .org-name { text-align: left; }
+    }
+
+    /* ─── experience rail: ghost year + featured image, scroll-driven ── */
+    .exp-split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--gap-2xl); align-items: start; }
+    .exp-split .log-row { grid-template-columns: 104px minmax(0, 1fr) 110px; gap: var(--gap-md); }
+    .exp-rail { position: sticky; top: 88px; }
+    .exp-ghost-year {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(110px, 12vw, 170px); line-height: 0.9; letter-spacing: -0.05em;
+      color: var(--fg); opacity: 0.07; user-select: none;
+      font-variant-numeric: tabular-nums; transition: opacity 0.35s ease;
+    }
+    .exp-rail-img {
+      margin-top: -30px; border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid var(--border); aspect-ratio: 4 / 3; background: var(--surface);
+      transition: opacity 0.35s ease;
+    }
+    .exp-rail-img.hidden { opacity: 0; }
+    .exp-rail-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .exp-rail-caption {
+      margin: 10px 0 0; font-family: var(--font-mono); font-size: 11px;
+      color: var(--muted); letter-spacing: 0.03em; min-height: 16px;
+      transition: opacity 0.35s ease;
+    }
+    @media (max-width: 960px) {
+      .exp-split { grid-template-columns: 1fr; }
+      .exp-rail { display: none; }
+      .exp-split .log-row { grid-template-columns: 1fr; }
     }
 
     /* ─── image placeholder ─────────────────────────────────────────── */
@@ -513,15 +558,28 @@
     [data-theme="light"] .gh-cell-3 { fill: #30a14e; }
     [data-theme="light"] .gh-cell-4 { fill: #216e39; }
 
-    /* ═══ CUSTOM: company / institution logo strip ════════════════════ */
-    .logo-strip { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-lg) var(--gap-xl); }
-    .logo-strip img {
-      height: 28px; width: auto; opacity: 0.55;
+    /* ═══ CUSTOM: company / institution logo marquee ══════════════════ */
+    .logo-marquee {
+      overflow: hidden; margin-top: var(--gap-xl);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+    .logo-marquee-track { display: flex; width: max-content; animation: logo-scroll 36s linear infinite; }
+    .logo-marquee:hover .logo-marquee-track { animation-play-state: paused; }
+    .logo-set { display: flex; align-items: center; gap: var(--gap-2xl); padding-right: var(--gap-2xl); }
+    .logo-set img {
+      height: 30px; width: auto; opacity: 0.55;
       filter: grayscale(1) contrast(0.9);
       transition: opacity 0.2s ease, filter 0.2s ease;
     }
-    .logo-strip img:hover { opacity: 1; filter: grayscale(0.3) contrast(1); }
-    @media (max-width: 720px) { .logo-strip { gap: var(--gap-md) var(--gap-lg); } .logo-strip img { height: 24px; } }
+    .logo-set img:hover { opacity: 1; filter: grayscale(0.3) contrast(1); }
+    /* content slides from left edge to the right for a rightward drift */
+    @keyframes logo-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .logo-marquee-track { animation: none; width: auto; flex-wrap: wrap; }
+      .logo-marquee { mask-image: none; -webkit-mask-image: none; }
+    }
+    @media (max-width: 720px) { .logo-set img { height: 24px; } .logo-set { gap: var(--gap-xl); padding-right: var(--gap-xl); } }
 
     /* ═══ CUSTOM: active nav link ════════════════════════════════════ */
     .topnav nav a { position: relative; padding-bottom: 2px; }
@@ -818,26 +876,65 @@
     <section class="section" data-od-id="stats">
       <div class="container">
         <p class="eyebrow" style="margin-bottom: 40px;">By the numbers</p>
-        <div class="grid-3" id="stats-grid">
+        <div class="stats-row" id="stats-grid">
           <div class="stat">
+            <div class="stat-kicker">Career</div>
             <div class="stat-num num">10<span class="stat-unit">+</span></div>
             <p class="stat-label">years in infrastructure finance — from solar assets to nuclear energy.</p>
           </div>
           <div class="stat">
+            <div class="stat-kicker">Open source</div>
             <div class="stat-num num">150<span class="stat-unit">+</span></div>
             <p class="stat-label">GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps.</p>
           </div>
           <div class="stat">
+            <div class="stat-kicker">Graduate degrees</div>
             <div class="stat-num num">2</div>
-            <p class="stat-label">graduate degrees — Master of Law (Osgoode) and Master of Finance (York University).</p>
+            <p class="stat-label">Master of Law (Osgoode) and Master of Finance (York University).</p>
           </div>
           <div class="stat">
+            <div class="stat-kicker">Undergraduate</div>
             <div class="stat-num num">1</div>
-            <p class="stat-label">undergraduate degree — BBA from York University.</p>
+            <p class="stat-label">BBA from York University, Schulich School of Business.</p>
           </div>
           <div class="stat">
+            <div class="stat-kicker">Certification</div>
             <div class="stat-num num">1</div>
-            <p class="stat-label">professional certification — Software Engineering at BrainStation.</p>
+            <p class="stat-label">Software Engineering at BrainStation.</p>
+          </div>
+        </div>
+        <div class="logo-marquee" aria-label="Selected organizations">
+          <div class="logo-marquee-track">
+            <div class="logo-set">
+              <img src="assets/logos/aimco.png" alt="AIMCo" loading="lazy">
+              <img src="assets/logos/greystone.png" alt="Greystone Managed Investments" loading="lazy">
+              <img src="assets/logos/scotiabank.png" alt="Scotiabank" loading="lazy">
+              <img src="assets/logos/cib.png" alt="Canada Infrastructure Bank" loading="lazy">
+              <img src="assets/logos/shopify.png" alt="Shopify" loading="lazy">
+              <img src="assets/logos/schulich.png" alt="Schulich School of Business" loading="lazy">
+              <img src="assets/logos/york.png" alt="York University" loading="lazy">
+              <img src="assets/logos/enercare.png" alt="Enercare" loading="lazy">
+              <img src="assets/logos/opg.png" alt="Ontario Power Generation" loading="lazy">
+              <img src="assets/logos/hkbu.png" alt="Hong Kong Baptist University" loading="lazy">
+              <img src="assets/logos/conflux.png" alt="Conflux" loading="lazy">
+              <img src="assets/logos/alephium.png" alt="Alephium" loading="lazy">
+              <img src="assets/logos/uniswap-foundation.png" alt="Uniswap Foundation" loading="lazy">
+            </div>
+            <div class="logo-set" aria-hidden="true">
+              <img src="assets/logos/aimco.png" alt="" loading="lazy">
+              <img src="assets/logos/greystone.png" alt="" loading="lazy">
+              <img src="assets/logos/scotiabank.png" alt="" loading="lazy">
+              <img src="assets/logos/cib.png" alt="" loading="lazy">
+              <img src="assets/logos/shopify.png" alt="" loading="lazy">
+              <img src="assets/logos/schulich.png" alt="" loading="lazy">
+              <img src="assets/logos/york.png" alt="" loading="lazy">
+              <img src="assets/logos/enercare.png" alt="" loading="lazy">
+              <img src="assets/logos/opg.png" alt="" loading="lazy">
+              <img src="assets/logos/hkbu.png" alt="" loading="lazy">
+              <img src="assets/logos/conflux.png" alt="" loading="lazy">
+              <img src="assets/logos/alephium.png" alt="" loading="lazy">
+              <img src="assets/logos/uniswap-foundation.png" alt="" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
@@ -883,18 +980,6 @@
             <span class="tag">Blockchain</span><span class="tag">Financial Modelling</span><span class="tag">Agent Harnesses</span>
           </div>
         </div>
-        <div>
-          <p class="eyebrow">Selected organizations</p>
-          <div class="logo-strip" id="logo-strip">
-            <img src="assets/logos/aimco.png" alt="AIMCo" loading="lazy">
-            <img src="assets/logos/td-greystone.png" alt="TD Greystone" loading="lazy">
-            <img src="assets/logos/cib.png" alt="Canada Infrastructure Bank" loading="lazy">
-            <img src="assets/logos/shopify.png" alt="Shopify" loading="lazy">
-            <img src="assets/logos/schulich.png" alt="Schulich School of Business" loading="lazy">
-            <img src="assets/logos/enercare.png" alt="Enercare" loading="lazy">
-            <img src="assets/logos/opg.png" alt="Ontario Power Generation" loading="lazy">
-          </div>
-        </div>
       </div>
     </section>
 
@@ -912,6 +997,7 @@
           <button class="filter-btn" data-exp="volunteer" aria-pressed="false">Volunteer</button>
           <button class="filter-btn" data-exp="internships" aria-pressed="false">Internships</button>
         </div>
+        <div class="exp-split">
         <div id="experience-list">
           <article class="log-row">
             <span class="meta">2026 — Now</span>
@@ -967,9 +1053,15 @@
               <h3>Analyst — Investments, Infrastructure</h3>
               <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">Fundraising and acquisition of solar assets (>50 MW). Transactions across Europe, US wind, UK airports.</p>
             </div>
-            <span class="pull meta">TD Greystone</span>
+            <span class="pull meta">Greystone</span>
           </article>
         </div>
+        <aside class="exp-rail" id="exp-rail" aria-hidden="true">
+          <div class="exp-ghost-year" id="exp-ghost-year">2026</div>
+          <div class="exp-rail-img hidden" id="exp-rail-img"><img id="exp-rail-photo" src="" alt=""></div>
+          <p class="exp-rail-caption" id="exp-rail-caption"></p>
+        </aside>
+        </div><!-- /exp-split -->
       </div>
     </section>
 
@@ -1297,6 +1389,7 @@
           if (statsGrid) {
             statsGrid.innerHTML = data.stats.map(s => `
               <div class="stat">
+                ${s.kicker ? `<div class="stat-kicker">${s.kicker}</div>` : ''}
                 <div class="stat-num num">${s.value}</div>
                 <p class="stat-label">${s.label}</p>
               </div>`).join('');
@@ -1308,16 +1401,19 @@
           const hl = e.highlights ? `<div class="highlights">${e.highlights.map(h =>
             `<img src="${h.image}" alt="${h.caption}" data-caption="${h.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${h.caption}" data-lb-trigger>`
           ).join('')}</div>` : '';
-          return `<article class="log-row">
+          const orgName = e.orgShort || e.org;
+          const railYear = (e.date.match(/\d{4}/) || [''])[0];
+          const railImg = (e.highlights && e.highlights.length) ? e.highlights[0].image : '';
+          const railCap = railImg ? e.highlights[0].caption : '';
+          return `<article class="log-row" data-year="${railYear}" data-img="${railImg}" data-caption="${railCap}">
             <span class="meta">${e.date}</span>
             <div>
-              <h3>${e.title}</h3>
+              <h3>${orgName ? `${orgName} &middot; ` : ''}${e.title}</h3>
               <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">${e.desc}</p>
               ${hl}
             </div>
             <div class="pull org-logo">
               ${e.logo ? `<img src="${e.logo}" alt="${e.org}" loading="lazy">` : ''}
-              <span class="org-name">${e.org}</span>
             </div>
           </article>`;
         }
@@ -1334,8 +1430,47 @@
             btn.classList.add('active');
             btn.setAttribute('aria-pressed', 'true');
             renderExpTab(btn.dataset.exp);
+            railKey = null; updateExpRail();
           });
         });
+
+        // Experience rail — ghost year + featured image follow the row
+        // nearest the upper third of the viewport as the visitor scrolls.
+        const expRail = document.getElementById('exp-rail');
+        const ghostYear = document.getElementById('exp-ghost-year');
+        const railImgWrap = document.getElementById('exp-rail-img');
+        const railPhoto = document.getElementById('exp-rail-photo');
+        const railCaption = document.getElementById('exp-rail-caption');
+        let railKey = null, railSwapTimer = 0;
+        function updateExpRail() {
+          if (!expRail || !ghostYear || expRail.offsetParent === null) return;
+          const rows = document.querySelectorAll('#experience-list .log-row');
+          if (!rows.length) return;
+          const threshold = window.innerHeight * 0.4;
+          let active = rows[0];
+          rows.forEach(r => { if (r.getBoundingClientRect().top <= threshold) active = r; });
+          const key = (active.dataset.year || '') + '|' + (active.dataset.img || '');
+          if (key === railKey) return;
+          railKey = key;
+          ghostYear.textContent = active.dataset.year || '';
+          clearTimeout(railSwapTimer);
+          const img = active.dataset.img || '';
+          if (img) {
+            railImgWrap.classList.add('hidden');
+            railSwapTimer = setTimeout(() => {
+              railPhoto.src = img;
+              railPhoto.alt = active.dataset.caption || '';
+              railCaption.textContent = active.dataset.caption || '';
+              railImgWrap.classList.remove('hidden');
+            }, 180);
+          } else {
+            railImgWrap.classList.add('hidden');
+            railCaption.textContent = '';
+          }
+        }
+        window.addEventListener('scroll', () => requestAnimationFrame(updateExpRail), { passive: true });
+        window.addEventListener('resize', () => requestAnimationFrame(updateExpRail), { passive: true });
+        updateExpRail();
 
         // Featured project preview image — populates the preview frame if a
         // screenshot is provided at projects.featured.image, else shows an

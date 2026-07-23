@@ -28,24 +28,29 @@
   },
   "stats": [
     {
+      "kicker": "Career",
       "value": "10+",
       "label": "years in infrastructure finance — from solar assets to nuclear energy."
     },
     {
+      "kicker": "Open source",
       "value": "150+",
       "label": "GitHub repositories spanning AI agents, blockchain, DeFi, and full-stack apps."
     },
     {
+      "kicker": "Graduate degrees",
       "value": "2",
-      "label": "graduate degrees — Master of Law (Osgoode) and Master of Finance (York University)."
+      "label": "Master of Law (Osgoode) and Master of Finance (York University)."
     },
     {
+      "kicker": "Undergraduate",
       "value": "1",
-      "label": "undergraduate degree — BBA from York University."
+      "label": "BBA from York University, Schulich School of Business."
     },
     {
+      "kicker": "Certification",
       "value": "1",
-      "label": "professional certification — Software Engineering at BrainStation."
+      "label": "Software Engineering at BrainStation."
     }
   ],
   "global": {
@@ -85,13 +90,21 @@
       "title": "Instructor — Fintech: Digital Transformation",
       "desc": "Teaching graduate course FINE6280 on fintech and digital transformation of financial services to 40 students.",
       "org": "York University, Schulich School of Business",
-      "logo": "assets/logos/schulich.png"
+      "orgShort": "York University",
+      "logo": "assets/logos/schulich.png",
+      "highlights": [
+        {
+          "image": "assets/YorkFintechClass.webp",
+          "caption": "With FINE6280 students — Fintech: Digital Transformation at York University"
+        }
+      ]
     },
     {
       "date": "2025 — 2026",
       "title": "Manager — Corporate Development",
       "desc": "M&A and new project development across nuclear, real estate, and renewable energy.",
       "org": "Ontario Power Generation (OPG)",
+      "orgShort": "Ontario Power Generation",
       "logo": "assets/logos/opg.png"
     },
     {
@@ -99,6 +112,7 @@
       "title": "Senior Financial Analyst — Shop Pay & Shop App",
       "desc": "Financial modelling for Shop App marketplace. Built business cases and helped launch the Shop Cash Loyalty Program.",
       "org": "Shopify",
+      "orgShort": "Shopify",
       "logo": "assets/logos/shopify.png",
       "highlights": [
         {
@@ -128,6 +142,7 @@
       "title": "Senior Manager — Green Infrastructure Investments",
       "desc": "Due diligence on equity/debt investments in Canadian infrastructure — transmission, district energy, SMRs.",
       "org": "Canada Infrastructure Bank",
+      "orgShort": "Canada Infrastructure Bank",
       "logo": "assets/logos/cib.png",
       "highlights": [
         {
@@ -141,6 +156,7 @@
       "title": "Senior Manager — Corporate Development",
       "desc": "M&A and acquisition of private companies. Closed a $150M private placement for water heater portfolio.",
       "org": "Enercare",
+      "orgShort": "Enercare",
       "logo": "assets/logos/enercare.png",
       "highlights": [
         {
@@ -158,6 +174,7 @@
       "title": "Senior Analyst — Private Investments, Infrastructure",
       "desc": "Built complex financial models for acquisition underwriting and financing. Managed portfolio companies.",
       "org": "Alberta Investment Management Corp",
+      "orgShort": "Alberta Investment Management Corp",
       "logo": "assets/logos/aimco.png",
       "highlights": [
         {
@@ -191,7 +208,8 @@
       "title": "Analyst — Investments, Infrastructure",
       "desc": "Fundraising and acquisition of solar assets (>50 MW). Transactions across Europe, US wind, UK airports.",
       "org": "TD Greystone",
-      "logo": "assets/logos/td-greystone.png",
+      "orgShort": "Greystone Managed Investments",
+      "logo": "assets/logos/greystone.png",
       "highlights": [
         {
           "image": "assets/Greystone.webp",
@@ -201,6 +219,14 @@
     }
   ],
   "volunteer": [
+    {
+      "date": "Ongoing",
+      "title": "Industry Project Mentor — MSc in Finance (Fintech and Financial Analytics)",
+      "desc": "Mentoring graduate students on industry projects for the MSc in Finance (Fintech and Financial Analytics) programme.",
+      "org": "Hong Kong Baptist University",
+      "orgShort": "HKBU",
+      "logo": "assets/logos/hkbu.png"
+    },
     {
       "date": "2021 — 2024",
       "title": "Director — Treasurer",
