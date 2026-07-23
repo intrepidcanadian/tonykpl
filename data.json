@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "Tony Lau",
-    "tagline": "Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.",
+    "tagline": "Finance professional, software engineer, entrepreneur. I have built skills in M&A due diligence, financial modelling, AI video production, blockchain, fintech and artificial intelligence.",
     "photo": "assets/photos/Tony%20Lau.webp",
     "collage": [
       "assets/events/AntlerResidencySpeakingPortrait.webp",
@@ -74,7 +74,9 @@
       { "city": "Darlington", "country": "Canada", "lat": 43.87, "lng": -78.72, "type": "work", "note": "Nuclear due diligence" },
       { "city": "Saskatoon", "country": "Canada", "lat": 52.13, "lng": -106.67, "type": "work", "note": "Transmission due diligence" },
       { "city": "Prince George", "country": "Canada", "lat": 53.92, "lng": -122.75, "type": "work", "note": "Transmission due diligence" },
-      { "city": "Nashville", "country": "USA", "lat": 36.16, "lng": -86.78, "type": "work", "note": "Solar due diligence" }
+      { "city": "Nashville", "country": "USA", "lat": 36.16, "lng": -86.78, "type": "work", "note": "Solar due diligence" },
+      { "city": "Chiang Mai", "country": "Thailand", "lat": 18.79, "lng": 98.98, "type": "work", "note": "Volunteer work at an orphanage" },
+      { "city": "Turks & Caicos", "country": "Turks and Caicos Islands", "lat": 21.79, "lng": -72.28, "type": "event", "note": "PADI scuba diving certification" }
     ]
   },
   "experience": [

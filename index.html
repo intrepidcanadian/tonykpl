@@ -10,7 +10,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tony Lau · Finance × Technology × Developer Relations</title>
-  <meta name="description" content="Infrastructure investor turned software engineer building at the intersection of finance and technology — AI video production, blockchain infrastructure, and fintech education." />
+  <meta name="description" content="Finance professional, software engineer, entrepreneur — M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence." />
   <meta name="author" content="Tony Lau" />
   <link rel="canonical" href="https://tonykpl.vercel.app/" />
 
@@ -23,7 +23,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Tony Lau" />
   <meta property="og:title" content="Tony Lau · Finance × Technology × Developer Relations" />
-  <meta property="og:description" content="Infrastructure investor turned software engineer building at the intersection of finance and technology — AI video production, blockchain infrastructure, and fintech education." />
+  <meta property="og:description" content="Finance professional, software engineer, entrepreneur — M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence." />
   <meta property="og:url" content="https://tonykpl.vercel.app/" />
   <meta property="og:image" content="https://tonykpl.vercel.app/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -33,7 +33,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Tony Lau · Finance × Technology × Developer Relations" />
-  <meta name="twitter:description" content="Infrastructure investor turned software engineer building at the intersection of finance and technology — AI video production, blockchain infrastructure, and fintech education." />
+  <meta name="twitter:description" content="Finance professional, software engineer, entrepreneur — M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence." />
   <meta name="twitter:image" content="https://tonykpl.vercel.app/assets/og-image.jpg" />
 
   <!-- structured data -->
@@ -46,7 +46,7 @@
     "image": "https://tonykpl.vercel.app/assets/og-image.jpg",
     "email": "mailto:tony.kp.lau@gmail.com",
     "jobTitle": "Software Engineer & Fintech Instructor",
-    "description": "Infrastructure investor turned software engineer building at the intersection of finance and technology.",
+    "description": "Finance professional, software engineer, entrepreneur — M&A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence.",
     "sameAs": [
       "https://github.com/Intrepidcanadian",
       "https://www.linkedin.com/in/tonykpl/"
@@ -493,8 +493,8 @@
     .section-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); margin-right: 12px; }
 
     /* ═══ GitHub contribution graph ═══════════════════════════════════ */
-    .gh-year { margin-bottom: var(--gap-lg); }
-    .gh-year-title { font-family: var(--font-body); font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .gh-year { margin-bottom: 10px; }
+    .gh-year-title { font-family: var(--font-body); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
     .gh-graph-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
     .gh-graph-scroll::-webkit-scrollbar { height: 4px; }
     .gh-graph-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -579,10 +579,18 @@
     .hero > .container { position: relative; z-index: 1; }
 
     /* ═══ CUSTOM: 3D globe section ══════════════════════════════════ */
-    .globe-section { position: relative; overflow: hidden; background: var(--bg); }
+    .globe-section { position: relative; overflow: hidden; background: var(--bg); padding-block: clamp(36px, 4vw, 56px); }
+    .globe-github-split {
+      display: grid; grid-template-columns: 7fr 5fr;
+      gap: var(--gap-xl); align-items: center;
+    }
+    .globe-github-split .gh-col { min-width: 0; }
+    @media (max-width: 960px) {
+      .globe-github-split { grid-template-columns: 1fr; }
+    }
     .globe-wrap {
       position: relative; width: 100%;
-      height: clamp(360px, 56vh, 560px);
+      height: clamp(320px, 46vh, 480px);
       display: grid; place-items: center;
     }
     .globe-wrap canvas { outline: none; }
@@ -594,11 +602,10 @@
     }
     .globe-loaded .globe-loading { opacity: 0; }
     .globe-caption {
-      position: absolute; left: 0; right: 0; bottom: 12px;
       display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;
+      margin-top: 8px;
       font-family: var(--font-mono); font-size: 11px; color: var(--muted);
       letter-spacing: 0.04em; pointer-events: none; text-align: center;
-      padding: 0 var(--gutter);
     }
     .globe-caption .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
     /* atmosphere rim glow behind the particle sphere */
@@ -761,7 +768,7 @@
         <div>
           <p class="eyebrow" data-curtain-avoid>Finance &middot; Technology &middot; Developer Relations</p>
           <h1 data-curtain-avoid>Tony Lau</h1>
-          <p class="lead" data-curtain-avoid style="margin-top: 20px;">Infrastructure investor turned software engineer. I build at the intersection of finance and technology — from AI video production to blockchain infrastructure to fintech education.</p>
+          <p class="lead" data-curtain-avoid style="margin-top: 20px;">Finance professional, software engineer, entrepreneur. I have built skills in M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech and artificial intelligence.</p>
           <div class="hero-cta" data-curtain-avoid style="margin-top: 28px;">
             <a href="#projects" class="btn btn-primary">View projects</a>
             <a href="https://github.com/Intrepidcanadian" class="btn btn-ghost btn-arrow" target="_blank" rel="noopener">GitHub</a>
@@ -776,22 +783,34 @@
 
     <!-- ─── GLOBAL (3D globe) ──────────────────────────────────────── -->
     <section class="section globe-section" data-od-id="global" id="global">
-      <div class="container" style="margin-bottom: var(--gap-md);">
+      <div class="container" style="margin-bottom: var(--gap-sm);">
         <p class="eyebrow" data-reveal>A global builder</p>
-        <h2 data-reveal style="max-width: 20ch;">From Toronto to the world.</h2>
-        <p class="lead" data-reveal style="margin-top: 12px;">Career, hackathons, and community work across four continents. Drag to spin.</p>
+        <h2 data-reveal>From Toronto to the world.</h2>
+        <p class="lead" data-reveal style="margin-top: 8px;">Career, hackathons, and community work across four continents.</p>
       </div>
-      <div class="globe-wrap" id="globe-wrap">
-        <!-- atmosphere rim glow -->
-        <div class="globe-glow" aria-hidden="true"></div>
-        <div class="globe-loading" id="globe-loading">Spinning up the globe&hellip;</div>
-        <div class="globe-tooltip" id="globe-tooltip" role="status" aria-live="polite"></div>
-        <!-- particle-globe canvas mounts here via JS -->
-      </div>
-      <div class="globe-caption" id="globe-caption">
-        <span><span class="dot" style="background: var(--accent);"></span>Home base</span>
-        <span><span class="dot" style="background: var(--success);"></span>Worked</span>
-        <span><span class="dot" style="background: var(--warn);"></span>Events &amp; hackathons</span>
+      <div class="container globe-github-split">
+        <div class="gh-col" id="github">
+          <p class="eyebrow">GitHub Activity</p>
+          <h3 style="margin-bottom: 8px;">Building in public</h3>
+          <p class="lead" style="font-size: 15px; margin-bottom: var(--gap-md);">Contribution history from <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">@intrepidcanadian</a>.</p>
+          <div id="github-activity">
+            <p style="color: var(--muted); font-size: 14px;">Loading contribution data&hellip;</p>
+          </div>
+        </div>
+        <div class="globe-col">
+          <div class="globe-wrap" id="globe-wrap">
+            <!-- atmosphere rim glow -->
+            <div class="globe-glow" aria-hidden="true"></div>
+            <div class="globe-loading" id="globe-loading">Spinning up the globe&hellip;</div>
+            <div class="globe-tooltip" id="globe-tooltip" role="status" aria-live="polite"></div>
+            <!-- particle-globe canvas mounts here via JS -->
+          </div>
+          <div class="globe-caption" id="globe-caption">
+            <span><span class="dot" style="background: var(--accent);"></span>Home base</span>
+            <span><span class="dot" style="background: var(--success);"></span>Worked</span>
+            <span><span class="dot" style="background: var(--warn);"></span>Events &amp; hackathons</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1110,21 +1129,10 @@
     </section>
 
     <!-- ─── GITHUB ACTIVITY ────────────────────────────────────────── -->
-    <section class="section" data-od-id="github" id="github">
-      <div class="container">
-        <p class="eyebrow"><span class="section-num">05</span> GitHub Activity</p>
-        <h2 style="margin-bottom: 8px;">Building in public</h2>
-        <p class="lead" style="margin-bottom: var(--gap-lg);">Contribution history from <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">@intrepidcanadian</a>.</p>
-        <div id="github-activity">
-          <p style="color: var(--muted); font-size: 14px;">Loading contribution data&hellip;</p>
-        </div>
-      </div>
-    </section>
-
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
     <section class="section" data-od-id="education" id="education">
       <div class="container">
-        <p class="eyebrow" data-reveal><span class="section-num">06</span> Education</p>
+        <p class="eyebrow" data-reveal><span class="section-num">05</span> Education</p>
         <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
         <div class="grid-3" data-reveal-group>
           <div class="card">
@@ -1154,7 +1162,7 @@
     <!-- ─── CONTACT (Layout 6 — CTA strip) ────────────────────────── -->
     <section class="section" data-od-id="contact" id="contact" style="text-align: center;">
       <div class="container" style="max-width: 600px;">
-        <p class="eyebrow" data-reveal><span class="section-num">07</span> Contact</p>
+        <p class="eyebrow" data-reveal><span class="section-num">06</span> Contact</p>
         <h2 data-reveal>Let's connect.</h2>
         <p class="lead" style="margin: 16px auto 32px;">Interested in collaborating, chatting, or just saying hello?</p>
         <div style="display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;">
@@ -1490,8 +1498,18 @@
       const container = document.getElementById('github-activity');
       if (!container) return;
 
-      fetch('/api/github-contributions')
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      // Public contributions API (mirrors the graph on the GitHub profile,
+      // including private-contribution counts once "Private contributions"
+      // is enabled in the profile's Contribution settings on github.com).
+      const GH_USER = 'intrepidcanadian';
+      const ghThisYear = new Date().getFullYear();
+      const ghYears = [];
+      for (let y = ghThisYear; y >= 2023; y--) ghYears.push(y);
+      Promise.all(ghYears.map(y =>
+        fetch('https://github-contributions-api.jogruber.de/v4/' + GH_USER + '?y=' + y)
+          .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(d => ({ year: y, total: (d.total && d.total[y]) || 0, days: d.contributions }))
+      ))
         .then(years => {
           container.innerHTML = '';
           years.forEach(yd => container.appendChild(buildYearGraph(yd)));
@@ -1530,8 +1548,8 @@
 
         const grid = buildGrid(data.days, data.year);
         const monthLabels = getMonthLabels(grid);
-        const cellSize = 10, cellGap = 3, step = cellSize + cellGap;
-        const labelH = 20, dayLabelW = 28;
+        const cellSize = 7, cellGap = 2, step = cellSize + cellGap;
+        const labelH = 16, dayLabelW = 24;
         const svgW = dayLabelW + grid.length * step;
         const svgH = labelH + 7 * step;
 
@@ -1548,9 +1566,9 @@
         monthLabels.forEach(l => {
           const t = document.createElementNS(ns, 'text');
           t.setAttribute('x', dayLabelW + l.col * step);
-          t.setAttribute('y', 12);
+          t.setAttribute('y', 10);
           t.setAttribute('fill', 'var(--muted)');
-          t.setAttribute('font-size', 10);
+          t.setAttribute('font-size', 9);
           t.setAttribute('font-family', 'var(--font-mono)');
           t.textContent = l.month;
           svg.appendChild(t);
@@ -1563,7 +1581,7 @@
           t.setAttribute('x', 0);
           t.setAttribute('y', labelH + row * step + cellSize - 1);
           t.setAttribute('fill', 'var(--muted)');
-          t.setAttribute('font-size', 9);
+          t.setAttribute('font-size', 8);
           t.setAttribute('font-family', 'var(--font-mono)');
           t.textContent = label;
           svg.appendChild(t);
@@ -2398,9 +2416,9 @@
       //    A symbol run is appended so currency/code glyphs still thread
       //    through the prose, keeping the finance-meets-code identity.
       const CURTAIN_TEXT =
-        'Infrastructure investor turned software engineer building at the ' +
-        'intersection of finance and technology — AI video production, ' +
-        'blockchain infrastructure, and fintech education across four ' +
+        'Finance professional, software engineer, entrepreneur — M&A due ' +
+        'diligence, financial modelling, AI video production, blockchain, ' +
+        'fintech, and artificial intelligence across four ' +
         'continents. $ ¥ € £ % { } [ ] => ++ == 0 1 2 3 4 5 6 7 8 9 ' +
         'Python TypeScript Solidity Next.js React Node Conflux DeFi SQL ' +
         'agent harnesses financial modelling corporate development M&A.';
