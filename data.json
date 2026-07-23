@@ -559,6 +559,65 @@
   "events": [
     {
       "type": "hosted/speaking",
+      "title": "ETH Toronto — Blockchain Futurist Conference (Speaker)",
+      "location": "Toronto",
+      "date": "July 2026",
+      "desc": "Panel speaker for Conflux Network at The House of ZK — \"The Agentic Economy: Verifiable AI & Autonomous Finance\" at ETH Toronto, Blockchain Futurist Conference.",
+      "image": "assets/events/ETHTorontoFuturist2026Panel.webp",
+      "highlights": [
+        {
+          "image": "assets/events/ETHTorontoFuturist2026Slide.webp",
+          "caption": "Speaker lineup — The Agentic Economy panel at ETH Toronto 2026"
+        }
+      ]
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Indexing Events on Conflux",
+      "location": "Online",
+      "date": "July 2026",
+      "desc": "Tutorial on indexing on-chain events on Conflux eSpace — decoding transfer and approval logs from ConfluxScan and building an event indexer for Ginseng Swap.",
+      "image": "assets/events/ConfluxIndexerTutorial.webp",
+      "url": "https://youtu.be/BceCM2vPPxQ"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "x402 Workshop — Conflux Global Hackfest 2026",
+      "location": "Online",
+      "date": "April 2026",
+      "desc": "Workshop for the Conflux Global Hackfest — x402: Payments for the Agentic Web. Reviving HTTP 402 to give humans, machines, and AI agents a native, stablecoin-based way to pay over the web.",
+      "image": "assets/events/X402WorkshopHackfest2026.webp",
+      "url": "https://www.youtube.com/watch?v=ccKztd5gORw"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Ginseng Swap Bounty Call — SummerHackfest 2025",
+      "location": "Online",
+      "date": "Summer 2025",
+      "desc": "Bounty call for Ginseng Swap at Conflux's Code Without Borders SummerHackfest 2025 — walking builders through the DEX bounties on Conflux eSpace.",
+      "image": "assets/events/GinsengSwapBountyCall2025.webp",
+      "url": "https://www.youtube.com/watch?v=6Zc5AjEhpuo"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Conflux eSpace NFT Tutorial — Minting with Conflux Scaffold",
+      "location": "Online",
+      "date": "August 2024",
+      "desc": "Tutorial on minting a simple NFT on Conflux eSpace — compiling and deploying contracts with Hardhat via Conflux Scaffold, then shipping a React app to testnet.",
+      "image": "assets/events/ConfluxNFTTutorial.webp",
+      "url": "https://www.youtube.com/watch?v=kdKu22ks2DY"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Conflux Scaffold Tutorial — Build and Deploy an App",
+      "location": "Online",
+      "date": "August 2024",
+      "desc": "Tutorial on Conflux Scaffold, the EVM-compatible eSpace dev stack — building and deploying a sample dApp with smart contracts and a Next.js front end.",
+      "image": "assets/events/ConfluxScaffoldTutorial.webp",
+      "url": "https://www.youtube.com/watch?v=ifzQz2Z1dyI"
+    },
+    {
+      "type": "hosted/speaking",
       "title": "WTF is Uniswap v4",
       "location": "George Brown College, Toronto",
       "date": "March 29, 2025",
