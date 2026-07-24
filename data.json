@@ -495,6 +495,7 @@
     "grid": [
       {
         "name": "Alephium Lofi",
+        "key": "L",
         "desc": "Lofi-styled developer documentation for Alephium — devnet setup, token bridge, and tooling walkthroughs with a VHS-era player vibe. Live at alephiumlofi.vercel.app.",
         "tags": [
           "Alephium",
@@ -506,6 +507,7 @@
       },
       {
         "name": "Blockchain Ticketing",
+        "key": "T",
         "desc": "NFT event ticketing dApp — mint and purchase tickets, VIP list, ticket-gated merch, AI-generated ticket art. Demo on YouTube. August 2023.",
         "tags": [
           "React",
@@ -517,6 +519,7 @@
       },
       {
         "name": "To-Do App",
+        "key": "D",
         "desc": "A simple to-do app.",
         "tags": [
           "JavaScript"
@@ -526,6 +529,7 @@
       },
       {
         "name": "Nanobot",
+        "key": "N",
         "desc": "Ultra-lightweight personal AI assistant — 99% fewer lines of code than OpenClaw. Multi-platform chat integration.",
         "tags": [
           "Python",
@@ -536,6 +540,7 @@
       },
       {
         "name": "Pulse520",
+        "key": "P",
         "desc": "Ultra-lightweight personal AI assistant with desktop app. ~4,000 lines delivering core agent functionality.",
         "tags": [
           "Python",
@@ -546,6 +551,7 @@
       },
       {
         "name": "Open Design",
+        "key": "O",
         "desc": "Open-source alternative to Claude Design. 31 skills, 72 design systems, sandboxed preview, multi-format export.",
         "tags": [
           "TypeScript",
@@ -556,6 +562,7 @@
       },
       {
         "name": "Trailer Maker",
+        "key": "M",
         "desc": "Concept-to-theatrical-trailer pipeline. Claude + Seedance 2.0 + ffmpeg with human-in-the-loop review.",
         "tags": [
           "Python",
@@ -566,6 +573,7 @@
       },
       {
         "name": "Learnpedia",
+        "key": "E",
         "desc": "Personal wiki for AI video production — prompts, camera angles, lighting, character consistency, motion.",
         "tags": [
           "Next.js",
@@ -576,6 +584,7 @@
       },
       {
         "name": "Conflux Bounties",
+        "key": "C",
         "desc": "Developer bounties program for the Conflux Network ecosystem. Open-source projects and incentives for builders.",
         "tags": [
           "TypeScript",
@@ -586,6 +595,7 @@
       },
       {
         "name": "Prediction Market Bot",
+        "key": "B",
         "desc": "Automated trading bot for prediction markets with AI-powered analysis and risk management.",
         "tags": [
           "TypeScript",
@@ -596,6 +606,7 @@
       },
       {
         "name": "Schulich FINE6280",
+        "key": "S",
         "desc": "Course materials for graduate-level Fintech: Digital Transformation of Financial Services.",
         "tags": [
           "HTML",
@@ -606,6 +617,7 @@
       },
       {
         "name": "Browser Use",
+        "key": "U",
         "desc": "Making websites accessible for AI agents — Chrome extension and RESTful API for browser automation.",
         "tags": [
           "Python",

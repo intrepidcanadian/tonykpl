@@ -33,6 +33,21 @@ python3 -m http.server 4173
 Then open http://localhost:4173. Any static server works (`npx serve .`,
 `npx http-server`); the port number is arbitrary.
 
+## Media pipeline
+
+All raster images on the site are webp. When adding a photo or screenshot,
+convert it with ffmpeg — max 1200px wide, quality 80:
+
+```bash
+ffmpeg -i source.jpg -vf "scale='min(1200,iw)':-2" -quality 80 assets/events/Name.webp
+```
+
+Portrait photos: crop dead space (ceilings, empty walls) so faces land in the
+card's cover-crop — e.g. `-vf "crop=iw:ih*0.6:0:ih*0.4,scale=..."`. Local
+tinkering videos: h264 mp4, ≤ ~10 MB, 720p, `-movflags +faststart`.
+Videos hosted on YouTube need no local file — cards fall back to the YouTube
+thumbnail automatically.
+
 ## assets/geo/land-mask.png
 
 Baked equirectangular land mask for the particle globe. 2048×1024, white = land,
@@ -62,12 +77,16 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
    ```json
    {
      "name": "Project Name",
+     "key": "X",
      "desc": "One-sentence description of what it does.",
      "tags": ["TypeScript", "AI"],
      "github": "https://github.com/Intrepidcanadian/repo-name",
      "image": "assets/projects/screenshot.png"
    }
    ```
+   `key` (optional) is the keyboard letter that loads the project onto the
+   workstation monitor — pick an unused A–Z/0–9 key (check the other entries).
+   `url` (optional) overrides `github` as the card link (e.g. live demo).
 2. Optionally drop a screenshot into `assets/projects/`
 
 ### Adding an event

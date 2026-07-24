@@ -527,6 +527,25 @@
       position: absolute; top: 20px; right: 24px; background: none; border: none;
       color: #fff; font-size: 32px; cursor: pointer; line-height: 1;
     }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; font-size: 26px; line-height: 1; cursor: pointer;
+      display: grid; place-items: center; transition: background 0.15s ease;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+    .lightbox-nav[hidden] { display: none; }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-counter {
+      color: rgba(255,255,255,0.6); font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: 0.08em; margin-top: 6px; min-height: 14px;
+    }
+    @media (max-width: 720px) {
+      .lightbox-prev { left: 8px; }
+      .lightbox-next { right: 8px; }
+    }
     .lightbox-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
     [data-lb-trigger] { cursor: pointer; }
     [data-lb-trigger]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius); }
@@ -543,7 +562,6 @@
     }
 
     /* ═══ CUSTOM: section numbers ════════════════════════════════════ */
-    .section-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); margin-right: 12px; }
 
     /* ═══ GitHub contribution graph ═══════════════════════════════════ */
     .gh-year { margin-bottom: 10px; }
@@ -565,6 +583,78 @@
     [data-theme="light"] .gh-cell-2 { fill: #40c463; }
     [data-theme="light"] .gh-cell-3 { fill: #30a14e; }
     [data-theme="light"] .gh-cell-4 { fill: #216e39; }
+
+    /* ═══ CUSTOM: workstation — monitor + keyboard project explorer ═══ */
+    .workstation { margin-bottom: var(--gap-2xl); }
+    .ws-monitor {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg) var(--radius-lg) var(--radius) var(--radius);
+      background: color-mix(in oklch, var(--surface) 55%, #000);
+      overflow: hidden; position: relative;
+    }
+    .ws-screen { min-height: 340px; position: relative; padding: clamp(18px, 3vw, 36px); display: grid; }
+    .ws-screen::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
+    }
+    .ws-statusline {
+      border-top: 1px solid var(--border); font-family: var(--font-mono);
+      font-size: 11px; color: var(--muted); padding: 8px 14px;
+      letter-spacing: 0.05em; min-height: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ws-idle {
+      align-self: center; justify-self: center; text-align: center;
+      font-family: var(--font-mono); color: var(--muted); font-size: 13px; line-height: 2.1;
+    }
+    .ws-idle .ws-cursor {
+      display: inline-block; width: 9px; height: 15px; background: var(--accent);
+      vertical-align: -2px; animation: ws-blink 1.1s steps(1) infinite;
+    }
+    @keyframes ws-blink { 50% { opacity: 0; } }
+    .ws-project {
+      display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+      gap: clamp(16px, 3vw, 36px); align-items: center; align-self: center;
+    }
+    .ws-project.no-shot { grid-template-columns: 1fr; }
+    .ws-shot { width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border); }
+    .ws-name { font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 8px; }
+    .ws-desc { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0 0 12px; }
+    .ws-links { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .ws-glitch { animation: ws-glitch 0.16s linear; }
+    @keyframes ws-glitch {
+      25% { transform: translateX(-3px) skewX(-1deg); }
+      75% { transform: translateX(3px) skewX(1deg); }
+    }
+    .ws-keyboard {
+      margin-top: 10px; padding: clamp(8px, 1.4vw, 14px);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      background: var(--surface); display: flex; flex-direction: column; gap: 6px;
+    }
+    .ws-row { display: flex; gap: 6px; justify-content: center; }
+    .keycap {
+      flex: 0 0 auto; width: clamp(28px, 4.4vw, 54px); height: clamp(32px, 4.8vw, 56px);
+      border: 1px solid var(--border); border-bottom-width: 3px; border-radius: 7px;
+      background: var(--bg); color: var(--muted);
+      font-family: var(--font-mono); font-size: 13px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+      cursor: default; user-select: none; padding: 0;
+      transition: transform 0.06s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .keycap-mapped {
+      cursor: pointer; color: var(--fg);
+      border-color: color-mix(in oklch, var(--accent) 45%, var(--border));
+    }
+    .keycap-mapped:hover { border-color: var(--accent); }
+    .keycap .keysub {
+      font-size: 7px; letter-spacing: 0.03em; color: var(--accent);
+      text-transform: uppercase; max-width: 92%; overflow: hidden; white-space: nowrap;
+    }
+    .keycap.pressed, .keycap-mapped:active { transform: translateY(2px); border-bottom-width: 1px; }
+    .keycap-active { background: color-mix(in oklch, var(--accent) 16%, var(--bg)); border-color: var(--accent); }
+    @media (max-width: 720px) {
+      .keycap .keysub { display: none; }
+      .ws-screen { min-height: 250px; }
+    }
 
     /* ═══ CUSTOM: personal photo grid (Other) ═════════════════════════ */
     .other-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -950,7 +1040,7 @@
     <section class="section" data-od-id="about" id="about">
       <div class="container stack" style="gap: 56px;">
         <div style="max-width: 48ch;" data-reveal>
-          <p class="eyebrow"><span class="section-num">01</span> About</p>
+          <p class="eyebrow">About</p>
           <h2>Three domains, one builder.</h2>
           <p class="lead" style="margin-top: 12px;">I bring a finance-meets-tech perspective to everything I do — from corporate development at OPG to teaching fintech at Schulich to building AI agents.</p>
         </div>
@@ -994,7 +1084,7 @@
       <div class="container">
         <div class="row-between" style="margin-bottom: 16px;">
           <div data-reveal>
-            <p class="eyebrow"><span class="section-num">02</span> Experience</p>
+            <p class="eyebrow">Experience</p>
             <h2>Career timeline</h2>
           </div>
         </div>
@@ -1074,7 +1164,7 @@
     <!-- ─── EVENTS ────────────────────────────────────────────────── -->
     <section class="section" data-od-id="events" id="events">
       <div class="container">
-        <p class="eyebrow" data-reveal><span class="section-num">03</span> Events</p>
+        <p class="eyebrow" data-reveal>Events</p>
         <h2 data-reveal style="margin-bottom: 8px;">Developer relations & community</h2>
         <p class="lead" style="margin-bottom: var(--gap-lg);">Hackathons, conferences, and events I've hosted and attended.</p>
 
@@ -1093,9 +1183,20 @@
     <!-- ─── PROJECTS ──────────────────────────────────────────────── -->
     <section class="section" data-od-id="projects" id="projects">
       <div class="container">
-        <p class="eyebrow" data-reveal><span class="section-num">04</span> Projects</p>
+        <p class="eyebrow" data-reveal>Projects</p>
         <h2 data-reveal style="margin-bottom: 8px;">Software & open source</h2>
         <p class="lead" style="margin-bottom: var(--gap-xl);">View all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
+
+        <!-- Workstation — keyboard-driven project explorer (stage 1).
+             Lit keycaps load a project onto the monitor; renders from
+             projects.grid entries that carry a "key" field. -->
+        <div class="workstation" id="workstation">
+          <div class="ws-monitor" id="ws-monitor">
+            <div class="ws-screen" id="ws-screen"></div>
+            <div class="ws-statusline" id="ws-statusline"></div>
+          </div>
+          <div class="ws-keyboard" id="ws-keyboard" role="group" aria-label="Project selector keyboard"></div>
+        </div>
 
         <!-- Two-column split: projects on the left, sticky coat on the right -->
         <div class="projects-coat-split">
@@ -1239,7 +1340,7 @@
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
     <section class="section" data-od-id="education" id="education">
       <div class="container">
-        <p class="eyebrow" data-reveal><span class="section-num">05</span> Education</p>
+        <p class="eyebrow" data-reveal>Education</p>
         <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
         <div class="grid-3" data-reveal-group>
           <div class="card">
@@ -1269,7 +1370,7 @@
     <!-- ─── CONTACT (Layout 6 — CTA strip) ────────────────────────── -->
     <section class="section" data-od-id="contact" id="contact" style="text-align: center;">
       <div class="container" style="max-width: 600px;">
-        <p class="eyebrow" data-reveal><span class="section-num">06</span> Contact</p>
+        <p class="eyebrow" data-reveal>Contact</p>
         <h2 data-reveal>Let's connect.</h2>
         <p class="lead" style="margin: 16px auto 32px;">Interested in collaborating, chatting, or just saying hello?</p>
         <div style="display: flex; justify-content: center; gap: var(--gap-lg); flex-wrap: wrap;">
@@ -1521,6 +1622,85 @@
               </a>`).join('');
           }
         }
+
+        // Workstation — stage 1: lit keycaps load projects onto the monitor;
+        // physical typing works too, and unmapped keys glitch the screen.
+        (function initWorkstation() {
+          const kb = document.getElementById('ws-keyboard');
+          const screen = document.getElementById('ws-screen');
+          const monitor = document.getElementById('ws-monitor');
+          const status = document.getElementById('ws-statusline');
+          if (!kb || !screen || !data.projects?.grid) return;
+          const byKey = {};
+          data.projects.grid.forEach(p => { if (p.key) byKey[p.key.toUpperCase()] = p; });
+          const ROWS = [
+            ['1','2','3','4','5','6','7','8','9','0'],
+            ['Q','W','E','R','T','Y','U','I','O','P'],
+            ['A','S','D','F','G','H','J','K','L'],
+            ['Z','X','C','V','B','N','M']
+          ];
+          kb.innerHTML = ROWS.map(row => `<div class="ws-row">${row.map(k => {
+            const p = byKey[k];
+            return `<button type="button" class="keycap${p ? ' keycap-mapped' : ''}" data-key="${k}"${p ? ` aria-label="Show project: ${p.name}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${p ? `<span class="keysub">${p.name.split(' ')[0]}</span>` : ''}</button>`;
+          }).join('')}</div>`).join('');
+
+          function showIdle() {
+            screen.innerHTML = `<div class="ws-idle">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
+            status.textContent = `${Object.keys(byKey).length} projects mapped — lit keys open them`;
+          }
+          function markActive(key) {
+            kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
+            const cap = kb.querySelector(`.keycap[data-key="${key}"]`);
+            if (cap) cap.classList.add('keycap-active');
+          }
+          function showProject(p, key) {
+            screen.innerHTML = `<div class="ws-project${p.image ? '' : ' no-shot'}">
+              ${p.image ? `<img class="ws-shot" src="${p.image}" alt="${p.name}">` : ''}
+              <div>
+                <h3 class="ws-name">${p.name}</h3>
+                <p class="ws-desc">${p.desc}</p>
+                <div>${(p.tags || []).map(t => `<span class="tag">${t}</span>`).join(' ')}</div>
+                <div class="ws-links">
+                  ${p.github ? `<a class="btn btn-secondary" style="font-size:13px;padding:7px 14px;" href="${p.github}" target="_blank" rel="noopener">Source &nearr;</a>` : ''}
+                  ${p.url ? `<a class="btn btn-primary" style="font-size:13px;padding:7px 14px;" href="${p.url}" target="_blank" rel="noopener">Open &nearr;</a>` : ''}
+                </div>
+              </div>
+            </div>`;
+            status.textContent = `~/projects/${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')} — key ${key}`;
+            markActive(key);
+          }
+          function pressVisual(key) {
+            const cap = kb.querySelector(`.keycap[data-key="${key}"]`);
+            if (!cap) return;
+            cap.classList.add('pressed');
+            setTimeout(() => cap.classList.remove('pressed'), 130);
+          }
+          function press(key) {
+            pressVisual(key);
+            const p = byKey[key];
+            if (p) { showProject(p, key); return; }
+            monitor.classList.remove('ws-glitch');
+            void monitor.offsetWidth;
+            monitor.classList.add('ws-glitch');
+            status.textContent = `key '${key}' is not mapped — lit keys open projects`;
+          }
+          kb.addEventListener('click', (e) => {
+            const cap = e.target.closest('.keycap-mapped');
+            if (cap) press(cap.dataset.key);
+          });
+          document.addEventListener('keydown', (e) => {
+            if (e.metaKey || e.ctrlKey || e.altKey) return;
+            if (!(e.target instanceof Element) || e.target.closest('input, textarea, [contenteditable]')) return;
+            if (document.getElementById('lightbox')?.classList.contains('open')) return;
+            const key = e.key.toUpperCase();
+            if (!/^[A-Z0-9]$/.test(key)) return;
+            // only hijack typing while the workstation is in or near view
+            const r = document.getElementById('workstation').getBoundingClientRect();
+            if (r.bottom < 0 || r.top > window.innerHeight) return;
+            press(key);
+          });
+          showIdle();
+        })();
 
         // Videos — shared card renderer for the software/hackathon grid and
         // the AI-produced grid. Cards accept `thumbnails` (multi-image strip)
@@ -1846,13 +2026,35 @@
       }
     })();
 
-    // Lightbox — keyboard accessible (Enter/Space to open, Escape to close)
-    let lastFocused = null;
+    // Lightbox — keyboard accessible (Enter/Space to open, Escape to close,
+    // arrows / swipe to browse the gallery the trigger belongs to)
+    let lastFocused = null, lbGroup = [], lbIndex = 0;
+    function lbGroupFor(img) {
+      const scope = img.closest('.highlights') || img.closest('.video-extra-shots') || img.closest('.other-grid');
+      return scope ? Array.from(scope.querySelectorAll('[data-lb-trigger]')) : [img];
+    }
+    function renderLightbox() {
+      const t = lbGroup[lbIndex];
+      if (!t) return;
+      const lbImg = document.getElementById('lightbox-img');
+      lbImg.src = t.src;
+      lbImg.alt = t.getAttribute('aria-label') || t.dataset.caption || t.alt || '';
+      document.getElementById('lightbox-caption').textContent = t.dataset.caption || '';
+      const multi = lbGroup.length > 1;
+      document.getElementById('lightbox-counter').textContent = multi ? `${lbIndex + 1} / ${lbGroup.length}` : '';
+      document.getElementById('lightbox-prev').hidden = !multi;
+      document.getElementById('lightbox-next').hidden = !multi;
+    }
+    function stepLightbox(dir) {
+      if (lbGroup.length < 2) return;
+      lbIndex = (lbIndex + dir + lbGroup.length) % lbGroup.length;
+      renderLightbox();
+    }
     function openLightbox(img) {
       const lb = document.getElementById('lightbox');
-      document.getElementById('lightbox-img').src = img.src;
-      document.getElementById('lightbox-img').alt = img.getAttribute('aria-label') || img.dataset.caption || img.alt || '';
-      document.getElementById('lightbox-caption').textContent = img.dataset.caption || '';
+      lbGroup = lbGroupFor(img);
+      lbIndex = Math.max(0, lbGroup.indexOf(img));
+      renderLightbox();
       lb.classList.add('open');
       document.body.classList.add('lb-open');
       lastFocused = img;
@@ -1873,13 +2075,14 @@
       if (t) { e.preventDefault(); openLightbox(t); }
     });
     document.addEventListener('keydown', (e) => {
-      const t = e.target.closest('[data-lb-trigger]');
+      const t = e.target instanceof Element ? e.target.closest('[data-lb-trigger]') : null;
       if (t && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault(); openLightbox(t);
       }
-      if (e.key === 'Escape' && document.getElementById('lightbox').classList.contains('open')) {
-        closeLightbox();
-      }
+      const lbOpen = document.getElementById('lightbox').classList.contains('open');
+      if (e.key === 'Escape' && lbOpen) closeLightbox();
+      if (lbOpen && e.key === 'ArrowLeft') { e.preventDefault(); stepLightbox(-1); }
+      if (lbOpen && e.key === 'ArrowRight') { e.preventDefault(); stepLightbox(1); }
     });
     // Lightbox listeners — the lightbox <div> is defined AFTER this
     // script in the markup, so defer these until the DOM is parsed.
@@ -1891,6 +2094,17 @@
       lb.addEventListener('click', (e) => {
         if (e.target === e.currentTarget) closeLightbox();
       });
+      document.getElementById('lightbox-prev').addEventListener('click', () => stepLightbox(-1));
+      document.getElementById('lightbox-next').addEventListener('click', () => stepLightbox(1));
+      // swipe to browse on touch devices
+      let touchX = null;
+      lb.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 40) stepLightbox(dx < 0 ? 1 : -1);
+        touchX = null;
+      }, { passive: true });
       return true;
     }
     if (document.readyState === 'loading') {
@@ -2989,8 +3203,11 @@
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image" hidden>&#8249;</button>
     <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image" hidden>&#8250;</button>
     <p class="lightbox-caption" id="lightbox-caption"></p>
+    <p class="lightbox-counter" id="lightbox-counter"></p>
   </div>
 </body>
 </html>
