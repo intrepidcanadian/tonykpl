@@ -56,32 +56,214 @@
   "global": {
     "hub": "Toronto",
     "places": [
-      { "city": "Toronto", "country": "Canada", "lat": 43.65, "lng": -79.38, "type": "home", "note": "Home base — OPG, Shopify, CIB, Schulich, ETH Toronto · district energy due diligence · Ontario private equity due diligence: medical isotopes, water heaters, submetering" },
-      { "city": "London", "country": "UK", "lat": 51.51, "lng": -0.13, "type": "work", "note": "AIMCo — airports (London City), rolling stock (Porterbrook), water utilities (Thames Water) due diligence" },
-      { "city": "Hong Kong", "country": "Hong Kong", "lat": 22.32, "lng": 114.17, "type": "work", "note": "SearchAsia internship · HKSTP Ideation · HK FinTech Week · AFF Pitchathon" },
-      { "city": "Singapore", "country": "Singapore", "lat": 1.35, "lng": 103.82, "type": "event", "note": "ETH Global Singapore hackathon" },
-      { "city": "Brussels", "country": "Belgium", "lat": 50.85, "lng": 4.35, "type": "event", "note": "ETH Global Brussels hackathon" },
-      { "city": "San Francisco", "country": "USA", "lat": 37.77, "lng": -122.42, "type": "event", "note": "Buildspace SF" },
-      { "city": "Denver", "country": "USA", "lat": 39.74, "lng": -104.99, "type": "event", "note": "ETHDenver 2025" },
-      { "city": "New York", "country": "USA", "lat": 40.71, "lng": -74.01, "type": "event", "note": "ETHGlobal New York hackathon" },
-      { "city": "Athens", "country": "Greece", "lat": 37.98, "lng": 23.73, "type": "event", "note": "Alephium Hephaestus hackathon" },
-      { "city": "Edmonton", "country": "Canada", "lat": 53.55, "lng": -113.49, "type": "work", "note": "AIMCo HQ — Trans Mountain, Enel wind" },
-      { "city": "Ottawa", "country": "Canada", "lat": 45.42, "lng": -75.70, "type": "work", "note": "Innovation, Science and Economic Development Canada" },
-      { "city": "Tel Aviv", "country": "Israel", "lat": 32.08, "lng": 34.78, "type": "event", "note": "Tel Aviv case competition" },
-      { "city": "Colón", "country": "Panama", "lat": 9.36, "lng": -79.90, "type": "work", "note": "Port investment due diligence" },
-      { "city": "Manzanillo", "country": "Mexico", "lat": 19.05, "lng": -104.32, "type": "work", "note": "Port investment due diligence" },
-      { "city": "Vancouver", "country": "Canada", "lat": 49.28, "lng": -123.12, "type": "work", "note": "Vancouver Wharf port investment due diligence · district energy due diligence" },
-      { "city": "Lisbon", "country": "Portugal", "lat": 38.72, "lng": -9.14, "type": "work", "note": "Natural gas distribution due diligence" },
-      { "city": "Calgary", "country": "Canada", "lat": 51.05, "lng": -114.07, "type": "work", "note": "Power and pipeline due diligence" },
-      { "city": "Houston", "country": "USA", "lat": 29.76, "lng": -95.37, "type": "work", "note": "LNG due diligence" },
-      { "city": "Northwest BC", "country": "Canada", "lat": 54.52, "lng": -128.60, "type": "work", "note": "Hydro facilities due diligence" },
-      { "city": "Markham", "country": "Canada", "lat": 43.86, "lng": -79.34, "type": "work", "note": "District energy due diligence" },
-      { "city": "Darlington", "country": "Canada", "lat": 43.87, "lng": -78.72, "type": "work", "note": "Nuclear due diligence" },
-      { "city": "Saskatoon", "country": "Canada", "lat": 52.13, "lng": -106.67, "type": "work", "note": "Transmission due diligence" },
-      { "city": "Prince George", "country": "Canada", "lat": 53.92, "lng": -122.75, "type": "work", "note": "Transmission due diligence" },
-      { "city": "Nashville", "country": "USA", "lat": 36.16, "lng": -86.78, "type": "work", "note": "Solar due diligence" },
-      { "city": "Chiang Mai", "country": "Thailand", "lat": 18.79, "lng": 98.98, "type": "work", "note": "Volunteer work at an orphanage" },
-      { "city": "Turks & Caicos", "country": "Turks and Caicos Islands", "lat": 21.79, "lng": -72.28, "type": "event", "note": "PADI scuba diving certification" }
+      {
+        "city": "Toronto",
+        "country": "Canada",
+        "lat": 43.65,
+        "lng": -79.38,
+        "type": "home",
+        "note": "Home base — OPG, Shopify, CIB, Schulich, ETH Toronto · district energy due diligence · Ontario private equity due diligence: medical isotopes, water heaters, submetering"
+      },
+      {
+        "city": "London",
+        "country": "UK",
+        "lat": 51.51,
+        "lng": -0.13,
+        "type": "work",
+        "note": "AIMCo — airports (London City), rolling stock (Porterbrook), water utilities (Thames Water) due diligence"
+      },
+      {
+        "city": "Hong Kong",
+        "country": "Hong Kong",
+        "lat": 22.32,
+        "lng": 114.17,
+        "type": "work",
+        "note": "SearchAsia internship · HKSTP Ideation · HK FinTech Week · AFF Pitchathon"
+      },
+      {
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.35,
+        "lng": 103.82,
+        "type": "event",
+        "note": "ETH Global Singapore hackathon"
+      },
+      {
+        "city": "Brussels",
+        "country": "Belgium",
+        "lat": 50.85,
+        "lng": 4.35,
+        "type": "event",
+        "note": "ETH Global Brussels hackathon"
+      },
+      {
+        "city": "San Francisco",
+        "country": "USA",
+        "lat": 37.77,
+        "lng": -122.42,
+        "type": "event",
+        "note": "Buildspace SF"
+      },
+      {
+        "city": "Denver",
+        "country": "USA",
+        "lat": 39.74,
+        "lng": -104.99,
+        "type": "event",
+        "note": "ETHDenver 2025"
+      },
+      {
+        "city": "New York",
+        "country": "USA",
+        "lat": 40.71,
+        "lng": -74.01,
+        "type": "event",
+        "note": "ETHGlobal New York hackathon"
+      },
+      {
+        "city": "Athens",
+        "country": "Greece",
+        "lat": 37.98,
+        "lng": 23.73,
+        "type": "event",
+        "note": "Alephium Hephaestus hackathon"
+      },
+      {
+        "city": "Edmonton",
+        "country": "Canada",
+        "lat": 53.55,
+        "lng": -113.49,
+        "type": "work",
+        "note": "AIMCo HQ — Trans Mountain, Enel wind"
+      },
+      {
+        "city": "Ottawa",
+        "country": "Canada",
+        "lat": 45.42,
+        "lng": -75.7,
+        "type": "work",
+        "note": "Innovation, Science and Economic Development Canada"
+      },
+      {
+        "city": "Tel Aviv",
+        "country": "Israel",
+        "lat": 32.08,
+        "lng": 34.78,
+        "type": "event",
+        "note": "Tel Aviv case competition"
+      },
+      {
+        "city": "Colón",
+        "country": "Panama",
+        "lat": 9.36,
+        "lng": -79.9,
+        "type": "work",
+        "note": "Port investment due diligence"
+      },
+      {
+        "city": "Manzanillo",
+        "country": "Mexico",
+        "lat": 19.05,
+        "lng": -104.32,
+        "type": "work",
+        "note": "Port investment due diligence"
+      },
+      {
+        "city": "Vancouver",
+        "country": "Canada",
+        "lat": 49.28,
+        "lng": -123.12,
+        "type": "work",
+        "note": "Vancouver Wharf port investment due diligence · district energy due diligence"
+      },
+      {
+        "city": "Lisbon",
+        "country": "Portugal",
+        "lat": 38.72,
+        "lng": -9.14,
+        "type": "work",
+        "note": "Natural gas distribution due diligence"
+      },
+      {
+        "city": "Calgary",
+        "country": "Canada",
+        "lat": 51.05,
+        "lng": -114.07,
+        "type": "work",
+        "note": "Power and pipeline due diligence"
+      },
+      {
+        "city": "Houston",
+        "country": "USA",
+        "lat": 29.76,
+        "lng": -95.37,
+        "type": "work",
+        "note": "LNG due diligence"
+      },
+      {
+        "city": "Northwest BC",
+        "country": "Canada",
+        "lat": 54.52,
+        "lng": -128.6,
+        "type": "work",
+        "note": "Hydro facilities due diligence"
+      },
+      {
+        "city": "Markham",
+        "country": "Canada",
+        "lat": 43.86,
+        "lng": -79.34,
+        "type": "work",
+        "note": "District energy due diligence"
+      },
+      {
+        "city": "Darlington",
+        "country": "Canada",
+        "lat": 43.87,
+        "lng": -78.72,
+        "type": "work",
+        "note": "Nuclear due diligence"
+      },
+      {
+        "city": "Saskatoon",
+        "country": "Canada",
+        "lat": 52.13,
+        "lng": -106.67,
+        "type": "work",
+        "note": "Transmission due diligence"
+      },
+      {
+        "city": "Prince George",
+        "country": "Canada",
+        "lat": 53.92,
+        "lng": -122.75,
+        "type": "work",
+        "note": "Transmission due diligence"
+      },
+      {
+        "city": "Nashville",
+        "country": "USA",
+        "lat": 36.16,
+        "lng": -86.78,
+        "type": "work",
+        "note": "Solar due diligence"
+      },
+      {
+        "city": "Chiang Mai",
+        "country": "Thailand",
+        "lat": 18.79,
+        "lng": 98.98,
+        "type": "work",
+        "note": "Volunteer work at an orphanage"
+      },
+      {
+        "city": "Turks & Caicos",
+        "country": "Turks and Caicos Islands",
+        "lat": 21.79,
+        "lng": -72.28,
+        "type": "event",
+        "note": "PADI scuba diving certification"
+      }
     ]
   },
   "experience": [
@@ -386,19 +568,30 @@
       "title": "JPMorgan Digital Identity Hackathon — 3rd Place",
       "desc": "Product Passport: verifiable credentials for bills of lading on zkSync Era using JPMorgan's Onyx SDK. 3rd place overall, November 2023",
       "url": "https://www.youtube.com/watch?v=O5WXx-31A9I",
-      "thumbnails": ["assets/videos/product-passport-1.webp", "assets/videos/product-passport-2.webp", "assets/videos/product-passport-3.webp"]
+      "thumbnails": [
+        "assets/videos/product-passport-1.webp",
+        "assets/videos/product-passport-2.webp",
+        "assets/videos/product-passport-3.webp"
+      ]
     },
     {
       "title": "NEAR Hackathon — Ancestry Records",
       "desc": "Tree: family records stored on NEAR with AI personas, so you can chat with ancestors who passed away. October 2023",
       "url": "https://youtu.be/rUYA5nFbYak",
-      "thumbnails": ["assets/videos/ancestry-tree-1.webp", "assets/videos/ancestry-tree-2.webp", "assets/videos/ancestry-tree-3.webp"]
+      "thumbnails": [
+        "assets/videos/ancestry-tree-1.webp",
+        "assets/videos/ancestry-tree-2.webp",
+        "assets/videos/ancestry-tree-3.webp"
+      ]
     },
     {
       "title": "Build Space Music Video — Bronson Alan",
       "desc": "On camera in Bronson Alan's rap music video, filmed with the buildspace crowd at Gateway Pavilion, San Francisco",
       "url": "https://youtu.be/u9VcT272xl0",
-      "thumbnails": ["assets/videos/buildspace-rap-1.webp", "assets/videos/buildspace-rap-2.webp"]
+      "thumbnails": [
+        "assets/videos/buildspace-rap-1.webp",
+        "assets/videos/buildspace-rap-2.webp"
+      ]
     }
   ],
   "videos": [
@@ -460,14 +653,17 @@
     },
     {
       "title": "AI Agent Making DeFi Transactions",
-      "desc": "ElizaOS agent swapping DAI to USDC on Polygon via Uniswap v3, then browsing Aave markets on its own. March 2025.",
+      "desc": "ElizaOS agent swapping DAI to USDC on Polygon via Uniswap v3, then supplying funds into Aave markets and using Browser-Use to gather data for decision-making. March 2025.",
       "video": "assets/videos/defi-agent-browser.mp4",
       "poster": "assets/videos/defi-agent-browser-poster.webp"
     },
     {
       "title": "Blockchain Mining",
-      "desc": "Building a mining rig from parts — GPU shopping at the computer store, then assembling at home. March 2024.",
-      "images": ["assets/videos/pc-build-home.webp", "assets/videos/pc-build-store.webp"]
+      "desc": "Building a mining rig from parts with friend — shopping for parts at the computer store, then assembling at home. 2020+",
+      "images": [
+        "assets/videos/pc-build-home.webp",
+        "assets/videos/pc-build-store.webp"
+      ]
     }
   ],
   "posts": [
@@ -573,15 +769,6 @@
     },
     {
       "type": "hosted/speaking",
-      "title": "Indexing Events on Conflux",
-      "location": "Online",
-      "date": "July 2026",
-      "desc": "Tutorial on indexing on-chain events on Conflux eSpace — decoding transfer and approval logs from ConfluxScan and building an event indexer for Ginseng Swap.",
-      "image": "assets/events/ConfluxIndexerTutorial.webp",
-      "url": "https://youtu.be/BceCM2vPPxQ"
-    },
-    {
-      "type": "hosted/speaking",
       "title": "x402 Workshop — Conflux Global Hackfest 2026",
       "location": "Online",
       "date": "April 2026",
@@ -597,6 +784,15 @@
       "desc": "Bounty call for Ginseng Swap at Conflux's Code Without Borders SummerHackfest 2025 — walking builders through the DEX bounties on Conflux eSpace.",
       "image": "assets/events/GinsengSwapBountyCall2025.webp",
       "url": "https://www.youtube.com/watch?v=6Zc5AjEhpuo"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Indexing Events on Conflux",
+      "location": "Online",
+      "date": "September 30, 2024",
+      "desc": "Tutorial on indexing on-chain events on Conflux eSpace — decoding transfer and approval logs from ConfluxScan and building an event indexer for Ginseng Swap.",
+      "image": "assets/events/ConfluxIndexerTutorial.webp",
+      "url": "https://youtu.be/BceCM2vPPxQ"
     },
     {
       "type": "hosted/speaking",
@@ -625,9 +821,18 @@
       "image": "assets/events/GeorgeBrownUniswapFoundation.webp",
       "url": "https://luma.com/d86cz5h5",
       "highlights": [
-        { "image": "assets/events/GeorgeBrownUniswapV4GroupPhoto.webp", "caption": "Group photo — wtf is uniswap v4" },
-        { "image": "assets/events/GeorgeBrownUniswapV4BuildHooks.webp", "caption": "Presenting Build Hooks: The Future of DeFi" },
-        { "image": "assets/events/GeorgeBrownUniswapV4AmbassadorIntro.webp", "caption": "Uniswap Foundation Ambassador introduction" }
+        {
+          "image": "assets/events/GeorgeBrownUniswapV4GroupPhoto.webp",
+          "caption": "Group photo — wtf is uniswap v4"
+        },
+        {
+          "image": "assets/events/GeorgeBrownUniswapV4BuildHooks.webp",
+          "caption": "Presenting Build Hooks: The Future of DeFi"
+        },
+        {
+          "image": "assets/events/GeorgeBrownUniswapV4AmbassadorIntro.webp",
+          "caption": "Uniswap Foundation Ambassador introduction"
+        }
       ]
     },
     {
@@ -647,7 +852,10 @@
       "image": "assets/events/33BloorUniswapFoundation.webp",
       "url": "https://luma.com/asd9qwpp",
       "highlights": [
-        { "image": "assets/events/33BloorUniswapBuilderGroupPhoto.webp", "caption": "Builder session group photo — 33 Bloor" }
+        {
+          "image": "assets/events/33BloorUniswapBuilderGroupPhoto.webp",
+          "caption": "Builder session group photo — 33 Bloor"
+        }
       ]
     },
     {
@@ -658,8 +866,14 @@
       "desc": "Hosted and spoke at a panel interview at Blockchain Tuesdays, a community gathering for blockchain in Toronto.",
       "image": "assets/events/BlockchainTuesdayPanelInterview.webp",
       "highlights": [
-        { "image": "assets/events/BlockchainTuesdayMarch2025Presenting.webp", "caption": "Presenting at Blockchain Tuesdays — March 2025" },
-        { "image": "assets/events/BlockchainTuesdayMarch2025Presenters.webp", "caption": "Presenters at Blockchain Tuesdays" }
+        {
+          "image": "assets/events/BlockchainTuesdayMarch2025Presenting.webp",
+          "caption": "Presenting at Blockchain Tuesdays — March 2025"
+        },
+        {
+          "image": "assets/events/BlockchainTuesdayMarch2025Presenters.webp",
+          "caption": "Presenters at Blockchain Tuesdays"
+        }
       ]
     },
     {
@@ -678,7 +892,10 @@
       "desc": "Pitched Ginseng Swap on the Pitchathon stage at the Asian Financial Forum's InnoVenture Salon.",
       "image": "assets/events/AFFPitchathonOnStage.webp",
       "highlights": [
-        { "image": "assets/events/AFFPitchathonGinsengSwapPitch.webp", "caption": "Ginseng Swap pitch at the AFF Pitchathon" }
+        {
+          "image": "assets/events/AFFPitchathonGinsengSwapPitch.webp",
+          "caption": "Ginseng Swap pitch at the AFF Pitchathon"
+        }
       ]
     },
     {
@@ -689,7 +906,10 @@
       "desc": "Exhibited Ginseng Swap — swap & remit on stablecoin rails — at the FintechHK Start-up Salon (HKTDC).",
       "image": "assets/events/FintechHKStartupSalonBoothTony.webp",
       "highlights": [
-        { "image": "assets/events/FintechHKStartupSalonBooth.webp", "caption": "Ginseng Swap booth at the FintechHK Start-up Salon" }
+        {
+          "image": "assets/events/FintechHKStartupSalonBooth.webp",
+          "caption": "Ginseng Swap booth at the FintechHK Start-up Salon"
+        }
       ]
     },
     {
@@ -700,8 +920,14 @@
       "desc": "Founder in Antler Canada's Toronto residency — built and pitched Ginseng Swap through the cohort.",
       "image": "assets/events/AntlerResidencySpeaking.webp",
       "highlights": [
-        { "image": "assets/events/AntlerResidencyCohort.webp", "caption": "Antler Toronto cohort" },
-        { "image": "assets/events/AntlerResidencyNetworking.webp", "caption": "Networking at Antler" }
+        {
+          "image": "assets/events/AntlerResidencyCohort.webp",
+          "caption": "Antler Toronto cohort"
+        },
+        {
+          "image": "assets/events/AntlerResidencyNetworking.webp",
+          "caption": "Networking at Antler"
+        }
       ]
     },
     {
@@ -712,7 +938,10 @@
       "desc": "Attended ETHDenver 2025 — the world's largest web3 #BUIDLathon.",
       "image": "assets/events/ETHDenver2025BuidlerBadge.webp",
       "highlights": [
-        { "image": "assets/events/ETHDenver2025RunningClub.webp", "caption": "Morning run with the running club, Denver" }
+        {
+          "image": "assets/events/ETHDenver2025RunningClub.webp",
+          "caption": "Morning run with the running club, Denver"
+        }
       ]
     },
     {
@@ -723,7 +952,10 @@
       "desc": "Attended Hong Kong FinTech Week 2024 — fintech, digital assets, and web3 across the Asia-Pacific ecosystem.",
       "image": "assets/events/HKFintechWeek2024Entrance.webp",
       "highlights": [
-        { "image": "assets/events/HKFintechWeek2024ConfluxBooth.webp", "caption": "Conflux booth at HK FinTech Week" }
+        {
+          "image": "assets/events/HKFintechWeek2024ConfluxBooth.webp",
+          "caption": "Conflux booth at HK FinTech Week"
+        }
       ]
     },
     {
@@ -734,8 +966,14 @@
       "desc": "Hacked at ETHGlobal Singapore at Marina Bay Sands — another ETHGlobal hackathon in the books.",
       "image": "assets/events/ETHGlobalSingapore2024MBS.webp",
       "highlights": [
-        { "image": "assets/events/ETHGlobalSingapore2024Queue.webp", "caption": "Hacker check-in at ETHGlobal Singapore" },
-        { "image": "assets/events/ETHGlobalSingapore2024Night.webp", "caption": "Singapore by night" }
+        {
+          "image": "assets/events/ETHGlobalSingapore2024Queue.webp",
+          "caption": "Hacker check-in at ETHGlobal Singapore"
+        },
+        {
+          "image": "assets/events/ETHGlobalSingapore2024Night.webp",
+          "caption": "Singapore by night"
+        }
       ]
     },
     {
@@ -746,8 +984,14 @@
       "desc": "Six-week builder residency at Buildspace in San Francisco — demoed Ginseng Swap at demo day.",
       "image": "assets/events/BuildspaceS5GinsengSwapDemo.webp",
       "highlights": [
-        { "image": "assets/events/BuildspaceS5GroupPhoto.webp", "caption": "Buildspace S5 group" },
-        { "image": "assets/events/BuildspaceS5PinkCar.webp", "caption": "Obligatory pink car moment" }
+        {
+          "image": "assets/events/BuildspaceS5GroupPhoto.webp",
+          "caption": "Buildspace S5 group"
+        },
+        {
+          "image": "assets/events/BuildspaceS5PinkCar.webp",
+          "caption": "Obligatory pink car moment"
+        }
       ]
     },
     {
@@ -758,8 +1002,14 @@
       "desc": "Hacked at ETHGlobal Brussels at The EGG — building at the intersection of blockchain and real-world applications.",
       "image": "assets/events/ETHGlobalBrussels2024Hacking.webp",
       "highlights": [
-        { "image": "assets/events/ETHGlobalBrussels2024Stage.webp", "caption": "ETHGlobal Brussels main stage" },
-        { "image": "assets/events/ETHGlobalBrussels2024Friend.webp", "caption": "With a fellow hacker" }
+        {
+          "image": "assets/events/ETHGlobalBrussels2024Stage.webp",
+          "caption": "ETHGlobal Brussels main stage"
+        },
+        {
+          "image": "assets/events/ETHGlobalBrussels2024Friend.webp",
+          "caption": "With a fellow hacker"
+        }
       ]
     },
     {
@@ -770,7 +1020,10 @@
       "desc": "Attended the Alephium Hephaestus hackathon in Greece as a developer ambassador.",
       "image": "assets/events/AlephiumHephaestusGreece.webp",
       "highlights": [
-        { "image": "assets/events/AlephiumHephaestusGreeceGroup.webp", "caption": "Hephaestus hackathon group photo" }
+        {
+          "image": "assets/events/AlephiumHephaestusGreeceGroup.webp",
+          "caption": "Hephaestus hackathon group photo"
+        }
       ]
     },
     {
@@ -781,7 +1034,10 @@
       "desc": "Attended Shopify Summit 2024 and Editions.Dev — celebrating 20 years of Shopify.",
       "image": "assets/events/ShopifySummit2024.webp",
       "highlights": [
-        { "image": "assets/events/ShopifyEditionsDev.webp", "caption": "Editions.Dev with a friend" }
+        {
+          "image": "assets/events/ShopifyEditionsDev.webp",
+          "caption": "Editions.Dev with a friend"
+        }
       ]
     },
     {
@@ -792,8 +1048,14 @@
       "desc": "Hacked at ETHGlobal New York — a weekend of building with the Ethereum ecosystem.",
       "image": "assets/events/ETHGlobalNewYorkSign.webp",
       "highlights": [
-        { "image": "assets/events/ETHGlobalNewYorkHackingHall.webp", "caption": "The hacking hall at ETHGlobal New York" },
-        { "image": "assets/events/ETHGlobalNewYorkWorkshop.webp", "caption": "Workshop room — ETHGlobal New York" }
+        {
+          "image": "assets/events/ETHGlobalNewYorkHackingHall.webp",
+          "caption": "The hacking hall at ETHGlobal New York"
+        },
+        {
+          "image": "assets/events/ETHGlobalNewYorkWorkshop.webp",
+          "caption": "Workshop room — ETHGlobal New York"
+        }
       ]
     },
     {

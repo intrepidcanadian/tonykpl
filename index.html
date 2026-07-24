@@ -9,7 +9,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tony Lau · Finance × Technology × Developer Relations</title>
+  <title>Tony Lau · Finance × Technology × Developer Relations × Software Engineering</title>
   <meta name="description" content="Finance professional, software engineer, entrepreneur — M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence." />
   <meta name="author" content="Tony Lau" />
   <link rel="canonical" href="https://tonykpl.vercel.app/" />
@@ -22,17 +22,17 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Tony Lau" />
-  <meta property="og:title" content="Tony Lau · Finance × Technology × Developer Relations" />
+  <meta property="og:title" content="Tony Lau · Finance × Technology × Developer Relations × Software Engineering" />
   <meta property="og:description" content="Finance professional, software engineer, entrepreneur — M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence." />
   <meta property="og:url" content="https://tonykpl.vercel.app/" />
   <meta property="og:image" content="https://tonykpl.vercel.app/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Tony Lau — Finance, Technology & Developer Relations" />
+  <meta property="og:image:alt" content="Tony Lau — Finance, Technology, Developer Relations & Software Engineering" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tony Lau · Finance × Technology × Developer Relations" />
+  <meta name="twitter:title" content="Tony Lau · Finance × Technology × Developer Relations × Software Engineering" />
   <meta name="twitter:description" content="Finance professional, software engineer, entrepreneur — M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech, and artificial intelligence." />
   <meta name="twitter:image" content="https://tonykpl.vercel.app/assets/og-image.jpg" />
 
@@ -566,28 +566,28 @@
     [data-theme="light"] .gh-cell-3 { fill: #30a14e; }
     [data-theme="light"] .gh-cell-4 { fill: #216e39; }
 
-    /* ═══ CUSTOM: company / institution logo marquee ══════════════════ */
-    .logo-marquee {
-      overflow: hidden; margin-top: var(--gap-xl);
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    /* ═══ CUSTOM: company / institution logo wall ═════════════════════ */
+    .logo-wall-label {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin: var(--gap-xl) 0 14px;
     }
-    .logo-marquee-track { display: flex; width: max-content; animation: logo-scroll 36s linear infinite; }
-    .logo-marquee:hover .logo-marquee-track { animation-play-state: paused; }
-    .logo-set { display: flex; align-items: center; gap: var(--gap-2xl); padding-right: var(--gap-2xl); }
-    .logo-set img {
-      height: 30px; width: auto; opacity: 0.55;
-      filter: grayscale(1) contrast(0.9);
-      transition: opacity 0.2s ease, filter 0.2s ease;
+    .logo-wall {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
     }
-    .logo-set img:hover { opacity: 1; filter: grayscale(0.3) contrast(1); }
-    /* content slides from left edge to the right for a rightward drift */
-    @keyframes logo-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-    @media (prefers-reduced-motion: reduce) {
-      .logo-marquee-track { animation: none; width: auto; flex-wrap: wrap; }
-      .logo-marquee { mask-image: none; -webkit-mask-image: none; }
+    .logo-wall .logo-tile {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      height: 64px; display: grid; place-items: center; padding: 12px 18px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    @media (max-width: 720px) { .logo-set img { height: 24px; } .logo-set { gap: var(--gap-xl); padding-right: var(--gap-xl); } }
+    .logo-wall .logo-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+    .logo-wall .logo-tile img { max-height: 30px; max-width: 100%; width: auto; object-fit: contain; display: block; }
+    @media (max-width: 720px) {
+      .logo-wall { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+      .logo-wall .logo-tile { height: 54px; padding: 10px 14px; }
+      .logo-wall .logo-tile img { max-height: 24px; }
+    }
 
     /* ═══ CUSTOM: active nav link ════════════════════════════════════ */
     .topnav nav a { position: relative; padding-bottom: 2px; }
@@ -832,7 +832,7 @@
       <canvas class="hero-curtain" id="hero-curtain" aria-hidden="true"></canvas>
       <div class="container hero-split">
         <div>
-          <p class="eyebrow" data-curtain-avoid>Finance &middot; Technology &middot; Developer Relations</p>
+          <p class="eyebrow" data-curtain-avoid>Finance &middot; Technology &middot; Developer Relations &middot; Software Engineering</p>
           <h1 data-curtain-avoid>Tony Lau</h1>
           <p class="lead" data-curtain-avoid style="margin-top: 20px;">Finance professional, software engineer, entrepreneur. I have built skills in M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech and artificial intelligence.</p>
           <div class="hero-cta" data-curtain-avoid style="margin-top: 28px;">
@@ -911,39 +911,21 @@
             <p class="stat-label">Software Engineering at BrainStation.</p>
           </div>
         </div>
-        <div class="logo-marquee" aria-label="Selected organizations">
-          <div class="logo-marquee-track">
-            <div class="logo-set">
-              <img src="assets/logos/aimco.png" alt="AIMCo" loading="lazy">
-              <img src="assets/logos/greystone.png" alt="Greystone Managed Investments" loading="lazy">
-              <img src="assets/logos/scotiabank.png" alt="Scotiabank" loading="lazy">
-              <img src="assets/logos/cib.png" alt="Canada Infrastructure Bank" loading="lazy">
-              <img src="assets/logos/shopify.png" alt="Shopify" loading="lazy">
-              <img src="assets/logos/schulich.png" alt="Schulich School of Business" loading="lazy">
-              <img src="assets/logos/york.png" alt="York University" loading="lazy">
-              <img src="assets/logos/enercare.png" alt="Enercare" loading="lazy">
-              <img src="assets/logos/opg.png" alt="Ontario Power Generation" loading="lazy">
-              <img src="assets/logos/hkbu.png" alt="Hong Kong Baptist University" loading="lazy">
-              <img src="assets/logos/conflux.png" alt="Conflux" loading="lazy">
-              <img src="assets/logos/alephium.png" alt="Alephium" loading="lazy">
-              <img src="assets/logos/uniswap-foundation.png" alt="Uniswap Foundation" loading="lazy">
-            </div>
-            <div class="logo-set" aria-hidden="true">
-              <img src="assets/logos/aimco.png" alt="" loading="lazy">
-              <img src="assets/logos/greystone.png" alt="" loading="lazy">
-              <img src="assets/logos/scotiabank.png" alt="" loading="lazy">
-              <img src="assets/logos/cib.png" alt="" loading="lazy">
-              <img src="assets/logos/shopify.png" alt="" loading="lazy">
-              <img src="assets/logos/schulich.png" alt="" loading="lazy">
-              <img src="assets/logos/york.png" alt="" loading="lazy">
-              <img src="assets/logos/enercare.png" alt="" loading="lazy">
-              <img src="assets/logos/opg.png" alt="" loading="lazy">
-              <img src="assets/logos/hkbu.png" alt="" loading="lazy">
-              <img src="assets/logos/conflux.png" alt="" loading="lazy">
-              <img src="assets/logos/alephium.png" alt="" loading="lazy">
-              <img src="assets/logos/uniswap-foundation.png" alt="" loading="lazy">
-            </div>
-          </div>
+        <p class="logo-wall-label">Selected organizations</p>
+        <div class="logo-wall" aria-label="Selected organizations">
+          <div class="logo-tile"><img src="assets/logos/aimco.png" alt="AIMCo" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/greystone.png" alt="Greystone Managed Investments" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/scotiabank.png" alt="Scotiabank" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/cib.png" alt="Canada Infrastructure Bank" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/shopify.png" alt="Shopify" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/schulich.png" alt="Schulich School of Business" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/york.png" alt="York University" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/enercare.png" alt="Enercare" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/opg.png" alt="Ontario Power Generation" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/hkbu.png" alt="Hong Kong Baptist University" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/conflux.png" alt="Conflux" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/alephium.png" alt="Alephium" loading="lazy"></div>
+          <div class="logo-tile"><img src="assets/logos/uniswap-foundation.png" alt="Uniswap Foundation" loading="lazy"></div>
         </div>
       </div>
     </section>

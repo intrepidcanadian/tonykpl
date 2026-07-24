@@ -19,6 +19,20 @@ portfolio/
                               Public domain — no attribution required. Used by the globe.
 ```
 
+## Running locally
+
+There is no package.json and no build step — the site is a static folder. But you
+can't just double-click `index.html`: the page `fetch()`es `data.json` at load time,
+and browsers block that on `file://`, so all dynamic content (photos, videos, events)
+stays empty. Serve the folder over HTTP instead:
+
+```bash
+python3 -m http.server 4173
+```
+
+Then open http://localhost:4173. Any static server works (`npx serve .`,
+`npx http-server`); the port number is arbitrary.
+
 ## assets/geo/land-mask.png
 
 Baked equirectangular land mask for the particle globe. 2048×1024, white = land,
