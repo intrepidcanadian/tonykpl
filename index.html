@@ -566,6 +566,22 @@
     [data-theme="light"] .gh-cell-3 { fill: #30a14e; }
     [data-theme="light"] .gh-cell-4 { fill: #216e39; }
 
+    /* ═══ CUSTOM: personal photo grid (Other) ═════════════════════════ */
+    .other-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .other-card { margin: 0; }
+    .other-card img {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .other-card img:hover { transform: translateY(-2px); border-color: var(--muted); }
+    .other-card figcaption {
+      margin-top: 8px; font-family: var(--font-mono); font-size: 11px;
+      color: var(--muted); letter-spacing: 0.03em;
+    }
+    @media (max-width: 920px) { .other-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .other-grid { grid-template-columns: 1fr; } }
+
     /* ═══ CUSTOM: company / institution logo wall ═════════════════════ */
     .logo-wall-label {
       font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
@@ -1211,6 +1227,15 @@
     </section>
 
     <!-- ─── GITHUB ACTIVITY ────────────────────────────────────────── -->
+    <!-- ─── OTHER (personal photos) ─────────────────────────────────── -->
+    <section class="section" data-od-id="other" id="other">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Other</p>
+        <h3 style="margin-bottom: var(--gap-md);">Beyond the resume</h3>
+        <div class="other-grid" id="other-grid"></div>
+      </div>
+    </section>
+
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
     <section class="section" data-od-id="education" id="education">
       <div class="container">
@@ -1482,7 +1507,7 @@
           const projGrid = document.getElementById('projects-grid');
           if (projGrid) {
             projGrid.innerHTML = data.projects.grid.map(p => `
-              <a href="${p.github}" class="project-link" target="_blank" rel="noopener">
+              <a href="${p.url || p.github}" class="project-link" target="_blank" rel="noopener">
                 <div class="card">
                   <div class="project-header">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -1556,6 +1581,18 @@
                 </div>
               </div>`;
             }).join('');
+          }
+        }
+
+        // Other — personal photos, click to enlarge in the lightbox
+        if (data.other) {
+          const oGrid = document.getElementById('other-grid');
+          if (oGrid) {
+            oGrid.innerHTML = data.other.map(o => `
+              <figure class="other-card">
+                <img src="${o.image}" alt="${o.caption}" data-caption="${o.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${o.caption}" data-lb-trigger>
+                <figcaption>${o.caption}</figcaption>
+              </figure>`).join('');
           }
         }
 

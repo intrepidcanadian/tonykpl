@@ -472,6 +472,17 @@
     },
     "grid": [
       {
+        "name": "Blockchain Ticketing",
+        "desc": "NFT event ticketing dApp — mint and purchase tickets, VIP list, ticket-gated merch, AI-generated ticket art. Demo on YouTube. August 2023.",
+        "tags": [
+          "React",
+          "Solidity",
+          "NFT"
+        ],
+        "url": "https://youtu.be/ik9hoqqWTk4",
+        "image": "assets/projects/blockchain-ticketing.webp"
+      },
+      {
         "name": "Nanobot",
         "desc": "Ultra-lightweight personal AI assistant — 99% fewer lines of code than OpenClaw. Multi-platform chat integration.",
         "tags": [
@@ -592,6 +603,11 @@
         "assets/videos/buildspace-rap-1.webp",
         "assets/videos/buildspace-rap-2.webp"
       ]
+    },
+    {
+      "title": "Mining Video — Triple Mining with GPUs on Conflux",
+      "desc": "Triple mining on one GPU rig — hashing Conflux, EPK, and KAS simultaneously. August 2024.",
+      "url": "https://youtu.be/-i11m5jzPLc"
     }
   ],
   "videos": [
@@ -664,6 +680,32 @@
         "assets/videos/pc-build-home.webp",
         "assets/videos/pc-build-store.webp"
       ]
+    }
+  ],
+  "other": [
+    {
+      "image": "assets/photos/DragonboatYork.webp",
+      "caption": "Dragon boat racing with the York University team"
+    },
+    {
+      "image": "assets/photos/SkiTrip.webp",
+      "caption": "Cabin ski trip with friends"
+    },
+    {
+      "image": "assets/photos/MFinClass.webp",
+      "caption": "Master of Finance classmates"
+    },
+    {
+      "image": "assets/photos/SchulichClass.webp",
+      "caption": "With Schulich classmates"
+    },
+    {
+      "image": "assets/photos/SchulichApprentice.webp",
+      "caption": "Schulich Apprentice marketing competition"
+    },
+    {
+      "image": "assets/photos/PondResidence.webp",
+      "caption": "Pond Residence — undergrad dorm days at York"
     }
   ],
   "posts": [
@@ -860,21 +902,43 @@
     },
     {
       "type": "hosted/speaking",
-      "title": "Blockchain Tuesday — Panel Interview",
+      "title": "Blockchain Tuesday — Prediction Markets and APIs: Toronto Edition",
       "location": "Toronto",
-      "date": "2025",
-      "desc": "Hosted and spoke at a panel interview at Blockchain Tuesdays, a community gathering for blockchain in Toronto.",
-      "image": "assets/events/BlockchainTuesdayPanelInterview.webp",
-      "highlights": [
-        {
-          "image": "assets/events/BlockchainTuesdayMarch2025Presenting.webp",
-          "caption": "Presenting at Blockchain Tuesdays — March 2025"
-        },
-        {
-          "image": "assets/events/BlockchainTuesdayMarch2025Presenters.webp",
-          "caption": "Presenters at Blockchain Tuesdays"
-        }
-      ]
+      "date": "April 28, 2026",
+      "desc": "Hosted this month's Blockchain Tuesday on prediction markets and APIs for autonomous agents.",
+      "url": "https://luma.com/34ylggsp"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Blockchain Tuesday — Behind the Chain: Stories from Web3 Builders",
+      "location": "Toronto",
+      "date": "August 12, 2025",
+      "desc": "Hosted \"Behind the Chain — Stories from Web3 Builders\": a panel with Jill, a Web3 and fintech developer building for an omni-CDP stablecoin protocol securing $300M+ TVL; Jeff, a Rust blockchain engineer (Circle, Alice Finance, Puffer Finance, Hyperlane); and Ethi, building Venice Fi — an order-book lending platform unifying fragmented BTC/stablecoin liquidity.",
+      "image": "assets/events/BlockchainTuesdayPanelInterview.webp"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Blockchain Tuesday — Decentralized Exchanges",
+      "location": "Toronto",
+      "date": "March 2025",
+      "desc": "Presented on decentralized exchanges at Blockchain Tuesdays, Toronto's community gathering for blockchain.",
+      "image": "assets/events/BlockchainTuesdayMarch2025Presenting.webp"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Blockchain Tuesday — Build a Blockchain AI Agent",
+      "location": "Toronto",
+      "date": "January 28, 2025",
+      "desc": "Hosted \"Build a Blockchain AI Agent\" at Blockchain Tuesdays — a hands-on session on building AI agents that interact with blockchains.",
+      "image": "assets/events/BlockchainTuesdayAIAgent.webp"
+    },
+    {
+      "type": "hosted/speaking",
+      "title": "Blockchain Tuesday — ERC-20 & Interoperable Tokens",
+      "location": "Toronto",
+      "date": "November 26, 2024",
+      "desc": "Presented on ERC-20 and deploying interoperable tokens (omni-tokens) through LayerZero at Blockchain Tuesdays.",
+      "image": "assets/events/BlockchainTuesdayNov2024Presenters.webp"
     },
     {
       "type": "hosted/speaking",
@@ -947,14 +1011,39 @@
     {
       "type": "attended",
       "title": "Hong Kong FinTech Week 2024",
-      "location": "Hong Kong",
-      "date": "November 2024",
-      "desc": "Attended Hong Kong FinTech Week 2024 — fintech, digital assets, and web3 across the Asia-Pacific ecosystem.",
-      "image": "assets/events/HKFintechWeek2024Entrance.webp",
+      "location": "Hong Kong Science and Technology Park, Hong Kong",
+      "date": "October 2024",
+      "desc": "Attended Hong Kong FinTech Week 2024 and the HKSTP Market Discovery Programme — fintech, digital assets, and web3 across the Asia-Pacific ecosystem.",
+      "image": "assets/events/HKSTPGoldenEgg2024.webp",
+      "url": "https://youtu.be/0tAaNATLizk",
       "highlights": [
+        {
+          "image": "assets/events/HKSTPPitch2024.webp",
+          "caption": "Pitching at the HKSTP Market Discovery Programme — October 23, 2024"
+        },
+        {
+          "image": "assets/events/BaiduHQ2024.webp",
+          "caption": "Visiting Baidu headquarters"
+        },
+        {
+          "image": "assets/events/HKFintechWeek2024Entrance.webp",
+          "caption": "Hong Kong FinTech Week entrance"
+        },
         {
           "image": "assets/events/HKFintechWeek2024ConfluxBooth.webp",
           "caption": "Conflux booth at HK FinTech Week"
+        },
+        {
+          "image": "assets/events/JumpstarterIgnitionGala.webp",
+          "caption": "Jumpstarter Ignition Gala — Alibaba Entrepreneurs Fund / HSBC, Hong Kong"
+        },
+        {
+          "image": "assets/events/CVCFCyberport2025.webp",
+          "caption": "CVCF @ Cyberport — November 2025"
+        },
+        {
+          "image": "assets/events/ChainlinkSmartCon.webp",
+          "caption": "Chainlink SmartCon — Hong Kong"
         }
       ]
     },
@@ -1003,6 +1092,10 @@
       "image": "assets/events/ETHGlobalBrussels2024Hacking.webp",
       "highlights": [
         {
+          "image": "assets/events/ETHCCBrussels2024.webp",
+          "caption": "At EthCC — Square Brussels, July 2024"
+        },
+        {
           "image": "assets/events/ETHGlobalBrussels2024Stage.webp",
           "caption": "ETHGlobal Brussels main stage"
         },
@@ -1023,6 +1116,14 @@
         {
           "image": "assets/events/AlephiumHephaestusGreeceGroup.webp",
           "caption": "Hephaestus hackathon group photo"
+        },
+        {
+          "image": "assets/events/AcropolisAthens2024.webp",
+          "caption": "On the Acropolis — Athens, June 2024"
+        },
+        {
+          "image": "assets/events/MultiCallAlephium.webp",
+          "caption": "Multi-Call on Alephium — gasless house-token faucet demo"
         }
       ]
     },
