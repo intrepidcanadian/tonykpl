@@ -1636,8 +1636,9 @@
               const hl = e.highlights ? `<div class="highlights">${e.highlights.map(h =>
                 `<img src="${h.image}" alt="${h.caption}" data-caption="${h.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${h.caption}" data-lb-trigger>`
               ).join('')}</div>` : '';
+              const gallery = JSON.stringify([e.image, ...(e.highlights || []).map(h => h.image)].filter(Boolean));
               return `
-              <div class="card event-card" data-type="${e.type}">
+              <div class="card event-card" data-type="${e.type}" data-gallery='${gallery}'>
                 <div class="event-img">
                   ${e.image
                     ? `<img src="${e.image}" alt="${e.title}" loading="lazy">`
@@ -1658,6 +1659,43 @@
         }
       })
       .catch(() => { /* data.json not found — static HTML works fine */ });
+
+    // ─── Event-card hover gallery peek ────────────────────────────
+    // Cards with extra photos cycle through their gallery while hovered,
+    // then settle back on the main image on mouse-out.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const FADE = 250, DWELL = 1100;
+      document.addEventListener('mouseover', (e) => {
+        const card = e.target.closest('.event-card');
+        if (!card || card._peek) return;
+        let gallery = [];
+        try { gallery = JSON.parse(card.dataset.gallery || '[]'); } catch (_) { return; }
+        if (gallery.length < 2) return;
+        const img = card.querySelector('.event-img img');
+        if (!img) return;
+        const original = img.getAttribute('src');
+        gallery.forEach(s => { const p = new Image(); p.src = s; });
+        img.style.transition = `opacity ${FADE}ms ease`;
+        let i = 0;
+        const step = () => {
+          img.style.opacity = '0';
+          setTimeout(() => {
+            i = (i + 1) % gallery.length;
+            img.src = gallery[i];
+            img.style.opacity = '1';
+          }, FADE);
+        };
+        step();
+        card._peek = setInterval(step, DWELL + FADE);
+        card.addEventListener('mouseleave', function stop() {
+          clearInterval(card._peek); card._peek = null;
+          card.removeEventListener('mouseleave', stop);
+          img.style.opacity = '0';
+          setTimeout(() => { img.src = original; img.style.opacity = '1'; }, FADE);
+        });
+      });
+    })();
 
     // ─── GitHub contribution graph ────────────────────────────────
     (function() {

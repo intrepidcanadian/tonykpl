@@ -282,6 +282,20 @@
       ]
     },
     {
+      "date": "2024 — Now",
+      "title": "Developer Relations Engineer (Part-time)",
+      "desc": "Part-time developer relations for Conflux Network — hackathon workshops and bounties, developer tutorials, and community events from Blockchain Tuesdays in Toronto to conference booths in Hong Kong.",
+      "org": "Conflux Network",
+      "orgShort": "Conflux",
+      "logo": "assets/logos/conflux.png",
+      "highlights": [
+        {
+          "image": "assets/events/ETHTorontoFuturist2026Panel.webp",
+          "caption": "Speaking for Conflux at ETH Toronto — Blockchain Futurist Conference 2026"
+        }
+      ]
+    },
+    {
       "date": "2025 — 2026",
       "title": "Manager — Corporate Development",
       "desc": "M&A and new project development across nuclear, real estate, and renewable energy.",
@@ -410,6 +424,14 @@
       "logo": "assets/logos/hkbu.png"
     },
     {
+      "date": "2024 — 2025",
+      "title": "Ambassador — Uniswap Hook Incubator",
+      "desc": "Completed the Uniswap Hook Incubator (Cohort 1, 2024), then served as a Uniswap Ambassador through 2025 — helping developers build on Uniswap v4 and Unichain and studying Uniswap's evolution across v2, v3, and v4.",
+      "org": "Uniswap Foundation",
+      "orgShort": "Uniswap",
+      "logo": "assets/logos/uniswap-foundation.png"
+    },
+    {
       "date": "2021 — 2024",
       "title": "Director — Treasurer",
       "desc": "Reviewed financials for condo building. Oversaw budgeting and financial reporting for the corporation.",
@@ -472,6 +494,17 @@
     },
     "grid": [
       {
+        "name": "Alephium Lofi",
+        "desc": "Lofi-styled developer documentation for Alephium — devnet setup, token bridge, and tooling walkthroughs with a VHS-era player vibe. Live at alephiumlofi.vercel.app.",
+        "tags": [
+          "Alephium",
+          "Docs",
+          "Web"
+        ],
+        "github": "https://github.com/intrepidcanadian/lofi",
+        "image": "assets/projects/alephium-lofi.webp"
+      },
+      {
         "name": "Blockchain Ticketing",
         "desc": "NFT event ticketing dApp — mint and purchase tickets, VIP list, ticket-gated merch, AI-generated ticket art. Demo on YouTube. August 2023.",
         "tags": [
@@ -481,6 +514,15 @@
         ],
         "url": "https://youtu.be/ik9hoqqWTk4",
         "image": "assets/projects/blockchain-ticketing.webp"
+      },
+      {
+        "name": "To-Do App",
+        "desc": "A simple to-do app.",
+        "tags": [
+          "JavaScript"
+        ],
+        "github": "https://github.com/intrepidcanadian/todo_app",
+        "image": null
       },
       {
         "name": "Nanobot",
@@ -819,6 +861,24 @@
       "url": "https://www.youtube.com/watch?v=ccKztd5gORw"
     },
     {
+      "type": "attended",
+      "title": "Hong Kong FinTech Week 2025",
+      "location": "Hong Kong",
+      "date": "November 2025",
+      "desc": "Attended Hong Kong FinTech Week 2025 — the StartmeupHK Festival's 10th anniversary — along with the Finternet Asia Digital Finance Summit and a return to HKSTP.",
+      "image": "assets/events/HKFintechWeek2025TechX.webp",
+      "highlights": [
+        {
+          "image": "assets/events/Finternet2025.webp",
+          "caption": "Finternet 2025 — Asia Digital Finance Summit"
+        },
+        {
+          "image": "assets/events/HKSTP2025.webp",
+          "caption": "Back at Hong Kong Science and Technology Park — October 2025"
+        }
+      ]
+    },
+    {
       "type": "hosted/speaking",
       "title": "Ginseng Swap Bounty Call — SummerHackfest 2025",
       "location": "Online",
@@ -913,7 +973,7 @@
       "title": "Blockchain Tuesday — Behind the Chain: Stories from Web3 Builders",
       "location": "Toronto",
       "date": "August 12, 2025",
-      "desc": "Hosted \"Behind the Chain — Stories from Web3 Builders\": a panel with Jill, a Web3 and fintech developer building for an omni-CDP stablecoin protocol securing $300M+ TVL; Jeff, a Rust blockchain engineer (Circle, Alice Finance, Puffer Finance, Hyperlane); and Ethi, building Venice Fi — an order-book lending platform unifying fragmented BTC/stablecoin liquidity.",
+      "desc": "A panel with various web3 professionals",
       "image": "assets/events/BlockchainTuesdayPanelInterview.webp"
     },
     {
@@ -1003,6 +1063,10 @@
       "image": "assets/events/ETHDenver2025BuidlerBadge.webp",
       "highlights": [
         {
+          "image": "assets/events/ETHDenver2025ConfluxWorkshop.webp",
+          "caption": "Web3 Familia house — Conflux workshop at ETHDenver 2025"
+        },
+        {
           "image": "assets/events/ETHDenver2025RunningClub.webp",
           "caption": "Morning run with the running club, Denver"
         }
@@ -1054,14 +1118,19 @@
       "date": "September 2024",
       "desc": "Hacked at ETHGlobal Singapore at Marina Bay Sands — another ETHGlobal hackathon in the books.",
       "image": "assets/events/ETHGlobalSingapore2024MBS.webp",
+      "url": "https://youtu.be/pWuCZeaNxj4",
       "highlights": [
+        {
+          "image": "assets/events/ETHGlobalSingapore2024Beanbag.webp",
+          "caption": "Hacking through the night on a beanbag — ETHGlobal Singapore"
+        },
         {
           "image": "assets/events/ETHGlobalSingapore2024Queue.webp",
           "caption": "Hacker check-in at ETHGlobal Singapore"
         },
         {
-          "image": "assets/events/ETHGlobalSingapore2024Night.webp",
-          "caption": "Singapore by night"
+          "image": "assets/events/SingaporeRiverNight.webp",
+          "caption": "By the Singapore River at night"
         }
       ]
     },
@@ -1110,8 +1179,9 @@
       "title": "Alephium Hephaestus Hackathon",
       "location": "Greece",
       "date": "June 2024",
-      "desc": "Attended the Alephium Hephaestus hackathon in Greece as a developer ambassador.",
+      "desc": "Attended the Alephium Hephaestus hackathon in Greece as a developer ambassador. The trip video reached <a href=\"https://x.com/intrepidudon/status/1808834754294300842\" target=\"_blank\" rel=\"noopener\" style=\"color: var(--accent); text-decoration: underline; text-underline-offset: 2px;\">9K+ views on X</a>.",
       "image": "assets/events/AlephiumHephaestusGreece.webp",
+      "url": "https://youtube.com/shorts/9pAIjmOkpz4",
       "highlights": [
         {
           "image": "assets/events/AlephiumHephaestusGreeceGroup.webp",
