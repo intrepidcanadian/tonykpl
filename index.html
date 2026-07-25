@@ -1864,17 +1864,21 @@
           }
           const playIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
           grid.innerHTML = list.map((v, i) => {
-            const single = v.thumbnail || ytThumb(v.url);
+            const single = v.thumbnail || (v.url ? ytThumb(v.url) : null);
             const thumbs = (v.thumbnails && v.thumbnails.length) ? v.thumbnails : (single ? [single] : []);
             const span = cols[i % cols.length];
             const main = thumbs[0];
             const extras = thumbs.slice(1);
-            return `
-            <a href="${v.url}" class="video-link" target="_blank" rel="noopener" style="grid-column: span ${span};">
+            // link-less entries (e.g. app showcases) get no play button and
+            // their main shot opens in the lightbox instead of navigating
+            const mainImg = main ? (v.url
+              ? `<img src="${main}" alt="${v.title}" loading="lazy">`
+              : `<img src="${main}" alt="${v.title}" data-caption="${v.title}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge screenshot from ${v.title}" data-lb-trigger>`) : '';
+            const card = `
               <div class="video-card">
                 <div class="video-thumb">
-                  ${main ? `<img src="${main}" alt="${v.title}" loading="lazy">` : ''}
-                  <div class="play-btn">${playIcon}</div>
+                  ${mainImg}
+                  ${v.url ? `<div class="play-btn">${playIcon}</div>` : ''}
                   ${extras.length ? `<div class="video-extra-shots">${extras.map((t, n) =>
                     `<img src="${t}" alt="${v.title} — screenshot ${n + 2}" data-caption="${v.title}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge screenshot from ${v.title}" data-lb-trigger>`
                   ).join('')}</div>` : ''}
@@ -1883,8 +1887,10 @@
                   <h3>${v.title}</h3>
                   <p>${v.desc}</p>
                 </div>
-              </div>
-            </a>`;
+              </div>`;
+            return v.url
+              ? `<a href="${v.url}" class="video-link" target="_blank" rel="noopener" style="grid-column: span ${span};">${card}</a>`
+              : `<div class="video-link" style="grid-column: span ${span};">${card}</div>`;
           }).join('');
         }
         renderVideoGrid(data.videosSoftware, 'videos-software-grid', [7, 5, 12]);
@@ -2207,7 +2213,7 @@
     // arrows / swipe to browse the gallery the trigger belongs to)
     let lastFocused = null, lbGroup = [], lbIndex = 0;
     function lbGroupFor(img) {
-      const scope = img.closest('.highlights') || img.closest('.video-extra-shots') || img.closest('.other-grid') || img.closest('.edu-shots');
+      const scope = img.closest('.highlights') || img.closest('.video-thumb') || img.closest('.other-grid') || img.closest('.edu-shots');
       return scope ? Array.from(scope.querySelectorAll('[data-lb-trigger]')) : [img];
     }
     function renderLightbox() {

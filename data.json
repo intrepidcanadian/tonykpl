@@ -669,6 +669,14 @@
       "desc": "Hackathon project integrating AI and computer vision, built at Hack for Good in Whitby",
       "url": "https://youtu.be/VXfCibrcDGc",
       "thumbnail": null
+    },
+    {
+      "title": "Translator — Live OCR & Voice Translation App",
+      "desc": "iPhone translator app with real-time camera OCR for signs and hold-to-talk voice translation, EN ↔ ZH",
+      "thumbnails": [
+        "assets/videos/translator-ocr.webp",
+        "assets/videos/translator-voice.webp"
+      ]
     }
   ],
   "videos": [
@@ -767,6 +775,30 @@
     {
       "image": "assets/photos/PondResidence.webp",
       "caption": "Pond Residence — undergrad dorm days at York"
+    },
+    {
+      "image": "assets/photos/HKBuilderDinner.webp",
+      "caption": "Builder community dinner in Hong Kong"
+    },
+    {
+      "image": "assets/photos/HKSunsetHike.webp",
+      "caption": "Sunset hike above Hong Kong"
+    },
+    {
+      "image": "assets/photos/HKRunClubMatcha.webp",
+      "caption": "Post-run matcha with the Hong Kong run club"
+    },
+    {
+      "image": "assets/photos/HKCommunityMeetup.webp",
+      "caption": "Builder meetup in Hong Kong"
+    },
+    {
+      "image": "assets/photos/HKPizzaNight.webp",
+      "caption": "Pizza night with the Hong Kong builder community"
+    },
+    {
+      "image": "assets/photos/VCWorldSummitHK.webp",
+      "caption": "Venture Capital World Summit"
     }
   ],
   "posts": [
@@ -878,6 +910,24 @@
       "desc": "Workshop for the Conflux Global Hackfest — x402: Payments for the Agentic Web. Reviving HTTP 402 to give humans, machines, and AI agents a native, stablecoin-based way to pay over the web.",
       "image": "assets/events/X402WorkshopHackfest2026.webp",
       "video": "https://www.youtube.com/watch?v=ccKztd5gORw"
+    },
+    {
+      "type": "attended",
+      "title": "Consensus Hong Kong",
+      "location": "Hong Kong",
+      "date": "February 2026",
+      "desc": "CoinDesk's Consensus conference in Hong Kong, plus the Global Web3 Dev Con side event where Conflux ran a booth.",
+      "image": "assets/events/ConsensusHKWelcome.webp",
+      "highlights": [
+        {
+          "image": "assets/events/ConsensusHKConfluxBooth.webp",
+          "caption": "Conflux booth"
+        },
+        {
+          "image": "assets/events/ConsensusHKGWDC.webp",
+          "caption": "Global Web3 Dev Con side event"
+        }
+      ]
     },
     {
       "type": "hosted/speaking",
@@ -1046,6 +1096,10 @@
         {
           "image": "assets/events/AFFPitchathonGinsengSwapPitch.webp",
           "caption": "Ginseng Swap pitch at the AFF Pitchathon"
+        },
+        {
+          "image": "assets/events/AFFFintechHKSalonBooth.webp",
+          "caption": "Ginseng Swap booth at the FintechHK Start-up Salon"
         }
       ]
     },
