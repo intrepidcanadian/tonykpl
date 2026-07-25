@@ -137,7 +137,31 @@
     /* ─── layout primitives ─────────────────────────────────────────── */
     .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
     .section { padding-block: clamp(48px, 8vw, var(--gap-2xl)); }
-    .section + .section { border-top: 1px solid var(--border); }
+
+    /* ═══ CUSTOM: boundary softening ═════════════════════════════════ */
+    /* No hard border between sections — seams blend instead:
+       (a) temperature zones: long-ramp background tints that fade to
+           transparent at both ends, so adjacent sections crossfade
+           through the shared base background rather than meeting a line */
+    .zone-cool   { background-image: linear-gradient(180deg, transparent 0%, rgba(99,140,255,0.05)  30%, rgba(99,140,255,0.05)  70%, transparent 100%); }
+    .zone-warm   { background-image: linear-gradient(180deg, transparent 0%, rgba(255,158,88,0.04)  30%, rgba(255,158,88,0.04)  70%, transparent 100%); }
+    .zone-violet { background-image: linear-gradient(180deg, transparent 0%, rgba(168,120,255,0.045) 30%, rgba(168,120,255,0.045) 70%, transparent 100%); }
+    /* (b) overlap pulls — a section's content rides up into the tail of
+       the section above so the two interleave instead of stacking */
+    .pull-up { margin-top: calc(-1 * clamp(36px, 6vw, 88px)); position: relative; z-index: 2; }
+    /* (c) giant half-cropped display word in place of eyebrow + H2 */
+    .giant-head {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(88px, 16vw, 240px);
+      line-height: 0.82; letter-spacing: -0.04em; white-space: nowrap;
+      color: color-mix(in srgb, var(--fg) 7%, transparent);
+      margin: 0 0 -0.18em -0.04em;
+      pointer-events: none; user-select: none;
+    }
+    /* crops the giant word at the viewport edge; `clip` (not `hidden`)
+       keeps position: sticky working for children like the coat */
+    .section-clip { overflow-x: clip; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
     .stack { display: flex; flex-direction: column; }
     .stack > * + * { margin-top: var(--gap-md); }
     .row { display: flex; align-items: center; gap: var(--gap-md); }
@@ -1045,7 +1069,7 @@
     </section>
 
     <!-- ─── GLOBAL (3D globe) ──────────────────────────────────────── -->
-    <section class="section globe-section" data-od-id="global" id="global">
+    <section class="section globe-section zone-cool" data-od-id="global" id="global">
       <div class="container" style="margin-bottom: var(--gap-sm);">
         <p class="eyebrow" data-reveal>A global builder</p>
         <h2 data-reveal>From Toronto to the world.</h2>
@@ -1079,7 +1103,7 @@
 
     <!-- ─── STATS (Layout 4) ──────────────────────────────────────── -->
     <section class="section" data-od-id="stats">
-      <div class="container">
+      <div class="container pull-up">
         <p class="eyebrow" style="margin-bottom: 40px;">By the numbers</p>
         <div class="stats-row" id="stats-grid">
           <div class="stat">
@@ -1128,7 +1152,7 @@
     </section>
 
     <!-- ─── ABOUT (Layout 3 — feature triplet) ───────────────────── -->
-    <section class="section" data-od-id="about" id="about">
+    <section class="section zone-warm" data-od-id="about" id="about">
       <div class="container stack" style="gap: 56px;">
         <div style="max-width: 48ch;" data-reveal>
           <p class="eyebrow">About</p>
@@ -1171,7 +1195,7 @@
     </section>
 
     <!-- ─── EXPERIENCE (Layout 7 — log list) ─────────────────────── -->
-    <section class="section" data-od-id="experience" id="experience">
+    <section class="section zone-violet" data-od-id="experience" id="experience">
       <div class="container">
         <div class="row-between" style="margin-bottom: 16px;">
           <div data-reveal>
@@ -1253,11 +1277,10 @@
     </section>
 
     <!-- ─── EVENTS ────────────────────────────────────────────────── -->
-    <section class="section" data-od-id="events" id="events">
-      <div class="container">
-        <p class="eyebrow" data-reveal>Events</p>
-        <h2 data-reveal style="margin-bottom: 8px;">Developer relations & community</h2>
-        <p class="lead" style="margin-bottom: var(--gap-lg);">Hackathons, conferences, and events I've hosted and attended.</p>
+    <section class="section section-clip zone-warm" data-od-id="events" id="events">
+      <div class="container pull-up">
+        <div class="giant-head" aria-hidden="true">Events</div>
+        <h2 class="sr-only">Developer relations & community — events hosted and attended</h2>
 
         <div class="events-filter" id="events-filter" role="group" aria-label="Filter events">
           <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
@@ -1272,11 +1295,11 @@
     </section>
 
     <!-- ─── PROJECTS ──────────────────────────────────────────────── -->
-    <section class="section" data-od-id="projects" id="projects">
+    <section class="section section-clip zone-cool" data-od-id="projects" id="projects">
       <div class="container">
-        <p class="eyebrow" data-reveal>Projects</p>
-        <h2 data-reveal style="margin-bottom: 8px;">Software & open source</h2>
-        <p class="lead" style="margin-bottom: var(--gap-xl);">View all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
+        <div class="giant-head" aria-hidden="true">Projects</div>
+        <h2 class="sr-only">Software & open source</h2>
+        <p class="lead" style="margin-bottom: var(--gap-xl); position: relative;">View all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
 
         <!-- Workstation — keyboard-driven project explorer (stage 1).
              Lit keycaps load a project onto the monitor; renders from
@@ -1391,10 +1414,8 @@
         </div><!-- /projects-coat-split -->
 
         <!-- Tinkering / lab builds -->
-        <hr class="rule" style="margin-top: var(--gap-2xl); margin-bottom: var(--gap-xl);">
-        <p class="eyebrow">Lab</p>
-        <h3 style="margin-bottom: var(--gap-md);">Tinkering</h3>
-        <div class="video-mosaic" id="tinkering-grid"></div>
+        <h3 class="sr-only">Tinkering — lab builds</h3>
+        <div class="video-mosaic" id="tinkering-grid" style="margin-top: var(--gap-xl);"></div>
 
         <!-- Software, hackathons & other -->
         <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
@@ -1414,16 +1435,16 @@
 
     <!-- ─── LINKEDIN POSTS ──────────────────────────────────────────── -->
     <section class="section" data-od-id="posts" id="posts">
-      <div class="container">
+      <div class="container pull-up">
         <p class="eyebrow">LinkedIn</p>
-        <h3 style="margin-bottom: var(--gap-md);">Posts & highlights</h3>
+        <h3 class="sr-only">Posts & highlights</h3>
         <div class="grid-3" id="posts-grid"></div>
       </div>
     </section>
 
     <!-- ─── GITHUB ACTIVITY ────────────────────────────────────────── -->
     <!-- ─── OTHER (personal photos) ─────────────────────────────────── -->
-    <section class="section" data-od-id="other" id="other">
+    <section class="section zone-warm" data-od-id="other" id="other">
       <div class="container">
         <p class="eyebrow" data-reveal>Other</p>
         <h3 style="margin-bottom: var(--gap-md);">Beyond the resume</h3>
@@ -1432,8 +1453,8 @@
     </section>
 
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
-    <section class="section" data-od-id="education" id="education">
-      <div class="container">
+    <section class="section zone-violet" data-od-id="education" id="education">
+      <div class="container pull-up">
         <p class="eyebrow" data-reveal>Education</p>
         <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
         <!-- Static fallback — replaced by data.json → education at runtime -->
