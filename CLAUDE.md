@@ -102,6 +102,9 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
    }
    ```
    `type` must be one of: `hosted/speaking`, `attended` (these match the filter buttons and badge styles in `index.html`)
+   Optional fields: `video` (YouTube URL — renders a visible "Watch video" pill
+   on the card), `url` (non-video link, e.g. a Luma page — turns the title into
+   a link), `highlights[]` (`{image, caption}` thumbs that open in the lightbox)
 2. Drop the photo into `assets/events/`
 
 ### Adding a video

@@ -871,7 +871,7 @@
       "date": "April 2026",
       "desc": "Workshop for the Conflux Global Hackfest — x402: Payments for the Agentic Web. Reviving HTTP 402 to give humans, machines, and AI agents a native, stablecoin-based way to pay over the web.",
       "image": "assets/events/X402WorkshopHackfest2026.webp",
-      "url": "https://www.youtube.com/watch?v=ccKztd5gORw"
+      "video": "https://www.youtube.com/watch?v=ccKztd5gORw"
     },
     {
       "type": "hosted/speaking",
@@ -906,7 +906,7 @@
       "date": "Summer 2025",
       "desc": "Bounty call for Ginseng Swap at Conflux's Code Without Borders SummerHackfest 2025 — walking builders through the DEX bounties on Conflux eSpace.",
       "image": "assets/events/GinsengSwapBountyCall2025.webp",
-      "url": "https://www.youtube.com/watch?v=6Zc5AjEhpuo"
+      "video": "https://www.youtube.com/watch?v=6Zc5AjEhpuo"
     },
     {
       "type": "hosted/speaking",
@@ -915,7 +915,7 @@
       "date": "September 30, 2024",
       "desc": "Tutorial on indexing on-chain events on Conflux eSpace — decoding transfer and approval logs from ConfluxScan and building an event indexer for Ginseng Swap.",
       "image": "assets/events/ConfluxIndexerTutorial.webp",
-      "url": "https://youtu.be/BceCM2vPPxQ"
+      "video": "https://youtu.be/BceCM2vPPxQ"
     },
     {
       "type": "hosted/speaking",
@@ -924,7 +924,7 @@
       "date": "August 2024",
       "desc": "Tutorial on minting a simple NFT on Conflux eSpace — compiling and deploying contracts with Hardhat via Conflux Scaffold, then shipping a React app to testnet.",
       "image": "assets/events/ConfluxNFTTutorial.webp",
-      "url": "https://www.youtube.com/watch?v=kdKu22ks2DY"
+      "video": "https://www.youtube.com/watch?v=kdKu22ks2DY"
     },
     {
       "type": "hosted/speaking",
@@ -933,7 +933,7 @@
       "date": "August 2024",
       "desc": "Tutorial on Conflux Scaffold, the EVM-compatible eSpace dev stack — building and deploying a sample dApp with smart contracts and a Next.js front end.",
       "image": "assets/events/ConfluxScaffoldTutorial.webp",
-      "url": "https://www.youtube.com/watch?v=ifzQz2Z1dyI"
+      "video": "https://www.youtube.com/watch?v=ifzQz2Z1dyI"
     },
     {
       "type": "hosted/speaking",
@@ -1100,7 +1100,6 @@
       "date": "October 2024",
       "desc": "Attended Hong Kong FinTech Week 2024 and the HKSTP Market Discovery Programme — fintech, digital assets, and web3 across the Asia-Pacific ecosystem.",
       "image": "assets/events/HKSTPGoldenEgg2024.webp",
-      "url": "https://youtu.be/0tAaNATLizk",
       "highlights": [
         {
           "image": "assets/events/HKSTPPitch2024.webp",
@@ -1130,7 +1129,8 @@
           "image": "assets/events/ChainlinkSmartCon.webp",
           "caption": "Chainlink SmartCon — Hong Kong"
         }
-      ]
+      ],
+      "video": "https://youtu.be/0tAaNATLizk"
     },
     {
       "type": "attended",
@@ -1139,7 +1139,6 @@
       "date": "September 2024",
       "desc": "Hacked at ETHGlobal Singapore at Marina Bay Sands — another ETHGlobal hackathon in the books.",
       "image": "assets/events/ETHGlobalSingapore2024MBS.webp",
-      "url": "https://youtu.be/pWuCZeaNxj4",
       "highlights": [
         {
           "image": "assets/events/ETHGlobalSingapore2024Beanbag.webp",
@@ -1153,7 +1152,8 @@
           "image": "assets/events/SingaporeRiverNight.webp",
           "caption": "By the Singapore River at night"
         }
-      ]
+      ],
+      "video": "https://youtu.be/pWuCZeaNxj4"
     },
     {
       "type": "attended",
@@ -1202,7 +1202,6 @@
       "date": "June 2024",
       "desc": "Attended the Alephium Hephaestus hackathon in Greece as a developer ambassador. The trip video reached <a href=\"https://x.com/intrepidudon/status/1808834754294300842\" target=\"_blank\" rel=\"noopener\" style=\"color: var(--accent); text-decoration: underline; text-underline-offset: 2px;\">9K+ views on X</a>.",
       "image": "assets/events/AlephiumHephaestusGreece.webp",
-      "url": "https://youtube.com/shorts/9pAIjmOkpz4",
       "highlights": [
         {
           "image": "assets/events/AlephiumHephaestusGreeceGroup.webp",
@@ -1216,7 +1215,8 @@
           "image": "assets/events/MultiCallAlephium.webp",
           "caption": "Multi-Call on Alephium — gasless house-token faucet demo"
         }
-      ]
+      ],
+      "video": "https://youtube.com/shorts/9pAIjmOkpz4"
     },
     {
       "type": "attended",
@@ -1279,7 +1279,6 @@
       "date": "June 2022",
       "desc": "On set as an actor for a Shopify Rebellion esports production — suited up for the dinner-scene sketch.",
       "image": "assets/events/ShopifyRebellionActor.webp",
-      "url": "https://www.youtube.com/watch?v=TMoPZ3rbJUk",
       "highlights": [
         {
           "image": "assets/events/ShopifyRebellionStill1.webp",
@@ -1289,7 +1288,8 @@
           "image": "assets/events/ShopifyRebellionStill2.webp",
           "caption": "On camera — Shopify Rebellion shoot"
         }
-      ]
+      ],
+      "video": "https://www.youtube.com/watch?v=TMoPZ3rbJUk"
     }
   ],
   "education": [

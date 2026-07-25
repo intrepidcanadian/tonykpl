@@ -489,6 +489,17 @@
     .badge-hosted-speaking { background: color-mix(in oklch, var(--success) 14%, transparent); color: var(--success); }
     .badge-attended { background: var(--accent-soft); color: var(--accent); }
     .event-meta-row { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    /* explicit "Watch video" pill for events with a video link */
+    .event-video-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 12px; padding: 6px 14px;
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+      color: var(--fg); text-decoration: none;
+      border: 1px solid var(--border); border-radius: 999px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .event-video-link svg { flex: none; }
+    .event-video-link:hover { color: var(--accent); border-color: var(--accent); }
 
     .events-filter { display: flex; gap: 8px; margin-bottom: var(--gap-lg); flex-wrap: wrap; }
     .filter-btn {
@@ -1995,6 +2006,7 @@
                   <h3 style="font-size: 17px; margin-bottom: 6px;">${e.url ? `<a href="${e.url}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--border);">${e.title} &nearr;</a>` : e.title}</h3>
                   <p class="event-meta-row">${e.location} &middot; ${e.date}</p>
                   <p style="color: var(--muted); font-size: 14px;">${e.desc}</p>
+                  ${e.video ? `<a class="event-video-link" href="${e.video}" target="_blank" rel="noopener" aria-label="Watch video: ${e.title}"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><polygon points="0,0 10,6 0,12"/></svg>Watch video</a>` : ''}
                   ${hl}
                 </div>
               </div>`;
