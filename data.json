@@ -1043,7 +1043,8 @@
       "location": "Toronto",
       "date": "April 28, 2026",
       "desc": "Hosted this month's Blockchain Tuesday on prediction markets and APIs for autonomous agents.",
-      "url": "https://luma.com/34ylggsp"
+      "url": "https://luma.com/34ylggsp",
+      "image": "assets/events/BlockchainTuesdayPredictionMarkets.webp"
     },
     {
       "type": "hosted/speaking",
