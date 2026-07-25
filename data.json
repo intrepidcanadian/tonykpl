@@ -874,6 +874,14 @@
       "url": "https://www.youtube.com/watch?v=ccKztd5gORw"
     },
     {
+      "type": "hosted/speaking",
+      "title": "HKBU Guest Lecture — Financial Technology for Banking and Finance",
+      "location": "Hong Kong",
+      "date": "January 2026",
+      "desc": "Guest lecture at Hong Kong Baptist University for FINE4028: Financial Technology for Banking and Finance — presenting Pulse520.ai and why AI agents need a consumer marketplace.",
+      "image": "assets/events/HKBUGuestLecture2026.webp"
+    },
+    {
       "type": "attended",
       "title": "Hong Kong FinTech Week 2025",
       "location": "Hong Kong",
