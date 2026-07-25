@@ -432,7 +432,7 @@
       "logo": "assets/logos/uniswap-foundation.png"
     },
     {
-      "date": "2024",
+      "date": "2024 — 2025",
       "title": "Developer Ambassador",
       "desc": "Developer ambassador for the Alephium ecosystem — writing tutorials and documentation, onboarding developers to the toolchain, and representing Alephium at hackathons including Hephaestus in Greece.",
       "org": "Alephium",
@@ -498,7 +498,8 @@
         "USDT0"
       ],
       "url": "https://cymstudio.app",
-      "github": "https://github.com/Intrepidcanadian/cymstudios"
+      "github": "https://github.com/Intrepidcanadian/cymstudios",
+      "key": "Y"
     },
     "grid": [
       {
@@ -645,7 +646,8 @@
         "assets/videos/product-passport-1.webp",
         "assets/videos/product-passport-2.webp",
         "assets/videos/product-passport-3.webp"
-      ]
+      ],
+      "hack": 8
     },
     {
       "title": "NEAR Hackathon — Ancestry Records",
@@ -656,7 +658,8 @@
         "assets/videos/ancestry-tree-2.webp",
         "assets/videos/ancestry-tree-3.webp",
         "assets/videos/ancestry-tree-4.webp"
-      ]
+      ],
+      "hack": 9
     },
     {
       "title": "Build Space Music Video — Bronson Alan",
@@ -676,7 +679,8 @@
       "title": "Hack for Good Whitby — AI & Computer Vision",
       "desc": "Hackathon project integrating AI and computer vision, built at Hack for Good in Whitby",
       "url": "https://youtu.be/VXfCibrcDGc",
-      "thumbnail": null
+      "thumbnail": null,
+      "hack": 10
     },
     {
       "title": "Translator — Live OCR & Voice Translation App",
@@ -736,27 +740,31 @@
       "title": "NVIDIA DGX Spark / Nemotron / Gemma4 / Nemo Claw",
       "desc": "Tinkering with NVIDIA DGX Spark hardware, running Nemotron, Gemma4, and Nemo Claw models locally.",
       "video": "assets/videos/dgx-spark-nemotron.mp4",
-      "poster": "assets/videos/dgx-spark-nemotron-poster.webp"
+      "poster": "assets/videos/dgx-spark-nemotron-poster.webp",
+      "key": "G"
     },
     {
       "title": "Apple Mobile App — Agent Task Marketplace",
       "desc": "Building a mobile app with an AI agent task marketplace using Pulse520.",
       "video": "assets/videos/pulse520-agent-marketplace.mp4",
-      "poster": "assets/videos/pulse520-agent-marketplace-poster.webp"
+      "poster": "assets/videos/pulse520-agent-marketplace-poster.webp",
+      "key": "A"
     },
     {
       "title": "AI Agent Making DeFi Transactions",
       "desc": "ElizaOS agent swapping DAI to USDC on Polygon via Uniswap v3, then supplying funds into Aave markets and using Browser-Use to gather data for decision-making. March 2025.",
       "video": "assets/videos/defi-agent-browser.mp4",
-      "poster": "assets/videos/defi-agent-browser-poster.webp"
+      "poster": "assets/videos/defi-agent-browser-poster.webp",
+      "key": "I"
     },
     {
-      "title": "Blockchain Mining",
+      "title": "Blockchain Mining and Node Setup",
       "desc": "Building a mining rig from parts with friend — shopping for parts at the computer store, then assembling at home. 2020+",
       "images": [
         "assets/videos/pc-build-home.webp",
         "assets/videos/pc-build-store.webp"
-      ]
+      ],
+      "key": "H"
     }
   ],
   "other": [
@@ -1222,7 +1230,8 @@
           "caption": "By the Singapore River at night"
         }
       ],
-      "video": "https://youtu.be/pWuCZeaNxj4"
+      "video": "https://youtu.be/pWuCZeaNxj4",
+      "hack": 1
     },
     {
       "type": "attended",
@@ -1240,7 +1249,8 @@
           "image": "assets/events/BuildspaceS5PinkCar.webp",
           "caption": "Obligatory pink car moment"
         }
-      ]
+      ],
+      "hack": 7
     },
     {
       "type": "attended",
@@ -1263,7 +1273,8 @@
           "caption": "With a fellow hacker"
         }
       ],
-      "video": "https://youtu.be/Be1HQb4goco"
+      "video": "https://youtu.be/Be1HQb4goco",
+      "hack": 2
     },
     {
       "type": "attended",
@@ -1286,7 +1297,8 @@
           "caption": "Multi-Call on Alephium — gasless house-token faucet demo"
         }
       ],
-      "video": "https://youtube.com/shorts/9pAIjmOkpz4"
+      "video": "https://youtube.com/shorts/9pAIjmOkpz4",
+      "hack": 4
     },
     {
       "type": "attended",
@@ -1319,7 +1331,8 @@
           "caption": "Workshop room — ETHGlobal New York"
         }
       ],
-      "video": "https://www.youtube.com/watch?v=hFmIAvEhLqo&list=PLXzKMXK2aHh7hzYpBqmzRrHOEE4RGpppJ"
+      "video": "https://www.youtube.com/watch?v=hFmIAvEhLqo&list=PLXzKMXK2aHh7hzYpBqmzRrHOEE4RGpppJ",
+      "hack": 3
     },
     {
       "type": "attended",
@@ -1327,7 +1340,8 @@
       "location": "Toronto",
       "date": "September 2023",
       "desc": "Won the Seed to Solution hackathon with team Harvest Hackers — $1,500 prize presented by BDO.",
-      "image": "assets/events/BDOSeedToSolutionWinners.webp"
+      "image": "assets/events/BDOSeedToSolutionWinners.webp",
+      "hack": 5
     },
     {
       "type": "attended",
@@ -1341,7 +1355,8 @@
           "image": "assets/events/KaspaCommunityEvent.webp",
           "caption": "With the Kaspa community at ETH Toronto"
         }
-      ]
+      ],
+      "hack": 6
     },
     {
       "type": "attended",

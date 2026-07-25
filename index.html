@@ -701,6 +701,19 @@
       background: var(--surface); display: flex; flex-direction: column; gap: 6px;
     }
     .ws-row { display: flex; gap: 6px; justify-content: center; }
+    /* main letter/function block sits beside a numpad of hackathons */
+    .ws-kb-wrap { display: flex; gap: clamp(8px, 1.4vw, 18px); align-items: flex-start; justify-content: center; }
+    .ws-kb-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .ws-pad { display: flex; flex-direction: column; gap: 4px; }
+    .ws-pad-label {
+      font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); text-align: center;
+    }
+    .ws-pad-keys { display: grid; grid-template-columns: repeat(3, auto); gap: 6px; }
+    .ws-pad-keys .keycap-zero { grid-column: span 3; width: 100%; }
+    @media (max-width: 720px) {
+      .ws-kb-wrap { flex-direction: column; align-items: center; }
+    }
     .keycap {
       flex: 0 0 auto; width: clamp(28px, 4.4vw, 54px); height: clamp(32px, 4.8vw, 56px);
       border: 1px solid var(--border); border-bottom-width: 3px; border-radius: 7px;
@@ -1774,11 +1787,13 @@
           const status = document.getElementById('ws-statusline');
           if (!kb || !screen || !data.projects?.grid) return;
           const byKey = {};
-          data.projects.grid.forEach(p => { if (p.key) byKey[p.key.toUpperCase()] = p; });
-          // number row = tinkering "channels", mapped in array order (1-9, 0)
+          [data.projects.featured, ...data.projects.grid].forEach(p => {
+            if (p && p.key) byKey[p.key.toUpperCase()] = p;
+          });
+          // tinkering builds sit on their own letter keys
           const byChannel = {};
-          (data.tinkering || []).slice(0, 10).forEach((t, i) => {
-            byChannel[String((i + 1) % 10)] = { ...t, ch: i + 1 };
+          (data.tinkering || []).forEach((t, i) => {
+            if (t.key) byChannel[t.key.toUpperCase()] = { ...t, ch: i + 1 };
           });
           // function row = AI-produced videos, mapped F1..Fn in array order
           const byFn = {};
@@ -1787,24 +1802,40 @@
             const id = ytId(v.url || '');
             if (id) byFn['F' + (i + 1)] = { ...v, id, fn: i + 1 };
           });
+          // numpad = hackathons, slot given by each entry's `hack` number
+          // (drawn from both events and the software video grid)
+          const byPad = {};
+          [...(data.events || []), ...(data.videosSoftware || [])]
+            .filter(h => h.hack)
+            .forEach(h => { byPad[String(h.hack % 10)] = h; });
           const ROWS = [
             Object.keys(byFn),
-            ['1','2','3','4','5','6','7','8','9','0'],
             ['Q','W','E','R','T','Y','U','I','O','P'],
             ['A','S','D','F','G','H','J','K','L'],
             ['Z','X','C','V','B','N','M']
           ];
-          kb.innerHTML = ROWS.filter(row => row.length).map(row => `<div class="ws-row">${row.map(k => {
-            const p = byKey[k], c = byChannel[k], f = byFn[k];
-            const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0] : f ? 'Video' : '';
-            const aria = p ? `Show project: ${p.name}` : c ? `Play channel ${c.ch}: ${c.title}` : f ? `Play AI video: ${f.title}` : '';
-            return `<button type="button" class="keycap${(p || c || f) ? ' keycap-mapped' : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
-          }).join('')}</div>`).join('');
+          const cap = (k, extra) => {
+            const p = byKey[k], c = byChannel[k], f = byFn[k], h = byPad[k];
+            const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0]
+              : f ? 'Video' : h ? (h.title.split(/[ —]/)[0] || 'Hack') : '';
+            const aria = p ? `Show project: ${p.name}` : c ? `Play build: ${c.title}`
+              : f ? `Play AI video: ${f.title}` : h ? `Show hackathon: ${h.title}` : '';
+            return `<button type="button" class="keycap${(p || c || f || h) ? ' keycap-mapped' : ''}${extra ? ' ' + extra : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
+          };
+          const PAD = [['7','8','9'], ['4','5','6'], ['1','2','3']];
+          kb.innerHTML = `<div class="ws-kb-wrap">
+            <div class="ws-kb-main">${ROWS.filter(r => r.length).map(row =>
+              `<div class="ws-row">${row.map(k => cap(k)).join('')}</div>`).join('')}</div>
+            <div class="ws-pad">
+              <span class="ws-pad-label">Hackathons</span>
+              <div class="ws-pad-keys">${PAD.flat().map(k => cap(k)).join('')}${cap('0', 'keycap-zero')}</div>
+            </div>
+          </div>`;
 
           function showIdle() {
             monitor.classList.remove('ws-showing-project');
             screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
-            status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} channels · ${Object.keys(byFn).length} videos on F-keys`;
+            status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} builds · ${Object.keys(byFn).length} videos on F-keys · ${Object.keys(byPad).length} hackathons on the numpad`;
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
           }
           function markActive(key) {
@@ -1862,10 +1893,30 @@
             status.textContent = `F${v.fn} — ${v.title.toLowerCase()}`;
             markActive(key);
           }
+          function showHack(h, key) {
+            monitor.classList.add('ws-showing-project');
+            const shot = h.image || (h.thumbnails || [])[0] || h.thumbnail;
+            const link = h.video || h.url;
+            screen.innerHTML = `<div class="ws-project${shot ? '' : ' no-shot'}">
+              ${shot ? `<img class="ws-shot" src="${shot}" alt="${h.title}">` : ''}
+              <div>
+                <h3 class="ws-name">${h.title}</h3>
+                <p class="ws-desc">${(h.desc || '').replace(/<[^>]*>/g, '')}</p>
+                <div>${[h.location, h.date].filter(Boolean).map(t => `<span class="tag">${t}</span>`).join(' ')}</div>
+                <div class="ws-links">
+                  ${link ? `<a class="btn btn-primary" style="font-size:13px;padding:7px 14px;" href="${link}" target="_blank" rel="noopener">${h.video ? 'Watch' : 'Open'} &nearr;</a>` : ''}
+                </div>
+              </div>
+            </div>`;
+            status.textContent = `hackathon ${key} — ${h.title.toLowerCase()}`;
+            markActive(key);
+          }
           function press(key) {
             pressVisual(key);
             const f = byFn[key];
             if (f) { showVideo(f, key); return; }
+            const h = byPad[key];
+            if (h) { showHack(h, key); return; }
             const p = byKey[key];
             if (p) { showProject(p, key); return; }
             const c = byChannel[key];
