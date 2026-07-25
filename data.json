@@ -1272,6 +1272,12 @@
       "logo": "assets/logos/york.png",
       "items": [
         "Master of Law"
+      ],
+      "photos": [
+        {
+          "src": "assets/photos/OsgoodeHallLibrary.webp",
+          "caption": "The Great Library at Osgoode Hall"
+        }
       ]
     },
     {
@@ -1306,7 +1312,8 @@
       "items": [
         "Software Engineering Certification"
       ],
-      "meta": "2023"
+      "meta": "2023",
+      "logo": "assets/logos/brainstation.png"
     },
     {
       "school": "Atrium Academy",
@@ -1314,7 +1321,9 @@
         "Uniswap Hook Incubator — Cohort 1"
       ],
       "meta": "2024",
-      "certificate": "assets/CertificateAtriumAcademy.webp"
+      "certificate": "assets/CertificateAtriumAcademy.webp",
+      "logo": "assets/logos/atrium.png",
+      "logoBg": "dark"
     },
     {
       "school": "Continuous Learning",

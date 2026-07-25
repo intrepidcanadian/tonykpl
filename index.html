@@ -731,9 +731,14 @@
     .edu-crest {
       position: absolute; top: 22px; right: 22px;
       background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
-      width: 52px; height: 52px; display: grid; place-items: center; padding: 9px;
+      height: 52px; min-width: 52px; display: grid; place-items: center; padding: 9px 11px;
     }
-    .edu-crest img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+    .edu-crest img { height: 34px; width: auto; max-width: 110px; object-fit: contain; display: block; }
+    /* light-on-dark wordmarks (e.g. Atrium) get a dark tile instead */
+    .edu-crest-dark { background: #0a0c10; }
+    /* small cards are too tight for a floating crest — let it flow inline */
+    .edu-card-sm .edu-crest { position: static; width: fit-content; height: 44px; min-width: 44px; margin-bottom: 2px; }
+    .edu-card-sm .edu-crest img { height: 26px; }
     .edu-school {
       font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
@@ -1424,7 +1429,8 @@
         <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
         <!-- Static fallback — replaced by data.json → education at runtime -->
         <div class="edu-marquee" id="edu-marquee" data-reveal-group>
-          <div class="card edu-card">
+          <div class="card edu-card" data-gallery='["assets/photos/OsgoodeHallLibrary.webp"]'>
+            <div class="edu-peek" aria-hidden="true"><img src="assets/photos/OsgoodeHallLibrary.webp" alt="" loading="lazy"></div>
             <div class="edu-crest"><img src="assets/logos/york.png" alt="York University crest"></div>
             <p class="edu-school">Osgoode Hall Law School, York University</p>
             <p class="edu-degree">Master of Law</p>
@@ -1441,11 +1447,13 @@
         </div>
         <div class="grid-3" id="edu-extras" data-reveal-group>
           <div class="card edu-card edu-card-sm">
+            <div class="edu-crest"><img src="assets/logos/brainstation.png" alt="BrainStation crest"></div>
             <p class="edu-school">BrainStation</p>
             <p class="edu-degree">Software Engineering Certification</p>
             <p class="meta">2023</p>
           </div>
           <div class="card edu-card edu-card-sm">
+            <div class="edu-crest edu-crest-dark"><img src="assets/logos/atrium.png" alt="Atrium Academy crest"></div>
             <p class="edu-school">Atrium Academy</p>
             <p class="edu-degree">Uniswap Hook Incubator — Cohort 1</p>
             <p class="meta">2024</p>
@@ -1883,7 +1891,7 @@
             return `
             <div class="card edu-card${sm ? ' edu-card-sm' : ''}"${gallery.length ? ` data-gallery='${JSON.stringify(gallery)}'` : ''}>
               ${gallery.length ? `<div class="edu-peek" aria-hidden="true"><img src="${gallery[0]}" alt="" loading="lazy"></div>` : ''}
-              ${e.logo ? `<div class="edu-crest"><img src="${e.logo}" alt="${e.school} crest"></div>` : ''}
+              ${e.logo ? `<div class="edu-crest${e.logoBg === 'dark' ? ' edu-crest-dark' : ''}"><img src="${e.logo}" alt="${e.school} crest"></div>` : ''}
               <p class="edu-school">${e.school}</p>
               <div>${e.items.map(i => `<p class="edu-degree">${i}</p>`).join('')}</div>
               ${e.meta ? `<p class="meta">${e.meta}</p>` : ''}
