@@ -425,11 +425,19 @@
     },
     {
       "date": "2024 — 2025",
-      "title": "Ambassador — Uniswap Hook Incubator",
-      "desc": "Completed the Uniswap Hook Incubator (Cohort 1, 2024), then served as a Uniswap Ambassador through 2025 — helping developers build on Uniswap v4 and Unichain and studying Uniswap's evolution across v2, v3, and v4.",
+      "title": "Developer Ambassador",
+      "desc": "Completed the Uniswap Hook Incubator (Cohort 1, 2024), then served as a Uniswap Foundation Developer Ambassador through 2025 — running workshops and helping developers build on Uniswap v4 and Unichain, and studying Uniswap's evolution across v2, v3, and v4.",
       "org": "Uniswap Foundation",
       "orgShort": "Uniswap",
       "logo": "assets/logos/uniswap-foundation.png"
+    },
+    {
+      "date": "2024",
+      "title": "Developer Ambassador",
+      "desc": "Developer ambassador for the Alephium ecosystem — writing tutorials and documentation, onboarding developers to the toolchain, and representing Alephium at hackathons including Hephaestus in Greece.",
+      "org": "Alephium",
+      "orgShort": "Alephium",
+      "logo": "assets/logos/alephium.png"
     },
     {
       "date": "2021 — 2024",
