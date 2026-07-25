@@ -1313,7 +1313,21 @@
         "Software Engineering Certification"
       ],
       "meta": "2023",
-      "logo": "assets/logos/brainstation.png"
+      "logo": "assets/logos/brainstation.png",
+      "photos": [
+        {
+          "src": "assets/photos/BrainStationCohort.webp",
+          "caption": "BrainStation cohort"
+        },
+        {
+          "src": "assets/photos/BrainStationProjectWork.webp",
+          "caption": "Project work session"
+        },
+        {
+          "src": "assets/photos/BrainStationSocial.webp",
+          "caption": "Cohort social"
+        }
+      ]
     },
     {
       "school": "Atrium Academy",
