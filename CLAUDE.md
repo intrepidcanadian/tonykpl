@@ -108,7 +108,7 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
 There are three video collections in `data.json`:
 - `videos[]` — "AI-produced videos" grid (purely creative productions, e.g. StarCraft broadcasts)
 - `videosSoftware[]` — "Software · Hackathons · Other" grid (hackathon demos, appearances)
-- `tinkering[]` — "Tinkering" grid of locally-hosted mp4s (`video` + `poster` fields; keep mp4s ≤ ~10 MB, 720p)
+- `tinkering[]` — "Tinkering" grid of locally-hosted mp4s (`video` + `poster` fields; keep mp4s ≤ ~10 MB, 720p). Entries also become workstation "channels" on the number keys, in array order (1–9, then 0)
 
 1. Add an entry to the right array in `data.json`:
    ```json

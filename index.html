@@ -631,6 +631,27 @@
       25% { transform: translateX(-3px) skewX(-1deg); }
       75% { transform: translateX(3px) skewX(1deg); }
     }
+    /* channel view — tinkering demos play on the monitor */
+    .ws-channel { display: grid; gap: 10px; align-content: center; min-width: 0; }
+    .ws-channel video {
+      width: 100%; max-height: 420px; object-fit: contain;
+      background: #000; border-radius: var(--radius); display: block;
+    }
+    .ws-ch-imgs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
+    .ws-ch-imgs img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); display: block; }
+    .ws-ch-meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
+    .ws-ch-num { color: var(--accent); }
+    /* tuning static between channel switches */
+    .ws-tune .ws-screen::before {
+      content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,0.16) 0 2px, rgba(0,0,0,0.5) 2px 4px);
+      animation: ws-tune-out 0.24s steps(5) forwards;
+    }
+    @keyframes ws-tune-out {
+      0% { opacity: 1; transform: translateY(0); }
+      60% { opacity: 0.55; transform: translateY(2px); }
+      100% { opacity: 0; transform: translateY(-1px); }
+    }
     .ws-keyboard {
       margin-top: 10px; padding: clamp(8px, 1.4vw, 14px);
       border: 1px solid var(--border); border-radius: var(--radius-lg);
@@ -1642,6 +1663,11 @@
           if (!kb || !screen || !data.projects?.grid) return;
           const byKey = {};
           data.projects.grid.forEach(p => { if (p.key) byKey[p.key.toUpperCase()] = p; });
+          // number row = tinkering "channels", mapped in array order (1-9, 0)
+          const byChannel = {};
+          (data.tinkering || []).slice(0, 10).forEach((t, i) => {
+            byChannel[String((i + 1) % 10)] = { ...t, ch: i + 1 };
+          });
           const ROWS = [
             ['1','2','3','4','5','6','7','8','9','0'],
             ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -1649,8 +1675,10 @@
             ['Z','X','C','V','B','N','M']
           ];
           kb.innerHTML = ROWS.map(row => `<div class="ws-row">${row.map(k => {
-            const p = byKey[k];
-            return `<button type="button" class="keycap${p ? ' keycap-mapped' : ''}" data-key="${k}"${p ? ` aria-label="Show project: ${p.name}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${p ? `<span class="keysub">${p.name.split(' ')[0]}</span>` : ''}</button>`;
+            const p = byKey[k], c = byChannel[k];
+            const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0] : '';
+            const aria = p ? `Show project: ${p.name}` : c ? `Play channel ${c.ch}: ${c.title}` : '';
+            return `<button type="button" class="keycap${(p || c) ? ' keycap-mapped' : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
           }).join('')}</div>`).join('');
 
           function showIdle() {
@@ -1687,10 +1715,27 @@
             cap.classList.add('pressed');
             setTimeout(() => cap.classList.remove('pressed'), 130);
           }
+          function showChannel(c, key) {
+            monitor.classList.add('ws-showing-project');
+            monitor.classList.remove('ws-tune');
+            void monitor.offsetWidth;
+            monitor.classList.add('ws-tune');
+            const media = c.video
+              ? `<video src="${c.video}"${c.poster ? ` poster="${c.poster}"` : ''} controls autoplay muted loop playsinline></video>`
+              : `<div class="ws-ch-imgs">${(c.images || []).map(s => `<img src="${s}" alt="${c.title}">`).join('')}</div>`;
+            screen.innerHTML = `<div class="ws-channel">
+              ${media}
+              <div class="ws-ch-meta"><span class="ws-ch-num">CH ${c.ch}</span> ${c.title}</div>
+            </div>`;
+            status.textContent = `channel ${c.ch} — ${c.title.toLowerCase()}`;
+            markActive(key);
+          }
           function press(key) {
             pressVisual(key);
             const p = byKey[key];
             if (p) { showProject(p, key); return; }
+            const c = byChannel[key];
+            if (c) { showChannel(c, key); return; }
             // unmapped key: always leave the project view, then hand the
             // energy to the suit if it's loaded (CRT glitch otherwise)
             if (monitor.classList.contains('ws-showing-project')) showIdle();
@@ -1705,7 +1750,7 @@
             status.textContent = `key '${key}' is not mapped — lit keys open projects`;
           }
           kb.addEventListener('click', (e) => {
-            const cap = e.target.closest('.keycap-mapped');
+            const cap = e.target.closest('.keycap');
             if (cap) press(cap.dataset.key);
           });
           document.addEventListener('keydown', (e) => {
@@ -2684,8 +2729,11 @@
             float denom = nw.x + nw.y + nw.z + 1e-5;
             float text = (tX*nw.x + tY*nw.y + tZ*nw.z) / denom;
             vec3 L = normalize(vec3(0.4, 0.8, 0.6));
-            float diff = 0.45 + 0.55 * max(0.0, dot(normalize(vWorldNormal), L));
-            vec3 col = mix(uBg * diff, uAccent * (0.8 + 0.4*diff), text);
+            float diff = 0.5 + 0.5 * max(0.0, dot(normalize(vWorldNormal), L));
+            // lift the garment body toward its accent so each part (tie,
+            // jacket, pants) reads as a surface on the dark background
+            vec3 body = mix(uBg, uAccent, 0.34);
+            vec3 col = mix(body * diff, uAccent * (0.85 + 0.4*diff), text);
             gl_FragColor = vec4(col, 1.0);
           }
         `;
