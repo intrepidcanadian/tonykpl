@@ -679,8 +679,7 @@
       "title": "Hack for Good Whitby — AI & Computer Vision",
       "desc": "Hackathon project integrating AI and computer vision, built at Hack for Good in Whitby",
       "url": "https://youtu.be/VXfCibrcDGc",
-      "thumbnail": null,
-      "hack": 10
+      "thumbnail": null
     },
     {
       "title": "Translator — Live OCR & Voice Translation App",
@@ -822,7 +821,9 @@
       "title": "NVIDIA Toronto Hackathon 2025",
       "desc": "Absolutely crazy how such tiny hardware can do so much — building with NVIDIA Jetson at the Toronto hackathon.",
       "url": "https://www.linkedin.com/posts/tonykpl_absolutely-crazy-how-such-tiny-hardware-can-ugcPost-7466866297054846976-Bt1R",
-      "date": "2025"
+      "date": "2025",
+      "hack": 10,
+      "location": "Toronto"
     },
     {
       "title": "Building an Indexer on Conflux Network",
@@ -1341,7 +1342,8 @@
       "date": "September 2023",
       "desc": "Won the Seed to Solution hackathon with team Harvest Hackers — $1,500 prize presented by BDO.",
       "image": "assets/events/BDOSeedToSolutionWinners.webp",
-      "hack": 5
+      "hack": 5,
+      "video": "https://youtu.be/VXfCibrcDGc"
     },
     {
       "type": "attended",

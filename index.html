@@ -1803,9 +1803,9 @@
             if (id) byFn['F' + (i + 1)] = { ...v, id, fn: i + 1 };
           });
           // numpad = hackathons, slot given by each entry's `hack` number
-          // (drawn from both events and the software video grid)
+          // (drawn from events, the software video grid, and posts)
           const byPad = {};
-          [...(data.events || []), ...(data.videosSoftware || [])]
+          [...(data.events || []), ...(data.videosSoftware || []), ...(data.posts || [])]
             .filter(h => h.hack)
             .forEach(h => { byPad[String(h.hack % 10)] = h; });
           const ROWS = [
