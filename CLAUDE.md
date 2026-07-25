@@ -134,6 +134,15 @@ Edit the `experience[]` array in `data.json`. Each entry has: `date`, `title`, `
 ### Updating skills
 Edit the `profile.skills[]` array in `data.json`.
 
+### Updating education
+Edit the `education[]` array in `data.json`. Each entry has: `school`, `items[]`
+(credential names, set in the display serif). Optional fields: `tier: "degree"`
+(renders in the large 2-up marquee row; everything else goes to the smaller
+certifications row), `logo` (crest shown on a white corner tile), `meta` (mono
+year line), `photos[]` (`{src, caption}` thumbs that open in the lightbox as a
+group), `certificate` (image path, shown as a wide thumb that opens in the
+lightbox).
+
 ## Design system
 
 Built with Open Design's `web-prototype` skill. Key rules:

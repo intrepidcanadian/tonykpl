@@ -1268,28 +1268,48 @@
   "education": [
     {
       "school": "Osgoode Hall Law School, York University",
+      "tier": "degree",
+      "logo": "assets/logos/york.png",
       "items": [
         "Master of Law"
       ]
     },
     {
       "school": "Schulich School of Business, York University",
+      "tier": "degree",
+      "logo": "assets/logos/schulich.png",
       "items": [
         "Master of Finance",
         "Bachelor of Business Administration"
+      ],
+      "photos": [
+        {
+          "src": "assets/photos/MFinClass.webp",
+          "caption": "Master of Finance class"
+        },
+        {
+          "src": "assets/photos/SchulichClass.webp",
+          "caption": "Schulich class"
+        },
+        {
+          "src": "assets/photos/SchulichApprentice.webp",
+          "caption": "Schulich Apprentice"
+        }
       ]
     },
     {
       "school": "BrainStation",
       "items": [
-        "Software Engineering Certification (2023)"
-      ]
+        "Software Engineering Certification"
+      ],
+      "meta": "2023"
     },
     {
       "school": "Atrium Academy",
       "items": [
-        "Uniswap Hook Incubator — Cohort 1 (2024)"
+        "Uniswap Hook Incubator — Cohort 1"
       ],
+      "meta": "2024",
       "certificate": "assets/CertificateAtriumAcademy.webp"
     },
     {

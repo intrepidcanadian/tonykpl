@@ -722,6 +722,43 @@
       .logo-wall .logo-tile img { max-height: 24px; }
     }
 
+    /* ═══ CUSTOM: education — diploma wall ═══════════════════════════ */
+    /* Two marquee degree cards read like diplomas — school as a mono
+       eyebrow, the credential set in the display serif, crest on a white
+       tile like the logo wall — then a slimmer row of certifications. */
+    .edu-marquee { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-lg); margin-bottom: var(--gap-lg); }
+    .edu-card { position: relative; display: flex; flex-direction: column; gap: 14px; }
+    .edu-crest {
+      position: absolute; top: 22px; right: 22px;
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      width: 52px; height: 52px; display: grid; place-items: center; padding: 9px;
+    }
+    .edu-crest img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+    .edu-school {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin: 0; padding-right: 68px;
+    }
+    .edu-degree {
+      font-family: var(--font-display); font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.15; letter-spacing: -0.01em; margin: 0;
+    }
+    .edu-degree + .edu-degree { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .edu-card-sm .edu-degree { font-size: 19px; }
+    .edu-card-sm .edu-degree + .edu-degree { margin-top: 8px; padding-top: 10px; }
+    .edu-shots { display: flex; gap: 8px; margin-top: auto; padding-top: 16px; flex-wrap: wrap; }
+    .edu-shots img {
+      width: 56px; height: 56px; object-fit: cover; border-radius: var(--radius);
+      border: 1px solid var(--border); cursor: zoom-in; display: block;
+      transition: transform 0.15s ease;
+    }
+    .edu-shots img:hover { transform: translateY(-2px); }
+    .edu-shots img.edu-cert { width: 84px; }
+    @media (max-width: 720px) {
+      .edu-marquee { grid-template-columns: 1fr; }
+      .edu-degree { font-size: 22px; }
+    }
+
     /* ═══ CUSTOM: active nav link ════════════════════════════════════ */
     .topnav nav a { position: relative; padding-bottom: 2px; }
     .topnav nav a.active { color: var(--fg); }
@@ -1372,26 +1409,40 @@
       <div class="container">
         <p class="eyebrow" data-reveal>Education</p>
         <h2 data-reveal style="margin-bottom: var(--gap-lg);">Academic background</h2>
-        <div class="grid-3" data-reveal-group>
-          <div class="card">
-            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Osgoode Hall Law School, York University</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Master of Law</p>
+        <!-- Static fallback — replaced by data.json → education at runtime -->
+        <div class="edu-marquee" id="edu-marquee" data-reveal-group>
+          <div class="card edu-card">
+            <div class="edu-crest"><img src="assets/logos/york.png" alt="York University crest"></div>
+            <p class="edu-school">Osgoode Hall Law School, York University</p>
+            <p class="edu-degree">Master of Law</p>
           </div>
-          <div class="card">
-            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Schulich School of Business, York University</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Master of Finance<br>Bachelor of Business Administration</p>
+          <div class="card edu-card">
+            <div class="edu-crest"><img src="assets/logos/schulich.png" alt="Schulich School of Business crest"></div>
+            <p class="edu-school">Schulich School of Business, York University</p>
+            <div>
+              <p class="edu-degree">Master of Finance</p>
+              <p class="edu-degree">Bachelor of Business Administration</p>
+            </div>
           </div>
-          <div class="card">
-            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">BrainStation</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Software Engineering Certification (2023)</p>
+        </div>
+        <div class="grid-3" id="edu-extras" data-reveal-group>
+          <div class="card edu-card edu-card-sm">
+            <p class="edu-school">BrainStation</p>
+            <p class="edu-degree">Software Engineering Certification</p>
+            <p class="meta">2023</p>
           </div>
-          <div class="card">
-            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Atrium Academy</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Uniswap Hook Incubator — Cohort 1 (2024)</p>
+          <div class="card edu-card edu-card-sm">
+            <p class="edu-school">Atrium Academy</p>
+            <p class="edu-degree">Uniswap Hook Incubator — Cohort 1</p>
+            <p class="meta">2024</p>
           </div>
-          <div class="card">
-            <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 12px;">Continuous Learning</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Full-Stack Development<br>Agent Harnesses & AI/ML<br>Advanced Financial Modelling</p>
+          <div class="card edu-card edu-card-sm">
+            <p class="edu-school">Continuous Learning</p>
+            <div>
+              <p class="edu-degree">Full-Stack Development</p>
+              <p class="edu-degree">Agent Harnesses & AI/ML</p>
+              <p class="edu-degree">Advanced Financial Modelling</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1805,6 +1856,30 @@
         renderVideoGrid(data.videosSoftware, 'videos-software-grid', [7, 5, 12]);
         renderVideoGrid(data.videos, 'videos-grid', [7, 5, 4, 4, 4, 12]);
 
+        // Education — diploma wall: marquee degree cards + certification row.
+        // Entries with tier "degree" go to the marquee; the rest to extras.
+        if (data.education) {
+          const shot = (src, caption, cls) => `<img src="${src}"${cls ? ` class="${cls}"` : ''} alt="${caption}" data-lb-trigger data-caption="${caption}" tabindex="0" role="button" loading="lazy">`;
+          const eduCard = (e, sm) => {
+            const shots = [
+              ...(e.photos || []).map(p => shot(p.src, p.caption || e.school, '')),
+              ...(e.certificate ? [shot(e.certificate, `${e.items[0]} — certificate`, 'edu-cert')] : []),
+            ];
+            return `
+            <div class="card edu-card${sm ? ' edu-card-sm' : ''}">
+              ${e.logo ? `<div class="edu-crest"><img src="${e.logo}" alt="${e.school} crest"></div>` : ''}
+              <p class="edu-school">${e.school}</p>
+              <div>${e.items.map(i => `<p class="edu-degree">${i}</p>`).join('')}</div>
+              ${e.meta ? `<p class="meta">${e.meta}</p>` : ''}
+              ${shots.length ? `<div class="edu-shots">${shots.join('')}</div>` : ''}
+            </div>`;
+          };
+          const marquee = document.getElementById('edu-marquee');
+          const extras = document.getElementById('edu-extras');
+          if (marquee) marquee.innerHTML = data.education.filter(e => e.tier === 'degree').map(e => eduCard(e, false)).join('');
+          if (extras) extras.innerHTML = data.education.filter(e => e.tier !== 'degree').map(e => eduCard(e, true)).join('');
+        }
+
         // Tinkering
         if (data.tinkering) {
           const tGrid = document.getElementById('tinkering-grid');
@@ -2095,7 +2170,7 @@
     // arrows / swipe to browse the gallery the trigger belongs to)
     let lastFocused = null, lbGroup = [], lbIndex = 0;
     function lbGroupFor(img) {
-      const scope = img.closest('.highlights') || img.closest('.video-extra-shots') || img.closest('.other-grid');
+      const scope = img.closest('.highlights') || img.closest('.video-extra-shots') || img.closest('.other-grid') || img.closest('.edu-shots');
       return scope ? Array.from(scope.querySelectorAll('[data-lb-trigger]')) : [img];
     }
     function renderLightbox() {
