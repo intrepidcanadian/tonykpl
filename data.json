@@ -819,11 +819,13 @@
   "posts": [
     {
       "title": "NVIDIA Toronto Hackathon 2025",
-      "desc": "Absolutely crazy how such tiny hardware can do so much — building with NVIDIA Jetson at the Toronto hackathon.",
+      "desc": "Built with NVIDIA Jetson at the Toronto hackathon — astonishing what such tiny hardware can do. Carried on afterwards with an NVIDIA DGX Spark, running Nemotron, Gemma4, and Nemo Claw models locally.",
       "url": "https://www.linkedin.com/posts/tonykpl_absolutely-crazy-how-such-tiny-hardware-can-ugcPost-7466866297054846976-Bt1R",
       "date": "2025",
       "hack": 10,
-      "location": "Toronto"
+      "location": "Toronto",
+      "image": "assets/videos/dgx-spark-nemotron-poster.webp",
+      "video": "assets/videos/dgx-spark-nemotron.mp4"
     },
     {
       "title": "Building an Indexer on Conflux Network",

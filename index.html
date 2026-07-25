@@ -1896,15 +1896,19 @@
           function showHack(h, key) {
             monitor.classList.add('ws-showing-project');
             const shot = h.image || (h.thumbnails || [])[0] || h.thumbnail;
-            const link = h.video || h.url;
-            screen.innerHTML = `<div class="ws-project${shot ? '' : ' no-shot'}">
-              ${shot ? `<img class="ws-shot" src="${shot}" alt="${h.title}">` : ''}
+            // a locally hosted clip plays in place of the still
+            const clip = /\.mp4($|\?)/.test(h.video || '') ? h.video : null;
+            const link = clip ? h.url : (h.video || h.url);
+            screen.innerHTML = `<div class="ws-project${(shot || clip) ? '' : ' no-shot'}">
+              ${clip
+                ? `<video class="ws-shot" src="${clip}"${shot ? ` poster="${shot}"` : ''} controls autoplay muted loop playsinline></video>`
+                : shot ? `<img class="ws-shot" src="${shot}" alt="${h.title}">` : ''}
               <div>
                 <h3 class="ws-name">${h.title}</h3>
                 <p class="ws-desc">${(h.desc || '').replace(/<[^>]*>/g, '')}</p>
                 <div>${[h.location, h.date].filter(Boolean).map(t => `<span class="tag">${t}</span>`).join(' ')}</div>
                 <div class="ws-links">
-                  ${link ? `<a class="btn btn-primary" style="font-size:13px;padding:7px 14px;" href="${link}" target="_blank" rel="noopener">${h.video ? 'Watch' : 'Open'} &nearr;</a>` : ''}
+                  ${link ? `<a class="btn btn-primary" style="font-size:13px;padding:7px 14px;" href="${link}" target="_blank" rel="noopener">${link === h.video ? 'Watch' : 'Open'} &nearr;</a>` : ''}
                 </div>
               </div>
             </div>`;
