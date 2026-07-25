@@ -143,9 +143,13 @@
        (a) temperature zones: long-ramp background tints that fade to
            transparent at both ends, so adjacent sections crossfade
            through the shared base background rather than meeting a line */
-    .zone-cool   { background-image: linear-gradient(180deg, transparent 0%, rgba(99,140,255,0.05)  30%, rgba(99,140,255,0.05)  70%, transparent 100%); }
-    .zone-warm   { background-image: linear-gradient(180deg, transparent 0%, rgba(255,158,88,0.04)  30%, rgba(255,158,88,0.04)  70%, transparent 100%); }
-    .zone-violet { background-image: linear-gradient(180deg, transparent 0%, rgba(168,120,255,0.045) 30%, rgba(168,120,255,0.045) 70%, transparent 100%); }
+    /* tint strength is theme-aware: near-black swallows colour, so dark
+       needs a heavier alpha than light to read as the same shift */
+    :root { --zone-a: 0.14; }
+    [data-theme="light"] { --zone-a: 0.07; }
+    .zone-cool   { background-image: linear-gradient(180deg, transparent 0%, rgba(99,140,255,var(--zone-a))  30%, rgba(99,140,255,var(--zone-a))  70%, transparent 100%); }
+    .zone-warm   { background-image: linear-gradient(180deg, transparent 0%, rgba(255,158,88,var(--zone-a))  30%, rgba(255,158,88,var(--zone-a))  70%, transparent 100%); }
+    .zone-violet { background-image: linear-gradient(180deg, transparent 0%, rgba(168,120,255,var(--zone-a)) 30%, rgba(168,120,255,var(--zone-a)) 70%, transparent 100%); }
     /* (b) overlap pulls — a section's content rides up into the tail of
        the section above so the two interleave instead of stacking */
     .pull-up { margin-top: calc(-1 * clamp(36px, 6vw, 88px)); position: relative; z-index: 2; }
@@ -671,6 +675,10 @@
     .ws-channel video {
       width: 100%; max-height: 420px; object-fit: contain;
       background: #000; border-radius: var(--radius); display: block;
+    }
+    .ws-channel iframe {
+      width: 100%; aspect-ratio: 16 / 9; max-height: 420px;
+      background: #000; border: 0; border-radius: var(--radius); display: block;
     }
     .ws-ch-imgs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
     .ws-ch-imgs img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); display: block; }
@@ -1772,23 +1780,31 @@
           (data.tinkering || []).slice(0, 10).forEach((t, i) => {
             byChannel[String((i + 1) % 10)] = { ...t, ch: i + 1 };
           });
+          // function row = AI-produced videos, mapped F1..Fn in array order
+          const byFn = {};
+          const ytId = (url) => (url.match(/(?:youtu\.be\/|v=)([A-Za-z0-9_-]{6,})/) || [])[1];
+          (data.videos || []).slice(0, 10).forEach((v, i) => {
+            const id = ytId(v.url || '');
+            if (id) byFn['F' + (i + 1)] = { ...v, id, fn: i + 1 };
+          });
           const ROWS = [
+            Object.keys(byFn),
             ['1','2','3','4','5','6','7','8','9','0'],
             ['Q','W','E','R','T','Y','U','I','O','P'],
             ['A','S','D','F','G','H','J','K','L'],
             ['Z','X','C','V','B','N','M']
           ];
-          kb.innerHTML = ROWS.map(row => `<div class="ws-row">${row.map(k => {
-            const p = byKey[k], c = byChannel[k];
-            const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0] : '';
-            const aria = p ? `Show project: ${p.name}` : c ? `Play channel ${c.ch}: ${c.title}` : '';
-            return `<button type="button" class="keycap${(p || c) ? ' keycap-mapped' : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
+          kb.innerHTML = ROWS.filter(row => row.length).map(row => `<div class="ws-row">${row.map(k => {
+            const p = byKey[k], c = byChannel[k], f = byFn[k];
+            const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0] : f ? 'Video' : '';
+            const aria = p ? `Show project: ${p.name}` : c ? `Play channel ${c.ch}: ${c.title}` : f ? `Play AI video: ${f.title}` : '';
+            return `<button type="button" class="keycap${(p || c || f) ? ' keycap-mapped' : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
           }).join('')}</div>`).join('');
 
           function showIdle() {
             monitor.classList.remove('ws-showing-project');
             screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
-            status.textContent = `${Object.keys(byKey).length} projects mapped — lit keys open them`;
+            status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} channels · ${Object.keys(byFn).length} videos on F-keys`;
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
           }
           function markActive(key) {
@@ -1834,8 +1850,22 @@
             status.textContent = `channel ${c.ch} — ${c.title.toLowerCase()}`;
             markActive(key);
           }
+          function showVideo(v, key) {
+            monitor.classList.add('ws-showing-project');
+            monitor.classList.remove('ws-tune');
+            void monitor.offsetWidth;
+            monitor.classList.add('ws-tune');
+            screen.innerHTML = `<div class="ws-channel">
+              <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&mute=1&rel=0" title="${v.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+              <div class="ws-ch-meta"><span class="ws-ch-num">F${v.fn}</span> ${v.title}</div>
+            </div>`;
+            status.textContent = `F${v.fn} — ${v.title.toLowerCase()}`;
+            markActive(key);
+          }
           function press(key) {
             pressVisual(key);
+            const f = byFn[key];
+            if (f) { showVideo(f, key); return; }
             const p = byKey[key];
             if (p) { showProject(p, key); return; }
             const c = byChannel[key];
@@ -1862,10 +1892,18 @@
             if (!(e.target instanceof Element) || e.target.closest('input, textarea, [contenteditable]')) return;
             if (document.getElementById('lightbox')?.classList.contains('open')) return;
             const key = e.key.toUpperCase();
-            if (!/^[A-Z0-9]$/.test(key)) return;
+            const isFn = /^F([1-9]|1[0-2])$/.test(key);
+            if (!isFn && !/^[A-Z0-9]$/.test(key)) return;
             // only hijack typing while the workstation is in or near view
             const r = document.getElementById('workstation').getBoundingClientRect();
             if (r.bottom < 0 || r.top > window.innerHeight) return;
+            // F-keys carry browser defaults; only swallow mapped ones, and
+            // never the reserved reload/fullscreen/devtools keys — those
+            // videos stay reachable by clicking their keycap
+            if (isFn) {
+              if (!byFn[key] || key === 'F5' || key === 'F11' || key === 'F12') return;
+              e.preventDefault();
+            }
             press(key);
           });
           showIdle();
