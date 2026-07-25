@@ -1271,6 +1271,25 @@
           "caption": "With the Kaspa community at ETH Toronto"
         }
       ]
+    },
+    {
+      "type": "attended",
+      "title": "Shopify Rebellion — Actor",
+      "location": "Toronto",
+      "date": "June 2022",
+      "desc": "On set as an actor for a Shopify Rebellion esports production — suited up for the dinner-scene sketch.",
+      "image": "assets/events/ShopifyRebellionActor.webp",
+      "url": "https://www.youtube.com/watch?v=TMoPZ3rbJUk",
+      "highlights": [
+        {
+          "image": "assets/events/ShopifyRebellionStill1.webp",
+          "caption": "Dinner scene still — Shopify Rebellion shoot"
+        },
+        {
+          "image": "assets/events/ShopifyRebellionStill2.webp",
+          "caption": "On camera — Shopify Rebellion shoot"
+        }
+      ]
     }
   ],
   "education": [
