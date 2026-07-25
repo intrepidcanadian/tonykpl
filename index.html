@@ -593,6 +593,17 @@
       overflow: hidden; position: relative;
     }
     .ws-screen { min-height: 340px; position: relative; padding: clamp(18px, 3vw, 36px); display: grid; }
+    .ws-suit-layer { position: absolute; inset: 0; }
+    .ws-suit-layer canvas { width: 100%; height: 100%; display: block; }
+    .ws-showing-project .ws-suit-layer { display: none; }
+    .ws-overlay { position: relative; display: grid; min-width: 0; }
+    /* once the suit is dancing on screen, the center boot text yields to it */
+    .ws-suit-ready .ws-idle-center { display: none; }
+    .ws-idle-hint {
+      position: absolute; left: 14px; bottom: 10px; z-index: 1;
+      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.05em; pointer-events: none;
+    }
     .ws-screen::after {
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
@@ -1192,7 +1203,10 @@
              projects.grid entries that carry a "key" field. -->
         <div class="workstation" id="workstation">
           <div class="ws-monitor" id="ws-monitor">
-            <div class="ws-screen" id="ws-screen"></div>
+            <div class="ws-screen" id="ws-screen">
+              <div class="ws-suit-layer" id="ws-suit-layer" aria-hidden="true"></div>
+              <div class="ws-overlay" id="ws-overlay"></div>
+            </div>
             <div class="ws-statusline" id="ws-statusline"></div>
           </div>
           <div class="ws-keyboard" id="ws-keyboard" role="group" aria-label="Project selector keyboard"></div>
@@ -1627,7 +1641,7 @@
         // physical typing works too, and unmapped keys glitch the screen.
         (function initWorkstation() {
           const kb = document.getElementById('ws-keyboard');
-          const screen = document.getElementById('ws-screen');
+          const screen = document.getElementById('ws-overlay');
           const monitor = document.getElementById('ws-monitor');
           const status = document.getElementById('ws-statusline');
           if (!kb || !screen || !data.projects?.grid) return;
@@ -1645,8 +1659,11 @@
           }).join('')}</div>`).join('');
 
           function showIdle() {
-            screen.innerHTML = `<div class="ws-idle">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
+            monitor.classList.remove('ws-showing-project');
+            screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>
+              <div class="ws-idle-hint">lit keys open projects · other keys move the suit</div>`;
             status.textContent = `${Object.keys(byKey).length} projects mapped — lit keys open them`;
+            kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
           }
           function markActive(key) {
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
@@ -1654,6 +1671,7 @@
             if (cap) cap.classList.add('keycap-active');
           }
           function showProject(p, key) {
+            monitor.classList.add('ws-showing-project');
             screen.innerHTML = `<div class="ws-project${p.image ? '' : ' no-shot'}">
               ${p.image ? `<img class="ws-shot" src="${p.image}" alt="${p.name}">` : ''}
               <div>
@@ -1679,6 +1697,14 @@
             pressVisual(key);
             const p = byKey[key];
             if (p) { showProject(p, key); return; }
+            // unmapped key: hand the energy to the suit if it's on screen,
+            // otherwise fall back to the CRT glitch
+            if (window.__suitKick && monitor.classList.contains('ws-suit-ready')) {
+              if (monitor.classList.contains('ws-showing-project')) showIdle();
+              window.__suitKick();
+              status.textContent = `key '${key}' — the suit approves. lit keys open projects`;
+              return;
+            }
             monitor.classList.remove('ws-glitch');
             void monitor.offsetWidth;
             monitor.classList.add('ws-glitch');
@@ -2755,9 +2781,76 @@
 
           wrap.classList.add('coat-loaded');
           if (loading) loading.style.display = 'none';
+          initWsView(root);
         }, undefined, () => {
           if (loading) loading.textContent = 'Suit unavailable.';
         });
+
+        // ── workstation suit view — the same model cloned onto the CRT.
+        //    Its own scene/camera; unmapped workstation keys feed impulses
+        //    through window.__suitKick and the dancer spins, hops, tilts.
+        let wsView = null;
+        function initWsView(root) {
+          const layer = document.getElementById('ws-suit-layer');
+          const wsMonitor = document.getElementById('ws-monitor');
+          if (!layer || !wsMonitor) return;
+          const c2 = document.createElement('canvas');
+          c2.style.width = c2.style.height = '100%';
+          c2.style.display = 'block';
+          layer.appendChild(c2);
+          const r2 = new THREE.WebGLRenderer({ canvas: c2, antialias: true, alpha: true });
+          r2.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          const s2 = new THREE.Scene();
+          const cam2 = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+          cam2.position.set(0, 0.15, 4.6);
+          const dancer = root.clone(true);
+          s2.add(dancer);
+          const resize2 = () => {
+            const w = layer.clientWidth, h = layer.clientHeight;
+            if (w < 2 || h < 2) return;
+            cam2.aspect = w / h;
+            cam2.updateProjectionMatrix();
+            r2.setSize(w, h, false);
+          };
+          resize2();
+          new ResizeObserver(resize2).observe(layer);
+          wsView = {
+            renderer: r2, scene: s2, camera: cam2, dancer, monitor: wsMonitor, layer,
+            baseY: dancer.position.y, y: 0, yawVel: 0.004, hopVel: 0, tiltVel: 0,
+          };
+          wsMonitor.classList.add('ws-suit-ready');
+          window.__suitKick = () => {
+            if (!wsView || REDUCE_MOTION) return;
+            wsView.yawVel += (Math.random() < 0.5 ? -1 : 1) * (0.10 + Math.random() * 0.12);
+            wsView.hopVel = Math.max(wsView.hopVel, 0.026 + Math.random() * 0.022);
+            wsView.tiltVel += (Math.random() < 0.5 ? -1 : 1) * 0.028;
+          };
+          wsObs.observe(layer);
+          if (!raf) raf = requestAnimationFrame(animate);
+        }
+        function stepWsView() {
+          if (!wsView) return;
+          if (wsView.monitor.classList.contains('ws-showing-project')) return;
+          const rect = wsView.layer.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+          const v = wsView, d = v.dancer;
+          if (!REDUCE_MOTION) {
+            d.rotation.y += v.yawVel;
+            v.yawVel += (0.004 - v.yawVel) * 0.03;   // settle back to a lazy spin
+            v.y += v.hopVel;
+            v.hopVel -= 0.0032;
+            if (v.y <= 0) {
+              v.y = 0;
+              v.hopVel = v.hopVel < -0.008 ? -v.hopVel * 0.35 : 0;
+            }
+            d.position.y = v.baseY + v.y;
+            d.rotation.z = (d.rotation.z + v.tiltVel) * 0.92;
+            v.tiltVel *= 0.86;
+          } else {
+            d.rotation.y += 0.002;
+          }
+          v.renderer.render(v.scene, v.camera);
+        }
 
         // ── scroll-driven rotation ─────────────────────────────────────
         // The coat is sticky inside the Projects section. As the user
@@ -2782,11 +2875,11 @@
         window.addEventListener('scroll', updateTargetYaw, { passive: true });
         updateTargetYaw();
 
-        // ── loop, paused when off-screen ───────────────────────────────
-        let raf = 0, visible = true;
+        // ── loop, paused when both views are off-screen ────────────────
+        let raf = 0, visible = true, wsVisible = false;
         function animate() {
-          if (!visible) { raf = 0; return; }
-          if (coat) {
+          if (!visible && !wsVisible) { raf = 0; return; }
+          if (coat && visible) {
             if (REDUCE_MOTION) {
               coat.rotation.y = targetYaw;           // direct, no easing
             } else {
@@ -2794,16 +2887,24 @@
               coat.rotation.y += (targetYaw - coat.rotation.y) * 0.08;
             }
           }
-          controls.update();
-          renderer.render(scene, camera);
+          if (visible) {
+            controls.update();
+            renderer.render(scene, camera);
+          }
+          if (wsVisible) stepWsView();
           raf = requestAnimationFrame(animate);
         }
         const visObs = new IntersectionObserver((entries) => {
           visible = entries[0].isIntersecting;
-          if (visible && !raf) raf = requestAnimationFrame(animate);
-          else if (!visible) { cancelAnimationFrame(raf); raf = 0; }
+          if ((visible || wsVisible) && !raf) raf = requestAnimationFrame(animate);
+          else if (!visible && !wsVisible) { cancelAnimationFrame(raf); raf = 0; }
         }, { threshold: 0 });
         visObs.observe(wrap);
+        const wsObs = new IntersectionObserver((entries) => {
+          wsVisible = entries[0].isIntersecting;
+          if ((visible || wsVisible) && !raf) raf = requestAnimationFrame(animate);
+          else if (!visible && !wsVisible) { cancelAnimationFrame(raf); raf = 0; }
+        }, { threshold: 0 });
 
         // start once (the vis observer will also gate it)
         raf = requestAnimationFrame(animate);
