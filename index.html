@@ -599,11 +599,6 @@
     .ws-overlay { position: relative; display: grid; min-width: 0; }
     /* once the suit is dancing on screen, the center boot text yields to it */
     .ws-suit-ready .ws-idle-center { display: none; }
-    .ws-idle-hint {
-      position: absolute; left: 14px; bottom: 10px; z-index: 1;
-      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
-      letter-spacing: 0.05em; pointer-events: none;
-    }
     .ws-screen::after {
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
@@ -1660,8 +1655,7 @@
 
           function showIdle() {
             monitor.classList.remove('ws-showing-project');
-            screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>
-              <div class="ws-idle-hint">lit keys open projects · other keys move the suit</div>`;
+            screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
             status.textContent = `${Object.keys(byKey).length} projects mapped — lit keys open them`;
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
           }
@@ -1697,10 +1691,10 @@
             pressVisual(key);
             const p = byKey[key];
             if (p) { showProject(p, key); return; }
-            // unmapped key: hand the energy to the suit if it's on screen,
-            // otherwise fall back to the CRT glitch
+            // unmapped key: always leave the project view, then hand the
+            // energy to the suit if it's loaded (CRT glitch otherwise)
+            if (monitor.classList.contains('ws-showing-project')) showIdle();
             if (window.__suitKick && monitor.classList.contains('ws-suit-ready')) {
-              if (monitor.classList.contains('ws-showing-project')) showIdle();
               window.__suitKick();
               status.textContent = `key '${key}' — the suit approves. lit keys open projects`;
               return;
@@ -2593,13 +2587,17 @@
       // ── pre-fetch: kick off the three.js + model load when the section
       //    is ~200px from the viewport, so it's ready as the user arrives.
       const prefetch = new IntersectionObserver((entries, obs) => {
-        if (entries[0].isIntersecting && !started) {
+        if (entries.some(en => en.isIntersecting) && !started) {
           started = true;
           obs.disconnect();
           load();
         }
       }, { rootMargin: '200px 0px' });
       prefetch.observe(wrap);
+      // the workstation monitor (above the coat) also needs the model —
+      // start loading as soon as either is near the viewport
+      const ws = document.getElementById('workstation');
+      if (ws) prefetch.observe(ws);
 
       // If the section is already in view on load (e.g. anchor jump),
       // the observer above still fires — no separate fast-path needed.
