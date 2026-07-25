@@ -1248,7 +1248,8 @@
           "image": "assets/events/ETHGlobalNewYorkWorkshop.webp",
           "caption": "Workshop room — ETHGlobal New York"
         }
-      ]
+      ],
+      "video": "https://www.youtube.com/watch?v=hFmIAvEhLqo&list=PLXzKMXK2aHh7hzYpBqmzRrHOEE4RGpppJ"
     },
     {
       "type": "attended",
