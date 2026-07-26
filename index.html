@@ -551,6 +551,33 @@
       background: color-mix(in oklch, var(--surface) 55%, #000);
       overflow: hidden; position: relative;
     }
+    /* title bar — what is on screen, and the key that loaded it */
+    .ws-titlebar {
+      display: flex; align-items: baseline; gap: 10px;
+      padding: 10px 14px; min-height: 44px;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in oklch, var(--surface) 70%, #000);
+    }
+    .ws-tb-key {
+      flex: none; font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.08em; color: var(--accent);
+      border: 1px solid color-mix(in oklch, var(--accent) 45%, transparent);
+      border-radius: 4px; padding: 2px 6px; line-height: 1.4;
+      align-self: center;
+    }
+    .ws-tb-key:empty { display: none; }
+    .ws-tb-kicker {
+      flex: none; font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .ws-tb-title {
+      font-family: var(--font-display); font-size: clamp(15px, 1.6vw, 19px);
+      font-weight: 600; letter-spacing: -0.01em; color: var(--fg);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+    }
+    @media (max-width: 560px) {
+      .ws-tb-kicker { display: none; }
+    }
     .ws-screen { min-height: 340px; position: relative; padding: clamp(18px, 3vw, 36px); display: grid; }
     .ws-suit-layer { position: absolute; inset: 0; }
     .ws-suit-layer canvas { width: 100%; height: 100%; display: block; }
@@ -1170,12 +1197,6 @@
         <div class="giant-head" aria-hidden="true">Events</div>
         <h2 class="sr-only">Developer relations & community — events hosted and attended</h2>
 
-        <div class="events-filter" id="events-filter" role="group" aria-label="Filter events">
-          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter-btn" data-filter="hosted/speaking" aria-pressed="false">Hosted / Speaking</button>
-          <button class="filter-btn" data-filter="attended" aria-pressed="false">Attended</button>
-        </div>
-
         <div class="grid-3" id="events-grid">
           <!-- Static fallback — replaced by data.json at runtime -->
         </div>
@@ -1195,6 +1216,13 @@
              Nothing mapped to a key is repeated as a card below. -->
         <div class="workstation" id="workstation">
           <div class="ws-monitor" id="ws-monitor">
+            <!-- title bar on the chassis: says what is on screen and which
+                 key put it there, so the view is never ambiguous -->
+            <div class="ws-titlebar" id="ws-titlebar" aria-live="polite">
+              <span class="ws-tb-key" id="ws-tb-key"></span>
+              <span class="ws-tb-kicker" id="ws-tb-kicker"></span>
+              <span class="ws-tb-title" id="ws-tb-title"></span>
+            </div>
             <div class="ws-screen" id="ws-screen">
               <div class="ws-suit-layer" id="ws-suit-layer" aria-hidden="true"></div>
               <div class="ws-overlay" id="ws-overlay"></div>
@@ -1293,7 +1321,6 @@
         <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">GitHub</a>
         <a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">LinkedIn</a>
       </div>
-      <span class="meta">Toronto</span>
     </div>
   </footer>
 
@@ -1350,24 +1377,6 @@
       }, { passive: true });
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     })();
-
-    // Event filter — scoped to #events-filter only, works on dynamic cards
-    function bindFilters() {
-      const group = document.getElementById('events-filter');
-      if (!group) return;
-      group.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          group.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-          btn.classList.add('active');
-          btn.setAttribute('aria-pressed', 'true');
-          const f = btn.dataset.filter;
-          document.querySelectorAll('.event-card').forEach(c => {
-            c.classList.toggle('hidden', f !== 'all' && c.dataset.type !== f);
-          });
-        });
-      });
-    }
-    bindFilters();
 
     // ─── Data-driven rendering from data.json ───────────────────────
     // On load, fetch data.json and overlay dynamic content onto the
@@ -1552,8 +1561,20 @@
             </div>
           </div>`;
 
+          // title bar — kicker says what kind of thing is on screen, the
+          // badge says which key, so nothing on the monitor is ambiguous
+          const tbKey = document.getElementById('ws-tb-key');
+          const tbKicker = document.getElementById('ws-tb-kicker');
+          const tbTitle = document.getElementById('ws-tb-title');
+          function setTitle(key, kicker, title) {
+            if (!tbTitle) return;
+            tbKey.textContent = key || '';
+            tbKicker.textContent = kicker || '';
+            tbTitle.textContent = title || '';
+          }
           function showIdle() {
             monitor.classList.remove('ws-showing-project');
+            setTitle('', 'Tony_OS', 'Press a lit key to load it here');
             screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
             status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} builds · ${Object.keys(byDemo).length} demos · ${Object.keys(byFn).length} videos on F-keys · ${Object.keys(byPad).length} hackathons on the numpad`;
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
@@ -1577,6 +1598,7 @@
                 </div>
               </div>
             </div>`;
+            setTitle(key, 'Project', p.name);
             status.textContent = `~/projects/${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')} — key ${key}`;
             markActive(key);
           }
@@ -1596,8 +1618,9 @@
               : `<div class="ws-ch-imgs">${(c.images || []).map(s => `<img src="${s}" alt="${c.title}">`).join('')}</div>`;
             screen.innerHTML = `<div class="ws-channel">
               ${media}
-              <div class="ws-ch-meta"><span class="ws-ch-num">CH ${c.ch}</span> ${c.title}</div>
+              <div class="ws-ch-meta"><span class="ws-ch-num">CH ${c.ch}</span> ${c.desc || c.title}</div>
             </div>`;
+            setTitle(key, `Build · CH ${c.ch}`, c.title);
             status.textContent = `channel ${c.ch} — ${c.title.toLowerCase()}`;
             markActive(key);
           }
@@ -1608,8 +1631,9 @@
             monitor.classList.add('ws-tune');
             screen.innerHTML = `<div class="ws-channel">
               <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&mute=1&rel=0" title="${v.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-              <div class="ws-ch-meta"><span class="ws-ch-num">F${v.fn}</span> ${v.title}</div>
+              <div class="ws-ch-meta"><span class="ws-ch-num">F${v.fn}</span> ${v.desc || v.title}</div>
             </div>`;
+            setTitle('F' + v.fn, 'AI video', v.title);
             status.textContent = `F${v.fn} — ${v.title.toLowerCase()}`;
             markActive(key);
           }
@@ -1626,8 +1650,9 @@
               : `<div class="ws-ch-imgs">${shots.map(s => `<img src="${s}" alt="${m.title}">`).join('')}</div>`;
             screen.innerHTML = `<div class="ws-channel">
               ${media}
-              <div class="ws-ch-meta"><span class="ws-ch-num">${key}</span> ${m.title} — ${m.desc}</div>
+              <div class="ws-ch-meta">${m.desc}</div>
             </div>`;
+            setTitle(key, 'Demo', m.title);
             status.textContent = `demo ${key} — ${m.title.toLowerCase()}`;
             markActive(key);
           }
@@ -1650,6 +1675,7 @@
                 </div>
               </div>
             </div>`;
+            setTitle(key, 'Hackathon', h.title);
             status.textContent = `hackathon ${key} — ${h.title.toLowerCase()}`;
             markActive(key);
           }
@@ -1760,7 +1786,6 @@
                 </div>
               </div>`;
             }).join('');
-            bindFilters(); // rebind after dynamic render
           }
         }
       })
