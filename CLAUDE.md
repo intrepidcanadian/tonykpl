@@ -5,6 +5,8 @@
 ```
 portfolio/
 ├── index.html              ← Single self-contained site (OD web-prototype skill)
+├── other/index.html        ← /other — "Beyond the resume" personal photos
+├── posts/index.html        ← /posts — LinkedIn posts & highlights
 ├── data.json               ← ALL dynamic content lives here — edit this to update the site
 ├── CLAUDE.md               ← You're reading this
 ├── 2026 Tony Lau Resume.pdf
@@ -72,6 +74,24 @@ for a lighter file, 1:10M for max detail).
 
 This portfolio uses a **data-driven architecture**. All content is defined in `data.json` and rendered by `index.html` at load time. To update content:
 
+### The workstation is the Projects section
+
+There are no project/video/demo card grids any more — the keyboard IS the
+section. Everything with a key mapping shows on the CRT monitor, and nothing
+mapped to a key is duplicated as a card elsewhere on the page:
+
+| Keys | Source | Shown as |
+|---|---|---|
+| A–Z letters | `projects.featured` + `projects.grid[]` (`key`) | screenshot + tags + repo/live links |
+| A–Z letters | `tinkering[]` (`key`) | local mp4 playing as a "channel" |
+| A–Z letters | `videosSoftware[]` (`key`) | YouTube embed, or a strip of `thumbnails` |
+| F1–F12 | `videos[]`, in array order | YouTube embed |
+| Numpad 1–9, 0 | any `events[]` / `videosSoftware[]` / `posts[]` entry with a `hack` number | photo + description + link |
+
+So: give an entry a `key` (or a `hack` slot) and it appears — pick a letter no
+other entry uses. Events keep their own card grid as well; that duplication is
+deliberate (the cards carry photos, filters and the timeline).
+
 ### Adding a new project
 1. Add an entry to `projects.grid[]` in `data.json`:
    ```json
@@ -84,9 +104,10 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
      "image": "assets/projects/screenshot.png"
    }
    ```
-   `key` (optional) is the keyboard letter that loads the project onto the
-   workstation monitor — pick an unused A–Z/0–9 key (check the other entries).
-   `url` (optional) overrides `github` as the card link (e.g. live demo).
+   `key` is the keyboard letter that loads the project onto the workstation
+   monitor — pick an unused A–Z key (check the other entries). Without a `key`
+   the project is not reachable anywhere on the page.
+   `url` (optional) renders an extra "Open" button next to "Source".
 2. Optionally drop a screenshot into `assets/projects/`
 
 ### Adding an event
@@ -108,24 +129,37 @@ This portfolio uses a **data-driven architecture**. All content is defined in `d
 2. Drop the photo into `assets/events/`
 
 ### Adding a video
-There are three video collections in `data.json`:
-- `videos[]` — "AI-produced videos" grid (purely creative productions, e.g. StarCraft broadcasts)
-- `videosSoftware[]` — "Software · Hackathons · Other" grid (hackathon demos, appearances)
-- `tinkering[]` — "Tinkering" grid of locally-hosted mp4s (`video` + `poster` fields; keep mp4s ≤ ~10 MB, 720p). Entries also become workstation "channels" on the number keys, in array order (1–9, then 0)
+There are three video collections in `data.json`, all of them keyboard-only:
+- `videos[]` — AI-produced videos (purely creative productions, e.g. StarCraft broadcasts). Mapped to F1, F2, … in array order, so keep the list ≤ 12
+- `videosSoftware[]` — demos & appearances. Needs a `key` (letter) or a `hack` (numpad slot); without one it renders nowhere
+- `tinkering[]` — locally-hosted mp4s (`video` + `poster`; keep mp4s ≤ ~10 MB, 720p). Needs a `key`; the "channel number" on the monitor comes from array order
 
 1. Add an entry to the right array in `data.json`:
    ```json
    {
      "title": "Video Title",
+     "key": "K",
      "desc": "Short description",
-     "url": "https://youtu.be/VIDEO_ID",
-     "thumbnail": "assets/videos/thumb.jpg"
+     "url": "https://youtu.be/VIDEO_ID"
    }
    ```
-   Instead of a single `thumbnail`, an entry may use `"thumbnails": ["a.webp", "b.webp"]` —
-   the card then shows the images side by side (used for video screenshots).
-   If both are omitted, the YouTube thumbnail is used automatically.
+   A `videosSoftware` entry with no `url` shows its `thumbnails: ["a.webp", "b.webp"]`
+   side by side on the monitor instead of an embed (used for app showcases).
 2. Optionally drop thumbnails/screenshots into `assets/videos/`
+
+### The /other and /posts pages
+Two collections live off the landing page, each in its own standalone file
+linked from the footer:
+
+- `other/index.html` → `/other/` — personal photos, from `other[]`
+- `posts/index.html` → `/posts/` — LinkedIn embeds, from `posts[]` (all of
+  them, not just the recent 6 the landing page used to show)
+
+Both carry their own copy of the tokens and chrome — there is no build step, so
+keep them in visual sync by hand if the design system changes. Both read
+`../data.json`, so asset paths in those arrays stay relative to the root.
+A post only renders if its `url` contains an `activity-<id>` or `ugcPost-<id>`
+segment — that id is what LinkedIn's embed endpoint needs.
 
 ### Updating profile photo
 1. Drop the photo into `assets/photos/`

@@ -410,87 +410,7 @@
 
     .rule { border: 0; border-top: 1px solid var(--border); margin: 0; }
 
-    /* ═══ CUSTOM: project cards ═══════════════════════════════════════ */
-    .project-link {
-      display: block; text-decoration: none; color: inherit;
-      transition: transform 0.15s ease;
-    }
-    .project-link:hover { transform: translateY(-2px); }
-    .project-link:hover .card { border-color: var(--accent); }
-    .project-link .card { display: flex; flex-direction: column; height: 100%; }
-    .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--gap-md); color: var(--muted); }
-    .project-arrow { font-size: 18px; transition: color 0.15s ease; }
-    .project-link:hover .project-arrow { color: var(--accent); }
-    .project-desc { color: var(--muted); font-size: 15px; margin: 6px 0 var(--gap-md); flex: 1; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    /* ═══ CUSTOM: featured project ═══════════════════════════════════ */
-    .featured {
-      background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent);
-      border-radius: var(--radius-lg); padding: 36px;
-      display: grid; grid-template-columns: 1fr 300px; gap: var(--gap-xl); align-items: center;
-      margin-bottom: var(--gap-xl);
-    }
-    .featured h3 { margin-bottom: 4px; }
-    .featured-sub { color: var(--accent); font-size: 14px; font-weight: 500; margin-bottom: var(--gap-md); }
-    .featured-body { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: var(--gap-md); }
-    .featured-links { display: flex; gap: var(--gap-sm); margin-top: var(--gap-md); }
-    .featured-links .btn { font-size: 13px; padding: 7px 14px; }
-    .featured-preview {
-      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .preview-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
-    .preview-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
-    .preview-url { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
-    .preview-body { height: 160px; display: grid; place-items: center; color: var(--muted); font-size: 14px; }
-    @media (max-width: 920px) { .featured { grid-template-columns: 1fr; } .featured-preview { display: none; } }
-
-    /* ═══ CUSTOM: video mosaic ═════════════════════════════════════ */
-    .video-mosaic {
-      display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px;
-    }
-    .video-link { display: block; text-decoration: none; color: inherit; cursor: pointer; }
-    .video-link:hover .video-card { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
-    .video-link:hover .video-thumb img { transform: scale(1.04); }
-    .video-card {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
-      overflow: hidden; background: var(--surface);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .video-thumb {
-      position: relative; aspect-ratio: 16/9; overflow: hidden;
-      background: linear-gradient(135deg, var(--accent-soft), var(--fg-soft));
-    }
-    .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-    .video-thumb.multi { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; }
-    .video-thumb.multi img { min-width: 0; }
-    /* extra screenshots — small corner thumbs that open the lightbox */
-    .video-extra-shots { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; z-index: 2; }
-    .video-extra-shots img {
-      width: 56px; height: 36px; object-fit: cover; border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 2px 10px rgba(0,0,0,0.45);
-      cursor: zoom-in; transition: transform 0.15s ease;
-    }
-    .video-extra-shots img:hover { transform: scale(1.12); }
-    .video-thumb .play-btn {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 48px; height: 48px; border-radius: 50%;
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-      display: grid; place-items: center; color: #fff;
-    }
-    .video-thumb .play-btn svg { margin-left: 3px; }
-    .video-meta { padding: 16px; }
-    .video-meta h3 { font-size: 15px; margin: 0 0 4px; }
-    .video-meta p { margin: 0; color: var(--muted); font-size: 13px; }
-    @media (max-width: 960px) {
-      .video-mosaic { grid-template-columns: 1fr; }
-      .video-mosaic > * { grid-column: span 1 !important; }
-    }
-
     /* ═══ CUSTOM: LinkedIn post embeds ════════════════════════════ */
-    .post-embed { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-    .post-embed iframe { width: 100%; border: none; min-height: 500px; }
 
     /* ═══ CUSTOM: event cards ═══════════════════════════════════════ */
     .event-card {
@@ -739,22 +659,6 @@
       .ws-screen { min-height: 250px; }
     }
 
-    /* ═══ CUSTOM: personal photo grid (Other) ═════════════════════════ */
-    .other-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .other-card { margin: 0; }
-    .other-card img {
-      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
-      border-radius: var(--radius-lg); border: 1px solid var(--border);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-    .other-card img:hover { transform: translateY(-2px); border-color: var(--muted); }
-    .other-card figcaption {
-      margin-top: 8px; font-family: var(--font-mono); font-size: 11px;
-      color: var(--muted); letter-spacing: 0.03em;
-    }
-    @media (max-width: 920px) { .other-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .other-grid { grid-template-columns: 1fr; } }
-
     /* ═══ CUSTOM: company / institution logo wall ═════════════════════ */
     .logo-wall-label {
       font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
@@ -838,19 +742,6 @@
       content: ''; position: absolute; left: 0; right: 0; bottom: -16px; height: 2px;
       background: var(--accent); border-radius: 2px;
     }
-
-    /* ═══ CUSTOM: featured preview image / honest fallback ════════════ */
-    .featured-preview { cursor: pointer; }
-    .featured-preview .preview-body { position: relative; padding: 0; overflow: hidden; }
-    .featured-preview img.preview-shot {
-      width: 100%; height: 100%; min-height: 160px; object-fit: cover; object-position: top;
-      display: block;
-    }
-    .featured-preview .preview-fallback {
-      height: 160px; display: grid; place-items: center; color: var(--muted);
-      font-family: var(--font-mono); font-size: 13px; gap: 8px; text-align: center;
-    }
-    .featured-preview .preview-fallback a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
     /* ═══ CUSTOM: hero collage loading bg ═════════════════════════════ */
     .hero-collage {
@@ -988,28 +879,6 @@
       .coat-wrap { height: clamp(360px, 56vh, 480px); }
     }
 
-    /* ═══ CUSTOM: projects + sticky coat split layout ════════════════ */
-    /* Two-column split: featured + single-column project cards on the left,
-       the static coat pinned (sticky) on the right while projects scroll.
-       align-items: start lets the right column stick without stretching. */
-    .projects-coat-split {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: var(--gap-xl);
-      align-items: start;
-    }
-    .projects-coat-split > .coat-sticky {
-      position: sticky;
-      top: 96px; /* clear the sticky nav (~60px) plus breathing room */
-    }
-    /* coat is shorter in a column than it was full-width */
-    .projects-coat-split .coat-wrap { height: clamp(380px, 60vh, 560px); }
-    @media (max-width: 920px) {
-      .projects-coat-split { grid-template-columns: 1fr; }
-      .projects-coat-split > .coat-sticky { position: static; }
-      .projects-coat-split .coat-wrap { height: clamp(360px, 56vh, 480px); }
-    }
-
     /* ═══ CUSTOM: reduced motion ═════════════════════════════════════ */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -1019,9 +888,7 @@
         transition-duration: 0.001ms !important;
         scroll-behavior: auto !important;
       }
-      .hero-collage .collage-cell img,
-      .video-link:hover .video-thumb img,
-      .project-link, .video-card { transform: none !important; }
+      .hero-collage .collage-cell img { transform: none !important; }
       /* curtain becomes a static, faint backdrop — no physics loop */
       .hero-curtain { opacity: 0.5; }
       /* scroll-reveal: show everything immediately, no motion */
@@ -1054,7 +921,7 @@
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#events">Events</a>
-        <a href="#projects">Projects</a>
+        <a href="#projects">Demos</a>
         <a href="#github">GitHub</a>
         <a href="#contact">Contact</a>
         <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
@@ -1078,7 +945,7 @@
           <h1 data-curtain-avoid>Tony Lau</h1>
           <p class="lead" data-curtain-avoid style="margin-top: 20px;">Finance professional, software engineer, entrepreneur. I have built skills in M&amp;A due diligence, financial modelling, AI video production, blockchain, fintech and artificial intelligence.</p>
           <div class="hero-cta" data-curtain-avoid style="margin-top: 28px;">
-            <a href="#projects" class="btn btn-primary">View projects</a>
+            <a href="#projects" class="btn btn-primary">View demos</a>
             <a href="https://github.com/Intrepidcanadian" class="btn btn-ghost btn-arrow" target="_blank" rel="noopener">GitHub</a>
             <a href="mailto:tony.kp.lau@gmail.com" class="btn btn-ghost">Email me</a>
           </div>
@@ -1318,13 +1185,14 @@
     <!-- ─── PROJECTS ──────────────────────────────────────────────── -->
     <section class="section section-clip zone-cool" data-od-id="projects" id="projects">
       <div class="container">
-        <div class="giant-head" aria-hidden="true">Projects</div>
-        <h2 class="sr-only">Software & open source</h2>
-        <p class="lead" style="margin-bottom: var(--gap-xl); position: relative;">View all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
+        <div class="giant-head" aria-hidden="true">Demos</div>
+        <h2 class="sr-only">Demos — software, open source, builds and hackathons</h2>
+        <p class="lead" style="margin-bottom: var(--gap-xl); position: relative;">Every repo, build, video and hackathon is on a key below &mdash; press a lit one, or view all on <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">GitHub</a>.</p>
 
-        <!-- Workstation — keyboard-driven project explorer (stage 1).
-             Lit keycaps load a project onto the monitor; renders from
-             projects.grid entries that carry a "key" field. -->
+        <!-- Workstation — the whole projects section in one device. Letter
+             keys load a repo or a tinkering build onto the monitor, F-keys
+             play the AI-produced videos, the numpad opens hackathons.
+             Nothing mapped to a key is repeated as a card below. -->
         <div class="workstation" id="workstation">
           <div class="ws-monitor" id="ws-monitor">
             <div class="ws-screen" id="ws-screen">
@@ -1336,142 +1204,19 @@
           <div class="ws-keyboard" id="ws-keyboard" role="group" aria-label="Project selector keyboard"></div>
         </div>
 
-        <!-- Two-column split: projects on the left, sticky coat on the right -->
-        <div class="projects-coat-split">
-          <div>
-            <!-- Featured -->
-            <div class="featured">
-          <div>
-            <span class="pill">Featured</span>
-            <h3 style="margin-top: var(--gap-md);">CYM Studio</h3>
-            <p class="featured-sub">AI video production + gasless gift-card redemption on Conflux eSpace</p>
-            <p class="featured-body">Full-stack platform for AI-powered video production with an integrated rewards system. Tournament winners redeem real-world gift cards across 300+ brands using USDT0 — no gas needed.</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--gap-md);">
-              <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Solidity</span><span class="tag">Conflux</span><span class="tag">USDT0</span>
-            </div>
-            <div class="featured-links">
-              <a href="https://cymstudio.app" class="btn btn-primary" target="_blank" rel="noopener" style="font-size:13px;padding:7px 14px;">Live site &nearr;</a>
-              <a href="https://github.com/Intrepidcanadian/cymstudios" class="btn btn-secondary" target="_blank" rel="noopener" style="font-size:13px;padding:7px 14px;">Source</a>
-            </div>
-          </div>
-          <a href="https://cymstudio.app" class="featured-preview" target="_blank" rel="noopener" id="featured-preview">
-            <div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-url">cymstudio.app</span></div>
-            <div class="preview-body">
-              <!-- Drop a screenshot at assets/projects/cymstudio.webp and it renders here.
-                   See data.json → projects.featured.image -->
-            </div>
-          </a>
-        </div>
-
-        <!-- Grid -->
-        <div class="stack" id="projects-grid" style="gap: var(--gap-md);">
-          <a href="https://github.com/Intrepidcanadian/nanobot" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Nanobot</h3>
-            <p class="project-desc">Ultra-lightweight personal AI assistant — 99% fewer lines of code than OpenClaw. Multi-platform chat integration.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">AI Agent</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/pulse520-releases" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Pulse520</h3>
-            <p class="project-desc">Ultra-lightweight personal AI assistant with desktop app. ~4,000 lines delivering core agent functionality.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">Desktop</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/open-design" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Open Design</h3>
-            <p class="project-desc">Open-source alternative to Claude Design. 31 skills, 72 design systems, sandboxed preview, multi-format export.</p>
-            <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Design</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/trailermaking" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Trailer Maker</h3>
-            <p class="project-desc">Concept-to-theatrical-trailer pipeline. Claude + Seedance 2.0 + ffmpeg with human-in-the-loop review.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">AI Video</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/learnpedia" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Learnpedia</h3>
-            <p class="project-desc">Personal wiki for AI video production — prompts, camera angles, lighting, character consistency, motion.</p>
-            <div class="project-tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/conflux-bounties" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Conflux Bounties</h3>
-            <p class="project-desc">Developer bounties program for the Conflux Network ecosystem. Open-source projects and incentives for builders.</p>
-            <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Blockchain</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/predictionmarketbot" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Prediction Market Bot</h3>
-            <p class="project-desc">Automated trading bot for prediction markets with AI-powered analysis and risk management.</p>
-            <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Trading</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/SCHULICH-FINE-TLAU" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 6 3 6 3s3 0 6-3v-5"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Schulich FINE6280</h3>
-            <p class="project-desc">Course materials for graduate-level Fintech: Digital Transformation of Financial Services.</p>
-            <div class="project-tags"><span class="tag">HTML</span><span class="tag">Education</span></div></div>
-          </a>
-          <a href="https://github.com/Intrepidcanadian/browser-use" class="project-link" target="_blank" rel="noopener">
-            <div class="card"><div class="project-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="project-arrow">&nearr;</span></div>
-            <h3>Browser Use</h3>
-            <p class="project-desc">Making websites accessible for AI agents — Chrome extension and RESTful API for browser automation.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">AI Agents</span></div></div>
-          </a>
-        </div>
-          </div><!-- /left column (featured + project list) -->
-
-          <!-- RIGHT: sticky static coat -->
-          <div class="coat-sticky">
-            <p class="eyebrow" data-reveal>The finance × code suit</p>
-            <h2 data-reveal style="max-width: 22ch; font-size: clamp(26px, 3vw, 34px);">Building skills</h2>
-            <div class="coat-wrap" id="coat-wrap" style="margin-top: var(--gap-md);">
-              <div class="coat-loading" id="coat-loading">Loading the suit&hellip;</div>
-              <!-- three.js canvas mounts here when scrolled into view -->
-            </div>
-            <p class="coat-attribution">Source: 3D model "Fancy Tailcoat Suit" by <a href="https://sketchfab.com/3d-models/fancy-tailcoat-suit-39205a46de554a2aa1645f85fdd3c7c2" target="_blank" rel="noopener">LuuHung</a> &middot; CC-BY-4.0</p>
-          </div>
-        </div><!-- /projects-coat-split -->
-
-        <!-- Tinkering / lab builds -->
-        <h3 class="sr-only">Tinkering — lab builds</h3>
-        <div class="video-mosaic" id="tinkering-grid" style="margin-top: var(--gap-xl);"></div>
-
-        <!-- Software, hackathons & other -->
-        <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
-        <p class="eyebrow">Software &middot; Hackathons &middot; Other</p>
-        <h3 style="margin-bottom: var(--gap-md);">Hackathon demos &amp; appearances</h3>
-        <div class="video-mosaic" id="videos-software-grid"></div>
-
-        <!-- Video work -->
-        <hr class="rule" style="margin-top: var(--gap-xl); margin-bottom: var(--gap-xl);">
-        <p class="eyebrow">Video Work</p>
-        <h3 style="margin-bottom: var(--gap-md);">AI-produced videos</h3>
-        <div class="video-mosaic" id="videos-grid">
-        </div>
+        <!-- The dancing suit lives on the CRT above (unmapped keys kick it),
+             so its CC-BY attribution rides with the workstation. -->
+        <p class="coat-attribution" style="margin-top: var(--gap-md);">Suit on screen: 3D model "Fancy Tailcoat Suit" by <a href="https://sketchfab.com/3d-models/fancy-tailcoat-suit-39205a46de554a2aa1645f85fdd3c7c2" target="_blank" rel="noopener">LuuHung</a> &middot; CC-BY-4.0</p>
 
       </div>
     </section>
 
-    <!-- ─── LINKEDIN POSTS ──────────────────────────────────────────── -->
-    <section class="section" data-od-id="posts" id="posts">
-      <div class="container pull-up">
-        <p class="eyebrow">LinkedIn</p>
-        <h3 class="sr-only">Posts & highlights</h3>
-        <div class="grid-3" id="posts-grid"></div>
-      </div>
-    </section>
+    <!-- LinkedIn posts now live on their own page at /posts —
+         see posts/index.html, same data.json → posts[] -->
 
     <!-- ─── GITHUB ACTIVITY ────────────────────────────────────────── -->
-    <!-- ─── OTHER (personal photos) ─────────────────────────────────── -->
-    <section class="section zone-warm" data-od-id="other" id="other">
-      <div class="container">
-        <p class="eyebrow" data-reveal>Other</p>
-        <h3 style="margin-bottom: var(--gap-md);">Beyond the resume</h3>
-        <div class="other-grid" id="other-grid"></div>
-      </div>
-    </section>
+    <!-- Personal photos ("Beyond the resume") now live on their own page
+         at /other — see other/index.html, same data.json → other[] -->
 
     <!-- ─── EDUCATION ─────────────────────────────────────────────── -->
     <section class="section zone-violet" data-od-id="education" id="education">
@@ -1542,11 +1287,13 @@
     <div class="container row-between">
       <span>&copy; 2026 Tony Lau</span>
       <div class="row" style="gap: var(--gap-md);">
+        <a href="/posts/" class="meta" style="color: var(--muted);">LinkedIn posts</a>
+        <a href="/other/" class="meta" style="color: var(--muted);">Beyond the resume</a>
         <a href="mailto:tony.kp.lau@gmail.com" class="meta" style="color: var(--muted);">Email</a>
         <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">GitHub</a>
         <a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">LinkedIn</a>
       </div>
-      <span class="meta">Built with Open Design &middot; Toronto</span>
+      <span class="meta">Toronto</span>
     </div>
   </footer>
 
@@ -1743,41 +1490,6 @@
         window.addEventListener('resize', () => requestAnimationFrame(updateExpRail), { passive: true });
         updateExpRail();
 
-        // Featured project preview image — populates the preview frame if a
-        // screenshot is provided at projects.featured.image, else shows an
-        // honest fallback. Drop the file in assets/projects/ and set the path.
-        if (data.projects?.featured?.image) {
-          const previewBody = document.querySelector('#featured-preview .preview-body');
-          if (previewBody) {
-            previewBody.innerHTML = `<img class="preview-shot" src="${data.projects.featured.image}" alt="CYM Studio screenshot" loading="lazy">`;
-          }
-        } else {
-          const previewBody = document.querySelector('#featured-preview .preview-body');
-          if (previewBody) {
-            previewBody.innerHTML = `<div class="preview-fallback"><span>Screenshot coming soon</span><a href="${data.projects?.featured?.url || 'https://cymstudio.app'}" target="_blank" rel="noopener">Visit cymstudio.app &nearr;</a></div>`;
-          }
-        }
-
-        // Projects grid
-        if (data.projects?.grid) {
-          const projGrid = document.getElementById('projects-grid');
-          if (projGrid) {
-            projGrid.innerHTML = data.projects.grid.map(p => `
-              <a href="${p.url || p.github}" class="project-link" target="_blank" rel="noopener">
-                <div class="card">
-                  <div class="project-header">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                    <span class="project-arrow">&nearr;</span>
-                  </div>
-                  ${p.image ? `<div style="height:120px;background:url(${p.image}) center/cover;border-radius:var(--radius);margin-bottom:var(--gap-md);"></div>` : ''}
-                  <h3>${p.name}</h3>
-                  <p class="project-desc">${p.desc}</p>
-                  <div class="project-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                </div>
-              </a>`).join('');
-          }
-        }
-
         // Workstation — stage 1: lit keycaps load projects onto the monitor;
         // physical typing works too, and unmapped keys glitch the screen.
         (function initWorkstation() {
@@ -1802,6 +1514,12 @@
             const id = ytId(v.url || '');
             if (id) byFn['F' + (i + 1)] = { ...v, id, fn: i + 1 };
           });
+          // demos & appearances — software-grid entries that carry a `key`
+          // instead of a numpad `hack` slot (YouTube demos, app showcases)
+          const byDemo = {};
+          (data.videosSoftware || []).forEach(v => {
+            if (v.key) byDemo[v.key.toUpperCase()] = { ...v, id: ytId(v.url || '') };
+          });
           // numpad = hackathons, slot given by each entry's `hack` number
           // (drawn from events, the software video grid, and posts)
           const byPad = {};
@@ -1815,12 +1533,14 @@
             ['Z','X','C','V','B','N','M']
           ];
           const cap = (k, extra) => {
-            const p = byKey[k], c = byChannel[k], f = byFn[k], h = byPad[k];
+            const p = byKey[k], c = byChannel[k], f = byFn[k], h = byPad[k], m = byDemo[k];
             const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0]
-              : f ? 'Video' : h ? (h.title.split(/[ —]/)[0] || 'Hack') : '';
+              : f ? 'Video' : h ? (h.title.split(/[ —]/)[0] || 'Hack')
+              : m ? (m.title.split(/[ —]/)[0] || 'Demo') : '';
             const aria = p ? `Show project: ${p.name}` : c ? `Play build: ${c.title}`
-              : f ? `Play AI video: ${f.title}` : h ? `Show hackathon: ${h.title}` : '';
-            return `<button type="button" class="keycap${(p || c || f || h) ? ' keycap-mapped' : ''}${extra ? ' ' + extra : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
+              : f ? `Play AI video: ${f.title}` : h ? `Show hackathon: ${h.title}`
+              : m ? `Show demo: ${m.title}` : '';
+            return `<button type="button" class="keycap${(p || c || f || h || m) ? ' keycap-mapped' : ''}${extra ? ' ' + extra : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
           };
           const PAD = [['7','8','9'], ['4','5','6'], ['1','2','3']];
           kb.innerHTML = `<div class="ws-kb-wrap">
@@ -1835,7 +1555,7 @@
           function showIdle() {
             monitor.classList.remove('ws-showing-project');
             screen.innerHTML = `<div class="ws-idle ws-idle-center">TONY_OS v1.0 — project explorer<br>press a lit key on the keyboard below<br><span class="ws-cursor"></span></div>`;
-            status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} builds · ${Object.keys(byFn).length} videos on F-keys · ${Object.keys(byPad).length} hackathons on the numpad`;
+            status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} builds · ${Object.keys(byDemo).length} demos · ${Object.keys(byFn).length} videos on F-keys · ${Object.keys(byPad).length} hackathons on the numpad`;
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
           }
           function markActive(key) {
@@ -1893,6 +1613,24 @@
             status.textContent = `F${v.fn} — ${v.title.toLowerCase()}`;
             markActive(key);
           }
+          // demos & appearances — a YouTube demo embeds, an entry with only
+          // screenshots (e.g. the Translator app) shows them side by side
+          function showDemo(m, key) {
+            monitor.classList.add('ws-showing-project');
+            monitor.classList.remove('ws-tune');
+            void monitor.offsetWidth;
+            monitor.classList.add('ws-tune');
+            const shots = m.thumbnails || (m.thumbnail ? [m.thumbnail] : []);
+            const media = m.id
+              ? `<iframe src="https://www.youtube-nocookie.com/embed/${m.id}?autoplay=1&mute=1&rel=0" title="${m.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+              : `<div class="ws-ch-imgs">${shots.map(s => `<img src="${s}" alt="${m.title}">`).join('')}</div>`;
+            screen.innerHTML = `<div class="ws-channel">
+              ${media}
+              <div class="ws-ch-meta"><span class="ws-ch-num">${key}</span> ${m.title} — ${m.desc}</div>
+            </div>`;
+            status.textContent = `demo ${key} — ${m.title.toLowerCase()}`;
+            markActive(key);
+          }
           function showHack(h, key) {
             monitor.classList.add('ws-showing-project');
             const shot = h.image || (h.thumbnails || [])[0] || h.thumbnail;
@@ -1925,6 +1663,8 @@
             if (p) { showProject(p, key); return; }
             const c = byChannel[key];
             if (c) { showChannel(c, key); return; }
+            const m = byDemo[key];
+            if (m) { showDemo(m, key); return; }
             // unmapped key: always leave the project view, then hand the
             // energy to the suit if it's loaded (CRT glitch otherwise)
             if (monitor.classList.contains('ws-showing-project')) showIdle();
@@ -1964,50 +1704,6 @@
           showIdle();
         })();
 
-        // Videos — shared card renderer for the software/hackathon grid and
-        // the AI-produced grid. Cards accept `thumbnails` (multi-image strip)
-        // or a single `thumbnail`, falling back to the YouTube thumb.
-        function renderVideoGrid(list, gridId, cols) {
-          const grid = document.getElementById(gridId);
-          if (!grid || !list) return;
-          function ytThumb(url) {
-            const m = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/);
-            return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : null;
-          }
-          const playIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-          grid.innerHTML = list.map((v, i) => {
-            const single = v.thumbnail || (v.url ? ytThumb(v.url) : null);
-            const thumbs = (v.thumbnails && v.thumbnails.length) ? v.thumbnails : (single ? [single] : []);
-            const span = cols[i % cols.length];
-            const main = thumbs[0];
-            const extras = thumbs.slice(1);
-            // link-less entries (e.g. app showcases) get no play button and
-            // their main shot opens in the lightbox instead of navigating
-            const mainImg = main ? (v.url
-              ? `<img src="${main}" alt="${v.title}" loading="lazy">`
-              : `<img src="${main}" alt="${v.title}" data-caption="${v.title}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge screenshot from ${v.title}" data-lb-trigger>`) : '';
-            const card = `
-              <div class="video-card">
-                <div class="video-thumb">
-                  ${mainImg}
-                  ${v.url ? `<div class="play-btn">${playIcon}</div>` : ''}
-                  ${extras.length ? `<div class="video-extra-shots">${extras.map((t, n) =>
-                    `<img src="${t}" alt="${v.title} — screenshot ${n + 2}" data-caption="${v.title}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge screenshot from ${v.title}" data-lb-trigger>`
-                  ).join('')}</div>` : ''}
-                </div>
-                <div class="video-meta">
-                  <h3>${v.title}</h3>
-                  <p>${v.desc}</p>
-                </div>
-              </div>`;
-            return v.url
-              ? `<a href="${v.url}" class="video-link" target="_blank" rel="noopener" style="grid-column: span ${span};">${card}</a>`
-              : `<div class="video-link" style="grid-column: span ${span};">${card}</div>`;
-          }).join('');
-        }
-        renderVideoGrid(data.videosSoftware, 'videos-software-grid', [7, 5, 12]);
-        renderVideoGrid(data.videos, 'videos-grid', [7, 5, 4, 4, 4, 12]);
-
         // Education — diploma wall: marquee degree cards + certification row.
         // Entries with tier "degree" go to the marquee; the rest to extras.
         if (data.education) {
@@ -2034,78 +1730,13 @@
           if (extras) extras.innerHTML = data.education.filter(e => e.tier !== 'degree').map(e => eduCard(e, true)).join('');
         }
 
-        // Tinkering
-        if (data.tinkering) {
-          const tGrid = document.getElementById('tinkering-grid');
-          if (tGrid) {
-            const tCols = [7, 5];
-            tGrid.innerHTML = data.tinkering.map((t, i) => {
-              const span = tCols[i % tCols.length];
-              const media = t.video
-                ? `<video src="${t.video}" controls preload="none"${t.poster ? ` poster="${t.poster}"` : ''} style="width:100%;height:100%;object-fit:cover;"></video>`
-                : (t.images || []).map(src => `<img src="${src}" alt="${t.title}" loading="lazy">`).join('');
-              return `
-              <div class="video-card" style="grid-column: span ${span};">
-                <div class="video-thumb${!t.video && t.images && t.images.length > 1 ? ' multi' : ''}" style="aspect-ratio:16/9;">
-                  ${media}
-                </div>
-                <div class="video-meta">
-                  <h3>${t.title}</h3>
-                  <p>${t.desc}</p>
-                </div>
-              </div>`;
-            }).join('');
-          }
-        }
-
-        // Other — personal photos, click to enlarge in the lightbox
-        if (data.other) {
-          const oGrid = document.getElementById('other-grid');
-          if (oGrid) {
-            oGrid.innerHTML = data.other.map(o => `
-              <figure class="other-card">
-                <img src="${o.image}" alt="${o.caption}" data-caption="${o.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${o.caption}" data-lb-trigger>
-                <figcaption>${o.caption}</figcaption>
-              </figure>`).join('');
-          }
-        }
-
-        // LinkedIn Posts — feature the most recent 6, link out for the rest
-        if (data.posts) {
-          const postGrid = document.getElementById('posts-grid');
-          if (postGrid) {
-            function liEmbedUrl(url) {
-              const ugc = url.match(/ugcPost-(\d+)/);
-              if (ugc) return 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:' + ugc[1];
-              const act = url.match(/activity-(\d+)/);
-              if (act) return 'https://www.linkedin.com/embed/feed/update/urn:li:activity:' + act[1];
-              return null;
-            }
-            const featured = data.posts.slice(0, 6);
-            postGrid.innerHTML = featured.map(p => {
-              const embedUrl = liEmbedUrl(p.url);
-              if (!embedUrl) return '';
-              return `<div class="post-embed">
-                <iframe src="${embedUrl}" title="${p.title}" loading="lazy"></iframe>
-              </div>`;
-            }).join('');
-            if (data.posts.length > featured.length) {
-              const more = document.createElement('div');
-              more.className = 'post-embed';
-              more.style.display = 'grid';
-              more.style.placeItems = 'center';
-              more.style.padding = 'var(--gap-lg)';
-              more.innerHTML = `<a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="btn btn-secondary btn-arrow">See ${data.posts.length - featured.length} more on LinkedIn</a>`;
-              postGrid.appendChild(more);
-            }
-          }
-        }
-
         // Events
         if (data.events) {
           const evGrid = document.getElementById('events-grid');
           if (evGrid) {
             const badgeClass = { 'hosted/speaking': 'badge-hosted-speaking', attended: 'badge-attended' };
+            // hackathons also sit on the workstation numpad — kept here too,
+            // the card view carries photos and the filters
             evGrid.innerHTML = data.events.map(e => {
               const hl = e.highlights ? `<div class="highlights">${e.highlights.map(h =>
                 `<img src="${h.image}" alt="${h.caption}" data-caption="${h.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${h.caption}" data-lb-trigger>`
@@ -2325,7 +1956,7 @@
     // arrows / swipe to browse the gallery the trigger belongs to)
     let lastFocused = null, lbGroup = [], lbIndex = 0;
     function lbGroupFor(img) {
-      const scope = img.closest('.highlights') || img.closest('.video-thumb') || img.closest('.other-grid') || img.closest('.edu-shots');
+      const scope = img.closest('.highlights') || img.closest('.edu-shots');
       return scope ? Array.from(scope.querySelectorAll('[data-lb-trigger]')) : [img];
     }
     function renderLightbox() {
@@ -2854,9 +2485,15 @@
     //  asset is redistributed).
     // ════════════════════════════════════════════════════════════════
     (function initCoat() {
+      // #coat-wrap is the standalone display coat; it was retired when the
+      // project list moved onto the keyboard, so the model now normally
+      // renders only on the CRT. Keep both paths: if the wrap exists we
+      // mount the big view too, otherwise we load headless for the monitor.
       const wrap = document.getElementById('coat-wrap');
       const loading = document.getElementById('coat-loading');
-      if (!wrap) return;
+      const ws = document.getElementById('workstation');
+      if (!wrap && !ws) return;
+      const SHOW_COAT = !!wrap;
       let started = false; // guard so we only load once
 
       // ── pre-fetch: kick off the three.js + model load when the section
@@ -2868,10 +2505,7 @@
           load();
         }
       }, { rootMargin: '200px 0px' });
-      prefetch.observe(wrap);
-      // the workstation monitor (above the coat) also needs the model —
-      // start loading as soon as either is near the viewport
-      const ws = document.getElementById('workstation');
+      if (wrap) prefetch.observe(wrap);
       if (ws) prefetch.observe(ws);
 
       // If the section is already in view on load (e.g. anchor jump),
@@ -2990,35 +2624,41 @@
         ];
 
         // ── renderer + scene (canvas mounts inside #coat-wrap) ─────────
-        const canvas = document.createElement('canvas');
-        canvas.style.width = canvas.style.height = '100%';
-        canvas.style.display = 'block';
-        wrap.appendChild(canvas);
-
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
+        // Headless (no #coat-wrap): the scene still holds the model so the
+        // CRT clone can be made from it, but nothing renders here.
+        let renderer = null, controls = null;
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
         camera.position.set(0, 0.2, 4.2);
 
         function resize() {
+          if (!renderer) return;
           const w = wrap.clientWidth, h = wrap.clientHeight;
           if (w < 2 || h < 2) return;
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
           renderer.setSize(w, h, false);
         }
-        resize();
 
-        const controls = new OrbitControls(camera, canvas);
-        controls.enableDamping = true;
-        controls.autoRotate = false; // coat stays static (still draggable)
-        controls.autoRotateSpeed = 0.8;
-        controls.enablePan = false;
-        controls.minDistance = 2.5;
-        controls.maxDistance = 7;
-        controls.target.set(0, -0.1, 0);
+        if (SHOW_COAT) {
+          const canvas = document.createElement('canvas');
+          canvas.style.width = canvas.style.height = '100%';
+          canvas.style.display = 'block';
+          wrap.appendChild(canvas);
+
+          renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          resize();
+
+          controls = new OrbitControls(camera, canvas);
+          controls.enableDamping = true;
+          controls.autoRotate = false; // coat stays static (still draggable)
+          controls.autoRotateSpeed = 0.8;
+          controls.enablePan = false;
+          controls.minDistance = 2.5;
+          controls.maxDistance = 7;
+          controls.target.set(0, -0.1, 0);
+        }
 
         const textTex = makeTextTexture();
         // uBg tracks the page background so dark fills match the section
@@ -3055,7 +2695,7 @@
           scene.add(root);
           coat = root;
 
-          wrap.classList.add('coat-loaded');
+          if (wrap) wrap.classList.add('coat-loaded');
           if (loading) loading.style.display = 'none';
           initWsView(root);
         }, undefined, () => {
@@ -3152,7 +2792,7 @@
         updateTargetYaw();
 
         // ── loop, paused when both views are off-screen ────────────────
-        let raf = 0, visible = true, wsVisible = false;
+        let raf = 0, visible = SHOW_COAT, wsVisible = false;
         function animate() {
           if (!visible && !wsVisible) { raf = 0; return; }
           if (coat && visible) {
@@ -3163,7 +2803,7 @@
               coat.rotation.y += (targetYaw - coat.rotation.y) * 0.08;
             }
           }
-          if (visible) {
+          if (visible && renderer) {
             controls.update();
             renderer.render(scene, camera);
           }
@@ -3175,7 +2815,7 @@
           if ((visible || wsVisible) && !raf) raf = requestAnimationFrame(animate);
           else if (!visible && !wsVisible) { cancelAnimationFrame(raf); raf = 0; }
         }, { threshold: 0 });
-        visObs.observe(wrap);
+        if (SHOW_COAT) visObs.observe(wrap);
         const wsObs = new IntersectionObserver((entries) => {
           wsVisible = entries[0].isIntersecting;
           if ((visible || wsVisible) && !raf) raf = requestAnimationFrame(animate);
@@ -3187,7 +2827,7 @@
 
         // resize reacts to layout, not just window resize
         const ro = new ResizeObserver(() => resize());
-        ro.observe(wrap);
+        if (SHOW_COAT) ro.observe(wrap);
       }
     })();
 

@@ -1,0 +1,219 @@
+<!doctype html>
+<!--
+  Tony Lau — LinkedIn posts
+  Split out of index.html so the landing page stays focused. Same tokens and
+  chrome as the main page (kept in sync by hand — there is no build step);
+  content still comes from the shared ../data.json → `posts[]`.
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LinkedIn posts · Tony Lau</title>
+  <meta name="description" content="LinkedIn posts and highlights from Tony Lau — hackathons, workshops, builds and developer relations." />
+  <meta name="author" content="Tony Lau" />
+  <link rel="canonical" href="https://tonykpl.vercel.app/posts/" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0a0a0c" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tony Lau" />
+  <meta property="og:title" content="LinkedIn posts · Tony Lau" />
+  <meta property="og:description" content="LinkedIn posts and highlights." />
+  <meta property="og:url" content="https://tonykpl.vercel.app/posts/" />
+  <meta property="og:image" content="https://tonykpl.vercel.app/assets/og-image.jpg" />
+
+  <style>
+    /* ─── tokens (mirror of index.html) ─────────────────────────────── */
+    :root {
+      --bg:      #0a0a0c;
+      --surface: #141417;
+      --fg:      #eeeee8;
+      --muted:   #7a7a74;
+      --border:  #222225;
+      --accent:  #4f7df5;
+
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+      --fs-h2: clamp(32px, 4vw, 48px);
+      --fs-body: 16px;
+      --fs-meta: 13px;
+
+      --gap-xs: 8px;
+      --gap-sm: 12px;
+      --gap-md: 20px;
+      --gap-lg: 32px;
+      --gap-xl: 56px;
+      --gap-2xl: 96px;
+      --container: 1120px;
+      --gutter: 32px;
+
+      --radius: 10px;
+      --radius-lg: 16px;
+      --zone-a: 0.14;
+    }
+    [data-theme="light"] {
+      --bg:      #fafaf7;
+      --surface: #ffffff;
+      --fg:      #1a1916;
+      --muted:   #6b6964;
+      --border:  #e8e5df;
+      --accent:  #3b6fd9;
+      --zone-a: 0.07;
+    }
+
+    /* ─── reset & base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+    h2 { font-size: var(--fs-h2); }
+    .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-md); }
+    .section { padding-block: var(--gap-2xl); }
+    .zone-cool { background-image: linear-gradient(180deg, transparent 0%, rgba(99,140,255,var(--zone-a)) 30%, rgba(99,140,255,var(--zone-a)) 70%, transparent 100%); }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin: 0 0 var(--gap-sm);
+    }
+    .meta { font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); }
+
+    /* ─── chrome: nav + footer ──────────────────────────────────────── */
+    .topnav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in oklch, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 14px; }
+    .topnav .logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+    .topnav .logo-dot { color: var(--accent); }
+    .topnav nav { display: flex; gap: var(--gap-lg); align-items: center; }
+    .topnav nav a { font-size: 14px; color: var(--muted); transition: color 0.15s ease; }
+    .topnav nav a:hover { color: var(--fg); }
+    .theme-btn {
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      padding: 5px 7px; color: var(--muted); display: flex; align-items: center;
+      transition: border-color 0.15s ease; cursor: pointer;
+    }
+    .theme-btn:hover { border-color: var(--muted); }
+    [data-theme="dark"] .icon-sun { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="light"] .icon-moon { display: block; }
+    .pagefoot { padding-block: var(--gap-xl); color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+    .pagefoot .row-between { flex-wrap: wrap; gap: var(--gap-md); }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: var(--gap-lg);
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); transition: color 0.15s ease;
+    }
+    .backlink:hover { color: var(--accent); }
+
+    /* ─── post embeds ───────────────────────────────────────────────── */
+    .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
+    .post-embed { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .post-embed iframe { width: 100%; border: none; min-height: 500px; }
+    @media (max-width: 960px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .posts-grid { grid-template-columns: 1fr; } }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: var(--radius);
+      border: 1px solid var(--border); font-size: 15px; font-weight: 500;
+      background: transparent; color: var(--fg);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn::after { content: '\2192'; transition: transform 0.15s ease; }
+    .btn:hover::after { transform: translateX(2px); }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="container topnav-inner">
+      <a class="logo" href="/">Tony<span class="logo-dot">.</span></a>
+      <nav>
+        <a href="/#about">About</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#events">Events</a>
+        <a href="/#projects">Demos</a>
+        <a href="/#contact">Contact</a>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section zone-cool">
+      <div class="container">
+        <a class="backlink" href="/">&larr; Back to the portfolio</a>
+        <p class="eyebrow">LinkedIn</p>
+        <h2 style="margin-bottom: var(--gap-md);">Posts &amp; highlights</h2>
+        <p style="color: var(--muted); max-width: 56ch; margin: 0 0 var(--gap-lg);">Workshops, hackathons and builds, posted as they happened. <a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 2px;">Follow along on LinkedIn</a>.</p>
+        <div class="posts-grid" id="posts-grid"></div>
+        <p style="margin-top: var(--gap-xl);">
+          <a class="btn" href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener">View my LinkedIn profile</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="container row-between">
+      <span>&copy; 2026 Tony Lau</span>
+      <div style="display: flex; gap: var(--gap-md);">
+        <a href="/other/" class="meta" style="color: var(--muted);">Beyond the resume</a>
+        <a href="mailto:tony.kp.lau@gmail.com" class="meta" style="color: var(--muted);">Email</a>
+        <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">GitHub</a>
+        <a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">LinkedIn</a>
+      </div>
+      <span class="meta">Toronto</span>
+    </div>
+  </footer>
+
+  <script>
+    // theme — shares the localStorage key with the main page
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // posts — same data.json the landing page reads. LinkedIn only embeds
+    // by urn, so a post URL without an activity/ugcPost id is skipped.
+    function liEmbedUrl(url) {
+      const ugc = url.match(/ugcPost-(\d+)/);
+      if (ugc) return 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:' + ugc[1];
+      const act = url.match(/activity-(\d+)/);
+      if (act) return 'https://www.linkedin.com/embed/feed/update/urn:li:activity:' + act[1];
+      return null;
+    }
+    fetch('../data.json')
+      .then(r => r.json())
+      .then(data => {
+        const grid = document.getElementById('posts-grid');
+        if (!grid || !data.posts) return;
+        grid.innerHTML = data.posts.map(p => {
+          const embedUrl = liEmbedUrl(p.url);
+          if (!embedUrl) return '';
+          return `<div class="post-embed"><iframe src="${embedUrl}" title="${p.title}" loading="lazy"></iframe></div>`;
+        }).join('');
+      })
+      .catch(() => { /* data.json not found — page still renders its chrome */ });
+  </script>
+</body>
+</html>

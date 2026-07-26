@@ -1,0 +1,308 @@
+<!doctype html>
+<!--
+  Tony Lau — Other / Beyond the resume
+  Split out of index.html so the landing page stays focused. Same tokens and
+  chrome as the main page (kept in sync by hand — there is no build step);
+  content still comes from the shared ../data.json → `other[]`.
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beyond the resume · Tony Lau</title>
+  <meta name="description" content="Personal photos beyond the resume — dragon boat, classmates, hikes and the rest of it." />
+  <meta name="author" content="Tony Lau" />
+  <link rel="canonical" href="https://tonykpl.vercel.app/other/" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0a0a0c" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tony Lau" />
+  <meta property="og:title" content="Beyond the resume · Tony Lau" />
+  <meta property="og:description" content="Personal photos beyond the resume." />
+  <meta property="og:url" content="https://tonykpl.vercel.app/other/" />
+  <meta property="og:image" content="https://tonykpl.vercel.app/assets/og-image.jpg" />
+
+  <style>
+    /* ─── tokens (mirror of index.html) ─────────────────────────────── */
+    :root {
+      --bg:      #0a0a0c;
+      --surface: #141417;
+      --fg:      #eeeee8;
+      --muted:   #7a7a74;
+      --border:  #222225;
+      --accent:  #4f7df5;
+
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+      --fs-h2: clamp(32px, 4vw, 48px);
+      --fs-body: 16px;
+      --fs-meta: 13px;
+
+      --gap-xs: 8px;
+      --gap-sm: 12px;
+      --gap-md: 20px;
+      --gap-lg: 32px;
+      --gap-xl: 56px;
+      --gap-2xl: 96px;
+      --container: 1120px;
+      --gutter: 32px;
+
+      --radius: 10px;
+      --radius-lg: 16px;
+      --zone-a: 0.14;
+    }
+    [data-theme="light"] {
+      --bg:      #fafaf7;
+      --surface: #ffffff;
+      --fg:      #1a1916;
+      --muted:   #6b6964;
+      --border:  #e8e5df;
+      --accent:  #3b6fd9;
+      --zone-a: 0.07;
+    }
+
+    /* ─── reset & base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+    h2 { font-size: var(--fs-h2); }
+    .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-md); }
+    .section { padding-block: var(--gap-2xl); }
+    .zone-warm { background-image: linear-gradient(180deg, transparent 0%, rgba(255,158,88,var(--zone-a)) 30%, rgba(255,158,88,var(--zone-a)) 70%, transparent 100%); }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin: 0 0 var(--gap-sm);
+    }
+    .meta { font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); }
+
+    /* ─── chrome: nav + footer ──────────────────────────────────────── */
+    .topnav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in oklch, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 14px; }
+    .topnav .logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+    .topnav .logo-dot { color: var(--accent); }
+    .topnav nav { display: flex; gap: var(--gap-lg); align-items: center; }
+    .topnav nav a { font-size: 14px; color: var(--muted); transition: color 0.15s ease; }
+    .topnav nav a:hover { color: var(--fg); }
+    .theme-btn {
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      padding: 5px 7px; color: var(--muted); display: flex; align-items: center;
+      transition: border-color 0.15s ease; cursor: pointer;
+    }
+    .theme-btn:hover { border-color: var(--muted); }
+    [data-theme="dark"] .icon-sun { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="light"] .icon-moon { display: block; }
+    .pagefoot { padding-block: var(--gap-xl); color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+    .pagefoot .row-between { flex-wrap: wrap; gap: var(--gap-md); }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: var(--gap-lg);
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); transition: color 0.15s ease;
+    }
+    .backlink:hover { color: var(--accent); }
+
+    /* ─── personal photo grid ───────────────────────────────────────── */
+    .other-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .other-card { margin: 0; }
+    .other-card img {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .other-card img:hover { transform: translateY(-2px); border-color: var(--muted); }
+    .other-card figcaption {
+      margin-top: 8px; font-family: var(--font-mono); font-size: 11px;
+      color: var(--muted); letter-spacing: 0.03em;
+    }
+    @media (max-width: 920px) { .other-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .other-grid { grid-template-columns: 1fr; } .topnav nav { gap: var(--gap-md); } }
+
+    /* ─── lightbox ──────────────────────────────────────────────────── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lightbox img { max-width: 90vw; max-height: 80vh; border-radius: var(--radius-lg); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+    .lightbox-caption { color: #fff; font-size: 14px; margin-top: 12px; text-align: center; max-width: 600px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px; background: none; border: none;
+      color: #fff; font-size: 32px; cursor: pointer; line-height: 1;
+    }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; font-size: 26px; line-height: 1; cursor: pointer;
+      display: grid; place-items: center; transition: background 0.15s ease;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+    .lightbox-nav[hidden] { display: none; }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-counter { color: rgba(255,255,255,0.6); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; margin-top: 6px; min-height: 14px; }
+    @media (max-width: 720px) { .lightbox-prev { left: 8px; } .lightbox-next { right: 8px; } }
+    .lightbox-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    [data-lb-trigger] { cursor: pointer; }
+    [data-lb-trigger]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius); }
+    body.lb-open { overflow: hidden; }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="container topnav-inner">
+      <a class="logo" href="/">Tony<span class="logo-dot">.</span></a>
+      <nav>
+        <a href="/#about">About</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#events">Events</a>
+        <a href="/#projects">Demos</a>
+        <a href="/#contact">Contact</a>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section zone-warm">
+      <div class="container">
+        <a class="backlink" href="/">&larr; Back to the portfolio</a>
+        <p class="eyebrow">Other</p>
+        <h2 style="margin-bottom: var(--gap-lg);">Beyond the resume</h2>
+        <div class="other-grid" id="other-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="container row-between">
+      <span>&copy; 2026 Tony Lau</span>
+      <div style="display: flex; gap: var(--gap-md);">
+        <a href="/posts/" class="meta" style="color: var(--muted);">LinkedIn posts</a>
+        <a href="mailto:tony.kp.lau@gmail.com" class="meta" style="color: var(--muted);">Email</a>
+        <a href="https://github.com/Intrepidcanadian" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">GitHub</a>
+        <a href="https://www.linkedin.com/in/tonykpl/" target="_blank" rel="noopener" class="meta" style="color: var(--muted);">LinkedIn</a>
+      </div>
+      <span class="meta">Toronto</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image" hidden>&#8249;</button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image" hidden>&#8250;</button>
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <p class="lightbox-counter" id="lightbox-counter"></p>
+  </div>
+
+  <script>
+    // theme — shares the localStorage key with the main page
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // photos — same data.json the landing page reads
+    fetch('../data.json')
+      .then(r => r.json())
+      .then(data => {
+        const grid = document.getElementById('other-grid');
+        if (!grid || !data.other) return;
+        grid.innerHTML = data.other.map(o => `
+          <figure class="other-card">
+            <img src="../${o.image}" alt="${o.caption}" data-caption="${o.caption}" loading="lazy" tabindex="0" role="button" aria-label="Enlarge image: ${o.caption}" data-lb-trigger>
+            <figcaption>${o.caption}</figcaption>
+          </figure>`).join('');
+      })
+      .catch(() => { /* data.json not found — page still renders its chrome */ });
+
+    // Lightbox — Enter/Space to open, Escape to close, arrows / swipe to browse
+    let lastFocused = null, lbGroup = [], lbIndex = 0;
+    function renderLightbox() {
+      const t = lbGroup[lbIndex];
+      if (!t) return;
+      const lbImg = document.getElementById('lightbox-img');
+      lbImg.src = t.src;
+      lbImg.alt = t.getAttribute('aria-label') || t.dataset.caption || t.alt || '';
+      document.getElementById('lightbox-caption').textContent = t.dataset.caption || '';
+      const multi = lbGroup.length > 1;
+      document.getElementById('lightbox-counter').textContent = multi ? `${lbIndex + 1} / ${lbGroup.length}` : '';
+      document.getElementById('lightbox-prev').hidden = !multi;
+      document.getElementById('lightbox-next').hidden = !multi;
+    }
+    function stepLightbox(dir) {
+      if (lbGroup.length < 2) return;
+      lbIndex = (lbIndex + dir + lbGroup.length) % lbGroup.length;
+      renderLightbox();
+    }
+    function openLightbox(img) {
+      const scope = img.closest('.other-grid');
+      lbGroup = scope ? Array.from(scope.querySelectorAll('[data-lb-trigger]')) : [img];
+      lbIndex = Math.max(0, lbGroup.indexOf(img));
+      renderLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.classList.add('lb-open');
+      lastFocused = img;
+      document.getElementById('lightbox-close').focus();
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.classList.remove('lb-open');
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-lb-trigger]');
+      if (t) { e.preventDefault(); openLightbox(t); }
+    });
+    document.addEventListener('keydown', (e) => {
+      const t = e.target instanceof Element ? e.target.closest('[data-lb-trigger]') : null;
+      if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLightbox(t); }
+      const lbOpen = document.getElementById('lightbox').classList.contains('open');
+      if (e.key === 'Escape' && lbOpen) closeLightbox();
+      if (lbOpen && e.key === 'ArrowLeft') { e.preventDefault(); stepLightbox(-1); }
+      if (lbOpen && e.key === 'ArrowRight') { e.preventDefault(); stepLightbox(1); }
+    });
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeLightbox();
+    });
+    document.getElementById('lightbox-prev').addEventListener('click', () => stepLightbox(-1));
+    document.getElementById('lightbox-next').addEventListener('click', () => stepLightbox(1));
+    let touchX = null;
+    const lb = document.getElementById('lightbox');
+    lb.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) stepLightbox(dx < 0 ? 1 : -1);
+      touchX = null;
+    }, { passive: true });
+  </script>
+</body>
+</html>

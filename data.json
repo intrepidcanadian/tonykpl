@@ -283,8 +283,8 @@
     },
     {
       "date": "2024 — Now",
-      "title": "Developer Relations Engineer (Part-time)",
-      "desc": "Part-time developer relations for Conflux Network — hackathon workshops and bounties, developer tutorials, and community events from Blockchain Tuesdays in Toronto to conference booths in Hong Kong.",
+      "title": "Developer Relations Engineer (Open-sourced Contributor)",
+      "desc": "Open-source developer relations for Conflux Network — hackathon workshops and bounties, developer tutorials, and community events from Blockchain Tuesdays in Toronto to conference booths in Hong Kong.",
       "org": "Conflux Network",
       "orgShort": "Conflux",
       "logo": "assets/logos/conflux.png",
@@ -428,7 +428,7 @@
       "title": "Developer Ambassador",
       "desc": "Completed the Uniswap Hook Incubator (Cohort 1, 2024), then served as a Uniswap Foundation Developer Ambassador through 2025 — running workshops and helping developers build on Uniswap v4 and Unichain, and studying Uniswap's evolution across v2, v3, and v4.",
       "org": "Uniswap Foundation",
-      "orgShort": "Uniswap",
+      "orgShort": "Uniswap Foundation",
       "logo": "assets/logos/uniswap-foundation.png"
     },
     {
@@ -560,7 +560,6 @@
       },
       {
         "name": "Open Design",
-        "key": "O",
         "desc": "Open-source alternative to Claude Design. 31 skills, 72 design systems, sandboxed preview, multi-format export.",
         "tags": [
           "TypeScript",
@@ -571,7 +570,6 @@
       },
       {
         "name": "Trailer Maker",
-        "key": "M",
         "desc": "Concept-to-theatrical-trailer pipeline. Claude + Seedance 2.0 + ffmpeg with human-in-the-loop review.",
         "tags": [
           "Python",
@@ -582,7 +580,6 @@
       },
       {
         "name": "Learnpedia",
-        "key": "E",
         "desc": "Personal wiki for AI video production — prompts, camera angles, lighting, character consistency, motion.",
         "tags": [
           "Next.js",
@@ -593,7 +590,6 @@
       },
       {
         "name": "Conflux Bounties",
-        "key": "C",
         "desc": "Developer bounties program for the Conflux Network ecosystem. Open-source projects and incentives for builders.",
         "tags": [
           "TypeScript",
@@ -604,7 +600,6 @@
       },
       {
         "name": "Prediction Market Bot",
-        "key": "B",
         "desc": "Automated trading bot for prediction markets with AI-powered analysis and risk management.",
         "tags": [
           "TypeScript",
@@ -626,7 +621,6 @@
       },
       {
         "name": "Browser Use",
-        "key": "U",
         "desc": "Making websites accessible for AI agents — Chrome extension and RESTful API for browser automation.",
         "tags": [
           "Python",
@@ -663,6 +657,7 @@
     },
     {
       "title": "Build Space Music Video — Bronson Alan",
+      "key": "V",
       "desc": "On camera in Bronson Alan's rap music video, filmed with the buildspace crowd at Gateway Pavilion, San Francisco",
       "url": "https://youtu.be/u9VcT272xl0",
       "thumbnails": [
@@ -672,17 +667,20 @@
     },
     {
       "title": "Mining Video — Triple Mining with GPUs on Conflux",
+      "key": "X",
       "desc": "Triple mining on one GPU rig — hashing Conflux, EPK, and KAS simultaneously. August 2024.",
       "url": "https://youtu.be/-i11m5jzPLc"
     },
     {
       "title": "Hack for Good Whitby — AI & Computer Vision",
+      "key": "W",
       "desc": "Hackathon project integrating AI and computer vision, built at Hack for Good in Whitby",
       "url": "https://youtu.be/VXfCibrcDGc",
       "thumbnail": null
     },
     {
       "title": "Translator — Live OCR & Voice Translation App",
+      "key": "R",
       "desc": "iPhone translator app with real-time camera OCR for signs and hold-to-talk voice translation, EN ↔ ZH",
       "thumbnails": [
         "assets/videos/translator-ocr.webp",
