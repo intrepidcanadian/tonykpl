@@ -23,7 +23,9 @@
       "AI/ML",
       "Blockchain",
       "Financial Modelling",
-      "Agent Harnesses"
+      "Agent Harnesses",
+      "MCP",
+      "ERC-8004"
     ]
   },
   "stats": [
@@ -1543,6 +1545,16 @@
         }
       ],
       "video": "https://www.youtube.com/watch?v=TMoPZ3rbJUk"
+    }
+  ],
+  "papers": [
+    {
+      "title": "The Funding Carry and a Cross-Venue Spread on Perpetual Futures: A Significance-Tested Study of Hyperliquid and Centralized Venues",
+      "status": "Pre-print",
+      "venue": "SSRN · 11 pages",
+      "date": "Posted 17 July 2026",
+      "desc": "Hyperliquid's hourly funding structurally exceeds Binance and Bybit on the same assets by roughly 7% annualized (14.7% in 2024, 4.6% in 2025). Held delta-neutral — long the centralized-venue perpetual, short the Hyperliquid one — the dislocation survives basis, capital and transaction costs at about 7–11% on deployed capital, and stays significant under Newey-West HAC t-stats of 4–8, a block bootstrap, five-fold walk-forward and a Deflated Sharpe. A battery of \"smart\" refinements — cost-recovery exits, cross-sectional allocation, ML tilts, options tail-hedging — all fail to beat the naive baseline; those nulls are reported as a catalog of holdout-selection artifacts.",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6993978"
     }
   ],
   "education": [

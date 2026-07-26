@@ -749,6 +749,18 @@
       .ws-screen { min-height: 250px; }
     }
 
+    /* ═══ CUSTOM: writing — papers & pre-prints ═══════════════════════ */
+    .paper-card { display: grid; gap: 8px; max-width: 780px; }
+    .paper-meta { text-transform: uppercase; letter-spacing: 0.12em; }
+    .paper-title { font-size: clamp(19px, 2.1vw, 24px); line-height: 1.35; margin: 0; }
+    .paper-title a {
+      color: inherit; text-decoration: none;
+      border-bottom: 1px solid var(--border); padding-bottom: 1px;
+      transition: border-color 0.15s ease;
+    }
+    .paper-title a:hover { border-color: var(--accent); }
+    .paper-desc { color: var(--muted); font-size: 15px; line-height: 1.65; margin: 0; }
+
     /* ═══ CUSTOM: company / institution logo wall ═════════════════════ */
     .logo-wall-label {
       font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
@@ -1136,6 +1148,7 @@
           <p class="eyebrow">About</p>
           <h2>Three domains, one builder.</h2>
           <p class="lead" style="margin-top: 12px;">I bring a finance-meets-tech perspective to everything I do — from corporate development at OPG to teaching fintech at Schulich to building AI agents.</p>
+          <p style="margin-top: 14px; color: var(--muted); font-size: 15px; line-height: 1.7;">The agent work runs the whole stack: registering agents on-chain under <strong style="color: var(--fg); font-weight: 500;">ERC-8004</strong>, and writing my own variant of Nanobot as the harness behind <strong style="color: var(--fg); font-weight: 500;">Pulse520.ai</strong> — MCP servers, tool use, desktop and browser control.</p>
         </div>
         <div class="grid-3" data-reveal-group>
           <div class="feature card-flat">
@@ -1143,7 +1156,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             </div>
             <h3>Software Engineering</h3>
-            <p>Full-stack development, AI agents, blockchain, video production tools. Python, TypeScript, Solidity, Next.js.</p>
+            <p>AI agents and agent harnesses, full-stack development, blockchain, video production tools. Python, TypeScript, Solidity, Next.js.</p>
           </div>
           <div class="feature card-flat">
             <div class="feature-mark">
@@ -1355,6 +1368,17 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ─── WRITING ───────────────────────────────────────────────── -->
+    <section class="section" data-od-id="writing" id="writing">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Writing</p>
+        <h2 data-reveal style="margin-bottom: 14px;">Currently writing papers.</h2>
+        <p class="lead" style="margin-bottom: var(--gap-lg);">Working notes and pre-prints on market microstructure &mdash; what the data says once it is significance-tested.</p>
+        <!-- Static fallback — replaced by data.json → papers at runtime -->
+        <div id="papers-list" data-reveal-group></div>
       </div>
     </section>
 
@@ -1894,6 +1918,25 @@
           const extras = document.getElementById('edu-extras');
           if (marquee) marquee.innerHTML = data.education.filter(e => e.tier === 'degree').map(e => eduCard(e, false)).join('');
           if (extras) extras.innerHTML = data.education.filter(e => e.tier !== 'degree').map(e => eduCard(e, true)).join('');
+        }
+
+        // Writing — papers and pre-prints. The whole section hides itself when
+        // there is nothing to show, so an empty list never leaves a stub.
+        const papersList = document.getElementById('papers-list');
+        if (papersList) {
+          const papers = data.papers || [];
+          if (!papers.length) {
+            document.getElementById('writing')?.remove();
+          } else {
+            papersList.innerHTML = papers.map(p => `
+              <article class="card paper-card">
+                <p class="meta paper-meta">${[p.status, p.venue, p.date].filter(Boolean).join(' &middot; ')}</p>
+                <h3 class="paper-title">${p.url
+                  ? `<a href="${p.url}" target="_blank" rel="noopener">${p.title} &nearr;</a>`
+                  : p.title}</h3>
+                ${p.desc ? `<p class="paper-desc">${p.desc}</p>` : ''}
+              </article>`).join('');
+          }
         }
 
         // Events

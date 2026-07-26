@@ -195,6 +195,23 @@ keep them in visual sync by hand if the design system changes. Both read
 A post only renders if its `url` contains an `activity-<id>` or `ugcPost-<id>`
 segment — that id is what LinkedIn's embed endpoint needs.
 
+### Adding a paper
+The "Currently writing papers" section between Education and Contact renders
+`papers[]` from `data.json`:
+```json
+{
+  "title": "Paper title",
+  "status": "Pre-print",
+  "venue": "SSRN",
+  "date": "2026",
+  "desc": "One or two sentences on what it measures.",
+  "url": "https://papers.ssrn.com/..."
+}
+```
+`status`, `venue` and `date` are joined into the mono line above the title; all
+three are optional, as are `desc` and `url`. An empty (or missing) `papers[]`
+removes the whole section rather than leaving an empty heading.
+
 ### Updating profile photo
 1. Drop the photo into `assets/photos/`
 2. Set `profile.photo` in `data.json` to the relative path: `"assets/photos/headshot.jpg"`
