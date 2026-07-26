@@ -608,7 +608,16 @@
       gap: clamp(16px, 3vw, 36px); align-items: center; align-self: center;
     }
     .ws-project.no-shot { grid-template-columns: 1fr; }
-    .ws-shot { width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border); }
+    /* the box shrinks to the image rather than the image stretching to the box,
+       so nothing is ever cropped and a tall (portrait) shot can't stretch the
+       monitor — the cap is what the video and channel views use */
+    .ws-shot {
+      width: auto; max-width: 100%; max-height: min(440px, 48vh);
+      display: block; border-radius: var(--radius); border: 1px solid var(--border);
+    }
+    .ws-shots { display: grid; gap: 10px; align-content: start; justify-items: center; min-width: 0; }
+    /* two or more shots share the space: each one whole, just smaller */
+    .ws-shots-multi .ws-shot { max-height: min(220px, 26vh); }
     .ws-name { font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 8px; }
     .ws-desc { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0 0 12px; }
     .ws-links { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
@@ -638,6 +647,19 @@
       object-fit: contain; border-radius: var(--radius);
       border: 1px solid var(--border); display: block;
     }
+    /* picker for a key that holds a series of videos */
+    .ws-picker { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ws-pick {
+      font-family: var(--font-mono); font-size: 11px; padding: 4px 10px;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: var(--bg); color: var(--muted); cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
+    .ws-pick:hover { border-color: var(--accent); color: var(--fg); }
+    .ws-pick-on {
+      border-color: var(--accent); color: var(--fg);
+      background: color-mix(in oklch, var(--accent) 14%, var(--bg));
+    }
     .ws-ch-meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
     .ws-ch-num { color: var(--accent); }
     /* tuning static between channel switches */
@@ -651,47 +673,79 @@
       60% { opacity: 0.55; transform: translateY(2px); }
       100% { opacity: 0; transform: translateY(-1px); }
     }
+    /* Full-size keyboard: one unit is --kw wide, and a wide key spans N units
+       plus the gaps it swallows (see the inline width on .keycap). Every row
+       of the main block adds up to 15 units, so the block stays flush. */
     .ws-keyboard {
+      /* the max is what a 15-unit row plus the numpad can fit inside the
+         capped container — raise it and the keys spill over the numpad */
+      --kw: clamp(18px, 4vw, 50px);
+      --kh: clamp(24px, 4.4vw, 54px);
+      --kgap: clamp(3px, 0.45vw, 6px);
       margin-top: 10px; padding: clamp(8px, 1.4vw, 14px);
       border: 1px solid var(--border); border-radius: var(--radius-lg);
       background: var(--surface); display: flex; flex-direction: column; gap: 6px;
     }
-    .ws-row { display: flex; gap: 6px; justify-content: center; }
+    .ws-row { display: flex; gap: var(--kgap); justify-content: center; }
     /* main letter/function block sits beside a numpad of hackathons */
-    .ws-kb-wrap { display: flex; gap: clamp(8px, 1.4vw, 18px); align-items: flex-start; justify-content: center; }
-    .ws-kb-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    /* wraps rather than letting the numpad collide with the main block if the
+       two ever stop fitting side by side */
+    .ws-kb-wrap {
+      display: flex; flex-wrap: wrap; gap: clamp(8px, 1.4vw, 18px);
+      align-items: flex-start; justify-content: center; max-width: 100%;
+    }
+    /* never shrink: a squeezed row would push its keycaps outside the row box */
+    .ws-kb-main { display: flex; flex-direction: column; gap: var(--kgap); flex: 0 0 auto; }
+    .ws-kb-side { display: flex; flex-direction: column; gap: clamp(6px, 0.8vw, 12px); }
     .ws-pad { display: flex; flex-direction: column; gap: 4px; }
     .ws-pad-label {
       font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--muted); text-align: center;
     }
-    .ws-pad-keys { display: grid; grid-template-columns: repeat(3, auto); gap: 6px; }
+    .ws-pad-keys { display: grid; grid-template-columns: repeat(3, auto); gap: var(--kgap); }
     .ws-pad-keys .keycap-zero { grid-column: span 3; width: 100%; }
     @media (max-width: 720px) {
       .ws-kb-wrap { flex-direction: column; align-items: center; }
+      .ws-kb-side { flex-direction: row; align-items: flex-end; }
+    }
+    @media (max-width: 420px) {
+      .ws-keyboard { --kw: clamp(14px, 3.9vw, 22px); --kh: 22px; --kgap: 2px; }
     }
     .keycap {
-      flex: 0 0 auto; width: clamp(28px, 4.4vw, 54px); height: clamp(32px, 4.8vw, 56px);
+      flex: 0 0 auto; width: var(--kw); height: var(--kh);
       border: 1px solid var(--border); border-bottom-width: 3px; border-radius: 7px;
       background: var(--bg); color: var(--muted);
-      font-family: var(--font-mono); font-size: 13px;
+      font-family: var(--font-mono); font-size: clamp(9px, 1.1vw, 13px);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
       cursor: default; user-select: none; padding: 0;
       transition: transform 0.06s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    /* modifiers and the wide keys carry no mapping — they are chassis, so
+       they sit back a step from the letters that actually do something */
+    .keycap-mod {
+      font-size: clamp(8px, 0.85vw, 11px);
+      color: color-mix(in oklch, var(--muted) 55%, var(--surface));
+      border-bottom-width: 2px;
     }
     .keycap-mapped {
       cursor: pointer; color: var(--fg);
       border-color: color-mix(in oklch, var(--accent) 45%, var(--border));
     }
     .keycap-mapped:hover { border-color: var(--accent); }
+    /* the sublabel rides the key size so a ten-character name ("BLOCKCHAIN",
+       "TRANSLATOR") stays whole at every width instead of being clipped */
     .keycap .keysub {
-      font-size: 7px; letter-spacing: 0.03em; color: var(--accent);
-      text-transform: uppercase; max-width: 92%; overflow: hidden; white-space: nowrap;
+      font-size: max(6px, calc(var(--kw) * 0.15)); letter-spacing: 0; color: var(--accent);
+      text-transform: uppercase; max-width: 96%; overflow: hidden; white-space: nowrap;
     }
     .keycap.pressed, .keycap-mapped:active { transform: translateY(2px); border-bottom-width: 1px; }
     .keycap-active { background: color-mix(in oklch, var(--accent) 16%, var(--bg)); border-color: var(--accent); }
-    @media (max-width: 720px) {
+    /* below this the keys are too narrow to hold a whole ten-character name,
+       and a clipped label reads as a bug — the lit keycap still says "mapped" */
+    @media (max-width: 1040px) {
       .keycap .keysub { display: none; }
+    }
+    @media (max-width: 720px) {
       .ws-screen { min-height: 250px; }
     }
 
@@ -1527,7 +1581,7 @@
           });
           // function row = AI-produced videos, mapped F1..Fn in array order
           const byFn = {};
-          const ytId = (url) => (url.match(/(?:youtu\.be\/|v=)([A-Za-z0-9_-]{6,})/) || [])[1];
+          const ytId = (url) => (url.match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{6,})/) || [])[1];
           (data.videos || []).slice(0, 10).forEach((v, i) => {
             const id = ytId(v.url || '');
             if (id) byFn['F' + (i + 1)] = { ...v, id, fn: i + 1 };
@@ -1544,29 +1598,51 @@
           [...(data.events || []), ...(data.videosSoftware || []), ...(data.posts || [])]
             .filter(h => h.hack)
             .forEach(h => { byPad[String(h.hack % 10)] = h; });
+          // A whole keyboard, not just the lit keys: a plain string is a
+          // one-unit key, an object is a wide one — {k, label, w, cls}. The
+          // modifiers are chassis (nothing maps to them), but a keyboard
+          // missing Esc, Tab and Shift reads as a prop rather than a machine.
+          const MOD = 'keycap-mod';
+          const K = (k, label, w) => ({ k, label, w, cls: MOD });
+          const FN = Array.from({ length: 12 }, (_, i) => ({ k: 'F' + (i + 1), w: 1.15 }));
           const ROWS = [
-            Object.keys(byFn),
-            ['Q','W','E','R','T','Y','U','I','O','P'],
-            ['A','S','D','F','G','H','J','K','L'],
-            ['Z','X','C','V','B','N','M']
+            [K('Esc', 'esc', 1.15), ...FN],
+            ['`','1','2','3','4','5','6','7','8','9','0','-','=', K('Backspace', '⌫', 2)],
+            [K('Tab', '⇥', 1.5), 'Q','W','E','R','T','Y','U','I','O','P','[',']', K('\\', '\\', 1.5)],
+            [K('CapsLock', '⇪', 1.75), 'A','S','D','F','G','H','J','K','L',';',"'", K('Enter', '⏎', 2.25)],
+            [K('Shift', '⇧', 2.25), 'Z','X','C','V','B','N','M',',','.','/', K('Shift', '⇧', 2.75)],
+            [K('Fn', 'fn', 1), K('Control', '⌃', 1), K('Option', '⌥', 1.25), K('Meta', '⌘', 1.5),
+             K('Space', '', 6.5), K('Meta', '⌘', 1.5), K('Option', '⌥', 1.25), K('Control', '⌃', 1)]
           ];
-          const cap = (k, extra) => {
+          const cap = (spec, extra) => {
+            const s = typeof spec === 'string' ? { k: spec } : spec;
+            const k = s.k;
             const p = byKey[k], c = byChannel[k], f = byFn[k], h = byPad[k], m = byDemo[k];
-            const label = p ? p.name.split(' ')[0] : c ? c.title.split(' ')[0]
-              : f ? 'Video' : h ? (h.title.split(/[ —]/)[0] || 'Hack')
-              : m ? (m.title.split(/[ —]/)[0] || 'Demo') : '';
-            const aria = p ? `Show project: ${p.name}` : c ? `Play build: ${c.title}`
-              : f ? `Play AI video: ${f.title}` : h ? `Show hackathon: ${h.title}`
+            // the sublabel is the first word of the title unless the entry
+            // supplies a shorter `keyLabel` — a keycap fits ~10 characters
+            const first = (e) => e.keyLabel || String(e.name || e.title).split(/[ —]/)[0];
+            const label = p ? first(p) : c ? first(c)
+              : f ? (f.keyLabel || 'Video') : h ? (first(h) || 'Hack')
+              : m ? (first(m) || 'Demo') : '';
+            const aria = p ? `Show ${p.kind ? p.kind.toLowerCase() : 'project'}: ${p.name}` : c ? `Play build: ${c.title}`
+              : f ? `Play ${f.kind ? f.kind.toLowerCase() : 'AI video'}: ${f.title}` : h ? `Show hackathon: ${h.title}`
               : m ? `Show demo: ${m.title}` : '';
-            return `<button type="button" class="keycap${(p || c || f || h || m) ? ' keycap-mapped' : ''}${extra ? ' ' + extra : ''}" data-key="${k}"${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${k}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
+            const cls = [s.cls, extra].filter(Boolean).join(' ');
+            // a wide key spans N units and eats the N-1 gaps between them
+            const width = s.w && s.w !== 1
+              ? ` style="width:calc(var(--kw) * ${s.w} + var(--kgap) * ${s.w - 1})"` : '';
+            const face = s.label !== undefined ? s.label : k;
+            return `<button type="button" class="keycap${(p || c || f || h || m) ? ' keycap-mapped' : ''}${cls ? ' ' + cls : ''}" data-key="${k}"${width}${aria ? ` aria-label="${aria}"` : ' tabindex="-1" aria-hidden="true"'}><span>${face}</span>${label ? `<span class="keysub">${label}</span>` : ''}</button>`;
           };
           const PAD = [['7','8','9'], ['4','5','6'], ['1','2','3']];
           kb.innerHTML = `<div class="ws-kb-wrap">
-            <div class="ws-kb-main">${ROWS.filter(r => r.length).map(row =>
+            <div class="ws-kb-main">${ROWS.map(row =>
               `<div class="ws-row">${row.map(k => cap(k)).join('')}</div>`).join('')}</div>
-            <div class="ws-pad">
-              <span class="ws-pad-label">Hackathons</span>
-              <div class="ws-pad-keys">${PAD.flat().map(k => cap(k)).join('')}${cap('0', 'keycap-zero')}</div>
+            <div class="ws-kb-side">
+              <div class="ws-pad">
+                <span class="ws-pad-label">Hackathons</span>
+                <div class="ws-pad-keys">${PAD.flat().map(k => cap(k)).join('')}${cap('0', 'keycap-zero')}</div>
+              </div>
             </div>
           </div>`;
 
@@ -1588,34 +1664,47 @@
             status.textContent = `${Object.keys(byKey).length} projects · ${Object.keys(byChannel).length} builds · ${Object.keys(byDemo).length} demos · ${Object.keys(byFn).length} videos on F-keys · ${Object.keys(byPad).length} hackathons on the numpad`;
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
           }
+          // matched by dataset rather than a selector: digits live on both the
+          // number row and the numpad, and keys like \ or ' would need escaping
+          const capsFor = (key) => Array.from(kb.querySelectorAll('.keycap')).filter(el => el.dataset.key === key);
           function markActive(key) {
             kb.querySelectorAll('.keycap-active').forEach(el => el.classList.remove('keycap-active'));
-            const cap = kb.querySelector(`.keycap[data-key="${key}"]`);
-            if (cap) cap.classList.add('keycap-active');
+            capsFor(key).forEach(el => el.classList.add('keycap-active'));
           }
-          function showProject(p, key) {
+          function showProject(p, key, featured) {
             monitor.classList.add('ws-showing-project');
-            screen.innerHTML = `<div class="ws-project${p.image ? '' : ' no-shot'}">
-              ${p.image ? `<img class="ws-shot" src="${p.image}" alt="${p.name}">` : ''}
+            // a project can ship a `shots` gallery instead of one screenshot —
+            // several stack at a smaller size, each whole, and they browse
+            // together in the lightbox
+            const shots = p.shots || (p.image ? [p.image] : []);
+            screen.innerHTML = `<div class="ws-project${shots.length ? '' : ' no-shot'}">
+              ${shots.length ? `<div class="ws-shots${shots.length > 1 ? ' ws-shots-multi' : ''}">${shots.map((s, i) => `<img class="ws-shot" src="${s}" alt="${p.name} — screenshot ${i + 1}" data-lb-trigger data-caption="${p.name} — ${p.tagline || ''}" tabindex="0" role="button" loading="lazy">`).join('')}</div>` : ''}
               <div>
                 <h3 class="ws-name">${p.name}</h3>
                 <p class="ws-desc">${p.desc}</p>
                 <div>${(p.tags || []).map(t => `<span class="tag">${t}</span>`).join(' ')}</div>
                 <div class="ws-links">
                   ${p.github ? `<a class="btn btn-secondary" style="font-size:13px;padding:7px 14px;" href="${p.github}" target="_blank" rel="noopener">Source &nearr;</a>` : ''}
+                  ${p.deck ? `<a class="btn btn-secondary" style="font-size:13px;padding:7px 14px;" href="${p.deck}" target="_blank" rel="noopener">Deck (PDF) &nearr;</a>` : ''}
                   ${p.url ? `<a class="btn btn-primary" style="font-size:13px;padding:7px 14px;" href="${p.url}" target="_blank" rel="noopener">Open &nearr;</a>` : ''}
                 </div>
               </div>
             </div>`;
-            setTitle(key, 'Project', p.name);
-            status.textContent = `~/projects/${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')} — key ${key}`;
+            // `kind` relabels an entry that isn't a software project (a
+            // venture, say) — it drives both the title bar and the path
+            setTitle(key, featured ? 'Featured project' : (p.kind || 'Project'), p.name);
+            const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const dir = p.kind ? slug(p.kind) + 's' : 'projects';
+            status.textContent = featured
+              ? `~/${dir}/${slug(p.name)} — key ${key} · press any lit key to load another`
+              : `~/${dir}/${slug(p.name)} — key ${key}`;
             markActive(key);
           }
           function pressVisual(key) {
-            const cap = kb.querySelector(`.keycap[data-key="${key}"]`);
-            if (!cap) return;
-            cap.classList.add('pressed');
-            setTimeout(() => cap.classList.remove('pressed'), 130);
+            capsFor(key).forEach(el => {
+              el.classList.add('pressed');
+              setTimeout(() => el.classList.remove('pressed'), 130);
+            });
           }
           function showChannel(c, key) {
             monitor.classList.add('ws-showing-project');
@@ -1642,7 +1731,7 @@
               <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&mute=1&rel=0" title="${v.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
               <div class="ws-ch-meta"><span class="ws-ch-num">F${v.fn}</span> ${v.desc || v.title}</div>
             </div>`;
-            setTitle('F' + v.fn, 'AI video', v.title);
+            setTitle('F' + v.fn, v.kind || 'AI video', v.title);
             status.textContent = `F${v.fn} — ${v.title.toLowerCase()}`;
             markActive(key);
           }
@@ -1650,19 +1739,34 @@
           // screenshots (e.g. the Translator app) shows them side by side
           function showDemo(m, key) {
             monitor.classList.add('ws-showing-project');
-            monitor.classList.remove('ws-tune');
-            void monitor.offsetWidth;
-            monitor.classList.add('ws-tune');
             const shots = m.thumbnails || (m.thumbnail ? [m.thumbnail] : []);
-            const media = m.id
-              ? `<iframe src="https://www.youtube-nocookie.com/embed/${m.id}?autoplay=1&mute=1&rel=0" title="${m.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
-              : `<div class="ws-ch-imgs">${shots.map(s => `<img src="${s}" alt="${m.title}">`).join('')}</div>`;
-            screen.innerHTML = `<div class="ws-channel">
-              ${media}
-              <div class="ws-ch-meta">${m.desc}</div>
-            </div>`;
-            setTitle(key, 'Demo', m.title);
-            status.textContent = `demo ${key} — ${m.title.toLowerCase()}`;
+            // one key can hold a series: `videos: [{title, url, desc}]` gets a
+            // picker under the player. A lone `url` is just a series of one.
+            const clips = (m.videos && m.videos.length) ? m.videos : [{ title: m.title, url: m.url, desc: m.desc }];
+            const play = (i) => {
+              const c = clips[i] || {};
+              const id = ytId(c.url || '');
+              monitor.classList.remove('ws-tune');
+              void monitor.offsetWidth;
+              monitor.classList.add('ws-tune');
+              const media = id
+                ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&rel=0" title="${c.title || m.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+                : `<div class="ws-ch-imgs">${shots.map(s => `<img src="${s}" alt="${m.title}">`).join('')}</div>`;
+              const picker = clips.length > 1
+                ? `<div class="ws-picker" role="group" aria-label="${m.title} — pick a video">${clips.map((c2, j) =>
+                    `<button type="button" class="ws-pick${j === i ? ' ws-pick-on' : ''}" data-i="${j}"${j === i ? ' aria-current="true"' : ''}>${j + 1}. ${c2.title}</button>`).join('')}</div>`
+                : '';
+              screen.innerHTML = `<div class="ws-channel">
+                ${media}
+                ${picker}
+                <div class="ws-ch-meta">${clips.length > 1 ? `<span class="ws-ch-num">${i + 1}/${clips.length}</span> ` : ''}${c.desc || m.desc || ''}</div>
+              </div>`;
+              screen.querySelectorAll('.ws-pick').forEach(b => b.addEventListener('click', () => play(+b.dataset.i)));
+            };
+            play(0);
+            setTitle(key, m.kind || 'Demo', m.title);
+            status.textContent = `${(m.kind || 'demo').toLowerCase()} ${key} — ${m.title.toLowerCase()}`
+              + (clips.length > 1 ? ` · ${clips.length} videos` : '');
             markActive(key);
           }
           function showHack(h, key) {
@@ -1671,6 +1775,24 @@
             // a locally hosted clip plays in place of the still
             const clip = /\.mp4($|\?)/.test(h.video || '') ? h.video : null;
             const link = clip ? h.url : (h.video || h.url);
+            // a hackathon with a YouTube recording plays it straight away, the
+            // same as the F-key videos — the still lives on its event card
+            const yt = clip ? null : ytId(h.video || h.url || '');
+            if (yt) {
+              monitor.classList.remove('ws-tune');
+              void monitor.offsetWidth;
+              monitor.classList.add('ws-tune');
+              const meta = [[h.location, h.date].filter(Boolean).join(' · '), (h.desc || '').replace(/<[^>]*>/g, '')]
+                .filter(Boolean).join(' — ');
+              screen.innerHTML = `<div class="ws-channel">
+                <iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&mute=1&rel=0" title="${h.title}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                <div class="ws-ch-meta"><span class="ws-ch-num">PAD ${key}</span> ${meta}</div>
+              </div>`;
+              setTitle(key, 'Hackathon', h.title);
+              status.textContent = `hackathon ${key} — ${h.title.toLowerCase()}`;
+              markActive(key);
+              return;
+            }
             screen.innerHTML = `<div class="ws-project${(shot || clip) ? '' : ' no-shot'}">
               ${clip
                 ? `<video class="ws-shot" src="${clip}"${shot ? ` poster="${shot}"` : ''} controls autoplay muted loop playsinline></video>`
@@ -1690,6 +1812,8 @@
           }
           function press(key) {
             pressVisual(key);
+            // Esc is the one modifier that does something: back to the idle screen
+            if (key === 'Esc') { showIdle(); return; }
             const f = byFn[key];
             if (f) { showVideo(f, key); return; }
             const h = byPad[key];
@@ -1723,10 +1847,14 @@
             if (document.getElementById('lightbox')?.classList.contains('open')) return;
             const key = e.key.toUpperCase();
             const isFn = /^F([1-9]|1[0-2])$/.test(key);
-            if (!isFn && !/^[A-Z0-9]$/.test(key)) return;
+            const isEsc = key === 'ESCAPE';
+            // letters, digits and punctuation all reach the keyboard; space is
+            // left to the page so it still scrolls
+            if (!isFn && !isEsc && !(key.length === 1 && key !== ' ')) return;
             // only hijack typing while the workstation is in or near view
             const r = document.getElementById('workstation').getBoundingClientRect();
             if (r.bottom < 0 || r.top > window.innerHeight) return;
+            if (isEsc) { press('Esc'); return; }
             // F-keys carry browser defaults; only swallow mapped ones, and
             // never the reserved reload/fullscreen/devtools keys — those
             // videos stay reachable by clicking their keycap
@@ -1736,7 +1864,10 @@
             }
             press(key);
           });
-          showIdle();
+          // boot with the featured project already on screen — the keyboard is
+          // the whole section, so "featured" has to mean it loads first
+          const fk = data.projects.featured?.key?.toUpperCase();
+          if (fk && byKey[fk]) showProject(byKey[fk], fk, true); else showIdle();
         })();
 
         // Education — diploma wall: marquee degree cards + certification row.
@@ -1990,7 +2121,7 @@
     // arrows / swipe to browse the gallery the trigger belongs to)
     let lastFocused = null, lbGroup = [], lbIndex = 0;
     function lbGroupFor(img) {
-      const scope = img.closest('.highlights') || img.closest('.edu-shots');
+      const scope = img.closest('.highlights') || img.closest('.edu-shots') || img.closest('.ws-shots');
       return scope ? Array.from(scope.querySelectorAll('[data-lb-trigger]')) : [img];
     }
     function renderLightbox() {

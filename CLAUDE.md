@@ -11,6 +11,7 @@ portfolio/
 ├── CLAUDE.md               ← You're reading this
 ├── 2026 Tony Lau Resume.pdf
 └── assets/
+    ├── decks/              ← Slide decks (PDF) linked from project cards
     ├── photos/             ← Profile photos (headshot, etc.)
     ├── events/             ← Event photos (conferences, meetups, hackathons)
     ├── projects/           ← Project screenshots and thumbnails
@@ -83,10 +84,21 @@ mapped to a key is duplicated as a card elsewhere on the page:
 | Keys | Source | Shown as |
 |---|---|---|
 | A–Z letters | `projects.featured` + `projects.grid[]` (`key`) | screenshot + tags + repo/live links |
+| — | `projects.featured` | loads on the monitor at page load, badged "Featured project" |
 | A–Z letters | `tinkering[]` (`key`) | local mp4 playing as a "channel" |
 | A–Z letters | `videosSoftware[]` (`key`) | YouTube embed, or a strip of `thumbnails` |
 | F1–F12 | `videos[]`, in array order | YouTube embed |
-| Numpad 1–9, 0 | any `events[]` / `videosSoftware[]` / `posts[]` entry with a `hack` number | photo + description + link |
+| Numpad 1–9, 0 | any `events[]` / `videosSoftware[]` / `posts[]` entry with a `hack` number | YouTube embed if the entry has one, else a local mp4, else photo + description + link |
+
+The keyboard is drawn full-size (Esc, F1–F12, number row, Tab/Caps/Shift and the
+modifier row). The modifiers are chassis — nothing maps to them, and pressing
+one glitches the CRT or kicks the dancing suit. Esc is the exception: it returns
+the monitor to the idle screen. Hackathon digits appear twice, on the number row
+and on the numpad, and both light up together because they are the same key.
+
+**The letters are full.** Every A–Z key is mapped, so a new entry either takes a
+free F-key (`videos[]` grows into F10–F12), joins an existing key as another
+video in its `videos[]` series, or displaces something.
 
 So: give an entry a `key` (or a `hack` slot) and it appears — pick a letter no
 other entry uses. Events keep their own card grid as well; that duplication is
@@ -108,6 +120,20 @@ deliberate (the cards carry photos, filters and the timeline).
    monitor — pick an unused A–Z key (check the other entries). Without a `key`
    the project is not reachable anywhere on the page.
    `url` (optional) renders an extra "Open" button next to "Source".
+   `deck` (optional) — path to a PDF in `assets/decks/`, renders a "Deck (PDF)" button.
+   `kind` (optional) — relabels an entry that isn't a software project. The
+   title bar and the status-line path follow it (`"kind": "Venture"` →
+   `~/ventures/beef-in-the-city`); the default is "Project" / `~/projects/`.
+   `keyLabel` (optional) — the sublabel printed on the keycap. Defaults to the
+   first word of the name; set it when that word is longer than ~10 characters
+   or just unhelpful.
+   `shots` (optional) — array of screenshots instead of a single `image`. The
+   first is the hero; the rest sit under it as capped thumbs, and all of them
+   browse together in the lightbox.
+
+   To feature a project instead, put the same object in `projects.featured` —
+   it is the one that loads on the monitor at page load. There is only one
+   featured slot, so the outgoing project moves into `grid[]`.
 2. Optionally drop a screenshot into `assets/projects/`
 
 ### Adding an event
@@ -130,8 +156,16 @@ deliberate (the cards carry photos, filters and the timeline).
 
 ### Adding a video
 There are three video collections in `data.json`, all of them keyboard-only:
-- `videos[]` — AI-produced videos (purely creative productions, e.g. StarCraft broadcasts). Mapped to F1, F2, … in array order, so keep the list ≤ 12
-- `videosSoftware[]` — demos & appearances. Needs a `key` (letter) or a `hack` (numpad slot); without one it renders nowhere
+- `videos[]` — video productions (AI-produced StarCraft broadcasts, personal
+  edits like the HK trip). Mapped to F1, F2, … in array order, so keep the list
+  ≤ 12. The title bar says "AI video" unless the entry sets `kind` (e.g.
+  `"kind": "Travel video"`)
+- `videosSoftware[]` — demos & appearances. Needs a `key` (letter) or a `hack` (numpad slot); without one it renders nowhere. `kind` relabels the title
+  bar and the status line ("Hackathon", "Tutorial", "Prototype"); the default is
+  "Demo". `keyLabel` overrides the keycap sublabel. A key can hold a **series**
+  instead of one `url` — `videos: [{title, url, desc}]` renders a picker of
+  pills under the player, and the meta line follows the selected clip (see
+  Mining on X, Conflux tutorials on N)
 - `tinkering[]` — locally-hosted mp4s (`video` + `poster`; keep mp4s ≤ ~10 MB, 720p). Needs a `key`; the "channel number" on the monitor comes from array order
 
 1. Add an entry to the right array in `data.json`:

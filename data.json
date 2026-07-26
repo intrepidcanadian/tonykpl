@@ -486,22 +486,63 @@
   ],
   "projects": {
     "featured": {
-      "name": "CYM Studio",
-      "image": "assets/projects/cymstudio.webp",
-      "tagline": "AI video production + gasless gift-card redemption on Conflux eSpace",
-      "desc": "Full-stack platform for AI-powered video production with an integrated rewards system. Tournament winners redeem real-world gift cards across 300+ brands using USDT0 — no gas needed.",
-      "tags": [
-        "Next.js",
-        "TypeScript",
-        "Solidity",
-        "Conflux",
-        "USDT0"
+      "name": "Monad Auctions",
+      "image": "assets/projects/monad-auctions.webp",
+      "shots": [
+        "assets/projects/monad-auctions.webp",
+        "assets/projects/monad-auctions-settlements.webp"
       ],
-      "url": "https://cymstudio.app",
-      "github": "https://github.com/Intrepidcanadian/cymstudios",
-      "key": "Y"
+      "tagline": "Continuous clearing auction for tokenized equities, settled with x402 upto on Monad",
+      "desc": "Monad hackathon build, 25 July 2026. x402's upto scheme is documented as metering — authorize a maximum, charge actual usage. Read as an auction it is already a bid: bidders sign a gasless, capped demand curve off-chain, every fill in a round clears at one uniform price, and losing bids cost nothing — no fee, no gas, no state. Price discovery for a tokenized stock stops being a guess someone has to make up front, and allocation stops going to the fastest bot: every bid above clearing fills pro-rata at it. Every price re-derives from the published bid set.",
+      "deck": "assets/decks/x402-monad.pdf",
+      "tags": [
+        "x402",
+        "Monad",
+        "Permit2",
+        "EIP-712",
+        "Python",
+        "TypeScript"
+      ],
+      "url": "https://monad-auctions.vercel.app",
+      "github": "https://github.com/intrepidcanadian/Monad-Auctions",
+      "key": "M"
     },
     "grid": [
+      {
+        "name": "Beef in the City",
+        "key": "B",
+        "kind": "Venture",
+        "keyLabel": "Beef",
+        "image": "assets/projects/beefinthecity.webp",
+        "shots": [
+          "assets/projects/beefinthecity.webp",
+          "assets/ShopifyFirstBoxes.webp"
+        ],
+        "tagline": "Direct-to-consumer beef boxes — a side venture built while at Shopify",
+        "desc": "A direct-to-consumer beef box business I started on the side while working at Shopify: the brand, the storefront, sourcing from the farm, and packing and shipping the first boxes myself — then standing behind the table at local food markets to sell them.",
+        "tags": [
+          "Entrepreneurship",
+          "D2C",
+          "Shopify",
+          "Toronto"
+        ]
+      },
+      {
+        "name": "CYM Studio",
+        "key": "Y",
+        "image": "assets/projects/cymstudio.webp",
+        "tagline": "AI video production + gasless gift-card redemption on Conflux eSpace",
+        "desc": "Full-stack platform for AI-powered video production with an integrated rewards system. Tournament winners redeem real-world gift cards across 300+ brands using USDT0 — no gas needed.",
+        "tags": [
+          "Next.js",
+          "TypeScript",
+          "Solidity",
+          "Conflux",
+          "USDT0"
+        ],
+        "url": "https://cymstudio.app",
+        "github": "https://github.com/Intrepidcanadian/cymstudios"
+      },
       {
         "name": "Alephium Lofi",
         "key": "L",
@@ -528,7 +569,6 @@
       },
       {
         "name": "To-Do App",
-        "key": "D",
         "desc": "A simple to-do app.",
         "tags": [
           "JavaScript"
@@ -538,24 +578,12 @@
       },
       {
         "name": "Nanobot",
-        "key": "N",
         "desc": "Ultra-lightweight personal AI assistant — 99% fewer lines of code than OpenClaw. Multi-platform chat integration.",
         "tags": [
           "Python",
           "AI Agent"
         ],
         "github": "https://github.com/Intrepidcanadian/nanobot",
-        "image": null
-      },
-      {
-        "name": "Pulse520",
-        "key": "P",
-        "desc": "Ultra-lightweight personal AI assistant with desktop app. ~4,000 lines delivering core agent functionality.",
-        "tags": [
-          "Python",
-          "Desktop"
-        ],
-        "github": "https://github.com/Intrepidcanadian/pulse520-releases",
         "image": null
       },
       {
@@ -611,13 +639,17 @@
       {
         "name": "Schulich FINE6280",
         "key": "S",
-        "desc": "Course materials for graduate-level Fintech: Digital Transformation of Financial Services.",
+        "keyLabel": "Schulich",
+        "desc": "Course site for FINE6280 — Fintech: Digital Transformation of Financial Services, at the Schulich School of Business. Eleven chapters of slides and PDFs, appendices and a Q&A review, plus AI-presented chapter walkthroughs: the on-screen presenter and voiceover are generated with HeyGen, so a full lecture video can be produced — and re-cut whenever the material changes — without a studio or a re-shoot.",
         "tags": [
-          "HTML",
-          "Education"
+          "HeyGen",
+          "AI video",
+          "Teaching",
+          "HTML"
         ],
         "github": "https://github.com/Intrepidcanadian/SCHULICH-FINE-TLAU",
-        "image": null
+        "url": "https://tlau-fine6280.vercel.app",
+        "image": "assets/projects/fine6280-lectures.webp"
       },
       {
         "name": "Browser Use",
@@ -632,6 +664,116 @@
     ]
   },
   "videosSoftware": [
+    {
+      "title": "Conflux BSIM — Interface Walk-Through",
+      "key": "D",
+      "kind": "Prototype",
+      "keyLabel": "BSIM",
+      "desc": "Technical walk-through of an interface for Conflux's BSIM card — the blockchain SIM that holds keys in the SIM itself. Prototype in progress",
+      "url": "https://youtu.be/65I_P6sQZus"
+    },
+    {
+      "title": "x402 Prototyping — GSL",
+      "key": "U",
+      "kind": "Prototype",
+      "keyLabel": "x402",
+      "desc": "Presentation walkthrough of x402 prototyping work at Ginseng Swap",
+      "url": "https://youtu.be/GKzc94tMXQc"
+    },
+    {
+      "title": "x402 Boilerplate — Conflux eSpace",
+      "key": "J",
+      "kind": "Boilerplate",
+      "keyLabel": "x402 kit",
+      "desc": "A starting scaffold for x402 on Conflux eSpace — accepting stablecoin payments over HTTP 402. 3 April 2026",
+      "url": "https://youtu.be/XXDkpPWeWBI"
+    },
+    {
+      "title": "LearnWeb3 Hackathon — MangaX",
+      "key": "G",
+      "kind": "Hackathon",
+      "keyLabel": "MangaX",
+      "desc": "MangaX — a platform using Streamr to experience manga enhanced with generative AI. Project presentation from the LearnWeb3 hackathon, 6 October 2023",
+      "url": "https://youtu.be/vDp01vKdfOQ"
+    },
+    {
+      "title": "Prototyping — LayerZero Bridge with Conflux and Sepolia",
+      "key": "Z",
+      "kind": "Prototype",
+      "keyLabel": "LayerZero",
+      "desc": "Bridging tokens between Conflux eSpace and Sepolia over LayerZero — wiring the endpoints up and watching a message land on the other chain",
+      "url": "https://youtu.be/3PlRsVKxOYA"
+    },
+    {
+      "title": "WebPixels with Chainlink Functions",
+      "key": "K",
+      "kind": "Prototype",
+      "keyLabel": "Chainlink",
+      "desc": "Tinkering with Shopify Web Pixels for marketing attribution, with Chainlink Functions bringing the off-chain signal on-chain. Presented 14 July 2024",
+      "url": "https://youtu.be/S7VrbWJAYok"
+    },
+    {
+      "title": "Conflux Developer Tutorials",
+      "key": "N",
+      "kind": "Tutorial",
+      "keyLabel": "Tutorials",
+      "desc": "Developer walkthroughs for building on Conflux",
+      "videos": [
+        {
+          "title": "Indexing events",
+          "url": "https://youtu.be/BceCM2vPPxQ",
+          "desc": "Indexing on-chain events on Conflux, so an app can query contract history instead of re-scanning the chain"
+        },
+        {
+          "title": "Scaffold app",
+          "url": "https://youtu.be/33S0IjGGsQg",
+          "desc": "Conflux Scaffold app tutorial — building and deploying a Conflux app end to end"
+        }
+      ]
+    },
+    {
+      "title": "Flash Sales through On-Chain ENS Verification",
+      "key": "E",
+      "kind": "Hackathon",
+      "keyLabel": "ETHDenver",
+      "desc": "ETHDenver hackathon project — flash sales gated by on-chain ENS verification, so only verified holders can buy at the flash price",
+      "url": "https://youtu.be/mv1M8QmV6GM"
+    },
+    {
+      "title": "Pulse520 — MCP User Interface",
+      "key": "P",
+      "keyLabel": "MCP UI",
+      "desc": "Surfacing e-commerce into LLM distribution channels — an MCP server renders an interactive gift-card catalogue inside the Claude desktop app, browsable and filterable without leaving the chat",
+      "url": "https://youtu.be/LcMDQsFvn8Y"
+    },
+    {
+      "title": "Pulse520 — MCP Query and Graphing",
+      "key": "Q",
+      "keyLabel": "Charts",
+      "desc": "Walk-through of Pulse520.ai connected to Hong Kong MCP servers — querying live data and charting the answer next to the conversation",
+      "url": "https://youtu.be/Q8oASIaad_U"
+    },
+    {
+      "title": "Pulse520 — Agent Tools",
+      "key": "F",
+      "keyLabel": "Agent",
+      "desc": "Personal AI agent with desktop integration — given a working directory and one instruction, it sorts hundreds of loose screenshots into folders",
+      "url": "https://youtu.be/PHazweSgweY"
+    },
+    {
+      "title": "Pulse520 — BrowserVision",
+      "key": "O",
+      "keyLabel": "Vision",
+      "desc": "Personal AI agent with Seedream for browser vision — the agent reads and reasons about the page it is looking at",
+      "url": "https://youtu.be/BQtWsTB5L8E"
+    },
+    {
+      "title": "Pulse520 — MCP Creator",
+      "key": "C",
+      "keyLabel": "Builder",
+      "desc": "Prompt to MCP server: describe a dice roller and the builder writes the server, generates an interactive UI, and publishes it to the registry",
+      "url": "https://youtu.be/ETfmum-AFTM"
+    },
     {
       "title": "JPMorgan Digital Identity Hackathon — 3rd Place",
       "desc": "Product Passport: verifiable credentials for bills of lading on zkSync Era using JPMorgan's Onyx SDK. 3rd place overall, November 2023",
@@ -656,20 +798,33 @@
       "hack": 9
     },
     {
-      "title": "Build Space Music Video — Bronson Alan",
-      "key": "V",
-      "desc": "On camera in Bronson Alan's rap music video, filmed with the buildspace crowd at Gateway Pavilion, San Francisco",
-      "url": "https://youtu.be/u9VcT272xl0",
-      "thumbnails": [
-        "assets/videos/buildspace-rap-1.webp",
-        "assets/videos/buildspace-rap-2.webp"
-      ]
-    },
-    {
-      "title": "Mining Video — Triple Mining with GPUs on Conflux",
+      "title": "Mining & Staking on Conflux",
       "key": "X",
-      "desc": "Triple mining on one GPU rig — hashing Conflux, EPK, and KAS simultaneously. August 2024.",
-      "url": "https://youtu.be/-i11m5jzPLc"
+      "kind": "Mining",
+      "keyLabel": "Mining",
+      "desc": "Mining and staking Conflux, from a GPU rig to passive yield",
+      "videos": [
+        {
+          "title": "Triple mining with GPUs",
+          "url": "https://youtu.be/-i11m5jzPLc",
+          "desc": "Triple mining on one GPU rig — hashing Conflux, EPK and KAS simultaneously. August 2024"
+        },
+        {
+          "title": "Mining is back",
+          "url": "https://youtu.be/WR61Ky4EUzY",
+          "desc": "Mining is BACK! Conflux triple mining — why the rigs came back online"
+        },
+        {
+          "title": "You can now triple mine",
+          "url": "https://youtu.be/Knx453smTGw",
+          "desc": "Conflux — you can now triple mine, and what that means for a rig's returns"
+        },
+        {
+          "title": "Staking CFX",
+          "url": "https://youtu.be/69IyvhVpHCU",
+          "desc": "Passive income: how staking Conflux compounds to roughly 2× over six years"
+        }
+      ]
     },
     {
       "title": "Hack for Good Whitby — AI & Computer Vision",
@@ -730,16 +885,25 @@
       "desc": "AI-produced broadcast for the June 2026 Non-Korean BSL Championship",
       "url": "https://www.youtube.com/watch?v=2GBAga5YZ_k",
       "thumbnail": null
+    },
+    {
+      "title": "HK2024 Trip",
+      "kind": "Travel video",
+      "keyLabel": "HK trip",
+      "desc": "Personal travel video cut from a 2024 trip to Hong Kong",
+      "url": "https://youtu.be/0tAaNATLizk",
+      "thumbnail": null
+    },
+    {
+      "title": "Build Space Music Video — Bronson Alan",
+      "kind": "Music video",
+      "keyLabel": "Bronson",
+      "desc": "On camera in Bronson Alan's rap music video, filmed with the buildspace crowd at Gateway Pavilion, San Francisco",
+      "url": "https://youtu.be/u9VcT272xl0",
+      "thumbnail": null
     }
   ],
   "tinkering": [
-    {
-      "title": "NVIDIA DGX Spark / Nemotron / Gemma4 / Nemo Claw",
-      "desc": "Tinkering with NVIDIA DGX Spark hardware, running Nemotron, Gemma4, and Nemo Claw models locally.",
-      "video": "assets/videos/dgx-spark-nemotron.mp4",
-      "poster": "assets/videos/dgx-spark-nemotron-poster.webp",
-      "key": "G"
-    },
     {
       "title": "Apple Mobile App — Agent Task Marketplace",
       "desc": "Building a mobile app with an AI agent task marketplace using Pulse520.",
@@ -1159,6 +1323,7 @@
       "location": "Denver",
       "date": "February 2025",
       "desc": "Attended ETHDenver 2025 — the world's largest web3 #BUIDLathon.",
+      "video": "https://youtu.be/mv1M8QmV6GM",
       "image": "assets/events/ETHDenver2025BuidlerBadge.webp",
       "highlights": [
         {

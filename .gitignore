@@ -13,6 +13,8 @@ AGENTS.md
 TOOLS.md
 HEARTBEAT.md
 *.pdf
+# ...except decks the site links to, which have to ship with it
+!assets/decks/*.pdf
 .vercel
 .gstack/
 .zcode/
